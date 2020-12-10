@@ -161,7 +161,10 @@
     "TecnicasCombate": {
       "templates": ["custoNivel"],
       "descricao": "",
-      "ajuste": "",
+      "ajuste": {
+        "atributo": "",
+        "valor": 0
+      },
       "total": 0,
       "categoria": "",
       "restricaoP": ""

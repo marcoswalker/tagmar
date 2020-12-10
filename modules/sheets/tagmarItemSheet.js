@@ -7,6 +7,10 @@ export default class tagmarItemSheet extends ItemSheet {
           this.options.width = this.position.width =  640;
           this.options.height = this.position.height = 620;
         }
+        if ( this.item.data.type === "Raca" ) {
+            this.options.width = this.position.width =  640;
+            this.options.height = this.position.height = 450;
+          }
       }
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -23,6 +27,12 @@ export default class tagmarItemSheet extends ItemSheet {
 
     get template() {
         return 'systems/tagmar/templates/sheets/'+ this.item.data.type.toLowerCase() +'-sheet.hbs';
+    }
+
+    getData() {
+        const data = super.getData();
+        
+        return data;
     }
 
     activateListeners(html) {
@@ -66,5 +76,21 @@ export default class tagmarItemSheet extends ItemSheet {
             $(html.find(".dano275")).val(dano275);
             $(html.find(".dano300")).val(dano300);
         });
+
+        html.find(".ajuste").change(this._attTotalHab(this));
+        html.find(".nivel").change(this._attTotalHab(this));
+        html.find(".penal").change(this._attTotalHab(this));
+        html.find(".bonus").change(this._attTotalHab(this));
+
     }
+
+    _attTotalHab(event) {
+        const ajuste = $(".ajuste").val();
+        const nivel = $(".nivel").val();
+        const penal = $(".penal").val();
+        const bonus = $(".bonus").val();
+        let soma = parseInt(ajuste) + parseInt(nivel) + parseInt(penal) + parseInt(bonus);
+        $(".totalInput2").val(soma);
+    }
+
 }

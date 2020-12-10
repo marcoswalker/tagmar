@@ -71,6 +71,7 @@ export default class tagmarActorSheet extends ActorSheet {
             /*this.actor.update({
                 "data.carga.sobrecarga": false
             });*/
+
         }
         
 
@@ -100,6 +101,7 @@ export default class tagmarActorSheet extends ActorSheet {
             li.slideUp(200, () => this.render(false));
         });
 
+
         html.find('.rollable').click(this._onRoll.bind(this));
 
         html.find(".movePertence").click(ev => {
@@ -115,7 +117,6 @@ export default class tagmarActorSheet extends ActorSheet {
                         "data.inTransport": false
                     });
                 }
-                console.log(item); // Continuar...
             }
         });
 
@@ -158,7 +159,7 @@ export default class tagmarActorSheet extends ActorSheet {
             } else if (item.type == "Pertence") {
                 if (item.data.inTransport) pertences_transporte.push(item);
                 else pertences.push(item);
-            }
+            } 
         });
         actorData.pertences_transporte = pertences_transporte;
         actorData.pertences = pertences;
