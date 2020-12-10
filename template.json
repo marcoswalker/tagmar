@@ -188,7 +188,8 @@
         "valor": 0
       },
       "hab_nata": "",
-      "descricao": ""
+      "descricao": "",
+      "tarefAperf": ""
     },
     "Defesa": {
       "defesa_base": {
