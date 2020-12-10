@@ -1,0 +1,57 @@
+@font-face {
+    font-family: 'FairyDustB';
+    src: url('../fonts/FairyDustB.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'GoudyMediaeval';
+    src: url('../fonts/GoudyMediaeval.ttf') format('truetype');
+}
+.fairyDust{
+    font-family: "FairyDustB";
+}
+.mediaeval {
+    font-family: "GoudyMediaeval";
+    font-size: 120%;
+}
+.dados {
+    padding: 2px 0;
+}
+.container_dados {
+    border: 2px groove black;
+    margin: 5px 0;
+}
+.cont-dir {
+    margin: 5px 0;
+}
+.dados-dir {
+    border: 2px groove black;
+    margin-left: 5px;
+    padding: 5px 5px;
+}
+.itemImg {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+}
+.rollable:hover,
+.rollable:focus {
+  color: #000;
+  text-shadow: 0 0 10px red;
+  cursor: pointer;
+}
+.armaImg:hover,
+.armaImg:focus {
+    cursor: pointer;
+}
+.hidden {
+    visibility: hidden;
+}
+.imgItem {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+.tagmarLogo {
+    border-style: none; 
+    padding-top:2px; 
+}

@@ -1,0 +1,25 @@
+{
+  "name": "tagmar",
+  "title": "Tagmar RPG",
+  "description": "Sistema simples para Tagmar 3.0.",
+  "version": "1.0.0",
+  "templateVersion": 2,
+  "author": "Xaura Walker, Pirata VFL",
+  "minimumCoreVersion": "0.7.7",
+  "compatibleCoreVersion": "0.7.7",
+  "scripts": [
+  ],
+  "esmodules": [
+    "modules/tagmar.js"
+  ],
+  "styles": [
+    "css/bootstrap-grid.css",
+    "css/sheet.css"
+  ],
+  "packs": [
+  ],
+  "languages": [
+  ],
+  "gridDistance": 1.0,
+  "gridUnits": "m"
+}

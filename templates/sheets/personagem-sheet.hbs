@@ -1,0 +1,573 @@
+<form class="{{cssClass}}" autocomplete="off" id="form_persona">
+    <header class="sheet-header">
+        <div class='container'>
+            <div class="row container_dados">
+                <div class="col-md-4">
+                    <img class="tagmarLogo" src="systems/tagmar/templates/sheets/img/logo.png"/> 
+                </div>
+                <div class="col-md-8">
+                    <h1 class="fairyDust" style="text-align: center; padding-top:20px;">{{actor.type}}</h1>
+                </div>
+            </div>
+            <div class="row container_dados">
+                <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="64" width="64"/>
+                <h1 class="fairyDust"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
+            </div>
+        </div>
+    </header>
+    <section class="sheet-primary">
+        <div class="container container_dados">
+            <div class="row dados">
+                <div class="col-md-12">
+                    <nav class="prim-tabs tabs" data-group="primary">       <!--Tabs-->
+                        <label class="mediaeval" style="border:black double 1px; text-align: center;"><a class="item" data-tab="basico" title="Basico">Básico</a></label>
+                        <label class="mediaeval" style="border:black double 1px; text-align: center;"><a class="item" data-tab="habilidades" title="Habilidades">Habilidades</a></label>
+                        <label class="mediaeval" style="border:black double 1px; text-align: center;"><a class="item" data-tab="combate" title="Combate">Combate</a></label>
+                        <label class="mediaeval" style="border:black double 1px; text-align: center;"><a class="item" data-tab="magia" title="Magia">Magia</a></label>
+                        <label class="mediaeval" style="border:black double 1px; text-align: center;"><a class="item" data-tab="pertences" title="Pertences">Pertences</a></label>
+                    </nav>
+                </div>
+            </div>
+            <div class="tab basico container" data-group="primary" data-tab="basico"> <!--Tab Básico-->
+                <div class="row dados">
+                    <div class="col-md-1">
+                        <label><h4 class="mediaeval">Raça:</h4></label>
+                    </div>
+                    <div class="col-md-3">
+                        <input name="data.raca" type="text" list="racas" value="{{data.raca}}" height="30"/>
+                        <datalist id="racas">
+                            <option value="Humano"></option>
+                            <option value="Pequenino"></option>
+                            <option value="Anão"></option>
+                            <option value="Elfo Dourado"></option>
+                            <option value="Elfo Florestal"></option>
+                            <option value="Meio-Elfo"></option>
+                        </datalist>
+                    </div>
+                    <div class="col-md-2">
+                        <label><h4 class="mediaeval">Profissão:</h4></label>
+                    </div>
+                    <div class="col-md-3">
+                        <input class="profissao" name="data.profissao" type="text" list="profissoes" value="{{data.profissao}}" height="30"/>
+                        <datalist id="profissoes">
+                            <option value="Bardo"></option>
+                            <option value="Guerreiro"></option>
+                            <option value="Ladino"></option>
+                            <option value="Mago"></option>
+                            <option value="Rastreador"></option>
+                            <option value="Sacerdote"></option>
+                        </datalist>
+                    </div>
+                    <div class="col-md-1">
+                        <label><h4 class="mediaeval">Deus:</h4></label>
+                    </div>
+                    <div class="col-md-2">
+                        <input name="data.deus" type="text" list="deuses" value="{{data.deus}}" height="30"/>
+                        <datalist id="deuses">
+                            <option value="Blator"></option>
+                            <option value="Cambu"></option>
+                            <option value="Crezir"></option>
+                            <option value="Crisagom"></option>
+                            <option value="Cruine"></option>
+                            <option value="Ganis"></option>
+                            <option value="Lena"></option>
+                            <option value="Liris"></option>
+                            <option value="Maira"></option>
+                            <option value="Palier"></option>
+                            <option value="Parom"></option>
+                            <option value="Plandis"></option>
+                            <option value="Quiris"></option>
+                            <option value="Selimon"></option>
+                            <option value="Sevides"></option>
+                        </datalist>
+                    </div>
+                </div>
+                <div class="row dados">
+                    <div class="col-md-2">
+                        <label><h4 class="mediaeval">Classe Social:</h4></label>
+                    </div>
+                    <div class="col-md-2">
+                        <input name="data.classe_social" type="text" value="{{data.classe_social}}" height="30"/>
+                    </div>
+                    <div class="col-md-2">
+                        <label><h4 class="mediaeval">Especialização:</h4></label>
+                    </div>
+                    <div class="col-md-4">
+                        <input class="especializacao" name="data.especializacao" type="text" list="especializacoes" value="{{data.especializacao}}" height="30"/>
+                        <datalist id="especializacoes">
+                            {{#ifeq data.profissao "Guerreiro"}}
+                                <option value="Academia de Infantaria"></option>
+                                <option value="Academias dos Arqueiros"></option>
+                                <option value="Academia dos Cavaleiros"></option>
+                                <option value="Academia dos Gladiadores"></option>
+                            {{/ifeq}}
+                            {{#ifeq data.profissao "Bardo"}}
+                                <option value="Confraria dos Artistas"></option>
+                                <option value="Confraria dos Arautos"></option>
+                                <option value="Confraria dos Eruditos"></option>
+                            {{/ifeq}}
+                            {{#ifeq data.profissao "Mago"}}
+                                <option value="Colégio Alquímico"></option>
+                                <option value="Colégio do Conhecimento"></option>
+                                <option value="Colégio Elemental"></option>
+                                <option value="Colégio das Ilusões"></option>
+                                <option value="Colégio Naturalista"></option>
+                                <option value="Colégio Necromântico"></option>
+                            {{/ifeq}}
+                            {{#ifeq data.profissao "Ladino"}}
+                                <option value="Guilda dos Ladrões"></option>
+                                <option value="Guilda dos Assassinos"></option>
+                                <option value="Guilda dos Piratas"></option>
+                            {{/ifeq}}
+                            {{#ifeq data.profissao "Rastreador"}}
+                                <option value="Trilha dos Caçadores"></option>
+                                <option value="Trilha dos Guardiões"></option>
+                                <option value="Trilha dos Exploradores"></option>
+                            {{/ifeq}}
+                            {{#ifeq data.profissao "Sacerdote"}}
+                                <option value="Ordem de Blator"></option>
+                                <option value="Ordem de Cambu"></option>
+                                <option value="Ordem de Crezir"></option>
+                                <option value="Ordem de Crisagom"></option>
+                                <option value="Ordem de Cruine"></option>
+                                <option value="Ordem de Ganis"></option>
+                                <option value="Ordem de Lena"></option>
+                                <option value="Ordem de Maira mon"></option>
+                                <option value="Ordem de Maira nil"></option>
+                                <option value="Ordem de Maira vet"></option>
+                                <option value="Ordem de Palier"></option>
+                                <option value="Ordem de Parom"></option>
+                                <option value="Ordem de Plandis"></option>
+                                <option value="Ordem de Selimon"></option>
+                                <option value="Ordem de Sevides"></option>
+                            {{/ifeq}}
+                        </datalist>
+                    </div>
+                    <div class="col-md-1">
+                        <label><h4 class="mediaeval">Idade:</h4></label>
+                    </div>
+                    <div class="col-md-1">
+                        <input name="data.idade" type="number" value="{{data.idade}}" height="30"/>
+                    </div>
+                </div>
+                <div class="row dados">
+                    <div class="col-md-2">
+                        <label><h4 class="mediaeval">Altura(m):</h4></label>
+                    </div>
+                    <div class="col-md-2">
+                        <input name="data.altura" type="text" value="{{data.altura}}" height="30"/>
+                    </div>
+                    <div class="col-md-1">
+                        <label><h4 class="mediaeval">Peso(Kg):</h4></label>
+                    </div>
+                    <div class="col-md-2">
+                        <input name="data.peso" type="number" value="{{data.peso}}" height="30"/>
+                    </div>
+                    <div class="col-md-2" style="text-align: right;">
+                        <label><h4 class="mediaeval">Carga(Kg):</h4></label>
+                    </div>
+                    <div class="col-md-2">
+                        <input name="data.carga.value" type="number" value="{{data.carga.value}}" height="30" readonly/>
+                    </div>
+                    <div class="col-md-1">
+                        {{#if actor.data.carga.sobrecarga}}
+                            <i class="fas fa-weight-hanging sobrepeso"></i>
+                        {{else}}
+                            <i class="fas fa-weight-hanging sobrepeso hidden"></i>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+            <div class="tab habilidades container" data-group="primary" data-tab="habilidades"> <!--Tab Habilidades-->
+                <div class="row dados">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3" style="text-align: right;">
+                        <label><h4 class="mediaeval">Pontos Para Aquisição:</h4></label>
+                    </div>
+                    <div class="col-md-2">
+                        <input name="data.pontos_aqui" type="number" value="{{data.pontos_aqui}}" height="30"/>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+                <div class="row dados">
+                    <div class="col-md-4" style="text-align: center;"><h2 class="fairyDust">Profissional</h2></div>
+                    <div class="col-md-4" style="text-align: center;"><h2 class="fairyDust">Manobra</h2></div>
+                    <div class="col-md-4" style="text-align: center;"><h2 class="fairyDust">Conhecimento</h2></div>
+                </div>
+                <div class="row dados">
+                    <div class="col-md-4">
+                        <table>
+                            <tr style="text-align: left;">
+                                <th class="mediaeval">Habilidade</th>
+                                <th class="mediaeval">Total</th>
+                                <th class="mediaeval">Editar</th>
+                            </tr>
+                            {{#each actor.h_prof as |h_prof|}}      <!--Habilidades Profissionais-->
+                            <tr class="item" data-item-id="{{h_prof._id}}">
+                                <td class="mediaeval"><a class="rollable mediaeval" data-item-id="{{h_prof._id}}">{{h_prof.name}}</a></td>
+                                <td class="mediaeval">{{h_prof.data.total}}</td>
+                                <td>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                    <div class="col-md-4">
+                        <table>
+                            <tr style="text-align: left;">
+                                <th class="mediaeval">Habilidade</th>
+                                <th class="mediaeval">Total</th>
+                                <th class="mediaeval">Editar</th>
+                            </tr>
+                            {{#each actor.h_man as |h_man|}}        <!--Habilidades Manuais-->
+                            <tr class="item" data-item-id="{{h_man._id}}">
+                                <td class="mediaeval"><a class="rollable" data-item-id="{{h_man._id}}">{{h_man.name}}</a></td>
+                                <td class="mediaeval">{{h_man.data.total}}</td>
+                                <td>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                    <div class="col-md-4">
+                        <table>
+                            <tr style="text-align: left;">
+                                <th class="mediaeval">Habilidade</th>
+                                <th class="mediaeval">Total</th>
+                                <th class="mediaeval">Editar</th>
+                            </tr>
+                            {{#each actor.h_con as |h_con|}}        <!--Habilidades de Conhecimento-->
+                            <tr class="item" data-item-id="{{h_con._id}}">
+                                <td class="mediaeval"><a class="rollable" data-item-id="{{h_con._id}}">{{h_con.name}}</a></td>
+                                <td class="mediaeval">{{h_con.data.total}}</td>
+                                <td>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                </div>
+                <div class="row dados">
+                    <div class="col-md-4" style="text-align: center;"><h2 class="fairyDust">Subterfúgio</h2></div>
+                    <div class="col-md-4" style="text-align: center;"><h2 class="fairyDust">Influência</h2></div>
+                    <div class="col-md-4" style="text-align: center;"><h2 class="fairyDust">Geral</h2></div>
+                </div>
+                <div class="row dados">
+                    <div class="col-md-4">
+                        <table>
+                            <tr style="text-align: left;">
+                                <th class="mediaeval">Habilidade</th>
+                                <th class="mediaeval">Total</th>
+                                <th class="mediaeval">Editar</th>
+                            </tr>
+                            {{#each actor.h_sub as |h_sub|}}    <!--Habilidades de Subterfúgio-->
+                            <tr class="item" data-item-id="{{h_sub._id}}">
+                                <td class="mediaeval"><a class="rollable" data-item-id="{{h_sub._id}}">{{h_sub.name}}</a></td>
+                                <td class="mediaeval">{{h_sub.data.total}}</td>
+                                <td>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                    <div class="col-md-4">
+                        <table>
+                            <tr style="text-align: left;">
+                                <th class="mediaeval">Habilidade</th>
+                                <th class="mediaeval">Total</th>
+                                <th class="mediaeval">Editar</th>
+                            </tr>
+                            {{#each actor.h_inf as |h_inf|}}    <!--Habilidades de Influência-->
+                            <tr class="item" data-item-id="{{h_inf._id}}">
+                                <td class="mediaeval"><a class="rollable" data-item-id="{{h_inf._id}}">{{h_inf.name}}</a></td>
+                                <td class="mediaeval">{{h_inf.data.total}}</td>
+                                <td>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                    <div class="col-md-4">
+                        <table>
+                            <tr style="text-align: left;">
+                                <th class="mediaeval">Habilidade</th>
+                                <th class="mediaeval">Total</th>
+                                <th class="mediaeval">Editar</th>
+                            </tr>
+                            {{#each actor.h_geral as |h_geral|}}        <!--Habilidades Gerais-->
+                            <tr class="item" data-item-id="{{h_geral._id}}">
+                                <td class="mediaeval"><a class="rollable" data-item-id="{{h_inf._id}}">{{h_geral.name}}</a></td>
+                                <td class="mediaeval">{{h_geral.data.total}}</td>
+                                <td>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab combate container" data-group="primary" data-tab="combate">     <!--Tab Combate-->
+                <div class="row dados">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3" style="text-align: right;">
+                        <label><h4 class="mediaeval">Pontos Para Aquisição:</h4></label>
+                    </div>
+                    <div class="col-md-2">
+                        <input name="data.pontos_comb" type="number" value="{{data.pontos_comb}}" height="30"/>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+                <div class="row dados"> <!--Tabela Armas-->
+                    <div class="col-md-12">
+                        <table>
+                            <tr style="text-align: left;">
+                                <th class="mediaeval">Arma</th>
+                                <th class="mediaeval">Munição</th>
+                                <th class="mediaeval">Alcance</th>
+                                <th class="mediaeval">L</th>
+                                <th class="mediaeval">M</th>
+                                <th class="mediaeval">P</th>
+                                <th class="mediaeval">Dano 100%</th>
+                                <th class="mediaeval">Editar</th>
+                            </tr>
+                            {{#each actor.combate as |combate|}}
+                            <tr class="item" data-item-id="{{combate._id}}">
+                                <td class="mediaeval"><a class="rollable" data-item-id="{{combate._id}}">{{combate.name}}</a></td>
+                                <td class="mediaeval">{{combate.data.municao}}</td>
+                                <td class="mediaeval">{{combate.data.alcance}}</td>
+                                <td class="mediaeval">{{combate.data.def_l}}</td>
+                                <td class="mediaeval">{{combate.data.def_m}}</td>
+                                <td class="mediaeval">{{combate.data.def_p}}</td>
+                                <td class="mediaeval">{{combate.data.dano.d100}}</td>
+                                <td>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                </div>
+                <div class="row dados">
+                    <div class="col-md-6"> <!--Tabela Defesas-->
+                        <table>
+                            <tr style="text-align: left;">
+                                <th class="mediaeval">Equipamento De Defesa</th>
+                                <th class="mediaeval">Def. Base</th>
+                                <th class="mediaeval">Absorção</th>
+                                <th class="mediaeval">Editar</th>
+                            </tr>
+                            {{#each actor.defesas as |defesa|}}
+                            <tr class="item" data-item-id="{{defesa._id}}">
+                                <td class="mediaeval"><a class="rollable" data-item-id="{{defesa._id}}">{{defesa.name}}</a></td>
+                                <td class="mediaeval">{{defesa.data.defesa_base.tipo}}{{defesa.data.defesa_base.valor}}</td>
+                                <td class="mediaeval">{{defesa.data.absorcao}}</td>
+                                <td>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                    <div class="col-md-6"> <!--Tabela Tecnicas Combate-->
+                        <table>
+                            <tr style="text-align: left;">
+                                <th class="mediaeval">Técnicas de Combate</th>
+                                <th class="mediaeval">Total</th>
+                                <th class="mediaeval">Categoria</th>
+                                <th class="mediaeval">Editar</th>
+                            </tr>
+                            {{#each actor.tecnicas as |tecnica|}}
+                            <tr class="item" data-item-id="{{tecnica._id}}">
+                                <td class="mediaeval"><a class="rollable" data-item-id="{{tecnica._id}}">{{tecnica.name}}</a></td>
+                                <td class="mediaeval">{{tecnica.data.total}}</td>
+                                <td class="mediaeval">{{tecnica.data.categoria}}</td>
+                                <td>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab magia container" data-group="primary" data-tab="magia">         <!--Tab Magia-->
+                <div class="row dados">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3" style="text-align: right;">
+                        <label><h4 class="mediaeval">Pontos Para Aquisição:</h4></label>
+                    </div>
+                    <div class="col-md-2">
+                        <input name="data.pontos_mag" type="number" value="{{data.pontos_mag}}" height="30"/>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+                <div class="row dados">
+                    <div class="col-md-12">
+                        <table>
+                            <tr style="text-align: left;">
+                                <th width="50px"></th>
+                                <th class="mediaeval">Magia</th>
+                                <th class="mediaeval">Nível</th>
+                                <th class="mediaeval">Editar</th>
+                            </tr>
+                            {{#each actor.magias as |magia|}}
+                            <tr class="item" data-item-id="{{magia._id}}">
+                                <td class="mediaeval">
+                                    <a class="rollable" data-item-id="{{magia._id}}">
+                                        <img class="imgItem" src="{{magia.img}}" onmouseover="src='systems/tagmar/templates/sheets/img/fvtt.png'" onmouseout="src='{{magia.img}}'"/>
+                                    </a>
+                                </td>
+                                <td class="mediaeval">
+                                    <a class="rollable" data-item-id="{{magia._id}}">{{magia.name}}</a>
+                                </td>
+                                <td class="mediaeval">{{magia.data.nivel}}</td>
+                                <td>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab pertences container" data-group="primary" data-tab="pertences">     <!--Tab Pertences-->
+                <div class="row dados">
+                    <div class="col-md-12"> <!--Tabela Pertences-->
+                        <table>
+                            <tr style="text-align: left;">
+                                <th width="50px"></th>
+                                <th class="mediaeval">Pertence</th>
+                                <th class="mediaeval">Quantidade</th>
+                                <th class="mediaeval">Peso(Kg)</th>
+                                <th class="mediaeval">Mover</th>
+                                <th class="mediaeval">Editar</th>
+                            </tr>
+                            {{#each actor.pertences as |pertence|}}
+                            <tr class="item" data-item-id="{{pertence._id}}">
+                                <td class="mediaeval">
+                                    <img class="imgItem" src="{{pertence.img}}"/>
+                                </td>
+                                <td class="mediaeval">{{pertence.name}}</td>
+                                <td class="mediaeval">{{pertence.data.quant}}</td>
+                                <td class="mediaeval">{{pertence.data.peso}}</td>
+                                <td>
+                                    <a class="movePertence" title="Mover" data-item-id="{{pertence._id}}"><i class="fas fa-horse"></i></a>
+                                </td>
+                                <td>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a> <!-- fa-edit  -->
+                                        <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                </div>
+                <div class="row dados">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        <label><h4 class="mediaeval">Carga no transporte(Kg):</h4></label>
+                    </div>
+                    <div class="col-md-2">
+                        <input name="data.carga_transp.value" type="number" value="{{data.carga_transp.value}}" height="30" readonly/>
+                    </div>
+                    <div class="col-md-1"><h4 class="mediaeval">/</h4></div>
+                    <div class="col-md-2">
+                        <input name="data.carga_transp.max" type="number" value="{{data.carga_transp.max}}" height="30" readonly/>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <div class="row dados">
+                    <div class="col-md-6"> <!--Tabela Transportes-->
+                        <table>
+                            <tr style="text-align: left;">
+                                <th class="mediaeval">Transporte</th>
+                                <th class="mediaeval">Cap.Carga(Kg)</th>
+                                <th class="mediaeval">Cap.Pessoas</th>
+                                <th class="mediaeval">Editar</th>
+                            </tr>
+                            {{#each actor.transportes as |transporte|}}
+                            <tr class="item" data-item-id="{{transporte._id}}">
+                                <td class="mediaeval">{{transporte.name}}</td>
+                                <td class="mediaeval">{{transporte.data.capacidade.carga}}</td>
+                                <td class="mediaeval">{{transporte.data.capacidade.pessoas}}</td>
+                                <td>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                    <div class="col-md-6"> <!--Itens em Transporte-->
+                        <table>
+                            <tr style="text-align: left;">
+                                <th class="mediaeval">Pertence</th>
+                                <th class="mediaeval">Quantidade</th>
+                                <th class="mediaeval">Peso(Kg)</th>
+                                <th class="mediaeval">Mover</th>
+                                <th class="mediaeval">Editar</th>
+                            </tr>
+                            {{#each actor.pertences_transporte as |pertence|}}
+                            <tr class="item" data-item-id="{{pertence._id}}">
+                                <td class="mediaeval">{{pertence.name}}</td>
+                                <td class="mediaeval">{{pertence.data.quant}}</td>
+                                <td class="mediaeval">{{pertence.data.peso}}</td>
+                                <td class="mediaeval">
+                                    <a class="movePertence" title="Mover" data-item-id="{{pertence._id}}"><i class="fas fa-user"></i></a>
+                                </td>
+                                <td>
+                                    <div class="item-controls">
+                                        <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                        <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section> 
+</form>
