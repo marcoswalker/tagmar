@@ -177,6 +177,123 @@
                         {{/if}}
                     </div>
                 </div>
+                <div class="row dados">  <!-- Table Atributos -->
+                    <div class="col-md-12">
+                        <table>
+                            <tr style="text-align: left;">
+                                <th width="150px"></th>
+                                <th class="mediaeval">INT</th>
+                                <th class="mediaeval">AUR</th>
+                                <th class="mediaeval">CAR</th>
+                                <th class="mediaeval">FOR</th>
+                                <th class="mediaeval">FIS</th>
+                                <th class="mediaeval">AGI</th>
+                                <th class="mediaeval">PER</th>
+                            </tr>
+                            <tr>
+                                <td class="mediaeval">Característica Sorteada</td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                            </tr>
+                            <tr>
+                                <td class="mediaeval">Modificador Racial</td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                            </tr>
+                            <tr>
+                                <td class="mediaeval">Características Finais</td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                            </tr>
+                            <tr>
+                                <td class="mediaeval">Ajuste</td>
+                                <td><input name="data.atributos.INT" type="number" value="{{data.atributos.INT}}"/></td>
+                                <td><input name="data.atributos.AUR" type="number" value="{{data.atributos.AUR}}"/></td>
+                                <td><input name="data.atributos.CAR" type="number" value="{{data.atributos.CAR}}" /></td>
+                                <td><input name="data.atributos.FOR" type="number" value="{{data.atributos.FOR}}" /></td>
+                                <td><input name="data.atributos.FIS" type="number" value="{{data.atributos.FIS}}" /></td>
+                                <td><input name="data.atributos.AGI" type="number" value="{{data.atributos.AGI}}" /></td>
+                                <td><input name="data.atributos.PER" type="number" value="{{data.atributos.PER}}" /></td>
+                            </tr>
+                            <tr>
+                                <td class="mediaeval">Valor Para Teste</td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                                <td><input type="number"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row dados">
+                    <div class="col-md-6">
+                        <table>
+                            <tr style="text-align: left;">
+                                <th width="100px"></th>
+                                <th class="mediaeval">EF</th>
+                                <th class="mediaeval">Absorção</th>
+                                <th class="mediaeval">EH</th>
+                                <th class="mediaeval">Karma</th>
+                            </tr>
+                            <tr>
+                                <td class="mediaeval">Valor Máximo</td>
+                                <td> <input name="data.ef.max" type="number" value="{{data.ef.max}}"/> </td>
+                                <td> <input name="data.absorcao.max" type="number" value="{{data.absorcao.max}}"/> </td>
+                                <td> <input name="data.eh.max" type="number" value="{{data.eh.max}}"/> </td>
+                                <td> <input name="data.karma.max" type="number" value="{{data.karma.max}}"/> </td>
+                            </tr>
+                            <tr>
+                                <td class="mediaeval">Valor Atual</td>
+                                <td> <input name="data.ef.value" type="number" value="{{data.ef.value}}"/> </td>
+                                <td> <input name="data.absorcao.value" type="number" value="{{data.absorcao.value}}"/> </td>
+                                <td> <input name="data.eh.value" type="number" value="{{data.eh.value}}"/> </td>
+                                <td> <input name="data.karma.value" type="number" value="{{data.karma.value}}"/> </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-2">
+                        <table>
+                            <tr style="text-align: center;">
+                                <th class="mediaeval">M.O</th>
+                            </tr>
+                            <tr style="text-align: center;">
+                                <td><input name="data.dinheiro.mo" type="number" value="{{data.dinheiro.mo}}"/></td>
+                            </tr>
+                            <tr style="text-align: center;">
+                                <th class="mediaeval">M.P</th>
+                            </tr>
+                            <tr style="text-align: center;">
+                                <td><input name="data.dinheiro.mp" type="number" value="{{data.dinheiro.mp}}" /></td>
+                            </tr>
+                            <tr style="text-align: center;">
+                                <th class="mediaeval">M.C</th>
+                            </tr>
+                            <tr style="text-align: center;">
+                                <td><input name="data.dinheiro.mc" type="number" value="{{data.dinheiro.mc}}"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
             </div>
             <div class="tab habilidades container" data-group="primary" data-tab="habilidades"> <!--Tab Habilidades-->
                 <div class="row dados">
