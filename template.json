@@ -41,6 +41,11 @@
           "categoria": "",
           "valor": 0
         },
+        "focus": {
+          "value": 0,
+          "min": 0,
+          "max": 0
+        },
         "vb": 0,
         "rm": 0,
         "rf": 0,

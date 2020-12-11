@@ -244,55 +244,121 @@
                     </div>
                 </div>
                 <div class="row dados">
-                    <div class="col-md-6">
-                        <table>
-                            <tr style="text-align: left;">
-                                <th width="100px"></th>
-                                <th class="mediaeval">EF</th>
-                                <th class="mediaeval">Absorção</th>
-                                <th class="mediaeval">EH</th>
-                                <th class="mediaeval">Karma</th>
-                            </tr>
-                            <tr>
-                                <td class="mediaeval">Valor Máximo</td>
-                                <td> <input name="data.ef.max" type="number" value="{{data.ef.max}}"/> </td>
-                                <td> <input name="data.absorcao.max" type="number" value="{{data.absorcao.max}}"/> </td>
-                                <td> <input name="data.eh.max" type="number" value="{{data.eh.max}}"/> </td>
-                                <td> <input name="data.karma.max" type="number" value="{{data.karma.max}}"/> </td>
-                            </tr>
-                            <tr>
-                                <td class="mediaeval">Valor Atual</td>
-                                <td> <input name="data.ef.value" type="number" value="{{data.ef.value}}"/> </td>
-                                <td> <input name="data.absorcao.value" type="number" value="{{data.absorcao.value}}"/> </td>
-                                <td> <input name="data.eh.value" type="number" value="{{data.eh.value}}"/> </td>
-                                <td> <input name="data.karma.value" type="number" value="{{data.karma.value}}"/> </td>
-                            </tr>
-                        </table>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <table>
+                                    <caption class="mediaeval">Pontos de Experiência</caption>
+                                    <tr style="text-align: center;">
+                                        <th class="mediaeval" width="120px">Atual</th>
+                                        <td><input name="data.pontos_estagio.value" type="number" value="{{data.pontos_estagio.value}}" /></td>
+                                    </tr>
+                                    <tr style="text-align: center;">
+                                        <th class="mediaeval">Próximo Estágio</th>
+                                        <td><input name="data.pontos_estagio.next" type="number" value="{{data.pontos_estagio.next}}" /></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-5">
+                                <table>
+                                    <tr style="text-align: left;">
+                                        <th class="mediaeval">V.Base</th>
+                                        <th class="mediaeval">R.Física</th>
+                                        <th class="mediaeval">R.Magia</th>
+                                        <th class="mediaeval">Iniciativa</th>
+                                    </tr>
+                                    <tr>
+                                    <td><input name="data.vb" type="number" value="{{data.vb}}" /></td> 
+                                    <td><input name="data.rf" type="number" value="{{data.rf}}" /></td>
+                                    <td><input name="data.rm" type="number" value="{{data.rm}}" /></td>
+                                    <td><input name="data.iniciativa" type="number" value="{{data.iniciativa}}" /></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <table>
+                                    <tr style="text-align: left;">
+                                        <th width="100px"></th>
+                                        <th class="mediaeval">EF</th>
+                                        <th class="mediaeval">EH</th>
+                                        <th class="mediaeval">Karma</th>
+                                        <th class="mediaeval">Focus</th>
+                                        <th class="mediaeval">Absorção </th>
+                                    </tr>
+                                    <tr>
+                                        <td class="mediaeval">Valor Máximo</td>
+                                        <td> <input name="data.ef.max" type="number" value="{{data.ef.max}}"/> </td>
+                                        <td> <input name="data.eh.max" type="number" value="{{data.eh.max}}"/> </td>
+                                        <td> <input name="data.karma.max" type="number" value="{{data.karma.max}}"/> </td>
+                                        <td> <input name="data.focus.max" type="number" value="{{data.focus.max}}"/> </td>
+                                        <td> <input name="data.absorcao.max" type="number" value="{{data.absorcao.max}}"/> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mediaeval">Valor Atual</td>
+                                        <td> <input name="data.ef.value" type="number" value="{{data.ef.value}}"/> </td>
+                                        <td> <input name="data.eh.value" type="number" value="{{data.eh.value}}"/> </td>
+                                        <td> <input name="data.karma.value" type="number" value="{{data.karma.value}}"/> </td>
+                                        <td> <input name="data.focus.value" type="number" value="{{data.focus.value}}"/> </td>
+                                        <td> <input name="data.absorcao.value" type="number" value="{{data.absorcao.value}}"/> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4">
+                                <table>
+                                    <tr style="text-align: left;">
+                                        <th width="80px"></th>
+                                        <th class="mediaeval">Cat.</th>
+                                        <th class="mediaeval">Valor</th>
+                                    </tr>
+                                    <tr style="text-align: left;">
+                                        <th class="mediaeval" width="80px">D.Ativa</th>
+                                        <td><input name="data.d_ativa.categoria" type="text" value="{{data.d_ativa.categoria}}" /></td>
+                                        <td><input name="data.d_ativa.valor" type="number" value="{{data.d_ativa.valor}}" /></td>
+                                    </tr>
+                                    <tr style="text-align: left;">
+                                        <th class="mediaeval">D.Passiva</th>
+                                        <td><input name="data.d_ativa.categoria" type="text" value="{{data.d_ativa.categoria}}" /></td>
+                                        <td><input name="data.d_ativa.valor" type="number" value="{{data.d_ativa.valor}}" /></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-4"></div>
                     <div class="col-md-2">
-                        <table>
-                            <tr style="text-align: center;">
-                                <th class="mediaeval">M.O</th>
-                            </tr>
-                            <tr style="text-align: center;">
-                                <td><input name="data.dinheiro.mo" type="number" value="{{data.dinheiro.mo}}"/></td>
-                            </tr>
-                            <tr style="text-align: center;">
-                                <th class="mediaeval">M.P</th>
-                            </tr>
-                            <tr style="text-align: center;">
-                                <td><input name="data.dinheiro.mp" type="number" value="{{data.dinheiro.mp}}" /></td>
-                            </tr>
-                            <tr style="text-align: center;">
-                                <th class="mediaeval">M.C</th>
-                            </tr>
-                            <tr style="text-align: center;">
-                                <td><input name="data.dinheiro.mc" type="number" value="{{data.dinheiro.mc}}"/></td>
-                            </tr>
-                        </table>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table>
+                                    <tr style="text-align: center;">
+                                        <th class="mediaeval">M.O</th>
+                                    </tr>
+                                    <tr style="text-align: center;">
+                                        <td><input name="data.dinheiro.mo" type="number" value="{{data.dinheiro.mo}}"/></td>
+                                    </tr>
+                                    <tr style="text-align: center;">
+                                        <th class="mediaeval">M.P</th>
+                                    </tr>
+                                    <tr style="text-align: center;">
+                                        <td><input name="data.dinheiro.mp" type="number" value="{{data.dinheiro.mp}}" /></td>
+                                    </tr>
+                                    <tr style="text-align: center;">
+                                        <th class="mediaeval">M.C</th>
+                                    </tr>
+                                    <tr style="text-align: center;">
+                                        <td><input name="data.dinheiro.mc" type="number" value="{{data.dinheiro.mc}}"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
+                    
+
+                    
                 </div>
+                
 
             </div>
             <div class="tab habilidades container" data-group="primary" data-tab="habilidades"> <!--Tab Habilidades-->

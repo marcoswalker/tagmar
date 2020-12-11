@@ -4,7 +4,7 @@ export default class tagmarActorSheet extends ActorSheet {
         return mergeObject(super.defaultOptions, {
         classes: ["tagmar", "sheet", "actor"],
         //width: 900,
-        //height: 600,
+        height: 780,
         tabs: [{
             navSelector: ".prim-tabs",
             contentSelector: ".sheet-primary",
@@ -25,6 +25,7 @@ export default class tagmarActorSheet extends ActorSheet {
             var actor_carga = 0;    // Atualiza Carga e verifica Sobrecarga
             var cap_transp = 0;
             var cap_usada = 0;
+            var absorcao = 0;
             if (data.actor.combate.length > 0){
                 data.actor.combate.forEach(function(item){
                     actor_carga += item.data.peso;
@@ -33,6 +34,7 @@ export default class tagmarActorSheet extends ActorSheet {
             if (data.actor.defesas.length > 0){
                 data.actor.defesas.forEach(function(item){
                     actor_carga += item.data.peso;
+                    absorcao += item.data.absorcao;
                 });
             }
             if (data.actor.pertences.length > 0){
@@ -51,10 +53,10 @@ export default class tagmarActorSheet extends ActorSheet {
                 });
             }
             this.actor.update({
-                "data.carga_transp.value": cap_usada
-            });
-            this.actor.update({
-                "data.carga_transp.max": cap_transp
+                "data.carga_transp.value": cap_usada,
+                "data.carga_transp.max": cap_transp,
+                "data.carga.value": actor_carga,
+                "data.absorcao.max": absorcao
             });
             if (cap_transp > 0 && cap_usada < cap_transp) {
                 this.actor.update({
@@ -65,9 +67,6 @@ export default class tagmarActorSheet extends ActorSheet {
                     "data.carga_transp.hasTransp": false
                 });
             }
-            this.actor.update({
-                "data.carga.value": actor_carga
-            });
             /*this.actor.update({
                 "data.carga.sobrecarga": false
             });*/
