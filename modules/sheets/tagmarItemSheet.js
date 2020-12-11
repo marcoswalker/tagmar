@@ -1,7 +1,6 @@
 export default class tagmarItemSheet extends ItemSheet {
     constructor(...args) {
         super(...args);
-        console.log(this.item.data.type);
         // Expand the default size of the class sheet
         if ( this.item.data.type === "Combate" ) {
           this.options.width = this.position.width =  640;
@@ -83,6 +82,8 @@ export default class tagmarItemSheet extends ItemSheet {
         html.find(".bonus").change(this._attTotalHab(this));
 
     }
+
+    
 
     _attTotalHab(event) {
         const ajuste = $(".ajuste").val();

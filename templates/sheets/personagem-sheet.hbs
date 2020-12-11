@@ -10,8 +10,18 @@
                 </div>
             </div>
             <div class="row container_dados">
-                <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="64" width="64"/>
-                <h1 class="fairyDust"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
+                <div class="col-md-2" style="padding-top: 3px;">
+                    <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="64" width="64"/>
+                </div>
+                <div class="col-md-6">
+                    <h1 class="fairyDust"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
+                </div>
+                <div class="col-md-2" style="text-align: center;">
+                    <label><h1 class="fairyDust" style="padding-top: 15px;">Estágio:</h1></label>
+                </div>
+                <div class="col-md-2">
+                    <h1 class="fairyDust"><input class="ipEstagio" name="data.estagio" type="number" value="{{data.estagio}}" style="text-align: center";/></h1>
+                </div>  
             </div>
         </div>
     </header>
@@ -171,7 +181,7 @@
                     </div>
                     <div class="col-md-1">
                         {{#if actor.data.carga.sobrecarga}}
-                            <i class="fas fa-weight-hanging sobrepeso"></i>
+                            <i class="fas fa-weight-hanging sobrepeso"><h4 class="mediaeval">+{{actor.data.carga.valor_s}}Kg</h4></i>
                         {{else}}
                             <i class="fas fa-weight-hanging sobrepeso hidden"></i>
                         {{/if}}
@@ -192,53 +202,53 @@
                             </tr>
                             <tr>
                                 <td class="mediaeval">Característica Sorteada</td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
+                                <td><input class="carac_sortINT" name="data.carac_sort.INT" type="number" value="{{data.carac_sort.INT}}"/></td>
+                                <td><input class="carac_sortAUR" name="data.carac_sort.AUR" type="number" value="{{data.carac_sort.AUR}}"/></td>
+                                <td><input class="carac_sortCAR" name="data.carac_sort.CAR" type="number" value="{{data.carac_sort.CAR}}"/></td>
+                                <td><input class="carac_sortFOR" name="data.carac_sort.FOR" type="number" value="{{data.carac_sort.FOR}}"/></td>
+                                <td><input class="carac_sortFIS" name="data.carac_sort.FIS" type="number" value="{{data.carac_sort.FIS}}"/></td>
+                                <td><input class="carac_sortAGI" name="data.carac_sort.AGI" type="number" value="{{data.carac_sort.AGI}}"/></td>
+                                <td><input class="carac_sortPER" name="data.carac_sort.PER" type="number" value="{{data.carac_sort.PER}}"/></td>
                             </tr>
                             <tr>
                                 <td class="mediaeval">Modificador Racial</td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
+                                <td><input class="mod_racialINT" name="data.mod_racial.INT" type="number" value="{{data.mod_racial.INT}}"/></td>
+                                <td><input class="mod_racialAUR" name="data.mod_racial.AUR" type="number" value="{{data.mod_racial.AUR}}"/></td>
+                                <td><input class="mod_racialCAR" name="data.mod_racial.CAR" type="number" value="{{data.mod_racial.CAR}}"/></td>
+                                <td><input class="mod_racialFOR" name="data.mod_racial.FOR" type="number" value="{{data.mod_racial.FOR}}"/></td>
+                                <td><input class="mod_racialFIS" name="data.mod_racial.FIS" type="number" value="{{data.mod_racial.FIS}}"/></td>
+                                <td><input class="mod_racialAGI" name="data.mod_racial.AGI" type="number" value="{{data.mod_racial.AGI}}"/></td>
+                                <td><input class="mod_racialPER" name="data.mod_racial.PER" type="number" value="{{data.mod_racial.PER}}"/></td>
                             </tr>
                             <tr>
                                 <td class="mediaeval">Características Finais</td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
+                                <td><input class="car_finINT" name="data.carac_final.INT" type="number" value="{{data.carac_final.INT}}"/></td>
+                                <td><input class="car_finAUR" name="data.carac_final.AUR" type="number" value="{{data.carac_final.AUR}}"/></td>
+                                <td><input class="car_finCAR" name="data.carac_final.CAR" type="number" value="{{data.carac_final.CAR}}"/></td>
+                                <td><input class="car_finFOR" name="data.carac_final.FOR" type="number" value="{{data.carac_final.FOR}}"/></td>
+                                <td><input class="car_finFIS" name="data.carac_final.FIS" type="number" value="{{data.carac_final.FIS}}"/></td>
+                                <td><input class="car_finAGI" name="data.carac_final.AGI" type="number" value="{{data.carac_final.AGI}}"/></td>
+                                <td><input class="car_finPER" name="data.carac_final.PER" type="number" value="{{data.carac_final.PER}}"/></td>
                             </tr>
                             <tr>
                                 <td class="mediaeval">Ajuste</td>
                                 <td><input name="data.atributos.INT" type="number" value="{{data.atributos.INT}}"/></td>
-                                <td><input name="data.atributos.AUR" type="number" value="{{data.atributos.AUR}}"/></td>
+                                <td><input class="ipAtrAUR" name="data.atributos.AUR" type="number" value="{{data.atributos.AUR}}"/></td>
                                 <td><input name="data.atributos.CAR" type="number" value="{{data.atributos.CAR}}" /></td>
                                 <td><input name="data.atributos.FOR" type="number" value="{{data.atributos.FOR}}" /></td>
-                                <td><input name="data.atributos.FIS" type="number" value="{{data.atributos.FIS}}" /></td>
+                                <td><input class="ipAtrFIS" name="data.atributos.FIS" type="number" value="{{data.atributos.FIS}}" /></td>
                                 <td><input name="data.atributos.AGI" type="number" value="{{data.atributos.AGI}}" /></td>
                                 <td><input name="data.atributos.PER" type="number" value="{{data.atributos.PER}}" /></td>
                             </tr>
                             <tr>
                                 <td class="mediaeval">Valor Para Teste</td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
-                                <td><input type="number"/></td>
+                                <td><input name="data.valor_teste.INT" type="number" value="{{data.valor_teste.INT}}"/></td>
+                                <td><input name="data.valor_teste.AUR" type="number" value="{{data.valor_teste.AUR}}"/></td>
+                                <td><input name="data.valor_teste.CAR" type="number" value="{{data.valor_teste.CAR}}"/></td>
+                                <td><input name="data.valor_teste.FOR" type="number" value="{{data.valor_teste.FOR}}"/></td>
+                                <td><input name="data.valor_teste.FIS" type="number" value="{{data.valor_teste.FIS}}"/></td>
+                                <td><input name="data.valor_teste.AGI" type="number" value="{{data.valor_teste.AGI}}"/></td>
+                                <td><input name="data.valor_teste.PER" type="number" value="{{data.valor_teste.PER}}"/></td>
                             </tr>
                         </table>
                     </div>
@@ -289,22 +299,20 @@
                 <div class="row dados"> <!--Aqui fica confuso-->
                     <div class="col-md-10">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <table>
                                     <caption class="mediaeval">Pontos de Experiência</caption>
                                     <tr style="text-align: center;">
                                         <th class="mediaeval" width="120px">Atual</th>
                                         <td><input name="data.pontos_estagio.value" type="number" value="{{data.pontos_estagio.value}}" /></td>
-                                        <th class="mediaeval">Estágio</th>
                                     </tr>
                                     <tr style="text-align: center;">
                                         <th class="mediaeval">Próximo Estágio</th>
                                         <td><input name="data.pontos_estagio.next" type="number" value="{{data.pontos_estagio.next}}" /></td>
-                                        <td><input name="data.estagio" type="number" value="{{data.estagio}}" /></td>
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-md-1"></div>
+                            <div class="col-md-2"></div>
                             <div class="col-md-5">
                                 <table>
                                     <tr style="text-align: left;">
@@ -337,7 +345,7 @@
                                         <td class="mediaeval">Valor Máximo</td>
                                         <td> <input name="data.ef.max" type="number" value="{{data.ef.max}}"/> </td>
                                         <td> <input name="data.eh.max" type="number" value="{{data.eh.max}}"/> </td>
-                                        <td> <input name="data.karma.max" type="number" value="{{data.karma.max}}"/> </td>
+                                        <td> <input class="ipKarmaMax" name="data.karma.max" type="number" value="{{data.karma.max}}"/> </td>
                                         <td> <input name="data.focus.max" type="number" value="{{data.focus.max}}"/> </td>
                                         <td> <input name="data.absorcao.max" type="number" value="{{data.absorcao.max}}"/> </td>
                                     </tr>

@@ -17,6 +17,15 @@
           "AGI": 0,
           "PER": 0
         },
+        "valor_teste": {
+          "INT": 0,
+          "AUR": 0,
+          "CAR": 0,
+          "FOR": 0,
+          "FIS": 0,
+          "AGI": 0,
+          "PER": 0
+        },
         "eh": {
           "value": 0,
           "min": 0,
@@ -92,7 +101,8 @@
       "carga": {
         "value": 0,
         "max": 0,
-        "sobrecarga": false
+        "sobrecarga": false,
+        "valor_s": 0
       },
       "classe_social": "",
       "deus": "",
@@ -110,6 +120,33 @@
         "max": 0,
         "value": 0,
         "hasTransp": false
+      },
+      "carac_sort": {
+        "INT": 0,
+        "AUR": 0,
+        "CAR": 0,
+        "FOR": 0,
+        "FIS": 0,
+        "AGI": 0,
+        "PER": 0
+      },
+      "carac_final": {
+        "INT": 0,
+        "AUR": 0,
+        "CAR": 0,
+        "FOR": 0,
+        "FIS": 0,
+        "AGI": 0,
+        "PER": 0
+      },
+      "mod_racial": {
+        "INT": 0,
+        "AUR": 0,
+        "CAR": 0,
+        "FOR": 0,
+        "FIS": 0,
+        "AGI": 0,
+        "PER": 0
       }
     },
     "NPC": {

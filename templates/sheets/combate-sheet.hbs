@@ -60,68 +60,50 @@
                     <div class="col-md-2">
                         <label><h4 class="mediaeval">Bônus:</h4></label>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <select class="mediaeval" name="data.bonus" type="text" value="{{data.bonus}}" data-dtype="String" height="30" style="font-size: 110%;">
                             {{#select data.bonus}}
                             <option value=""></option>
-                            <option value="AUR">AURA</option>
-                            <option value="FOR">FORÇA</option>
-                            <option value="AGI">AGILIDADE</option>
-                            <option value="PER">PERCEPÇÃO</option>
+                            <option value="AUR">AUR</option>
+                            <option value="FOR">FOR</option>
+                            <option value="AGI">AGI</option>
+                            <option value="PER">PER</option>
                             {{/select}}
                         </select>         
                     </div>
-                    <div class="col-md-4">
-                        <label><h4 class="mediaeval">Bônus Mágico:</h4></label>
+                    <div class="col-md-2">
+                        <label><h4 class="mediaeval">Tipo:</h4></label>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="mediaeval" name="data.tipo" type="text" data-dtype="String" value="{{data.tipo}}" height="30">
+                        {{#select data.tipo}}
+                            <option value=""></option>
+                            <option value="CD">CD</option>
+                            <option value="CI">CI</option>
+                            <option value="CL">CL</option>
+                            <option value="CLD">CLD</option>
+                            <option value="EL">EL</option>
+                            <option value="CmE">CmE</option>
+                            <option value="CmM">CmM</option>
+                            <option value="EM">EM</option>
+                            <option value="PmA">PmA</option>
+                            <option value="PmL">PmL</option>
+                            <option value="CpE">CpE</option>
+                            <option value="CpM">CpM</option>
+                            <option value="EP">EP</option>
+                            <option value="PP">PP</option>
+                            <option value="PpA">PpA</option>
+                            <option value="PpB">PpB</option>
+                        {{/select}}
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label><h4 class="mediaeval">B.Mágico:</h4></label>
                     </div>
                     <div class="col-md-2">
                         <input  name="data.bonus_magico" type="number" value="{{data.bonus_magico}}" height="30"/>
                     </div>
                 </div>
-
-                <div class="row dados">
-                    <div class="col-md-1">
-                        <label><h4 class="mediaeval">Tipo:</h4></label>
-                    </div>
-                    <div class="col-md-5">
-                        <select class="mediaeval" name="data.tipo" type="text" data-dtype="String" value="{{data.tipo}}" height="30">
-                        {{#select data.tipo}}
-                            <option value=""></option>
-                            <option value="CD">Combate Desarmado</option>
-                            <option value="CI">Combate de Imobilização</option>
-                            <option value="CL">Corte Leve</option>
-                            <option value="CLD">Combate Leve à Distância</option>
-                            <option value="EL">Esmagamento Leve</option>
-                            <option value="CmE">Corte Médio Com Espadas</option>
-                            <option value="CmM">Corte Médio Com Machados</option>
-                            <option value="EM">Esmagamento Médio</option>
-                            <option value="PmA">Penetração Média Com Arcos</option>
-                            <option value="PmL">Penetração Média Com Lanças</option>
-                            <option value="CpE">Corte Pesado Com Espadas</option>
-                            <option value="CpM">Corte Pesado Com Machados</option>
-                            <option value="EP">Esmagamento Pesado</option>
-                            <option value="PP">Penetração Pesada</option>
-                            <option value="PpA">Pentração Pesado Com Arcos</option>
-                            <option value="PpB">Pentração Pesado Com Bestas</option>
-                        {{/select}}
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label><h4 class="mediaeval">Bônus Dano:</h4></label>
-                    </div>
-                    <div class="col-md-3">
-                        <select class="mediaeval" name="data.bonus_dano" type="text" value="{{data.bonus_dano}}" data-dtype="String" height="30" style="font-size: 110%;">
-                            {{#select data.bonus_dano}}
-                            <option value=""></option>
-                            <option value="AUR">AURA</option>
-                            <option value="FOR">FORÇA</option>
-                            <option value="AGI">AGILIDADE</option>
-                            <option value="PER">PERCEPÇÃO</option>
-                            {{/select}}
-                        </select>       
-                    </div>
-                </div>
-
                 <div class="row dados">
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
@@ -144,7 +126,23 @@
                     </div>
                     <div class="col-md-1"></div>
                 </div>
-
+                <div class="row dados">
+                    
+                    <div class="col-md-3">
+                        <label><h4 class="mediaeval">Bônus Dano:</h4></label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="mediaeval" name="data.bonus_dano" type="text" value="{{data.bonus_dano}}" data-dtype="String" height="30" style="font-size: 110%;">
+                            {{#select data.bonus_dano}}
+                            <option value=""></option>
+                            <option value="AUR">AUR</option>
+                            <option value="FOR">FOR</option>
+                            <option value="AGI">AGI</option>
+                            <option value="PER">PER</option>
+                            {{/select}}
+                        </select>       
+                    </div>
+                </div>
                 <div class="row dados">
                     <div class="col-md-1">
                         <label><h4 class="mediaeval">Dano:</h4></label>
