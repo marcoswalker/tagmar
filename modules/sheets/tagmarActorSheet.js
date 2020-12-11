@@ -4,7 +4,7 @@ export default class tagmarActorSheet extends ActorSheet {
         return mergeObject(super.defaultOptions, {
         classes: ["tagmar", "sheet", "actor"],
         //width: 900,
-        height: 780,
+        height: 990,
         tabs: [{
             navSelector: ".prim-tabs",
             contentSelector: ".sheet-primary",
@@ -26,6 +26,8 @@ export default class tagmarActorSheet extends ActorSheet {
             var cap_transp = 0;
             var cap_usada = 0;
             var absorcao = 0;
+            var def_pasVal = 0;
+            var def_pasCat = "";
             if (data.actor.combate.length > 0){
                 data.actor.combate.forEach(function(item){
                     actor_carga += item.data.peso;
@@ -35,6 +37,10 @@ export default class tagmarActorSheet extends ActorSheet {
                 data.actor.defesas.forEach(function(item){
                     actor_carga += item.data.peso;
                     absorcao += item.data.absorcao;
+                    def_pasVal += item.data.defesa_base.valor;
+                    if (item.data.defesa_base.tipo != ""){
+                        def_pasCat = item.data.defesa_base.tipo;
+                    }
                 });
             }
             if (data.actor.pertences.length > 0){
@@ -53,6 +59,8 @@ export default class tagmarActorSheet extends ActorSheet {
                 });
             }
             this.actor.update({
+                "data.d_passiva.valor": def_pasVal,
+                "data.d_passiva.categoria": def_pasCat,
                 "data.carga_transp.value": cap_usada,
                 "data.carga_transp.max": cap_transp,
                 "data.carga.value": actor_carga,

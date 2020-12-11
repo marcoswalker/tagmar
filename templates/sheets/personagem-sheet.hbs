@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="tab basico container" data-group="primary" data-tab="basico"> <!--Tab Básico-->
-                <div class="row dados">
+                <div class="row dados">         <!--Primeira Linha-->
                     <div class="col-md-1">
                         <label><h4 class="mediaeval">Raça:</h4></label>
                     </div>
@@ -82,7 +82,7 @@
                         </datalist>
                     </div>
                 </div>
-                <div class="row dados">
+                <div class="row dados">         <!--Segunda Linha-->
                     <div class="col-md-2">
                         <label><h4 class="mediaeval">Classe Social:</h4></label>
                     </div>
@@ -150,7 +150,7 @@
                         <input name="data.idade" type="number" value="{{data.idade}}" height="30"/>
                     </div>
                 </div>
-                <div class="row dados">
+                <div class="row dados">         <!--Terceira Linha-->
                     <div class="col-md-2">
                         <label><h4 class="mediaeval">Altura(m):</h4></label>
                     </div>
@@ -177,7 +177,7 @@
                         {{/if}}
                     </div>
                 </div>
-                <div class="row dados">  <!-- Table Atributos -->
+                <div class="row dados">  <!-- Table Atributos -->       <!--Quarta Linha-->
                     <div class="col-md-12">
                         <table>
                             <tr style="text-align: left;">
@@ -243,23 +243,68 @@
                         </table>
                     </div>
                 </div>
-                <div class="row dados">
+                <div class="row dados">     <!--Quinta Linha-->
+                    <div class="col-md-12">
+                        <table>
+                            <caption class="mediaeval">Grupos</caption>
+                            <tr style="text-align: left;">
+                                <th class="mediaeval">CD</th>
+                                <th class="mediaeval">CI</th>
+                                <th class="mediaeval">CL</th>
+                                <th class="mediaeval">CLD</th>
+                                <th class="mediaeval">EL</th>
+                                <th class="mediaeval">CmE</th>
+                                <th class="mediaeval">CmM</th>
+                                <th class="mediaeval">EM</th>
+                                <th class="mediaeval">PmA</th>
+                                <th class="mediaeval">PmL</th>
+                                <th class="mediaeval">CpE</th>
+                                <th class="mediaeval">CpM</th>
+                                <th class="mediaeval">EP</th>
+                                <th class="mediaeval">PP</th>
+                                <th class="mediaeval">PpA</th>
+                                <th class="mediaeval">PpB</th>
+                            </tr>
+                            <tr>
+                                <td><input name="data.grupos.CD" type="number" value="{{data.grupos.CD}}" /></td>
+                                <td><input name="data.grupos.CI" type="number" value="{{data.grupos.CI}}" /></td>
+                                <td><input name="data.grupos.CL" type="number" value="{{data.grupos.CL}}" /></td>
+                                <td><input name="data.grupos.CLD" type="number" value="{{data.grupos.CLD}}" /></td>
+                                <td><input name="data.grupos.EL" type="number" value="{{data.grupos.EL}}" /></td>
+                                <td><input name="data.grupos.CmE" type="number" value="{{data.grupos.CmE}}" /></td>
+                                <td><input name="data.grupos.CmM" type="number" value="{{data.grupos.CmM}}" /></td>
+                                <td><input name="data.grupos.EM" type="number" value="{{data.grupos.EM}}" /></td>
+                                <td><input name="data.grupos.PmA" type="number" value="{{data.grupos.PmA}}" /></td>
+                                <td><input name="data.grupos.PmL" type="number" value="{{data.grupos.PmL}}" /></td>
+                                <td><input name="data.grupos.CpE" type="number" value="{{data.grupos.CpE}}" /></td>
+                                <td><input name="data.grupos.CpM" type="number" value="{{data.grupos.CpM}}" /></td>
+                                <td><input name="data.grupos.EP" type="number" value="{{data.grupos.EP}}" /></td>
+                                <td><input name="data.grupos.PP" type="number" value="{{data.grupos.PP}}" /></td>
+                                <td><input name="data.grupos.PpA" type="number" value="{{data.grupos.PpA}}" /></td>
+                                <td><input name="data.grupos.PpB" type="number" value="{{data.grupos.PpB}}" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row dados"> <!--Aqui fica confuso-->
                     <div class="col-md-10">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <table>
                                     <caption class="mediaeval">Pontos de Experiência</caption>
                                     <tr style="text-align: center;">
                                         <th class="mediaeval" width="120px">Atual</th>
                                         <td><input name="data.pontos_estagio.value" type="number" value="{{data.pontos_estagio.value}}" /></td>
+                                        <th class="mediaeval">Estágio</th>
                                     </tr>
                                     <tr style="text-align: center;">
                                         <th class="mediaeval">Próximo Estágio</th>
                                         <td><input name="data.pontos_estagio.next" type="number" value="{{data.pontos_estagio.next}}" /></td>
+                                        <td><input name="data.estagio" type="number" value="{{data.estagio}}" /></td>
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-md-2"></div>
+                            <div class="col-md-1"></div>
                             <div class="col-md-5">
                                 <table>
                                     <tr style="text-align: left;">
@@ -321,8 +366,8 @@
                                     </tr>
                                     <tr style="text-align: left;">
                                         <th class="mediaeval">D.Passiva</th>
-                                        <td><input name="data.d_ativa.categoria" type="text" value="{{data.d_ativa.categoria}}" /></td>
-                                        <td><input name="data.d_ativa.valor" type="number" value="{{data.d_ativa.valor}}" /></td>
+                                        <td><input name="data.d_passiva.categoria" type="text" value="{{data.d_passiva.categoria}}" /></td>
+                                        <td><input name="data.d_passiva.valor" type="number" value="{{data.d_passiva.valor}}" /></td>
                                     </tr>
                                 </table>
                             </div>
@@ -354,11 +399,15 @@
                             </div>
                         </div>
                     </div>
-                    
-
-                    
                 </div>
-                
+                <div class="row dados">
+                    <div class="col-md-2">
+                        <label><h4 class="mediaeval">Caracterização:</h4></label>
+                    </div>
+                    <div class="col-md-10">
+                        <textarea class="mediaeval" name="data.descricao" value="{{data.descricao}}" style="height: 100px;font-size: 100%;">{{data.descricao}}</textarea>
+                    </div>
+                </div>
 
             </div>
             <div class="tab habilidades container" data-group="primary" data-tab="habilidades"> <!--Tab Habilidades-->
@@ -619,7 +668,7 @@
                 </div>
                 <div class="row dados">
                     <div class="col-md-12">
-                        <table>
+                        <table>                             <!--Tabela de Magias-->
                             <tr style="text-align: left;">
                                 <th width="50px"></th>
                                 <th class="mediaeval">Magia</th>
