@@ -361,6 +361,15 @@ export default class tagmarActorSheet extends ActorSheet {
                 flavor: ``
             });
         });
+        html.find(".roll1d10").click(ev => {
+            let formula = "1d10";
+            let r = new Roll(formula);
+            r.roll().toMessage({
+                user: game.user._id,
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                flavor: ``
+            });
+        });
     }
 
     _passandoEH(event) {
