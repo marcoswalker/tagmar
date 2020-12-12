@@ -271,7 +271,7 @@ export default class tagmarActorSheet extends ActorSheet {
         });
 
 
-        html.find('.rollable').click(this._onRoll.bind(this));
+        html.find('.rollable').click(this._onItemRoll.bind(this));
 
         html.find(".movePertence").click(ev => {
             const li = $(ev.currentTarget).parents(".item");
@@ -352,6 +352,15 @@ export default class tagmarActorSheet extends ActorSheet {
             $(html.find(".car_finPER")).val(soma);
         });
         html.find(".calculaNovaEH").click(this._passandoEH.bind(this));
+        html.find(".rollAtributos").click(ev => {
+            let formula = "{3d10dl,3d10dl,3d10dl,3d10dl,3d10dl,3d10dl,3d10dl}";
+            let r = new Roll(formula);
+            r.roll().toMessage({
+                user: game.user._id,
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                flavor: ``
+            });
+        });
     }
 
     _passandoEH(event) {
@@ -660,5 +669,139 @@ export default class tagmarActorSheet extends ActorSheet {
         item_comb.update({
             "data.nivel": valor_n
         });
+    }
+
+    _onItemRoll(event) {
+        const tabela_resol = [
+            [-7, "verde", "verde", "verde", "verde", "verde", "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "laranja", "vermelho", "azul", "cinza"],
+            [-6, "verde", "verde", "verde", "verde", "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "laranja", "vermelho", "azul", "cinza"],
+            [-5, "verde", "verde", "verde", "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "vermelho", "azul", "cinza"],
+            [-4, "verde", "verde", "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "vermelho", "azul", "cinza"],
+            [-3, "verde", "verde", "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "vermelho", "azul", "cinza"],
+            [-2, "verde", "verde", "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "vermelho", "vermelho", "azul", "cinza"],
+            [-1, "verde", "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "vermelho", "vermelho", "azul", "cinza"],
+            [0, "verde", "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "azul", "cinza"],
+            [1, "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "azul", "cinza"],
+            [2, "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "vermelho", "vermelho", "azul", "azul", "cinza"],
+            [3, "verde", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "azul", "azul", "cinza"],
+            [4, "verde", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "azul", "azul", "cinza"],
+            [5, "verde", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "azul", "azul", "cinza"],
+            [6, "verde", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "cinza"],
+            [7, "verde", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "cinza"],
+            [8, "verde", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "cinza"],
+            [9, "verde", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "cinza"],
+            [10, "verde", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "azul", "cinza"],
+            [11, "verde", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "roxo", "cinza"],
+            [12, "verde", "branco", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "roxo", "cinza"],
+            [13, "verde", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "roxo", "cinza"],
+            [14, "verde", "branco", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "azul", "roxo", "cinza"],
+            [15, "verde", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "roxo", "roxo", "cinza"],
+            [16, "verde", "amarelo", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "roxo", "roxo", "cinza"],
+            [17, "verde", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "roxo", "roxo", "cinza"],
+            [18, "verde", "amarelo", "amarelo", "amarelo", "laranja", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "azul", "roxo", "roxo", "cinza"],
+            [19, "verde", "amarelo", "amarelo", "laranja", "laranja", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "roxo", "roxo", "roxo", "cinza"],
+            [20, "verde", "amarelo", "laranja", "laranja", "laranja", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "azul", "roxo", "roxo", "roxo", "cinza"]
+        ];
+
+        let button = $(event.currentTarget);
+        const li = button.parents(".item");
+        const item = this.actor.getOwnedItem(li.data("itemId"));
+        let formulaD = "";
+        var conteudo = "";
+        var resultado = "";
+        var PrintResult = "";
+        var r;
+        
+        if (item.data.type == "Habilidade") {
+            let h_total = item.data.data.total;
+            formulaD = "1d20";
+            conteudo = "<h3>Tarefas Aperfeiçoadas: </h3>" + "<h4>" + item.data.data.tarefAperf + "</h4>";
+            r = new Roll(formulaD);
+            r.evaluate();
+            var Dresult = r.total;
+            if (item.data.data.total <= 20) {
+                for (let i = 0; i < tabela_resol.length; i++) {
+                    if (tabela_resol[i][0] == item.data.data.total) {
+                        resultado = tabela_resol[i][Dresult];
+                        if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha</h1>";
+                        else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                        else if (resultado == "amarelo") PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                        else if (resultado == "laranja") PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                        else if (resultado == "vermelho") PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                        else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                        else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                        r.toMessage({
+                            user: game.user._id,
+                            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                            flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${PrintResult}`
+                          });
+                    }
+                }
+            } else {
+                let valor_hab = item.data.data.total % 20;
+                if (valor_hab == 0) {
+                    let vezes = item.data.data.total / 20;
+                    let dados = [];
+                    for (let x = 0; x < vezes; x++){
+                        dados[x] = new Roll(formulaD);
+                        dados[x].evaluate();
+                        var Dresult = dados[x].total;
+                        resultado = tabela_resol[20][Dresult];
+                        if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha</h1>";
+                        else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                        else if (resultado == "amarelo") PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                        else if (resultado == "laranja") PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                        else if (resultado == "vermelho") PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                        else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                        else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                        dados[x].toMessage({
+                            user: game.user._id,
+                            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                            flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${PrintResult}`
+                        });
+                    }
+                } else if (valor_hab > 0) {
+                    let vezes = parseInt(item.data.data.total / 20);
+                    let sobra = item.data.data.total % 20;
+                    let dados = [];
+                    for (let x = 0; x < vezes; x++){
+                        dados[x] = new Roll(formulaD);
+                        dados[x].evaluate();
+                        var Dresult = dados[x].total;
+                        resultado = tabela_resol[20][Dresult];
+                        if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha</h1>";
+                        else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                        else if (resultado == "amarelo") PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                        else if (resultado == "laranja") PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                        else if (resultado == "vermelho") PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                        else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                        else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                        dados[x].toMessage({
+                            user: game.user._id,
+                            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                            flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${PrintResult}`
+                        });
+                    }
+                    var dado = new Roll(formulaD);
+                    dado.evaluate();
+                    Dresult = dado.total;
+                    resultado = tabela_resol[sobra][Dresult];
+                    if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha</h1>";
+                    else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                    else if (resultado == "amarelo") PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                    else if (resultado == "laranja") PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                    else if (resultado == "vermelho") PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                    else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                    else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                    dado.toMessage({
+                        user: game.user._id,
+                        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                        flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${PrintResult}`
+                    });
+                }
+            } 
+        }
+        
+        
     }
 }

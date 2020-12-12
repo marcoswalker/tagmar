@@ -201,7 +201,7 @@
                                 <th class="mediaeval">PER</th>
                             </tr>
                             <tr>
-                                <td class="mediaeval">Característica Sorteada</td>
+                                <td class="mediaeval"><a class="rollAtributos">Característica Sorteada</a></td>
                                 <td><input class="carac_sortINT" name="data.carac_sort.INT" type="number" value="{{data.carac_sort.INT}}"/></td>
                                 <td><input class="carac_sortAUR" name="data.carac_sort.AUR" type="number" value="{{data.carac_sort.AUR}}"/></td>
                                 <td><input class="carac_sortCAR" name="data.carac_sort.CAR" type="number" value="{{data.carac_sort.CAR}}"/></td>
@@ -299,7 +299,7 @@
                 <div class="row dados"> <!--Aqui fica confuso-->
                     <div class="col-md-10">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <table>
                                     <caption class="mediaeval">Pontos de Experiência</caption>
                                     <tr style="text-align: center;">
@@ -323,19 +323,26 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <table>
                                     <tr style="text-align: left;">
                                         <th class="mediaeval">V.Base</th>
-                                        <th class="mediaeval">R.Física</th>
-                                        <th class="mediaeval">R.Magia</th>
+                                        <th class="mediaeval">V.B.E</th>
+                                        <th class="mediaeval"><a class="rolaR.Fis" />R.Física</th>
+                                        <th class="mediaeval"><a class="rolaR.Mag" />R.Magia</th>
                                         <th class="mediaeval">Iniciativa</th>
                                     </tr>
                                     <tr>
-                                    <td><input name="data.vb" type="number" value="{{data.vb}}" /></td> 
-                                    <td><input name="data.rf" type="number" value="{{data.rf}}" /></td>
-                                    <td><input name="data.rm" type="number" value="{{data.rm}}" /></td>
-                                    <td><input name="data.iniciativa" type="number" value="{{data.iniciativa}}" /></td>
+                                        <td><input name="data.vb" type="number" value="{{data.vb}}" /></td> 
+                                        <td><input name="data.vbe" type="number" value="{{data.vbe}}" title="Você voa? Você nada? Coloca ai e não enche o saco!" /></td>
+                                        <td><input name="data.rf" type="number" value="{{data.rf}}" /></td>
+                                        <td><input name="data.rm" type="number" value="{{data.rm}}" /></td>
+                                        <td><input name="data.iniciativa" type="number" value="{{data.iniciativa}}" /></td>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                       <th class="mediaeval">F.Ataque:</th>
+                                       <td><input class="F.Ataque" type="number"/></td> 
                                     </tr>
                                 </table>
                             </div>
@@ -352,16 +359,16 @@
                                         <th class="mediaeval">Absorção </th>
                                     </tr>
                                     <tr>
-                                        <td class="mediaeval">Valor Máximo</td>
-                                        <td> <input name="data.ef.max" type="number" value="{{data.ef.max}}"/> </td>
+                                        <th class="mediaeval">Valor Máximo</th>
+                                        <td> <input name="data.ef.max" type="number" value="{{data.ef.max}}" title="Que EF mixuruca."/> </td>
                                         <td> <input name="data.eh.max" type="number" value="{{data.eh.max}}"/> </td>
                                         <td> <input class="ipKarmaMax" name="data.karma.max" type="number" value="{{data.karma.max}}"/> </td>
                                         <td> <input name="data.focus.max" type="number" value="{{data.focus.max}}"/> </td>
                                         <td> <input name="data.absorcao.max" type="number" value="{{data.absorcao.max}}"/> </td>
                                     </tr>
                                     <tr>
-                                        <td class="mediaeval">Valor Atual</td>
-                                        <td> <input name="data.ef.value" type="number" value="{{data.ef.value}}"/> </td>
+                                        <th class="mediaeval">Valor Atual</th>
+                                        <td> <input name="data.ef.value" type="number" value="{{data.ef.value}}" title="Cuidado com um crítico.Sê vai morrer eim!" />  </td>
                                         <td> <input name="data.eh.value" type="number" value="{{data.eh.value}}"/> </td>
                                         <td> <input name="data.karma.value" type="number" value="{{data.karma.value}}"/> </td>
                                         <td> <input name="data.focus.value" type="number" value="{{data.focus.value}}"/> </td>
@@ -454,7 +461,7 @@
                             </tr>
                             {{#each actor.h_prof as |h_prof|}}      <!--Habilidades Profissionais-->
                             <tr class="item" data-item-id="{{h_prof._id}}">
-                                <td class="mediaeval"><a class="rollable mediaeval" data-item-id="{{h_prof._id}}">{{h_prof.name}}</a></td>
+                                <td class="mediaeval"><a class="rollable mediaeval" data-item-id="{{h_prof._id}}" title="Rolar Habilidade">{{h_prof.name}}</a></td>
                                 <td class="mediaeval">{{h_prof.data.total}}</td>
                                 <td>
                                     <div class="item-controls">
@@ -475,7 +482,7 @@
                             </tr>
                             {{#each actor.h_man as |h_man|}}        <!--Habilidades Manuais-->
                             <tr class="item" data-item-id="{{h_man._id}}">
-                                <td class="mediaeval"><a class="rollable" data-item-id="{{h_man._id}}">{{h_man.name}}</a></td>
+                                <td class="mediaeval"><a class="rollable" data-roll="{{h_man.total}}" data-item-id="{{h_man._id}}" title="Rolar Habilidade">{{h_man.name}}</a></td>
                                 <td class="mediaeval">{{h_man.data.total}}</td>
                                 <td>
                                     <div class="item-controls">
@@ -496,7 +503,7 @@
                             </tr>
                             {{#each actor.h_con as |h_con|}}        <!--Habilidades de Conhecimento-->
                             <tr class="item" data-item-id="{{h_con._id}}">
-                                <td class="mediaeval"><a class="rollable" data-item-id="{{h_con._id}}">{{h_con.name}}</a></td>
+                                <td class="mediaeval"><a class="rollable" data-item-id="{{h_con._id}}" title="Rolar Habilidade">{{h_con.name}}</a></td>
                                 <td class="mediaeval">{{h_con.data.total}}</td>
                                 <td>
                                     <div class="item-controls">
@@ -524,7 +531,7 @@
                             </tr>
                             {{#each actor.h_sub as |h_sub|}}    <!--Habilidades de Subterfúgio-->
                             <tr class="item" data-item-id="{{h_sub._id}}">
-                                <td class="mediaeval"><a class="rollable" data-item-id="{{h_sub._id}}">{{h_sub.name}}</a></td>
+                                <td class="mediaeval"><a class="rollable" data-item-id="{{h_sub._id}}" title="Rolar Habilidade">{{h_sub.name}}</a></td>
                                 <td class="mediaeval">{{h_sub.data.total}}</td>
                                 <td>
                                     <div class="item-controls">
@@ -545,7 +552,7 @@
                             </tr>
                             {{#each actor.h_inf as |h_inf|}}    <!--Habilidades de Influência-->
                             <tr class="item" data-item-id="{{h_inf._id}}">
-                                <td class="mediaeval"><a class="rollable" data-item-id="{{h_inf._id}}">{{h_inf.name}}</a></td>
+                                <td class="mediaeval"><a class="rollable" data-item-id="{{h_inf._id}}" title="Rolar Habilidade">{{h_inf.name}}</a></td>
                                 <td class="mediaeval">{{h_inf.data.total}}</td>
                                 <td>
                                     <div class="item-controls">
@@ -566,7 +573,7 @@
                             </tr>
                             {{#each actor.h_geral as |h_geral|}}        <!--Habilidades Gerais-->
                             <tr class="item" data-item-id="{{h_geral._id}}">
-                                <td class="mediaeval"><a class="rollable" data-item-id="{{h_inf._id}}">{{h_geral.name}}</a></td>
+                                <td class="mediaeval"><a class="rollable" data-item-id="{{h_inf._id}}" title="Rolar Habilidade">{{h_geral.name}}</a></td>
                                 <td class="mediaeval">{{h_geral.data.total}}</td>
                                 <td>
                                     <div class="item-controls">
