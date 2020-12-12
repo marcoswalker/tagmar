@@ -108,6 +108,36 @@ export default class tagmarActorSheet extends ActorSheet {
                     } 
                 });
             }
+            if (data.actor.h_prof.length > 0){
+                data.actor.h_prof.forEach(function(item){
+                    isso.updateHabAjuste(item._id, isso.actor);
+                });
+            }
+            if (data.actor.h_man.length > 0){
+                data.actor.h_man.forEach(function(item){
+                    isso.updateHabAjuste(item._id, isso.actor);
+                });
+            }
+            if (data.actor.h_con.length > 0){
+                data.actor.h_con.forEach(function(item){
+                    isso.updateHabAjuste(item._id, isso.actor);
+                });
+            }
+            if (data.actor.h_sub.length > 0){
+                data.actor.h_sub.forEach(function(item){
+                    isso.updateHabAjuste(item._id, isso.actor);
+                });
+            }
+            if (data.actor.h_inf.length > 0){
+                data.actor.h_inf.forEach(function(item){
+                    isso.updateHabAjuste(item._id, isso.actor);
+                });
+            }
+            if (data.actor.h_geral.length > 0){
+                data.actor.h_geral.forEach(function(item){
+                    isso.updateHabAjuste(item._id, isso.actor);
+                });
+            }
             if (data.actor.defesas.length > 0){
                 data.actor.defesas.forEach(function(item){
                     actor_carga += item.data.peso;
@@ -163,6 +193,52 @@ export default class tagmarActorSheet extends ActorSheet {
                     "data.carga.sobrecarga": false,
                     "data.carga.valor_s": 0
                 });
+            }
+            if (this.actor.data.data.raca != "" && this.actor.data.data.profissao != "") {
+                let ef_base = 0;
+                let vb_base = 0;
+                let eh_base = 0;
+                if (this.actor.data.data.raca == "Anão") {
+                    ef_base = 15;
+                    vb_base = 16;
+                } else if (this.actor.data.data.raca == "Elfo Dourado") {
+                    ef_base = 13;
+                    vb_base = 18;
+                } else if (this.actor.data.data.raca == "Elfo Florestal") {
+                    ef_base = 14;
+                    vb_base = 18
+                } else if (this.actor.data.data.raca == "Humano") {
+                    ef_base = 17;
+                    vb_base = 20;
+                } else if (this.actor.data.data.raca == "Meio-Elfo") {
+                    ef_base = 15;
+                    vb_base = 17;
+                } else if (this.actor.data.data.raca == "Pequenino") {
+                    ef_base = 11;
+                    vb_base = 14;
+                }
+                if (this.actor.data.data.profissao == "Bardo") eh_base = 9;
+                else if (this.actor.data.data.profissao == "Guerreiro") eh_base = 18;
+                else if (this.actor.data.data.profissao == "Ladino" || this.actor.data.data.profissao == "Sacerdote") eh_base = 12;
+                else if (this.actor.data.data.profissao == "Mago") eh_base = 6;
+                else if (this.actor.data.data.profissao == "Rastreador") eh_base = 15;
+                let efMax = this.actor.data.data.atributos.FOR + this.actor.data.data.atributos.FIS + ef_base;
+                let vbTotal = this.actor.data.data.atributos.FIS + vb_base;
+                if (this.actor.data.data.ef.max != efMax) {
+                    this.actor.update({
+                        "data.ef.max": efMax,
+                        "data.vb": vbTotal
+                    });
+                }
+                if (this.actor.data.data.estagio == 1){
+                    let ehMax = eh_base + this.actor.data.data.atributos.FIS;
+                    if (this.actor.data.data.eh.max != ehMax) {
+                        this.actor.update({
+                            "data.eh.max": ehMax
+                        });
+                    }
+                }
+                
             }
 
         }
@@ -275,6 +351,52 @@ export default class tagmarActorSheet extends ActorSheet {
             let soma = parseInt($(html.find(".carac_sortPER")).val()) + parseInt($(html.find(".mod_racialPER")).val());
             $(html.find(".car_finPER")).val(soma);
         });
+        html.find(".calculaNovaEH").click(this._passandoEH.bind(this));
+    }
+
+    _passandoEH(event) {
+        let estagio_atual = parseInt($(".ipEstagio").val());
+        let valord10 = parseInt($(".valord10EH").val())
+        let profissao = $(".profissao").val();
+        let raca_list = [];
+        let nova_eh = 0;
+        let eh_atual = this.actor.data.data.eh.max;
+        let attFIS = this.actor.data.data.atributos.FIS;
+        if (estagio_atual > 1 && valord10 > 0 && valord10 <= 10) {
+            if (profissao == "Guerreiro") {
+                raca_list = [0,6,6,7,7,7,8,8,8,9,9];
+                nova_eh = raca_list[valord10];
+                this.actor.update({
+                    "data.eh.max": eh_atual + nova_eh + attFIS
+                });
+            } else if (profissao == "Ladino" || profissao == "Sacerdote") {
+                raca_list = [0,4,4,5,5,5,6,6,6,7,7];
+                nova_eh = raca_list[valord10];
+                this.actor.update({
+                    "data.eh.max": eh_atual + nova_eh + attFIS
+                });
+            } else if (profissao == "Mago") {
+                raca_list = [0,2,2,3,3,3,4,4,4,5,5];
+                nova_eh = raca_list[valord10];
+                this.actor.update({
+                    "data.eh.max": eh_atual + nova_eh + attFIS
+                });
+            } else if (profissao == "Rastreador") {
+                raca_list = [0,5,5,6,6,6,7,7,7,8,8];
+                nova_eh = raca_list[valord10];
+                this.actor.update({
+                    "data.eh.max": eh_atual + nova_eh + attFIS
+                });
+            } else if (profissao == "Bardo") {
+                raca_list = [0,3,3,4,4,4,5,5,5,6,6];
+                nova_eh = raca_list[valord10];
+                this.actor.update({
+                    "data.eh.max": eh_atual + nova_eh + attFIS
+                });
+            }
+        }
+        $(".valord10EH").val("");
+        this.render();
     }
 
     _attProxEstag(event) {
@@ -503,6 +625,30 @@ export default class tagmarActorSheet extends ActorSheet {
         const actorData = actor.data.data;
         const itemId = $(a).parents('.item').attr('data-item-id');
         const item = actor.getOwnedItem(itemId);
+    }
+
+    updateHabAjuste(item_id, actor = null){
+        actor = !actor ? this.actor : actor;
+        if (!actor.data) {
+            return;
+        }
+        const item_hab = actor.getOwnedItem(item_id);
+        console.log(item_hab);
+        const atributo = item_hab.data.data.ajuste.atributo;
+        let valor_atrib = 0;
+        const actorData = actor.data.data;
+        if (atributo == "INT") valor_atrib = actorData.atributos.INT;
+        else if (atributo == "AUR") valor_atrib = actorData.atributos.AUR;
+        else if (atributo == "CAR") valor_atrib = actorData.atributos.CAR;
+        else if (atributo == "FOR") valor_atrib = actorData.atributos.FOR;
+        else if (atributo == "FIS") valor_atrib = actorData.atributos.FIS;
+        else if (atributo == "AGI") valor_atrib = actorData.atributos.AGI;
+        else if (atributo == "PER") valor_atrib = actorData.atributos.PER;
+        if (item_hab.data.data.ajuste.valor != valor_atrib) {
+            item_hab.update({
+                "data.ajuste.valor": valor_atrib
+            });
+        }
     }
     
     updateItemNivel(valor_n , item_id, actor = null) {

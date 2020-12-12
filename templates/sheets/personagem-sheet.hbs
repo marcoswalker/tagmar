@@ -177,7 +177,7 @@
                         <label><h4 class="mediaeval">Carga(Kg):</h4></label>
                     </div>
                     <div class="col-md-2">
-                        <input name="data.carga.value" type="number" value="{{data.carga.value}}" height="30" readonly/>
+                        <input title="Carga Máxima: 20Kg p/ ponto de FOR" name="data.carga.value" type="number" value="{{data.carga.value}}" height="30" readonly/>
                     </div>
                     <div class="col-md-1">
                         {{#if actor.data.carga.sobrecarga}}
@@ -312,7 +312,17 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-md-2"></div>
+                            <div class="col-md-2">
+                                <table>
+                                    <caption class="mediaeval">Nova EH</caption>
+                                    <tr style="text-align: center;">
+                                        <th class="mediaeval">1d10 <a class="calculaNovaEH" title="Calcular EH"><i class="fas fa-calculator"></i></a></th>
+                                    </tr>
+                                    <tr style="text-align: center;">
+                                        <td><input class="valord10EH" type="number"/></td>
+                                    </tr>
+                                </table>
+                            </div>
                             <div class="col-md-5">
                                 <table>
                                     <tr style="text-align: left;">
@@ -727,7 +737,7 @@
                                 <td class="mediaeval">{{pertence.data.quant}}</td>
                                 <td class="mediaeval">{{pertence.data.peso}}</td>
                                 <td>
-                                    <a class="movePertence" title="Mover" data-item-id="{{pertence._id}}"><i class="fas fa-horse"></i></a>
+                                    <a class="movePertence" title="Mover para Transporte" data-item-id="{{pertence._id}}"><i class="fas fa-horse"></i></a>
                                 </td>
                                 <td>
                                     <div class="item-controls">
@@ -793,7 +803,7 @@
                                 <td class="mediaeval">{{pertence.data.quant}}</td>
                                 <td class="mediaeval">{{pertence.data.peso}}</td>
                                 <td class="mediaeval">
-                                    <a class="movePertence" title="Mover" data-item-id="{{pertence._id}}"><i class="fas fa-user"></i></a>
+                                    <a class="movePertence" title="Mover para Personagem" data-item-id="{{pertence._id}}"><i class="fas fa-user"></i></a>
                                 </td>
                                 <td>
                                     <div class="item-controls">
