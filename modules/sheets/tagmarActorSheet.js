@@ -629,29 +629,12 @@ export default class tagmarActorSheet extends ActorSheet {
         actorData.magias = magias;
     }
 
-    _onRoll(event, actor = null) {
-        actor = !actor ? this.actor : actor;
-    
-        // Initialize variables.
-        event.preventDefault();
-    
-        if (!actor.data) {
-          return;
-        }
-        const a = event.currentTarget;
-        const data = a.dataset;
-        const actorData = actor.data.data;
-        const itemId = $(a).parents('.item').attr('data-item-id');
-        const item = actor.getOwnedItem(itemId);
-    }
-
     updateHabAjuste(item_id, actor = null){
         actor = !actor ? this.actor : actor;
         if (!actor.data) {
             return;
         }
         const item_hab = actor.getOwnedItem(item_id);
-        console.log(item_hab);
         const atributo = item_hab.data.data.ajuste.atributo;
         let valor_atrib = 0;
         const actorData = actor.data.data;
@@ -739,10 +722,11 @@ export default class tagmarActorSheet extends ActorSheet {
                         else if (resultado == "vermelho") PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
                         else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
                         else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                        let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4>";
                         r.toMessage({
                             user: game.user._id,
                             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${PrintResult}`
+                            flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
                           });
                     }
                 }
@@ -755,19 +739,24 @@ export default class tagmarActorSheet extends ActorSheet {
                         dados[x] = new Roll(formulaD);
                         dados[x].evaluate();
                         var Dresult = dados[x].total;
-                        resultado = tabela_resol[20][Dresult];
-                        if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha</h1>";
-                        else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
-                        else if (resultado == "amarelo") PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
-                        else if (resultado == "laranja") PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - Médio</h1>";
-                        else if (resultado == "vermelho") PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
-                        else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
-                        else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
-                        dados[x].toMessage({
-                            user: game.user._id,
-                            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${PrintResult}`
-                        });
+                        for (let i = 0; i < tabela_resol.length; i++) {
+                            if (tabela_resol[i][0] == 20) {
+                                resultado = tabela_resol[i][Dresult];
+                                if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha</h1>";
+                                else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                                else if (resultado == "amarelo") PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                                else if (resultado == "laranja") PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                                else if (resultado == "vermelho") PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                                else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                                let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4>";
+                                r.toMessage({
+                                    user: game.user._id,
+                                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                                    flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                  });
+                            }
+                        }
                     }
                 } else if (valor_hab > 0) {
                     let vezes = parseInt(item.data.data.total / 20);
@@ -777,36 +766,46 @@ export default class tagmarActorSheet extends ActorSheet {
                         dados[x] = new Roll(formulaD);
                         dados[x].evaluate();
                         var Dresult = dados[x].total;
-                        resultado = tabela_resol[20][Dresult];
-                        if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha</h1>";
-                        else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
-                        else if (resultado == "amarelo") PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
-                        else if (resultado == "laranja") PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - Médio</h1>";
-                        else if (resultado == "vermelho") PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
-                        else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
-                        else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
-                        dados[x].toMessage({
-                            user: game.user._id,
-                            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${PrintResult}`
-                        });
+                        for (let i = 0; i < tabela_resol.length; i++) {
+                            if (tabela_resol[i][0] == 20) {
+                                resultado = tabela_resol[i][Dresult];
+                                if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha</h1>";
+                                else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                                else if (resultado == "amarelo") PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                                else if (resultado == "laranja") PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                                else if (resultado == "vermelho") PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                                else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                                let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4>";
+                                r.toMessage({
+                                    user: game.user._id,
+                                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                                    flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                  });
+                            }
+                        }
                     }
                     var dado = new Roll(formulaD);
                     dado.evaluate();
                     Dresult = dado.total;
-                    resultado = tabela_resol[sobra][Dresult];
-                    if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha</h1>";
-                    else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
-                    else if (resultado == "amarelo") PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
-                    else if (resultado == "laranja") PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - Médio</h1>";
-                    else if (resultado == "vermelho") PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
-                    else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
-                    else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
-                    dado.toMessage({
-                        user: game.user._id,
-                        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                        flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${PrintResult}`
-                    });
+                    for (let i = 0; i < tabela_resol.length; i++) {
+                        if (tabela_resol[i][0] == sobra) {
+                            resultado = tabela_resol[i][Dresult];
+                            if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha</h1>";
+                            else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                            else if (resultado == "amarelo") PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                            else if (resultado == "laranja") PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                            else if (resultado == "vermelho") PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                            else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                            else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                            let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4>";
+                            r.toMessage({
+                                user: game.user._id,
+                                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                                flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
+                              });
+                        }
+                    }
                 }
             } 
         }
