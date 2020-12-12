@@ -24,6 +24,9 @@ export default class tagmarActorSheet extends ActorSheet {
             this._prepareCharacterItems(data);
             this._prepareValorTeste(data);
             this._calculaAjuste(data);
+            if (data.actor.data.raca != "") {
+                this._preparaCaracRaciais(data);
+            }
             const isso = this;
             var actor_carga = 0;    // Atualiza Carga e verifica Sobrecarga
             var cap_transp = 0;
@@ -305,6 +308,71 @@ export default class tagmarActorSheet extends ActorSheet {
         this.actor.update({
             "data.karma.max": karma
         });
+    }
+
+    _preparaCaracRaciais(sheetData) {
+        const actorData = sheetData.actor;
+        if (actorData.data.raca == "Humano") {
+            this.actor.update({
+                "data.mod_racial.INT": 0,
+                "data.mod_racial.AUR": 0,
+                "data.mod_racial.CAR": 0,
+                "data.mod_racial.FOR": 0,
+                "data.mod_racial.FIS": 0,
+                "data.mod_racial.AGI": 0,
+                "data.mod_racial.PER": 0
+            });
+        } else if (actorData.data.raca == "Pequenino") {
+            this.actor.update({
+                "data.mod_racial.INT": 0,
+                "data.mod_racial.AUR": 0,
+                "data.mod_racial.CAR": 1,
+                "data.mod_racial.FOR": -2,
+                "data.mod_racial.FIS": 1,
+                "data.mod_racial.AGI": 2,
+                "data.mod_racial.PER": 1
+            });
+        } else if (actorData.data.raca == "Anão") {
+            this.actor.update({
+                "data.mod_racial.INT": 0,
+                "data.mod_racial.AUR": 0,
+                "data.mod_racial.CAR": 0,
+                "data.mod_racial.FOR": 1,
+                "data.mod_racial.FIS": 2,
+                "data.mod_racial.AGI": -1,
+                "data.mod_racial.PER": 0
+            });
+        } else if (actorData.data.raca == "Elfo Dourado") {
+            this.actor.update({
+                "data.mod_racial.INT": 1,
+                "data.mod_racial.AUR": 2,
+                "data.mod_racial.CAR": 0,
+                "data.mod_racial.FOR": -1,
+                "data.mod_racial.FIS": -1,
+                "data.mod_racial.AGI": 1,
+                "data.mod_racial.PER": 0
+            });
+        } else if (actorData.data.raca == "Elfo Florestal") {
+            this.actor.update({
+                "data.mod_racial.INT": 0,
+                "data.mod_racial.AUR": 1,
+                "data.mod_racial.CAR": 0,
+                "data.mod_racial.FOR": -1,
+                "data.mod_racial.FIS": -1,
+                "data.mod_racial.AGI": 1,
+                "data.mod_racial.PER": 2
+            });
+        } else if (actorData.data.raca == "Meio-Elfo") {
+            this.actor.update({
+                "data.mod_racial.INT": 0,
+                "data.mod_racial.AUR": 0,
+                "data.mod_racial.CAR": 1,
+                "data.mod_racial.FOR": 0,
+                "data.mod_racial.FIS": 0,
+                "data.mod_racial.AGI": 1,
+                "data.mod_racial.PER": 0
+            });
+        }
     }
 
     _calculaAjuste(sheetData) {
