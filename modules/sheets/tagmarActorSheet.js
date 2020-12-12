@@ -364,11 +364,13 @@ export default class tagmarActorSheet extends ActorSheet {
         html.find(".roll1d10").click(ev => {
             let formula = "1d10";
             let r = new Roll(formula);
-            r.roll().toMessage({
+            r.evaluate();
+            r.toMessage({
                 user: game.user._id,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                 flavor: ``
             });
+            $(html.find(".valord10EH")).val(r.total);
         });
     }
 
@@ -750,7 +752,7 @@ export default class tagmarActorSheet extends ActorSheet {
                                 else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
                                 else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
                                 let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4>";
-                                r.toMessage({
+                                dados[x].toMessage({
                                     user: game.user._id,
                                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                                     flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
@@ -777,7 +779,7 @@ export default class tagmarActorSheet extends ActorSheet {
                                 else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
                                 else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
                                 let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4>";
-                                r.toMessage({
+                                dados[x].toMessage({
                                     user: game.user._id,
                                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                                     flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
@@ -799,7 +801,7 @@ export default class tagmarActorSheet extends ActorSheet {
                             else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
                             else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
                             let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4>";
-                            r.toMessage({
+                            dado.toMessage({
                                 user: game.user._id,
                                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                                 flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
