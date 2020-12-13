@@ -1173,9 +1173,10 @@ export default class tagmarActorSheet extends ActorSheet {
                     }
                 }
             } 
-        } else if (item.data.type == "Combate") { // Combate
+        } else if (item.data.type == "Combate") { //Combate
             let municao = item.data.data.municao;
             let muni_usada = 0;
+            let punicaoText = "";
             if (municao > 0) {
                 muni_usada = 1;
                 municao -= 1;
@@ -1186,6 +1187,10 @@ export default class tagmarActorSheet extends ActorSheet {
             }
             let bonus_cat = item.data.data.bonus;
             let bonus_ajustev = 0;
+            const puni_25 = item.data.data.penalidade.p25;
+            const puni_50 = item.data.data.penalidade.p50;
+            const puni_75 = item.data.data.penalidade.p75;
+            const puni_100 = item.data.data.penalidade.p100;
             if (bonus_cat == "AUR") bonus_ajustev = this.actor.data.data.atributos.AUR;
             else if (bonus_cat == "FOR") bonus_ajustev = this.actor.data.data.atributos.FOR;
             else if (bonus_cat == "AGI") bonus_ajustev = this.actor.data.data.atributos.AGI;
@@ -1193,10 +1198,10 @@ export default class tagmarActorSheet extends ActorSheet {
             let total_l = item.data.data.nivel + bonus_ajustev + item.data.data.bonus_magico + item.data.data.def_l;
             let total_m = item.data.data.nivel + bonus_ajustev + item.data.data.bonus_magico + item.data.data.def_m;
             let total_p = item.data.data.nivel + bonus_ajustev + item.data.data.bonus_magico + item.data.data.def_p;
-            let dano_total = 0;
-            let dano_text = "";
+            var dano_total = 0;
+            var dano_text = "";
             const cat_def = this.actor.data.data.inf_ataque.cat_def;
-            let valor_tabela = 0;
+            var valor_tabela = 0;
             if (cat_def == "L") valor_tabela = total_l + this.actor.data.data.inf_ataque.bonus - this.actor.data.data.inf_ataque.valor_def;
             else if (cat_def == "M") valor_tabela = total_m + this.actor.data.data.inf_ataque.bonus - this.actor.data.data.inf_ataque.valor_def;
             else if (cat_def == "P") valor_tabela = total_p + this.actor.data.data.inf_ataque.bonus - this.actor.data.data.inf_ataque.valor_def;
@@ -1213,23 +1218,96 @@ export default class tagmarActorSheet extends ActorSheet {
                         else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Errou</h1>";
                         else if (resultado == "amarelo") {
                             PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - 25%</h1>";
-                            dano_total = item.data.data.dano.d25;
+                            if (puni_25 || puni_50 || puni_75 || puni_100) {
+                                if (puni_25) {
+                                    dano_total = 0;
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                } 
+                                else if (puni_50) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    dano_total = 0;
+                                }
+                                else if (puni_75) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    dano_total = 0;
+                                }
+                                else if (puni_100) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    dano_total = 0;
+                                }
+                            } else dano_total = item.data.data.dano.d25;
                         }
                         else if (resultado == "laranja") {
                             PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - 50%</h1>";
-                            dano_total = item.data.data.dano.d50;
+                            if (puni_25 || puni_50 || puni_75 || puni_100) {
+                                if (puni_25) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    dano_total = item.data.data.dano.d25;
+                                } else if (puni_50) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    dano_total = 0;
+                                } else if (puni_75) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    dano_total = 0;
+                                } else if (puni_100) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    dano_total = 0;
+                                }
+                            } else dano_total = item.data.data.dano.d50;
                         }
                         else if (resultado == "vermelho") {
                             PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - 75%</h1>";
-                            dano_total = item.data.data.dano.d75;
+                            if (puni_25 || puni_50 || puni_75 || puni_100) {
+                                if (puni_25) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    dano_total = item.data.data.dano.d50;
+                                } else if (puni_50) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    dano_total = item.data.data.dano.d25;
+                                } else if (puni_75) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    dano_total = 0;
+                                } else if (puni_100) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    dano_total = 0;
+                                }
+                            } else dano_total = item.data.data.dano.d75;
                         }
                         else if (resultado == "azul") {
                             PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - 100%</h1>";
-                            dano_total = item.data.data.dano.d100;
+                            if (puni_25 || puni_50 || puni_75 || puni_100) {
+                                if (puni_25) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    dano_total = item.data.data.dano.d75;
+                                } else if (puni_50) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    dano_total = item.data.data.dano.d50;
+                                } else if (puni_75) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    dano_total = item.data.data.dano.d25;
+                                } else if (puni_100) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    dano_total = 0;
+                                }
+                            } else dano_total = item.data.data.dano.d100;
                         }
                         else if (resultado == "roxo") {
                             PrintResult = "<h1 class='mediaeval rola' style='color: rgb(2,9,37); text-align:center;'>Azul Escuro - 125%</h1>";
-                            dano_total = item.data.data.dano.d125;
+                            if (puni_25 || puni_50 || puni_75 || puni_100) {
+                                if (puni_25) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    dano_total = item.data.data.dano.d100;
+                                } else if (puni_50) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    dano_total = item.data.data.dano.d75;
+                                } else if (puni_75) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    dano_total = item.data.data.dano.d50;
+                                } else if (puni_100) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    dano_total = item.data.data.dano.d25;
+                                }
+                            } else dano_total = item.data.data.dano.d125;
                         }
                         else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico</h1>";
                         let coluna = "<h4 class='mediaeval rola'>Coluna: " + tabela_resol[i][0] + "</h4><h4 class='mediaeval rola'>Munição gasta: " + muni_usada + "</h4>";
@@ -1237,40 +1315,125 @@ export default class tagmarActorSheet extends ActorSheet {
                             r.toMessage({
                             user: game.user._id,
                             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            flavor: `<h2 class="mediaeval">${item.name} - ${item.data.data.tipo}</h2>${conteudo}${coluna}${PrintResult}${dano_text}`
+                            flavor: `<h2 class="mediaeval">${item.name} - ${item.data.data.tipo}</h2>${conteudo}${coluna}${PrintResult}${punicaoText}${dano_text}`
                           });
                     }
                 }
             } else {
                 let coluna_t = valor_tabela % 20;
-                let ajusteDano = parseInt(valor_tabela/20) * 50;
+                const ajusteDano = parseInt(valor_tabela/20) * 50;
+                dano_total = 0;
                 for (let i = 0; i < tabela_resol.length; i++) {
                     if (tabela_resol[i][0] == coluna_t) {
                         resultado = tabela_resol[i][Dresult];
                         if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha Crítica</h1>";
                         else if (resultado == "branco") {
                             PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Errou</h1>";
-                            dano_total = 0 + ajusteDano;
+                            if (puni_25 || puni_50 || puni_75 || puni_100) {
+                                if (puni_25) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    dano_total = ajusteDano + 0 - 25;
+                                } else if (puni_50) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    dano_total = 0 + ajusteDano - 50;
+                                } else if (puni_75) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    dano_total = 0 + ajusteDano - 75;
+                                } else if (puni_100) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    dano_total = 0 + ajusteDano - 100;
+                                }
+                            } else dano_total = 0 + ajusteDano;
                         }
                         else if (resultado == "amarelo") {
                             PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - 25%</h1>";
-                            dano_total = 25 + ajusteDano;
+                            if (puni_25 || puni_50 || puni_75 || puni_100) {
+                                if (puni_25) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    dano_total = ajusteDano + 25 - 25;
+                                } else if (puni_50) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    dano_total = 25 + ajusteDano - 50;
+                                } else if (puni_75) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    dano_total = 25 + ajusteDano - 75;
+                                } else if (puni_100) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    dano_total = 25 + ajusteDano - 100;
+                                }
+                            } else dano_total = 25 + ajusteDano;
                         }
                         else if (resultado == "laranja") {
                             PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - 50%</h1>";
-                            dano_total = 50 + ajusteDano;
+                            if (puni_25 || puni_50 || puni_75 || puni_100) {
+                                if (puni_25) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    dano_total = ajusteDano + 50 - 25;
+                                } else if (puni_50) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    dano_total = 50 + ajusteDano - 50;
+                                } else if (puni_75) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    dano_total = 50 + ajusteDano - 75;
+                                } else if (puni_100) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    dano_total = 50 + ajusteDano - 100;
+                                }
+                            } else dano_total = 50 + ajusteDano;
                         }
                         else if (resultado == "vermelho") {
                             PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - 75%</h1>";
-                            dano_total = 75 + ajusteDano;
+                            if (puni_25 || puni_50 || puni_75 || puni_100) {
+                                if (puni_25) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    dano_total = ajusteDano + 75 - 25;
+                                } else if (puni_50) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    dano_total = 75 + ajusteDano - 50;
+                                } else if (puni_75) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    dano_total = 75 + ajusteDano - 75;
+                                } else if (puni_100) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    dano_total = 75 + ajusteDano - 100;
+                                }
+                            } else dano_total = 75 + ajusteDano;
                         }
                         else if (resultado == "azul") {
                             PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - 100%</h1>";
-                            dano_total = 100 + ajusteDano;
+                            if (puni_25 || puni_50 || puni_75 || puni_100) {
+                                if (puni_25) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    dano_total = ajusteDano + 100 - 25;
+                                } else if (puni_50) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    dano_total = 100 + ajusteDano - 50;
+                                } else if (puni_75) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    dano_total = 100 + ajusteDano - 75;
+                                } else if (puni_100) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    dano_total = 100 + ajusteDano - 100;
+                                }
+                            } else dano_total = 100 + ajusteDano;
                         }
                         else if (resultado == "roxo") {
                             PrintResult = "<h1 class='mediaeval rola' style='color: rgb(2,9,37); text-align:center;'>Azul Escuro - 125%</h1>";
-                            dano_total = 125 + ajusteDano;
+                            if (puni_25 || puni_50 || puni_75 || puni_100) {
+                                if (puni_25) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    dano_total = ajusteDano + 125 - 25;
+                                } else if (puni_50) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    dano_total = 125 + ajusteDano - 50;
+                                } else if (puni_75) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    dano_total = 125 + ajusteDano - 75;
+                                } else if (puni_100) {
+                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    dano_total = 125 + ajusteDano - 100;
+                                }
+                            } else dano_total = 125 + ajusteDano;
                         }
                         else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico</h1>";
                         let dano_novo = 0;
@@ -1318,7 +1481,7 @@ export default class tagmarActorSheet extends ActorSheet {
                         r.toMessage({
                         user: game.user._id,
                         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                        flavor: `<h2 class="mediaeval">${item.name} - ${item.data.data.tipo}</h2>${conteudo}${coluna}${PrintResult}${ajuste_text}${dano_text}`
+                        flavor: `<h2 class="mediaeval">${item.name} - ${item.data.data.tipo}</h2>${conteudo}${coluna}${PrintResult}${ajuste_text}${punicaoText}${dano_text}`
                         });
                     }
                 }

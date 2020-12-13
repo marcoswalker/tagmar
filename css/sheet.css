@@ -4,14 +4,14 @@
 }
 @font-face {
     font-family: 'GoudyMediaeval';
-    src: url('../fonts/GoudyMediaeval.ttf') format('truetype');
+    src: url('../fonts/Baskerville_Old_Face.ttf') format('truetype');
 }
 .fairyDust{
     font-family: "FairyDustB";
 }
 .mediaeval {
     font-family: "GoudyMediaeval";
-    font-size: 120%;
+    font-size: 110%;
 }
 .dados {
     padding: 2px 0;
