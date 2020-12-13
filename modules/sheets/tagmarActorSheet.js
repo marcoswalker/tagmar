@@ -385,6 +385,14 @@ export default class tagmarActorSheet extends ActorSheet {
         html.find(".rolarMoral").click(this._rolarMoral.bind(this));
         html.find(".rolaR_Fis").click(this._rolaRFIS.bind(this));
         html.find(".rolaR_Mag").click(this._rolaRMAG.bind(this));
+        if (this.actor.owner) {
+        let handler = ev => this._onDragStart(ev);
+        html.find('.dragable').each((i, li) => {
+            if (li.classList.contains("inventory-header")) return;
+            li.setAttribute("draggable", true);
+            li.addEventListener("dragstart", handler, false);
+        });
+        }
     }
 
     _rolaRMAG(event) {
