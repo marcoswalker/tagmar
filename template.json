@@ -149,7 +149,8 @@
           "cat_def": "",
           "valor_def": 0,
           "bonus": 0
-        }
+        },
+        "bonus_habil": 0
       }
     },
     "Personagem": {

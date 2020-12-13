@@ -946,16 +946,18 @@ export default class tagmarActorSheet extends ActorSheet {
         var PrintResult = "";
         var r;
         
+        
         if (item.data.type == "Habilidade") {
-            let h_total = item.data.data.total;
+            let bonus_hab = this.actor.data.data.bonus_habil;
+            let h_total = item.data.data.total + bonus_hab;
             formulaD = "1d20";
             conteudo = "<h3>Tarefas Aperfeiçoadas: </h3>" + "<h4>" + item.data.data.tarefAperf + "</h4>";
             r = new Roll(formulaD);
             r.evaluate();
             var Dresult = r.total;
-            if (item.data.data.total <= 20) {
+            if (h_total <= 20) {
                 for (let i = 0; i < tabela_resol.length; i++) {
-                    if (tabela_resol[i][0] == item.data.data.total) {
+                    if (tabela_resol[i][0] == h_total) {
                         resultado = tabela_resol[i][Dresult];
                         if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha</h1>";
                         else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
@@ -968,14 +970,14 @@ export default class tagmarActorSheet extends ActorSheet {
                         r.toMessage({
                             user: game.user._id,
                             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
+                            flavor: `<h2>${item.name} - ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
                           });
                     }
                 }
             } else {
-                let valor_hab = item.data.data.total % 20;
+                let valor_hab = h_total % 20;
                 if (valor_hab == 0) {
-                    let vezes = item.data.data.total / 20;
+                    let vezes = h_total / 20;
                     let dados = [];
                     for (let x = 0; x < vezes; x++){
                         dados[x] = new Roll(formulaD);
@@ -995,14 +997,14 @@ export default class tagmarActorSheet extends ActorSheet {
                                 dados[x].toMessage({
                                     user: game.user._id,
                                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                    flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                    flavor: `<h2>${item.name} - ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
                                   });
                             }
                         }
                     }
                 } else if (valor_hab > 0) {
-                    let vezes = parseInt(item.data.data.total / 20);
-                    let sobra = item.data.data.total % 20;
+                    let vezes = parseInt(h_total / 20);
+                    let sobra = h_total % 20;
                     let dados = [];
                     for (let x = 0; x < vezes; x++){
                         dados[x] = new Roll(formulaD);
@@ -1022,7 +1024,7 @@ export default class tagmarActorSheet extends ActorSheet {
                                 dados[x].toMessage({
                                     user: game.user._id,
                                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                    flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                    flavor: `<h2>${item.name} - ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
                                   });
                             }
                         }
@@ -1044,7 +1046,7 @@ export default class tagmarActorSheet extends ActorSheet {
                             dado.toMessage({
                                 user: game.user._id,
                                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                flavor: `<h2>${item.name} - ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
                               });
                         }
                     }
@@ -1164,6 +1166,14 @@ export default class tagmarActorSheet extends ActorSheet {
                 }
             } 
         } else if (item.data.type == "Combate") { // Combate
+            let municao = item.data.data.municao;
+            if (municao > 0) {
+                municao -= 1;
+                item.update({
+                    "data.municao": municao
+                });
+                item.render();
+            }
             let bonus_cat = item.data.data.bonus;
             let bonus_ajustev = 0;
             if (bonus_cat == "AUR") bonus_ajustev = this.actor.data.data.atributos.AUR;
@@ -1212,7 +1222,7 @@ export default class tagmarActorSheet extends ActorSheet {
                             dano_total = item.data.data.dano.d125;
                         }
                         else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico</h1>";
-                        let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4>";
+                        let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4><h4>Munição:" + item.data.data.municao + "</h4>";
                         dano_text = "<h2 style='text-align: center;'>Dano: " + dano_total + "</h2>";
                             r.toMessage({
                             user: game.user._id,
@@ -1292,7 +1302,7 @@ export default class tagmarActorSheet extends ActorSheet {
                                 dano_novo = item.data.data.dano.d300;
                                 break;
                         }
-                        let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4>";
+                        let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4><h4>Munição:" + item.data.data.municao + "</h4>";
                         let ajuste_text = "<h1 style='text-align: center;'>AAC20: " + ajusteDano + "%</h1>";
                         dano_text = "<h1 style='text-align: center;'>Dano: " + dano_novo + "</h1>";
                         r.toMessage({
