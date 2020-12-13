@@ -91,64 +91,69 @@
         "max_hab": 0,
         "pontos_comb": 0,
         "pontos_tec": 0,
-        "pontos_mag": 0
+        "pontos_mag": 0,
+        "idade": 0,
+        "altura": "",
+        "peso": 0,
+        "carga": {
+          "value": 0,
+          "max": 0,
+          "sobrecarga": false,
+          "valor_s": 0
+        },
+        "classe_social": "",
+        "deus": "",
+        "pontos_estagio": {
+          "value": 0,
+          "next": 0
+        },
+        "dinheiro": {
+          "mo": 0,
+          "mp": 0,
+          "mc": 0
+        },
+        "combos": "",
+        "carga_transp": {
+          "max": 0,
+          "value": 0,
+          "hasTransp": false
+        },
+        "carac_sort": {
+          "INT": 0,
+          "AUR": 0,
+          "CAR": 0,
+          "FOR": 0,
+          "FIS": 0,
+          "AGI": 0,
+          "PER": 0
+        },
+        "carac_final": {
+          "INT": 0,
+          "AUR": 0,
+          "CAR": 0,
+          "FOR": 0,
+          "FIS": 0,
+          "AGI": 0,
+          "PER": 0
+        },
+        "mod_racial": {
+          "INT": 0,
+          "AUR": 0,
+          "CAR": 0,
+          "FOR": 0,
+          "FIS": 0,
+          "AGI": 0,
+          "PER": 0
+        },
+        "inf_ataque": {
+          "cat_def": "",
+          "valor_def": 0,
+          "bonus": 0
+        }
       }
     },
     "Personagem": {
-      "templates": ["base"],
-      "idade": 0,
-      "altura": "",
-      "peso": 0,
-      "carga": {
-        "value": 0,
-        "max": 0,
-        "sobrecarga": false,
-        "valor_s": 0
-      },
-      "classe_social": "",
-      "deus": "",
-      "pontos_estagio": {
-        "value": 0,
-        "next": 0
-      },
-      "dinheiro": {
-        "mo": 0,
-        "mp": 0,
-        "mc": 0
-      },
-      "combos": "",
-      "carga_transp": {
-        "max": 0,
-        "value": 0,
-        "hasTransp": false
-      },
-      "carac_sort": {
-        "INT": 0,
-        "AUR": 0,
-        "CAR": 0,
-        "FOR": 0,
-        "FIS": 0,
-        "AGI": 0,
-        "PER": 0
-      },
-      "carac_final": {
-        "INT": 0,
-        "AUR": 0,
-        "CAR": 0,
-        "FOR": 0,
-        "FIS": 0,
-        "AGI": 0,
-        "PER": 0
-      },
-      "mod_racial": {
-        "INT": 0,
-        "AUR": 0,
-        "CAR": 0,
-        "FOR": 0,
-        "FIS": 0,
-        "AGI": 0,
-        "PER": 0
-      }
+      "templates": ["base"]
     },
     "NPC": {
       "templates": ["base"],
@@ -192,6 +197,20 @@
         "d275": 0,
         "d300": 0
       },
+      "dano_base": {
+        "d25": 0,
+        "d50": 0,
+        "d75": 0,
+        "d100": 0,
+        "d125": 0,
+        "d150": 0,
+        "d175": 0,
+        "d200": 0,
+        "d225": 0,
+        "d250": 0,
+        "d275": 0,
+        "d300": 0
+      },
       "penalidade": {
         "p25": false,
         "p50": false,
@@ -217,7 +236,11 @@
       "templates": ["base", "custoNivel"],
       "evocacao": "",
       "duracao": "",
-      "efeito": ""
+      "efeito": "",
+      "total": {
+        "valor": 0,
+        "valorKarma": 0
+      }
     },
     "Habilidade": {
       "templates": ["custoNivel"],

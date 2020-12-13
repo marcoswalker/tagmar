@@ -4,7 +4,7 @@ export default class tagmarItemSheet extends ItemSheet {
         // Expand the default size of the class sheet
         if ( this.item.data.type === "Combate" ) {
           this.options.width = this.position.width =  640;
-          this.options.height = this.position.height = 620;
+          this.options.height = this.position.height = 660;
         }
         if ( this.item.data.type === "Raca" ) {
             this.options.width = this.position.width =  640;
@@ -37,17 +37,6 @@ export default class tagmarItemSheet extends ItemSheet {
     activateListeners(html) {
         super.activateListeners(html);
         if (!this.options.editable) return;
-
-        html.find(".nivelInput").change(event => {
-            const nivel = parseInt(html.find(".nivelInput").val());
-            const custo = parseInt(html.find(".custoInput").val());
-            $(html.find(".totalInput")).val(nivel + custo);
-        });
-        html.find(".custoInput").change(event => {
-            const nivel = parseInt(html.find(".nivelInput").val());
-            const custo = parseInt(html.find(".custoInput").val());
-            $(html.find(".totalInput")).val(nivel + custo);
-        });
 
         html.find(".dano25").change(event => {
             const dano25Input = html.find(".dano25");

@@ -1,5 +1,4 @@
 export default class tagmarActorSheet extends ActorSheet {
-
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
         classes: ["tagmar", "sheet", "actor"],
@@ -15,12 +14,11 @@ export default class tagmarActorSheet extends ActorSheet {
     get template() {
         return 'systems/tagmar/templates/sheets/'+ this.actor.data.type.toLowerCase() +'-sheet.hbs';
     }
-
     getData() {
         const data = super.getData();
         data.dtypes = ["String", "Number", "Boolean"];
          // Prepare items.
-        if (this.actor.data.type == 'Personagem') {
+        if (this.actor.data.type == 'Personagem' || this.actor.data.type == "NPC") {
             this._prepareCharacterItems(data);
             this._prepareValorTeste(data);
             this._calculaAjuste(data);
@@ -105,7 +103,9 @@ export default class tagmarActorSheet extends ActorSheet {
                     else if (item.data.tipo == "PpB") {
                         valor_n = data.actor.data.grupos.PpB;
                         isso.updateItemNivel(valor_n, item._id, isso.actor);
-                    } 
+                    } else if (item.data.tipo == "") {
+                        isso.updateCombateNivel(item._id, isso.actor);
+                    }
                 });
             }
             if (data.actor.h_prof.length > 0){
@@ -161,6 +161,16 @@ export default class tagmarActorSheet extends ActorSheet {
             if (data.actor.pertences_transporte.length > 0){
                 data.actor.pertences_transporte.forEach(function(item){
                     cap_usada += item.data.peso * item.data.quant;
+                });
+            }
+            if (data.actor.magias.length > 0) {
+                data.actor.magias.forEach(function(item){
+                    isso.updateMagiasTotal(item._id, isso.actor);
+                });
+            }
+            if (data.actor.tecnicas.length > 0) {
+                data.actor.tecnicas.forEach(function(item){
+                    isso.updateTecnicasTotal(item._id, isso.actor);
                 });
             }
             var def_atiVal = def_pasVal + this.actor.data.data.atributos.AGI;
@@ -372,8 +382,64 @@ export default class tagmarActorSheet extends ActorSheet {
             });
             $(html.find(".valord10EH")).val(r.total);
         });
+        html.find(".rolarMoral").click(this._rolarMoral.bind(this));
+        html.find(".rolaR_Fis").click(this._rolaRFIS.bind(this));
+        html.find(".rolaR_Mag").click(this._rolaRMAG.bind(this));
     }
 
+    _rolaRMAG(event) {
+        const table_resFisMag = this.table_resFisMag;
+        const forcAtaque = parseInt($(".F_Ataque").val());
+        const valorDef = this.actor.data.data.rm;
+        let stringSucesso = "";
+        let valorSucess = 0;
+        for (let i = 0; i < table_resFisMag.length; i++) {
+            if (table_resFisMag[i][0] == valorDef) {
+                valorSucess = table_resFisMag[i][forcAtaque];
+            }
+        }
+        let r = new Roll("1d20");
+        r.evaluate();
+        var Dresult = r.total;
+        if (Dresult >= valorSucess) { // Sucesso
+            stringSucesso = "<h1 style='text-align:center; color: blue;'>SUCESSO</h1>";
+        } else {    // Insucesso
+            stringSucesso = "<h1 style='text-align:center; color: red;'>FRACASSO</h1>";
+        }   
+        r.toMessage({
+            user: game.user._id,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            flavor: `<h2>Teste de Resistência </h2><h3> Força Ataque: ${forcAtaque}  Resistência Magía: ${valorDef}</h3>${stringSucesso}`
+        });
+        $(".F_Ataque").val("");
+    }
+
+    _rolaRFIS(event) {
+        const table_resFisMag = this.table_resFisMag;
+        const forcAtaque = parseInt($(".F_Ataque").val());
+        const valorDef = this.actor.data.data.rf;
+        let stringSucesso = "";
+        let valorSucess = 0;
+        for (let i = 0; i < table_resFisMag.length; i++) {
+            if (table_resFisMag[i][0] == valorDef) {
+                valorSucess = table_resFisMag[i][forcAtaque];
+            }
+        }
+        let r = new Roll("1d20");
+        r.evaluate();
+        var Dresult = r.total;
+        if (Dresult >= valorSucess) { // Sucesso
+            stringSucesso = "<h1 style='text-align:center; color: blue;'>SUCESSO</h1>";
+        } else {    // Insucesso
+            stringSucesso = "<h1 style='text-align:center; color: red;'>FRACASSO</h1>";
+        }   
+        r.toMessage({
+            user: game.user._id,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            flavor: `<h2>Teste de Resistência </h2><h3> Força Ataque: ${forcAtaque}  Resistência Física: ${valorDef}</h3>${stringSucesso}`
+        });
+        $(".F_Ataque").val("");
+    }
     _passandoEH(event) {
         let estagio_atual = parseInt($(".ipEstagio").val());
         let valord10 = parseInt($(".valord10EH").val())
@@ -616,56 +682,6 @@ export default class tagmarActorSheet extends ActorSheet {
                 else pertences.push(item);
             } 
         });
-        actorData.pertences_transporte = pertences_transporte;
-        actorData.pertences = pertences;
-        actorData.defesas = defesas;
-        actorData.transportes = transportes;
-        actorData.tecnicas = tecnicas;
-        actorData.h_prof = h_prof;
-        actorData.h_man = h_man;
-        actorData.h_con = h_con;
-        actorData.h_sub = h_sub;
-        actorData.h_inf = h_inf;
-        actorData.h_geral = h_geral;
-        actorData.combate = combate;
-        actorData.magias = magias;
-    }
-
-    updateHabAjuste(item_id, actor = null){
-        actor = !actor ? this.actor : actor;
-        if (!actor.data) {
-            return;
-        }
-        const item_hab = actor.getOwnedItem(item_id);
-        const atributo = item_hab.data.data.ajuste.atributo;
-        let valor_atrib = 0;
-        const actorData = actor.data.data;
-        if (atributo == "INT") valor_atrib = actorData.atributos.INT;
-        else if (atributo == "AUR") valor_atrib = actorData.atributos.AUR;
-        else if (atributo == "CAR") valor_atrib = actorData.atributos.CAR;
-        else if (atributo == "FOR") valor_atrib = actorData.atributos.FOR;
-        else if (atributo == "FIS") valor_atrib = actorData.atributos.FIS;
-        else if (atributo == "AGI") valor_atrib = actorData.atributos.AGI;
-        else if (atributo == "PER") valor_atrib = actorData.atributos.PER;
-        if (item_hab.data.data.ajuste.valor != valor_atrib) {
-            item_hab.update({
-                "data.ajuste.valor": valor_atrib
-            });
-        }
-    }
-    
-    updateItemNivel(valor_n , item_id, actor = null) {
-        actor = !actor ? this.actor : actor;
-        if (!actor.data) {
-            return;
-        }
-        const item_comb = actor.getOwnedItem(item_id);
-        item_comb.update({
-            "data.nivel": valor_n
-        });
-    }
-
-    _onItemRoll(event) {
         const tabela_resol = [
             [-7, "verde", "verde", "verde", "verde", "verde", "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "laranja", "vermelho", "azul", "cinza"],
             [-6, "verde", "verde", "verde", "verde", "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "laranja", "vermelho", "azul", "cinza"],
@@ -696,7 +712,231 @@ export default class tagmarActorSheet extends ActorSheet {
             [19, "verde", "amarelo", "amarelo", "laranja", "laranja", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "roxo", "roxo", "roxo", "cinza"],
             [20, "verde", "amarelo", "laranja", "laranja", "laranja", "laranja", "laranja", "laranja", "laranja", "vermelho", "vermelho", "vermelho", "azul", "azul", "azul", "azul", "roxo", "roxo", "roxo", "cinza"]
         ];
+        const table_resFisMag = [
+            [-2, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+            [-1, 13, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20],
+            [ 0, 12, 13, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 20, 20, 20, 20, 20],
+            [ 1, 11, 12, 13, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 20, 20, 20, 20],
+            [ 2, 10, 11, 12, 13, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 20, 20, 20],
+            [ 3,  9, 10, 11, 12, 13, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 20, 20],
+            [ 4,  8,  9, 10, 11, 12, 13, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 20],
+            [ 5,  7,  8,  9, 10, 11, 12, 13, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20],
+            [ 6,  7,  7,  8,  9, 10, 11, 12, 13, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20],
+            [ 7,  6,  7,  7,  8,  9, 10, 11, 12, 13, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19],
+            [ 8,  6,  6,  7,  7,  8,  9, 10, 11, 12, 13, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19],
+            [ 9,  5,  6,  6,  7,  7,  8,  9, 10, 11, 12, 13, 14, 15, 15, 16, 16, 17, 17, 18, 18],
+            [10,  5,  5,  6,  6,  7,  7,  8,  9, 10, 11, 12, 13, 14, 15, 15, 16, 16, 17, 17, 18],
+            [11,  4,  5,  5,  6,  6,  7,  7,  8,  9, 10, 11, 12, 13, 14, 15, 15, 16, 16, 17, 17],
+            [12,  4,  4,  5,  5,  6,  6,  7,  7,  8,  9, 10, 11, 12, 13, 14, 15, 15, 16, 16, 17],
+            [13,  3,  4,  4,  5,  5,  6,  6,  7,  7,  8,  9, 10, 11, 12, 13, 14, 15, 15, 16, 16],
+            [14,  3,  3,  4,  4,  5,  5,  6,  6,  7,  7,  8,  9, 10, 11, 12, 13, 14, 15, 15, 16],
+            [15,  2,  3,  3,  4,  4,  5,  5,  6,  6,  7,  7,  8,  9, 10, 11, 12, 13, 14, 15, 15],
+            [16,  2,  2,  3,  3,  4,  4,  5,  5,  6,  6,  7,  7,  8,  9, 10, 11, 12, 13, 14, 15],
+            [17,  2,  2,  2,  3,  3,  4,  4,  5,  5,  6,  6,  7,  7,  8,  9, 10, 11, 12, 13, 14],
+            [18,  2,  2,  2,  2,  3,  3,  4,  4,  5,  5,  6,  6,  7,  7,  8,  9, 10, 11, 12, 13],
+            [19,  2,  2,  2,  2,  2,  3,  3,  4,  4,  5,  5,  6,  6,  7,  7,  8,  9, 10, 11, 12],
+            [20,  2,  2,  2,  2,  2,  2,  3,  3,  4,  4,  5,  5,  6,  6,  7,  7,  8,  9, 10, 11]
+        ];
+        this.table_resFisMag = table_resFisMag;
+        this.tabela_resol = tabela_resol;
+        actorData.pertences_transporte = pertences_transporte;
+        actorData.pertences = pertences;
+        actorData.defesas = defesas;
+        actorData.transportes = transportes;
+        actorData.tecnicas = tecnicas;
+        actorData.h_prof = h_prof;
+        actorData.h_man = h_man;
+        actorData.h_con = h_con;
+        actorData.h_sub = h_sub;
+        actorData.h_inf = h_inf;
+        actorData.h_geral = h_geral;
+        actorData.combate = combate;
+        actorData.magias = magias;
+    }
 
+    updateTecnicasTotal(item_id, actor = null){
+        actor = !actor ? this.actor : actor;
+        if (!actor.data) {
+            return;
+        }
+        const tecnica = actor.getOwnedItem(item_id);
+        const actorData = actor.data.data;
+        const ajusteTecnica = tecnica.data.data.ajuste;
+        const nivel_tecnica = tecnica.data.data.nivel;
+        let total = 0;
+        if (ajusteTecnica.atributo == "INT") total = actorData.atributos.INT + nivel_tecnica;
+        else if (ajusteTecnica.atributo == "CAR") total = actorData.atributos.CAR + nivel_tecnica;
+        else if (ajusteTecnica.atributo == "AUR") total = actorData.atributos.AUR + nivel_tecnica;
+        else if (ajusteTecnica.atributo == "FOR") total = actorData.atributos.FOR + nivel_tecnica;
+        else if (ajusteTecnica.atributo == "FIS") total = actorData.atributos.FIS + nivel_tecnica;
+        else if (ajusteTecnica.atributo == "AGI") total = actorData.atributos.AGI + nivel_tecnica;
+        else if (ajusteTecnica.atributo == "PER") total = actorData.atributos.PER + nivel_tecnica;
+        tecnica.update({
+            "data.total": total
+        });
+        tecnica.render();
+    }
+
+    updateMagiasTotal(item_id, actor = null){
+        actor = !actor ? this.actor : actor;
+        if (!actor.data) {
+            return;
+        }
+        const magia = actor.getOwnedItem(item_id);
+        const actorData = actor.data.data;
+        const aura = actorData.atributos.AUR;
+        const m_nivel = magia.data.data.nivel;
+        const m_karma = magia.data.data.total.valorKarma;
+        magia.update({
+            "data.total.valor": aura + m_nivel + m_karma
+        });
+        magia.render();
+    }
+
+    updateHabAjuste(item_id, actor = null){
+        actor = !actor ? this.actor : actor;
+        if (!actor.data) {
+            return;
+        }
+        const item_hab = actor.getOwnedItem(item_id);
+        const atributo = item_hab.data.data.ajuste.atributo;
+        let valor_atrib = 0;
+        const actorData = actor.data.data;
+        if (atributo == "INT") valor_atrib = actorData.atributos.INT;
+        else if (atributo == "AUR") valor_atrib = actorData.atributos.AUR;
+        else if (atributo == "CAR") valor_atrib = actorData.atributos.CAR;
+        else if (atributo == "FOR") valor_atrib = actorData.atributos.FOR;
+        else if (atributo == "FIS") valor_atrib = actorData.atributos.FIS;
+        else if (atributo == "AGI") valor_atrib = actorData.atributos.AGI;
+        else if (atributo == "PER") valor_atrib = actorData.atributos.PER;
+        if (item_hab.data.data.ajuste.valor != valor_atrib) {
+            item_hab.update({
+                "data.ajuste.valor": valor_atrib
+            });
+            item_hab.render();
+        }
+    }
+
+    updateCombateNivel(item_id, actor = null) {
+        actor = !actor ? this.actor : actor;
+        if (!actor.data) {
+            return;
+        }
+        const actorData = this.actor.data.data;
+        const item_comb = actor.getOwnedItem(item_id);
+        const ItemData = item_comb.data.data;
+        const bonus_magico = item_comb.data.data.bonus_magico;
+        const bonus_dano = item_comb.data.data.bonus_dano;
+        let bonus_valor = 0;
+        if (bonus_dano == "AUR") bonus_valor = actorData.atributos.AUR;
+        else if (bonus_dano == "FOR") bonus_valor = actorData.atributos.FOR;
+        else if (bonus_dano == "AGI") bonus_valor = actorData.atributos.AGI;
+        else if (bonus_dano == "PER") bonus_valor = actorData.atributos.PER;
+        const p_25 = ItemData.dano_base.d25;
+        const p_50 = ItemData.dano_base.d50;
+        const p_75 = ItemData.dano_base.d75;
+        const p_100 = ItemData.dano_base.d100;
+        const p_125 = ItemData.dano_base.d125;
+        const p_150 = ItemData.dano_base.d150;
+        const p_175 = ItemData.dano_base.d175;
+        const p_200 = ItemData.dano_base.d200;
+        const p_225 = ItemData.dano_base.d225;
+        const p_250 = ItemData.dano_base.d250;
+        const p_275 = ItemData.dano_base.d275;
+        const p_300 = ItemData.dano_base.d300;
+        item_comb.update({
+            "data.dano.d25": p_25 + bonus_valor + bonus_magico,
+            "data.dano.d50": p_50 + bonus_valor + bonus_magico,
+            "data.dano.d75": p_75 + bonus_valor + bonus_magico,
+            "data.dano.d100": p_100 + bonus_valor + bonus_magico,
+            "data.dano.d125": p_125 + bonus_valor + bonus_magico,
+            "data.dano.d150": p_150 + bonus_valor + bonus_magico,
+            "data.dano.d175": p_175 + bonus_valor + bonus_magico,
+            "data.dano.d200": p_200 + bonus_valor + bonus_magico,
+            "data.dano.d225": p_225 + bonus_valor + bonus_magico,
+            "data.dano.d250": p_250 + bonus_valor + bonus_magico,
+            "data.dano.d275": p_275 + bonus_valor + bonus_magico,
+            "data.dano.d300": p_300 + bonus_valor + bonus_magico
+        });
+        item_comb.render();
+    }
+    
+    updateItemNivel(valor_n , item_id, actor = null) {
+        actor = !actor ? this.actor : actor;
+        if (!actor.data) {
+            return;
+        }
+        const actorData = this.actor.data.data;
+        const item_comb = actor.getOwnedItem(item_id);
+        const ItemData = item_comb.data.data;
+        const bonus_magico = item_comb.data.data.bonus_magico;
+        const bonus_dano = item_comb.data.data.bonus_dano;
+        let bonus_valor = 0;
+        if (bonus_dano == "AUR") bonus_valor = actorData.atributos.AUR;
+        else if (bonus_dano == "FOR") bonus_valor = actorData.atributos.FOR;
+        else if (bonus_dano == "AGI") bonus_valor = actorData.atributos.AGI;
+        else if (bonus_dano == "PER") bonus_valor = actorData.atributos.PER;
+        const p_25 = ItemData.dano_base.d25;
+        const p_50 = ItemData.dano_base.d50;
+        const p_75 = ItemData.dano_base.d75;
+        const p_100 = ItemData.dano_base.d100;
+        const p_125 = ItemData.dano_base.d125;
+        const p_150 = ItemData.dano_base.d150;
+        const p_175 = ItemData.dano_base.d175;
+        const p_200 = ItemData.dano_base.d200;
+        const p_225 = ItemData.dano_base.d225;
+        const p_250 = ItemData.dano_base.d250;
+        const p_275 = ItemData.dano_base.d275;
+        const p_300 = ItemData.dano_base.d300;
+        item_comb.update({
+            "data.nivel": valor_n,
+            "data.dano.d25": p_25 + bonus_valor + bonus_magico,
+            "data.dano.d50": p_50 + bonus_valor + bonus_magico,
+            "data.dano.d75": p_75 + bonus_valor + bonus_magico,
+            "data.dano.d100": p_100 + bonus_valor + bonus_magico,
+            "data.dano.d125": p_125 + bonus_valor + bonus_magico,
+            "data.dano.d150": p_150 + bonus_valor + bonus_magico,
+            "data.dano.d175": p_175 + bonus_valor + bonus_magico,
+            "data.dano.d200": p_200 + bonus_valor + bonus_magico,
+            "data.dano.d225": p_225 + bonus_valor + bonus_magico,
+            "data.dano.d250": p_250 + bonus_valor + bonus_magico,
+            "data.dano.d275": p_275 + bonus_valor + bonus_magico,
+            "data.dano.d300": p_300 + bonus_valor + bonus_magico
+        });
+        item_comb.render();
+    }
+    _rolarMoral(event) {
+        const tabela_resol = this.tabela_resol;
+        const moral = this.actor.data.data.moral;
+        let formulaD = "1d20";
+        let r = new Roll(formulaD);
+        let resultado = "";
+        let PrintResult = "";
+        r.evaluate();
+        var Dresult = r.total;
+        for (let i = 0; i < tabela_resol.length; i++) {
+            if (tabela_resol[i][0] == moral) {
+                resultado = tabela_resol[i][Dresult];
+                if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha</h1>";
+                else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                else if (resultado == "amarelo") PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                else if (resultado == "laranja") PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                else if (resultado == "vermelho") PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4>";
+                r.toMessage({
+                    user: game.user._id,
+                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                    flavor: `<h2>Moral - ${moral}</h2>${coluna}${PrintResult}`
+                  });
+            }
+        }
+    }
+
+    _onItemRoll(event) {
+        const tabela_resol = this.tabela_resol;
+    
         let button = $(event.currentTarget);
         const li = button.parents(".item");
         const item = this.actor.getOwnedItem(li.data("itemId"));
@@ -807,6 +1047,259 @@ export default class tagmarActorSheet extends ActorSheet {
                                 flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
                               });
                         }
+                    }
+                }
+            } 
+        } else if (item.data.type == "Magia") {
+            //const mensage = new ChatMessage();
+            let chatData = {
+                user: game.user._id,
+                speaker: ChatMessage.getSpeaker({
+                    actor: this.actor
+                  })
+            };
+            chatData.content = "<h1 style='text-align: center;'>" + item.name + "</h1>" + "<h2 style='text-align: center'>Nível: " + item.data.data.nivel + "</h2>" + "<h3>" + item.data.data.efeito + "</h3>";
+            ChatMessage.create(chatData);
+        } else if (item.data.type == "TecnicasCombate") {
+            formulaD = "1d20";
+            conteudo = "<h3>Descrição: </h3>" + "<h4>" + item.data.data.descricao + "</h4>";
+            r = new Roll(formulaD);
+            r.evaluate();
+            var Dresult = r.total;
+            if (item.data.data.total <= 20) {
+                for (let i = 0; i < tabela_resol.length; i++) {
+                    if (tabela_resol[i][0] == item.data.data.total) {
+                        resultado = tabela_resol[i][Dresult];
+                        if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha</h1>";
+                        else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                        else if (resultado == "amarelo") PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                        else if (resultado == "laranja") PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                        else if (resultado == "vermelho") PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                        else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                        else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                        let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4>";
+                        r.toMessage({
+                            user: game.user._id,
+                            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                            flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
+                        });
+                    }
+                }
+            } else {
+                let valor_hab = item.data.data.total % 20;
+                if (valor_hab == 0) {
+                    let vezes = item.data.data.total / 20;
+                    let dados = [];
+                    for (let x = 0; x < vezes; x++){
+                        dados[x] = new Roll(formulaD);
+                        dados[x].evaluate();
+                        var Dresult = dados[x].total;
+                        for (let i = 0; i < tabela_resol.length; i++) {
+                            if (tabela_resol[i][0] == 20) {
+                                resultado = tabela_resol[i][Dresult];
+                                if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha</h1>";
+                                else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                                else if (resultado == "amarelo") PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                                else if (resultado == "laranja") PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                                else if (resultado == "vermelho") PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                                else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                                let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4>";
+                                dados[x].toMessage({
+                                    user: game.user._id,
+                                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                                    flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                  });
+                            }
+                        }
+                    }
+                } else if (valor_hab > 0) {
+                    let vezes = parseInt(item.data.data.total / 20);
+                    let sobra = item.data.data.total % 20;
+                    let dados = [];
+                    for (let x = 0; x < vezes; x++){
+                        dados[x] = new Roll(formulaD);
+                        dados[x].evaluate();
+                        var Dresult = dados[x].total;
+                        for (let i = 0; i < tabela_resol.length; i++) {
+                            if (tabela_resol[i][0] == 20) {
+                                resultado = tabela_resol[i][Dresult];
+                                if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha</h1>";
+                                else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                                else if (resultado == "amarelo") PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                                else if (resultado == "laranja") PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                                else if (resultado == "vermelho") PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                                else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                                let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4>";
+                                dados[x].toMessage({
+                                    user: game.user._id,
+                                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                                    flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                  });
+                            }
+                        }
+                    }
+                    var dado = new Roll(formulaD);
+                    dado.evaluate();
+                    Dresult = dado.total;
+                    for (let i = 0; i < tabela_resol.length; i++) {
+                        if (tabela_resol[i][0] == sobra) {
+                            resultado = tabela_resol[i][Dresult];
+                            if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha</h1>";
+                            else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                            else if (resultado == "amarelo") PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                            else if (resultado == "laranja") PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                            else if (resultado == "vermelho") PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                            else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                            else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                            let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4>";
+                            dado.toMessage({
+                                user: game.user._id,
+                                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                                flavor: `<h2>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
+                              });
+                        }
+                    }
+                }
+            } 
+        } else if (item.data.type == "Combate") { // Combate
+            let bonus_cat = item.data.data.bonus;
+            let bonus_ajustev = 0;
+            if (bonus_cat == "AUR") bonus_ajustev = this.actor.data.data.atributos.AUR;
+            else if (bonus_cat == "FOR") bonus_ajustev = this.actor.data.data.atributos.FOR;
+            else if (bonus_cat == "AGI") bonus_ajustev = this.actor.data.data.atributos.AGI;
+            else if (bonus_cat == "PER") bonus_ajustev = this.actor.data.data.atributos.PER; 
+            let total_l = item.data.data.nivel + bonus_ajustev + item.data.data.bonus_magico + item.data.data.def_l;
+            let total_m = item.data.data.nivel + bonus_ajustev + item.data.data.bonus_magico + item.data.data.def_m;
+            let total_p = item.data.data.nivel + bonus_ajustev + item.data.data.bonus_magico + item.data.data.def_p;
+            let dano_total = 0;
+            let dano_text = "";
+            const cat_def = this.actor.data.data.inf_ataque.cat_def;
+            let valor_tabela = 0;
+            if (cat_def == "L") valor_tabela = total_l + this.actor.data.data.inf_ataque.bonus - this.actor.data.data.inf_ataque.valor_def;
+            else if (cat_def == "M") valor_tabela = total_m + this.actor.data.data.inf_ataque.bonus - this.actor.data.data.inf_ataque.valor_def;
+            else if (cat_def == "P") valor_tabela = total_p + this.actor.data.data.inf_ataque.bonus - this.actor.data.data.inf_ataque.valor_def;
+            formulaD = "1d20";
+            conteudo = "";
+            r = new Roll(formulaD);
+            r.evaluate();
+            var Dresult = r.total;
+            if (valor_tabela <= 20) { // Começa Rolagem
+                for (let i = 0; i < tabela_resol.length; i++) {
+                    if (tabela_resol[i][0] == valor_tabela) {
+                        resultado = tabela_resol[i][Dresult];
+                        if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha Crítica</h1>";
+                        else if (resultado == "branco") PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Errou</h1>";
+                        else if (resultado == "amarelo") {
+                            PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - 25%</h1>";
+                            dano_total = item.data.data.dano.d25;
+                        }
+                        else if (resultado == "laranja") {
+                            PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - 50%</h1>";
+                            dano_total = item.data.data.dano.d50;
+                        }
+                        else if (resultado == "vermelho") {
+                            PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - 75%</h1>";
+                            dano_total = item.data.data.dano.d75;
+                        }
+                        else if (resultado == "azul") {
+                            PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - 100%</h1>";
+                            dano_total = item.data.data.dano.d100;
+                        }
+                        else if (resultado == "roxo") {
+                            PrintResult = "<h1 style='color: rgb(2,9,37); text-align:center;'>Azul Escuro - 125%</h1>";
+                            dano_total = item.data.data.dano.d125;
+                        }
+                        else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico</h1>";
+                        let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4>";
+                        dano_text = "<h2 style='text-align: center;'>Dano: " + dano_total + "</h2>";
+                            r.toMessage({
+                            user: game.user._id,
+                            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                            flavor: `<h2>${item.name} - ${item.data.data.tipo}</h2>${conteudo}${coluna}${PrintResult}${dano_text}`
+                          });
+                    }
+                }
+            } else {
+                let coluna_t = valor_tabela % 20;
+                let ajusteDano = parseInt(valor_tabela/20) * 50;
+                for (let i = 0; i < tabela_resol.length; i++) {
+                    if (tabela_resol[i][0] == coluna_t) {
+                        resultado = tabela_resol[i][Dresult];
+                        if (resultado == "verde") PrintResult = "<h1 style='color: green; text-align:center;'>Verde - Falha Crítica</h1>";
+                        else if (resultado == "branco") {
+                            PrintResult = "<h1 style='color: white; text-align:center;'>Branco - Errou</h1>";
+                            dano_total = 0 + ajusteDano;
+                        }
+                        else if (resultado == "amarelo") {
+                            PrintResult = "<h1 style='color: yellow; text-align:center;'>Amarelo - 25%</h1>";
+                            dano_total = 25 + ajusteDano;
+                        }
+                        else if (resultado == "laranja") {
+                            PrintResult = "<h1 style='color: orange; text-align:center;'>Laranja - 50%</h1>";
+                            dano_total = 50 + ajusteDano;
+                        }
+                        else if (resultado == "vermelho") {
+                            PrintResult = "<h1 style='color: red; text-align:center;'>Vermelho - 75%</h1>";
+                            dano_total = 75 + ajusteDano;
+                        }
+                        else if (resultado == "azul") {
+                            PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - 100%</h1>";
+                            dano_total = 100 + ajusteDano;
+                        }
+                        else if (resultado == "roxo") {
+                            PrintResult = "<h1 style='color: rgb(2,9,37); text-align:center;'>Azul Escuro - 125%</h1>";
+                            dano_total = 125 + ajusteDano;
+                        }
+                        else if (resultado == "cinza") PrintResult = "<h1 style='color: gray; text-align:center;'>Cinza - Crítico</h1>";
+                        let dano_novo = 0;
+                        switch (dano_total) {
+                            case 25:
+                                dano_novo = item.data.data.dano.d25;
+                                break;
+                            case 50:
+                                dano_novo = item.data.data.dano.d50;
+                                break;
+                            case 75:
+                                dano_novo = item.data.data.dano.d75;
+                                break;
+                            case 100:
+                                dano_novo = item.data.data.dano.d100;
+                                break;
+                            case 125:
+                                dano_novo = item.data.data.dano.d125;
+                                break;
+                            case 150:
+                                dano_novo = item.data.data.dano.d150;
+                                break;
+                            case 175:
+                                dano_novo = item.data.data.dano.d175;
+                                break;
+                            case 200:
+                                dano_novo = item.data.data.dano.d200;
+                                break;
+                            case 225:
+                                dano_novo = item.data.data.dano.d225;
+                                break;
+                            case 250:
+                                dano_novo = item.data.data.dano.d250;
+                                break;
+                            case 275:
+                                dano_novo = item.data.data.dano.d275;
+                                break;
+                            case 300:
+                                dano_novo = item.data.data.dano.d300;
+                                break;
+                        }
+                        let coluna = "<h4>Coluna:" + tabela_resol[i][0] + "</h4>";
+                        let ajuste_text = "<h1 style='text-align: center;'>AAC20: " + ajusteDano + "%</h1>";
+                        dano_text = "<h1 style='text-align: center;'>Dano: " + dano_novo + "</h1>";
+                        r.toMessage({
+                        user: game.user._id,
+                        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                        flavor: `<h2>${item.name} - ${item.data.data.tipo}</h2>${conteudo}${coluna}${PrintResult}${ajuste_text}${dano_text}`
+                        });
                     }
                 }
             } 
