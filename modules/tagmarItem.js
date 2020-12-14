@@ -88,7 +88,7 @@ export class tagmarItem extends Item {
             else if (cat_def == "M") valor_tabela = total_m + actorData.inf_ataque.bonus - actorData.inf_ataque.valor_def;
             else if (cat_def == "P") valor_tabela = total_p + actorData.inf_ataque.bonus - actorData.inf_ataque.valor_def;
             formulaD = "1d20";
-            conteudo = "";
+            conteudo = "<h4 class='mediaeval rola'>Descrição: " + itemData.descricao + "</h4>";
             r = new Roll(formulaD);
             r.evaluate();
             var Dresult = r.total;
@@ -103,18 +103,18 @@ export class tagmarItem extends Item {
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
                                     dano_total = 0;
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
                                 } 
                                 else if (puni_50) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 50%</h4>";
                                     dano_total = 0;
                                 }
                                 else if (puni_75) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 75%</h4>";
                                     dano_total = 0;
                                 }
                                 else if (puni_100) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 100%</h4>";
                                     dano_total = 0;
                                 }
                             } else dano_total = itemData.dano.d25;
@@ -123,16 +123,16 @@ export class tagmarItem extends Item {
                             PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - 50%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
                                     dano_total = itemData.dano.d25;
                                 } else if (puni_50) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 50%</h4>";
                                     dano_total = 0;
                                 } else if (puni_75) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 75%</h4>";
                                     dano_total = 0;
                                 } else if (puni_100) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 100%</h4>";
                                     dano_total = 0;
                                 }
                             } else dano_total = itemData.dano.d50;
@@ -141,16 +141,16 @@ export class tagmarItem extends Item {
                             PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - 75%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
                                     dano_total = itemData.dano.d50;
                                 } else if (puni_50) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 50%</h4>";
                                     dano_total = itemData.dano.d25;
                                 } else if (puni_75) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 75%</h4>";
                                     dano_total = 0;
                                 } else if (puni_100) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 100%</h4>";
                                     dano_total = 0;
                                 }
                             } else dano_total = itemData.dano.d75;
@@ -159,16 +159,16 @@ export class tagmarItem extends Item {
                             PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - 100%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
                                     dano_total = itemData.dano.d75;
                                 } else if (puni_50) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 50%</h4>";
                                     dano_total = itemData.dano.d50;
                                 } else if (puni_75) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 75%</h4>";
                                     dano_total = itemData.dano.d25;
                                 } else if (puni_100) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 100%</h4>";
                                     dano_total = 0;
                                 }
                             } else dano_total = itemData.dano.d100;
@@ -177,16 +177,16 @@ export class tagmarItem extends Item {
                             PrintResult = "<h1 class='mediaeval rola' style='color: rgb(2,9,37); text-align:center;'>Azul Escuro - 125%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
                                     dano_total = itemData.dano.d100;
                                 } else if (puni_50) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 50%</h4>";
                                     dano_total = itemData.dano.d75;
                                 } else if (puni_75) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 75%</h4>";
                                     dano_total = itemData.dano.d50;
                                 } else if (puni_100) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 100%</h4>";
                                     dano_total = itemData.dano.d25;
                                 }
                             } else dano_total = itemData.dano.d125;
@@ -197,7 +197,7 @@ export class tagmarItem extends Item {
                             r.toMessage({
                             user: game.user._id,
                             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval">${item.name} - ${itemData.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${punicaoText}${dano_text}`
+                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola">${item.name} - ${itemData.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${punicaoText}${dano_text}`
                         });
                     }
                 }
@@ -212,16 +212,16 @@ export class tagmarItem extends Item {
                             PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Errou</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
                                     dano_total = ajusteDano + 0 - 25;
                                 } else if (puni_50) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 50%</h4>";
                                     dano_total = 0 + ajusteDano - 50;
                                 } else if (puni_75) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 75%</h4>";
                                     dano_total = 0 + ajusteDano - 75;
                                 } else if (puni_100) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 100%</h4>";
                                     dano_total = 0 + ajusteDano - 100;
                                 }
                             } else dano_total = 0 + ajusteDano;
@@ -230,16 +230,16 @@ export class tagmarItem extends Item {
                             PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - 25%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
                                     dano_total = ajusteDano + 25 - 25;
                                 } else if (puni_50) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 50%</h4>";
                                     dano_total = 25 + ajusteDano - 50;
                                 } else if (puni_75) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 75%</h4>";
                                     dano_total = 25 + ajusteDano - 75;
                                 } else if (puni_100) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 100%</h4>";
                                     dano_total = 25 + ajusteDano - 100;
                                 }
                             } else dano_total = 25 + ajusteDano;
@@ -248,16 +248,16 @@ export class tagmarItem extends Item {
                             PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - 50%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
                                     dano_total = ajusteDano + 50 - 25;
                                 } else if (puni_50) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 50%</h4>";
                                     dano_total = 50 + ajusteDano - 50;
                                 } else if (puni_75) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 75%</h4>";
                                     dano_total = 50 + ajusteDano - 75;
                                 } else if (puni_100) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 100%</h4>";
                                     dano_total = 50 + ajusteDano - 100;
                                 }
                             } else dano_total = 50 + ajusteDano;
@@ -266,16 +266,16 @@ export class tagmarItem extends Item {
                             PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - 75%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
                                     dano_total = ajusteDano + 75 - 25;
                                 } else if (puni_50) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 50%</h4>";
                                     dano_total = 75 + ajusteDano - 50;
                                 } else if (puni_75) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 75%</h4>";
                                     dano_total = 75 + ajusteDano - 75;
                                 } else if (puni_100) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 100%</h4>";
                                     dano_total = 75 + ajusteDano - 100;
                                 }
                             } else dano_total = 75 + ajusteDano;
@@ -284,16 +284,16 @@ export class tagmarItem extends Item {
                             PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - 100%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
                                     dano_total = ajusteDano + 100 - 25;
                                 } else if (puni_50) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 50%</h4>";
                                     dano_total = 100 + ajusteDano - 50;
                                 } else if (puni_75) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 75%</h4>";
                                     dano_total = 100 + ajusteDano - 75;
                                 } else if (puni_100) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 100%</h4>";
                                     dano_total = 100 + ajusteDano - 100;
                                 }
                             } else dano_total = 100 + ajusteDano;
@@ -302,16 +302,16 @@ export class tagmarItem extends Item {
                             PrintResult = "<h1 class='mediaeval rola' style='color: rgb(2,9,37); text-align:center;'>Azul Escuro - 125%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 25%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
                                     dano_total = ajusteDano + 125 - 25;
                                 } else if (puni_50) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 50%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 50%</h4>";
                                     dano_total = 125 + ajusteDano - 50;
                                 } else if (puni_75) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 75%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 75%</h4>";
                                     dano_total = 125 + ajusteDano - 75;
                                 } else if (puni_100) {
-                                    punicaoText = "<h4 class='mediaeval' style='color: red; text-align: center;'>Penalidade 100%</h4>";
+                                    punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 100%</h4>";
                                     dano_total = 125 + ajusteDano - 100;
                                 }
                             } else dano_total = 125 + ajusteDano;
@@ -362,7 +362,7 @@ export class tagmarItem extends Item {
                         r.toMessage({
                         user: game.user._id,
                         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                        flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval">${item.name} - ${itemData.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${ajuste_text}${punicaoText}${dano_text}`
+                        flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola">${item.name} - ${itemData.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${ajuste_text}${punicaoText}${dano_text}`
                         });
                     }
                 }
