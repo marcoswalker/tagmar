@@ -6,7 +6,7 @@
         "descricao": "",
         "raca": "",
         "profissao": "",
-        "estagio": 0,
+        "estagio": 1,
         "especializacao": "",
         "atributos": {
           "INT": 0,
@@ -162,7 +162,7 @@
     }
   },
   "Item": {
-    "types": ["Combate", "Magia", "TecnicasCombate","Habilidade","Defesa","Transporte","Pertence"],
+    "types": ["Combate", "Magia", "TecnicasCombate","Habilidade","Defesa","Transporte","Pertence", "Profissao", "Raca"],
     "templates": {
       "base": {
         "alcance": "",
@@ -287,6 +287,31 @@
       "peso": 0,
       "preco": "",
       "inTransport": false
+    },
+    "Profissao": {
+      "especializacoes": "",
+      "eh_base": 0,
+      "lista_eh": {
+        "v1": 0,
+        "v2": 0,
+        "v3": 0,
+        "v4": 0
+      },
+      "descricao": ""
+    },
+    "Raca": {
+      "descricao": "",
+      "mod_racial": {
+        "INT": 0,
+        "AUR": 0,
+        "CAR": 0,
+        "FOR": 0,
+        "FIS": 0,
+        "AGI": 0,
+        "PER": 0
+      },
+      "ef_base": 0,
+      "vb": 0
     }
   }
 }

@@ -9,7 +9,7 @@ export default class tagmarItemSheet extends ItemSheet {
         if ( this.item.data.type === "Raca" ) {
             this.options.width = this.position.width =  640;
             this.options.height = this.position.height = 450;
-          }
+        }
       }
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -30,7 +30,9 @@ export default class tagmarItemSheet extends ItemSheet {
 
     getData() {
         const data = super.getData();
-        
+        if (this.item.data.type == "Profissao" && this.item.data.data.especializacoes != "") {
+            data.item.especializacoes = this.item.data.data.especializacoes.split(",");
+        } else if (this.item.data.type == "Profissao") data.item.especializacoes = [];
         return data;
     }
 
@@ -69,9 +71,46 @@ export default class tagmarItemSheet extends ItemSheet {
         html.find(".nivel").change(this._attTotalHab(this));
         html.find(".penal").change(this._attTotalHab(this));
         html.find(".bonus").change(this._attTotalHab(this));
-
+        html.find(".bAddEspec").click(this._addEspec.bind(this));
+        html.find(".bApagaEspec").click(this._deleteEspec.bind(this));
     }
 
+    _deleteEspec(event) {
+        const itemData = this.item.data.data;
+        let especD = $(event.currentTarget).data("itemId");
+        let espec_list_string = itemData.especializacoes;
+        let nova_string = "";
+        let espec_list = espec_list_string.split(",");
+        for (let i = 0; i < espec_list.length; i++) {
+            if (espec_list[i] == especD) {
+                espec_list.splice(i, 1);
+            }
+        }
+        nova_string = espec_list.join(",");
+        this.item.update({
+            "data.especializacoes": nova_string
+        });
+        this.render();
+    }
+
+    _addEspec(event) {
+        const item = this.item;
+        const espec_name = $(".iEspecName").val();
+        let espec_list = item.data.data.especializacoes;
+        let espec_list_string = "";
+        
+        if (!espec_list.search(",") && espec_name != "") {
+            espec_list_string = espec_name + ",";
+        } else if (espec_name != "") {
+            espec_list_string = espec_list + espec_name + ",";
+        }
+        if (espec_list_string != "") {
+            this.item.update({
+                "data.especializacoes": espec_list_string
+            });
+        }
+        this.render();
+    }
     
 
     _attTotalHab(event) {

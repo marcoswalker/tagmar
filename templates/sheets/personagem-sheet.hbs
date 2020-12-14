@@ -44,29 +44,13 @@
                         <label><h4 class="mediaeval">Raça:</h4></label>
                     </div>
                     <div class="col-md-3">
-                        <input name="data.raca" type="text" list="racas" value="{{data.raca}}" height="30" title="Escolha uma raça ou crie a sua."/>
-                        <datalist id="racas">
-                            <option value="Humano"></option>
-                            <option value="Pequenino"></option>
-                            <option value="Anão"></option>
-                            <option value="Elfo Dourado"></option>
-                            <option value="Elfo Florestal"></option>
-                            <option value="Meio-Elfo"></option>
-                        </datalist>
+                        <input name="data.raca" type="text" list="racas" value="{{data.raca}}" height="30" title="Escolha uma raça ou crie a sua." readonly/>
                     </div>
                     <div class="col-md-2">
                         <label><h4 class="mediaeval">Profissão:</h4></label>
                     </div>
                     <div class="col-md-3">
-                        <input class="profissao" name="data.profissao" type="text" list="profissoes" value="{{data.profissao}}" height="30" title="Uma profissão diz muito sobre o heroi, escolha da lista ou invente uma."/>
-                        <datalist id="profissoes">
-                            <option value="Bardo"></option>
-                            <option value="Guerreiro"></option>
-                            <option value="Ladino"></option>
-                            <option value="Mago"></option>
-                            <option value="Rastreador"></option>
-                            <option value="Sacerdote"></option>
-                        </datalist>
+                        <input class="profissao" name="data.profissao" type="text" value="{{data.profissao}}" height="30" title="Uma profissão diz muito sobre o herói." readonly/>
                     </div>
                     <div class="col-md-1">
                         <label><h4 class="mediaeval">Deus:</h4></label>
@@ -103,55 +87,13 @@
                         <label><h4 class="mediaeval">Especialização:</h4></label>
                     </div>
                     <div class="col-md-4">
-                        <input class="especializacao" name="data.especializacao" type="text" list="especializacoes" value="{{data.especializacao}}" height="30" title="Caia na real, você não tem nada de especial. Se você escolheu uma profissão, pode escolher algo aqui tambem."/>
-                        <datalist id="especializacoes">
-                            {{#ifeq data.profissao "Guerreiro"}}
-                                <option value="Academia de Infantaria"></option>
-                                <option value="Academias dos Arqueiros"></option>
-                                <option value="Academia dos Cavaleiros"></option>
-                                <option value="Academia dos Gladiadores"></option>
-                            {{/ifeq}}
-                            {{#ifeq data.profissao "Bardo"}}
-                                <option value="Confraria dos Artistas"></option>
-                                <option value="Confraria dos Arautos"></option>
-                                <option value="Confraria dos Eruditos"></option>
-                            {{/ifeq}}
-                            {{#ifeq data.profissao "Mago"}}
-                                <option value="Colégio Alquímico"></option>
-                                <option value="Colégio do Conhecimento"></option>
-                                <option value="Colégio Elemental"></option>
-                                <option value="Colégio das Ilusões"></option>
-                                <option value="Colégio Naturalista"></option>
-                                <option value="Colégio Necromântico"></option>
-                            {{/ifeq}}
-                            {{#ifeq data.profissao "Ladino"}}
-                                <option value="Guilda dos Ladrões"></option>
-                                <option value="Guilda dos Assassinos"></option>
-                                <option value="Guilda dos Piratas"></option>
-                            {{/ifeq}}
-                            {{#ifeq data.profissao "Rastreador"}}
-                                <option value="Trilha dos Caçadores"></option>
-                                <option value="Trilha dos Guardiões"></option>
-                                <option value="Trilha dos Exploradores"></option>
-                            {{/ifeq}}
-                            {{#ifeq data.profissao "Sacerdote"}}
-                                <option value="Ordem de Blator"></option>
-                                <option value="Ordem de Cambu"></option>
-                                <option value="Ordem de Crezir"></option>
-                                <option value="Ordem de Crisagom"></option>
-                                <option value="Ordem de Cruine"></option>
-                                <option value="Ordem de Ganis"></option>
-                                <option value="Ordem de Lena"></option>
-                                <option value="Ordem de Maira mon"></option>
-                                <option value="Ordem de Maira nil"></option>
-                                <option value="Ordem de Maira vet"></option>
-                                <option value="Ordem de Palier"></option>
-                                <option value="Ordem de Parom"></option>
-                                <option value="Ordem de Plandis"></option>
-                                <option value="Ordem de Selimon"></option>
-                                <option value="Ordem de Sevides"></option>
-                            {{/ifeq}}
-                        </datalist>
+                        <select name="data.especializacao" type="text" data-dtype="String" value="{{data.especializacao}}" height="30" title="Caia na real, você não tem nada de especial. Se você escolheu uma profissão, pode escolher algo aqui tambem."/>
+                            {{#select data.especializacao}}
+                                {{#each actor.especializacoes as |especializacao|}}
+                                    <option value="{{especializacao}}">{{especializacao}}</option>
+                                {{/each}}
+                            {{/select}}
+                        </select>
                     </div>
                     <div class="col-md-1">
                         <label><h4 class="mediaeval">Idade:</h4></label>

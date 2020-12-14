@@ -22,8 +22,11 @@ export default class tagmarActorSheet extends ActorSheet {
             this._prepareCharacterItems(data);
             this._prepareValorTeste(data);
             this._calculaAjuste(data);
-            if (data.actor.data.raca != "") {
+            if (data.actor.raca) {
                 this._preparaCaracRaciais(data);
+            }
+            if (data.actor.profissao) {
+                this._attProfissao(data);
             }
             const isso = this;
             var actor_carga = 0;    // Atualiza Carga e verifica Sobrecarga
@@ -204,34 +207,15 @@ export default class tagmarActorSheet extends ActorSheet {
                     "data.carga.valor_s": 0
                 });
             }
-            if (this.actor.data.data.raca != "" && this.actor.data.data.profissao != "") {
+            if (data.actor.raca && data.actor.profissao) {
                 let ef_base = 0;
                 let vb_base = 0;
                 let eh_base = 0;
-                if (this.actor.data.data.raca == "Anão") {
-                    ef_base = 15;
-                    vb_base = 16;
-                } else if (this.actor.data.data.raca == "Elfo Dourado") {
-                    ef_base = 13;
-                    vb_base = 18;
-                } else if (this.actor.data.data.raca == "Elfo Florestal") {
-                    ef_base = 14;
-                    vb_base = 18
-                } else if (this.actor.data.data.raca == "Humano") {
-                    ef_base = 17;
-                    vb_base = 20;
-                } else if (this.actor.data.data.raca == "Meio-Elfo") {
-                    ef_base = 15;
-                    vb_base = 17;
-                } else if (this.actor.data.data.raca == "Pequenino") {
-                    ef_base = 11;
-                    vb_base = 14;
-                }
-                if (this.actor.data.data.profissao == "Bardo") eh_base = 9;
-                else if (this.actor.data.data.profissao == "Guerreiro") eh_base = 18;
-                else if (this.actor.data.data.profissao == "Ladino" || this.actor.data.data.profissao == "Sacerdote") eh_base = 12;
-                else if (this.actor.data.data.profissao == "Mago") eh_base = 6;
-                else if (this.actor.data.data.profissao == "Rastreador") eh_base = 15;
+            
+                ef_base = data.actor.raca.data.ef_base;
+                vb_base = data.actor.raca.data.vb;
+                eh_base = data.actor.profissao.data.eh_base;
+                
                 let efMax = this.actor.data.data.atributos.FOR + this.actor.data.data.atributos.FIS + ef_base;
                 let vbTotal = this.actor.data.data.atributos.FIS + vb_base;
                 if (this.actor.data.data.ef.max != efMax) {
@@ -261,11 +245,11 @@ export default class tagmarActorSheet extends ActorSheet {
         super.activateListeners(html);
         if (!this.options.editable) return;
 
-        html.find(".profissao").change(ev => {
+        /*html.find(".profissao").change(ev => {
             //const profissao = ev.currentTarget.value;
             const especializacao = html.find(".especializacao");
             $(especializacao).val("");
-        });
+        });*/
         // Update Inventory Item
         html.find('.item-edit').click(ev => {
             const li = $(ev.currentTarget).parents(".item");
@@ -475,42 +459,33 @@ export default class tagmarActorSheet extends ActorSheet {
     _passandoEH(event) {
         let estagio_atual = parseInt($(".ipEstagio").val());
         let valord10 = parseInt($(".valord10EH").val())
-        let profissao = $(".profissao").val();
         let raca_list = [];
         let nova_eh = 0;
         let eh_atual = this.actor.data.data.eh.max;
         let attFIS = this.actor.data.data.atributos.FIS;
         if (estagio_atual > 1 && valord10 > 0 && valord10 <= 10) {
-            if (profissao == "Guerreiro") {
-                raca_list = [0,6,6,7,7,7,8,8,8,9,9];
-                nova_eh = raca_list[valord10];
-                this.actor.update({
-                    "data.eh.max": eh_atual + nova_eh + attFIS
-                });
-            } else if (profissao == "Ladino" || profissao == "Sacerdote") {
-                raca_list = [0,4,4,5,5,5,6,6,6,7,7];
-                nova_eh = raca_list[valord10];
-                this.actor.update({
-                    "data.eh.max": eh_atual + nova_eh + attFIS
-                });
-            } else if (profissao == "Mago") {
-                raca_list = [0,2,2,3,3,3,4,4,4,5,5];
-                nova_eh = raca_list[valord10];
-                this.actor.update({
-                    "data.eh.max": eh_atual + nova_eh + attFIS
-                });
-            } else if (profissao == "Rastreador") {
-                raca_list = [0,5,5,6,6,6,7,7,7,8,8];
-                nova_eh = raca_list[valord10];
-                this.actor.update({
-                    "data.eh.max": eh_atual + nova_eh + attFIS
-                });
-            } else if (profissao == "Bardo") {
-                raca_list = [0,3,3,4,4,4,5,5,5,6,6];
-                nova_eh = raca_list[valord10];
-                this.actor.update({
-                    "data.eh.max": eh_atual + nova_eh + attFIS
-                });
+            if (this.profissao) {
+                if (valord10 >= 1 && valord10 <= 2) {
+                    nova_eh = this.profissao.data.lista_eh.v1;
+                    this.actor.update({
+                        "data.eh.max": eh_atual + nova_eh + attFIS
+                    });
+                } else if (valord10 >= 3 && valord10 <= 5) {
+                    nova_eh = this.profissao.data.lista_eh.v2;
+                    this.actor.update({
+                        "data.eh.max": eh_atual + nova_eh + attFIS
+                    });
+                } else if (valord10 >= 6 && valord10 <= 8) {
+                    nova_eh = this.profissao.data.lista_eh.v3;
+                    this.actor.update({
+                        "data.eh.max": eh_atual + nova_eh + attFIS
+                    });
+                } else if (valord10 >= 9 && valord10 <= 10) {
+                    nova_eh = this.profissao.data.lista_eh.v4;
+                    this.actor.update({
+                        "data.eh.max": eh_atual + nova_eh + attFIS
+                    });
+                }
             }
         }
         $(".valord10EH").val("");
@@ -549,69 +524,35 @@ export default class tagmarActorSheet extends ActorSheet {
             "data.karma.max": karma
         });
     }
+    _attProfissao(sheetData) {
+        const actorData = sheetData.actor;
+        if (actorData.profissao) {
+            const profissaoData = actorData.profissao;
+            if  (profissaoData.name != actorData.data.profissao) {
+                this.actor.update({
+                    "data.profissao": profissaoData.name
+                });
+            }
+        }
+    }
 
     _preparaCaracRaciais(sheetData) {
         const actorData = sheetData.actor;
-        if (actorData.data.raca == "Humano") {
-            this.actor.update({
-                "data.mod_racial.INT": 0,
-                "data.mod_racial.AUR": 0,
-                "data.mod_racial.CAR": 0,
-                "data.mod_racial.FOR": 0,
-                "data.mod_racial.FIS": 0,
-                "data.mod_racial.AGI": 0,
-                "data.mod_racial.PER": 0
-            });
-        } else if (actorData.data.raca == "Pequenino") {
-            this.actor.update({
-                "data.mod_racial.INT": 0,
-                "data.mod_racial.AUR": 0,
-                "data.mod_racial.CAR": 1,
-                "data.mod_racial.FOR": -2,
-                "data.mod_racial.FIS": 1,
-                "data.mod_racial.AGI": 2,
-                "data.mod_racial.PER": 1
-            });
-        } else if (actorData.data.raca == "Anão") {
-            this.actor.update({
-                "data.mod_racial.INT": 0,
-                "data.mod_racial.AUR": 0,
-                "data.mod_racial.CAR": 0,
-                "data.mod_racial.FOR": 1,
-                "data.mod_racial.FIS": 2,
-                "data.mod_racial.AGI": -1,
-                "data.mod_racial.PER": 0
-            });
-        } else if (actorData.data.raca == "Elfo Dourado") {
-            this.actor.update({
-                "data.mod_racial.INT": 1,
-                "data.mod_racial.AUR": 2,
-                "data.mod_racial.CAR": 0,
-                "data.mod_racial.FOR": -1,
-                "data.mod_racial.FIS": -1,
-                "data.mod_racial.AGI": 1,
-                "data.mod_racial.PER": 0
-            });
-        } else if (actorData.data.raca == "Elfo Florestal") {
-            this.actor.update({
-                "data.mod_racial.INT": 0,
-                "data.mod_racial.AUR": 1,
-                "data.mod_racial.CAR": 0,
-                "data.mod_racial.FOR": -1,
-                "data.mod_racial.FIS": -1,
-                "data.mod_racial.AGI": 1,
-                "data.mod_racial.PER": 2
-            });
-        } else if (actorData.data.raca == "Meio-Elfo") {
-            this.actor.update({
-                "data.mod_racial.INT": 0,
-                "data.mod_racial.AUR": 0,
-                "data.mod_racial.CAR": 1,
-                "data.mod_racial.FOR": 0,
-                "data.mod_racial.FIS": 0,
-                "data.mod_racial.AGI": 1,
-                "data.mod_racial.PER": 0
-            });
+        if (actorData.raca) {
+            const racaData = actorData.raca.data;
+            if (actorData.data.raca != actorData.raca.name)
+            {
+                this.actor.update({
+                "data.raca": actorData.raca.name,
+                "data.mod_racial.INT": racaData.mod_racial.INT,
+                "data.mod_racial.AUR": racaData.mod_racial.AUR,
+                "data.mod_racial.CAR": racaData.mod_racial.CAR,
+                "data.mod_racial.FOR": racaData.mod_racial.FOR,
+                "data.mod_racial.FIS": racaData.mod_racial.FIS,
+                "data.mod_racial.AGI": racaData.mod_racial.AGI,
+                "data.mod_racial.PER": racaData.mod_racial.PER
+                });
+            } 
         }
     }
 
@@ -697,6 +638,9 @@ export default class tagmarActorSheet extends ActorSheet {
         const transportes = [];
         const pertences = [];
         const pertences_transporte = [];
+        const racas = [];
+        const profissoes = [];
+        var especializacoes = [];
         const itens = sheetData.items;
         itens.forEach(function(item, indice, array) {
             if (item.type == "Combate"){
@@ -719,7 +663,14 @@ export default class tagmarActorSheet extends ActorSheet {
             } else if (item.type == "Pertence") {
                 if (item.data.inTransport) pertences_transporte.push(item);
                 else pertences.push(item);
-            } 
+            } else if (item.type == "Raca") {
+                if (racas.length >= 1) this.actor.deleteOwnedItem(item._id);
+                else racas.push(item);
+                
+            } else if (item.type == "Profissao") {
+                if (profissoes.length >= 1) this.actor.deleteOwnedItem(item._id);
+                else profissoes.push(item);
+            }
         });
         const tabela_resol = [
             [-7, "verde", "verde", "verde", "verde", "verde", "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "laranja", "vermelho", "azul", "cinza"],
@@ -776,8 +727,16 @@ export default class tagmarActorSheet extends ActorSheet {
             [19,  2,  2,  2,  2,  2,  3,  3,  4,  4,  5,  5,  6,  6,  7,  7,  8,  9, 10, 11, 12],
             [20,  2,  2,  2,  2,  2,  2,  3,  3,  4,  4,  5,  5,  6,  6,  7,  7,  8,  9, 10, 11]
         ];
+        if (profissoes[0]) {
+            especializacoes = profissoes[0].data.especializacoes.split(",");
+        }
         this.table_resFisMag = table_resFisMag;
         this.tabela_resol = tabela_resol;
+        actorData.especializacoes = especializacoes;
+        actorData.raca = racas[0];
+        actorData.profissao = profissoes[0];
+        this.raca = actorData.raca;
+        this.profissao = actorData.profissao;
         actorData.pertences_transporte = pertences_transporte;
         actorData.pertences = pertences;
         actorData.defesas = defesas;
