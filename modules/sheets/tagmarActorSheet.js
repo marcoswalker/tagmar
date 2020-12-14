@@ -978,7 +978,7 @@ export default class tagmarActorSheet extends ActorSheet {
                         r.toMessage({
                             user: game.user._id,
                             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            flavor: `<h2 class="mediaeval">${item.name} - ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
+                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval">${item.name} - ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
                           });
                     }
                 }
@@ -1005,7 +1005,7 @@ export default class tagmarActorSheet extends ActorSheet {
                                 dados[x].toMessage({
                                     user: game.user._id,
                                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                    flavor: `<h2 class="mediaeval">${item.name} - ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
+                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval">${item.name} - ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
                                   });
                             }
                         }
@@ -1032,7 +1032,7 @@ export default class tagmarActorSheet extends ActorSheet {
                                 dados[x].toMessage({
                                     user: game.user._id,
                                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                    flavor: `<h2 class='mediaeval rola'>${item.name} - ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
+                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola'>${item.name} - ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
                                   });
                             }
                         }
@@ -1054,7 +1054,7 @@ export default class tagmarActorSheet extends ActorSheet {
                             dado.toMessage({
                                 user: game.user._id,
                                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                flavor: `<h2 class="mediaeval">${item.name} - ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
+                                flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval">${item.name} - ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
                               });
                         }
                     }
@@ -1068,7 +1068,7 @@ export default class tagmarActorSheet extends ActorSheet {
                     actor: this.actor
                   })
             };
-            chatData.content = "<h1 class='mediaeval rola' style='text-align: center;'>" + item.name + "</h1>" + "<h2 class='mediaeval rola' style='text-align: center'>Nível: " + item.data.data.nivel + "</h2>" + "<h3 class='mediaeval rola'>" + item.data.data.efeito + "</h3>";
+            chatData.content = "<img src='"+ item.img +"' style='display: block; margin-left: auto; margin-right: auto;' /><h1 class='mediaeval rola' style='text-align: center;'>" + item.name + "</h1>" + "<h2 class='mediaeval rola' style='text-align: center'>Nível: " + item.data.data.nivel + "</h2>" + "<h3 class='mediaeval rola'>" + item.data.data.efeito + "</h3>";
             ChatMessage.create(chatData);
         } else if (item.data.type == "TecnicasCombate") {
             formulaD = "1d20";
@@ -1091,7 +1091,7 @@ export default class tagmarActorSheet extends ActorSheet {
                         r.toMessage({
                             user: game.user._id,
                             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            flavor: `<h2 class='mediaeval rola'>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
+                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola'>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
                         });
                     }
                 }
@@ -1118,7 +1118,7 @@ export default class tagmarActorSheet extends ActorSheet {
                                 dados[x].toMessage({
                                     user: game.user._id,
                                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                    flavor: `<h2 class='mediaeval rola'>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola'>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
                                   });
                             }
                         }
@@ -1145,7 +1145,7 @@ export default class tagmarActorSheet extends ActorSheet {
                                 dados[x].toMessage({
                                     user: game.user._id,
                                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                    flavor: `<h2 class='mediaeval rola'>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola'>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
                                   });
                             }
                         }
@@ -1167,7 +1167,7 @@ export default class tagmarActorSheet extends ActorSheet {
                             dado.toMessage({
                                 user: game.user._id,
                                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                flavor: `<h2 class='mediaeval rola'>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola'>${item.name} - ${item.data.data.total}</h2>${conteudo}${coluna}${PrintResult}`
                               });
                         }
                     }
@@ -1176,6 +1176,7 @@ export default class tagmarActorSheet extends ActorSheet {
         } else if (item.data.type == "Combate") { //Combate
             let municao = item.data.data.municao;
             let muni_usada = 0;
+            let municao_text = "";
             let punicaoText = "";
             if (municao > 0) {
                 muni_usada = 1;
@@ -1185,6 +1186,8 @@ export default class tagmarActorSheet extends ActorSheet {
                 });
                 item.render();
             }
+            if (muni_usada == 1) municao_text = "<h4 class='mediaeval rola'>Munição gasta: " + muni_usada + " Restam: " + municao + "</h4>";
+            else municao_text = "";
             let bonus_cat = item.data.data.bonus;
             let bonus_ajustev = 0;
             const puni_25 = item.data.data.penalidade.p25;
@@ -1210,6 +1213,7 @@ export default class tagmarActorSheet extends ActorSheet {
             r = new Roll(formulaD);
             r.evaluate();
             var Dresult = r.total;
+            
             if (valor_tabela <= 20) { // Começa Rolagem
                 for (let i = 0; i < tabela_resol.length; i++) {
                     if (tabela_resol[i][0] == valor_tabela) {
@@ -1310,12 +1314,12 @@ export default class tagmarActorSheet extends ActorSheet {
                             } else dano_total = item.data.data.dano.d125;
                         }
                         else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico</h1>";
-                        let coluna = "<h4 class='mediaeval rola'>Coluna: " + tabela_resol[i][0] + "</h4><h4 class='mediaeval rola'>Munição gasta: " + muni_usada + "</h4>";
+                        let coluna = "<h4 class='mediaeval rola'>Coluna: " + tabela_resol[i][0] + "</h4>";
                         dano_text = "<h2 class='mediaeval rola' style='text-align: center;'>Dano: " + dano_total + "</h2>";
                             r.toMessage({
                             user: game.user._id,
                             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            flavor: `<h2 class="mediaeval">${item.name} - ${item.data.data.tipo}</h2>${conteudo}${coluna}${PrintResult}${punicaoText}${dano_text}`
+                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval">${item.name} - ${item.data.data.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${punicaoText}${dano_text}`
                           });
                     }
                 }
@@ -1475,13 +1479,13 @@ export default class tagmarActorSheet extends ActorSheet {
                                 dano_novo = item.data.data.dano.d300;
                                 break;
                         }
-                        let coluna = "<h4 class='mediaeval rola'>Coluna: " + tabela_resol[i][0] + "</h4><h4 class='mediaeval rola'>Munição gasta: " + muni_usada + "</h4>";
+                        let coluna = "<h4 class='mediaeval rola'>Coluna: " + tabela_resol[i][0] + "</h4>";
                         let ajuste_text = "<h1 class='mediaeval rola' style='text-align: center;'>AAC20: " + ajusteDano + "%</h1>";
                         dano_text = "<h1 class='mediaeval rola' style='text-align: center;'>Dano: " + dano_novo + "</h1>";
                         r.toMessage({
                         user: game.user._id,
                         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                        flavor: `<h2 class="mediaeval">${item.name} - ${item.data.data.tipo}</h2>${conteudo}${coluna}${PrintResult}${ajuste_text}${punicaoText}${dano_text}`
+                        flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval">${item.name} - ${item.data.data.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${ajuste_text}${punicaoText}${dano_text}`
                         });
                     }
                 }

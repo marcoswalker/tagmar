@@ -52,8 +52,9 @@ export class tagmarItem extends Item {
         var PrintResult = "";
         var r;
         const tabela_resol = this.tabela_resol;
-        if (item.type == "Combate") {
+        if (item.type == "Combate") {  //  Rolagem de Combate
             let punicaoText = "";
+            let municao_text = "";
             let municao = itemData.municao;
             let muni_usada = 0;
             if (municao > 0) {
@@ -64,6 +65,8 @@ export class tagmarItem extends Item {
                 });
                 ItemUpdate.render();
             }
+            if (muni_usada == 1) municao_text = "<h4 class='mediaeval rola'>Munição gasta: " + muni_usada + " Restam: " + municao + "</h4>";
+            else municao_text = "";
             const puni_25 = itemData.penalidade.p25;
             const puni_50 = itemData.penalidade.p50;
             const puni_75 = itemData.penalidade.p75;
@@ -189,12 +192,12 @@ export class tagmarItem extends Item {
                             } else dano_total = itemData.dano.d125;
                         }
                         else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico</h1>";
-                        let coluna = "<h4 class='mediaeval rola'>Coluna: " + tabela_resol[i][0] + "</h4><h4 class='mediaeval rola'>Munição gasta: " + muni_usada + "</h4>";
+                        let coluna = "<h4 class='mediaeval rola'>Coluna: " + tabela_resol[i][0] + "</h4>";
                         dano_text = "<h2 class='mediaeval rola' style='text-align: center;'>Dano: " + dano_total + "</h2>";
                             r.toMessage({
                             user: game.user._id,
                             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            flavor: `<h2 class="mediaeval">${item.name} - ${itemData.tipo}</h2>${conteudo}${coluna}${PrintResult}${punicaoText}${dano_text}`
+                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval">${item.name} - ${itemData.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${punicaoText}${dano_text}`
                         });
                     }
                 }
@@ -353,14 +356,117 @@ export class tagmarItem extends Item {
                                 dano_novo = itemData.dano.d300;
                                 break;
                         }
-                        let coluna = "<h4 class='mediaeval rola'>Coluna: " + tabela_resol[i][0] + "</h4><h4 class='mediaeval rola'>Munição gasta: " + muni_usada + "</h4>";
+                        let coluna = "<h4 class='mediaeval rola'>Coluna: " + tabela_resol[i][0] + "</h4>";
                         let ajuste_text = "<h1 class='mediaeval rola' style='text-align: center;'>AAC20: " + ajusteDano + "%</h1>";
                         dano_text = "<h1 class='mediaeval rola' style='text-align: center;'>Dano: " + dano_novo + "</h1>";
                         r.toMessage({
                         user: game.user._id,
                         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                        flavor: `<h2 class="mediaeval">${item.name} - ${itemData.tipo}</h2>${conteudo}${coluna}${PrintResult}${ajuste_text}${punicaoText}${dano_text}`
+                        flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval">${item.name} - ${itemData.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${ajuste_text}${punicaoText}${dano_text}`
                         });
+                    }
+                }
+            }
+        } else if (item.type == "TecnicasCombate") {    // Rolagem TecnicasCombate Macro
+            formulaD = "1d20";
+            conteudo = "<h3 class='mediaeval rola'>Descrição: </h3>" + "<h4 class='mediaeval rola'>" + itemData.descricao + "</h4>";
+            r = new Roll(formulaD);
+            r.evaluate();
+            var Dresult = r.total;
+            if (itemData.total <= 20) {
+                for (let i = 0; i < tabela_resol.length; i++) {
+                    if (tabela_resol[i][0] == itemData.total) {
+                        resultado = tabela_resol[i][Dresult];
+                        if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha</h1>";
+                        else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                        else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                        else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                        else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                        else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                        else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                        let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
+                        r.toMessage({
+                            user: game.user._id,
+                            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola'>${item.name} - ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
+                        });
+                    }
+                }
+            } else {
+                let valor_hab = itemData.total % 20;
+                if (valor_hab == 0) {
+                    let vezes = itemData.total / 20;
+                    let dados = [];
+                    for (let x = 0; x < vezes; x++){
+                        dados[x] = new Roll(formulaD);
+                        dados[x].evaluate();
+                        var Dresult = dados[x].total;
+                        for (let i = 0; i < tabela_resol.length; i++) {
+                            if (tabela_resol[i][0] == 20) {
+                                resultado = tabela_resol[i][Dresult];
+                                if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha</h1>";
+                                else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                                else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                                else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                                else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                                else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                                let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
+                                dados[x].toMessage({
+                                    user: game.user._id,
+                                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola'>${item.name} - ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                  });
+                            }
+                        }
+                    }
+                } else if (valor_hab > 0) {
+                    let vezes = parseInt(itemData.total / 20);
+                    let sobra = itemData.total % 20;
+                    let dados = [];
+                    for (let x = 0; x < vezes; x++){
+                        dados[x] = new Roll(formulaD);
+                        dados[x].evaluate();
+                        var Dresult = dados[x].total;
+                        for (let i = 0; i < tabela_resol.length; i++) {
+                            if (tabela_resol[i][0] == 20) {
+                                resultado = tabela_resol[i][Dresult];
+                                if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha</h1>";
+                                else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                                else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                                else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                                else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                                else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                                let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
+                                dados[x].toMessage({
+                                    user: game.user._id,
+                                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola'>${item.name} - ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                  });
+                            }
+                        }
+                    }
+                    var dado = new Roll(formulaD);
+                    dado.evaluate();
+                    Dresult = dado.total;
+                    for (let i = 0; i < tabela_resol.length; i++) {
+                        if (tabela_resol[i][0] == sobra) {
+                            resultado = tabela_resol[i][Dresult];
+                            if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha</h1>";
+                            else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                            else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                            else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                            else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                            else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                            else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                            let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
+                            dado.toMessage({
+                                user: game.user._id,
+                                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                                flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola'>${item.name} - ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
+                              });
+                        }
                     }
                 }
             }
