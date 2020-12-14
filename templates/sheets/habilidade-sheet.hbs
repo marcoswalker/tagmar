@@ -19,8 +19,8 @@
                     <div class="col-md-1">
                         <label><h4 class="mediaeval">Tipo:</h4></label>
                     </div>
-                    <div class="col-md-3">
-                        <select class="mediaeval" name="data.tipo" type="text" value="{{data.tipo}}" data-dtype="String" height="30" style="font-size: 110%;">
+                    <div class="col-md-4">
+                        <select class="mediaeval" name="data.tipo" type="text" value="{{data.tipo}}" data-dtype="String" height="30">
                             {{#select data.tipo}}
                             <option value="profissional">Profissional</option>
                             <option value="manobra">Manobra</option>
@@ -31,7 +31,7 @@
                             {{/select}}
                         </select>      
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2" style="text-align: right;">
                         <label><h4 class="mediaeval">Penal.Prof:</h4></label>
                     </div>
                     <div class="col-md-4">
@@ -45,7 +45,7 @@
                             <option value="Sacerdote"></option>
                         </datalist>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-1" style="text-align: left;">
                         <input name="data.custoAdd.valor" type="number" value="{{data.custoAdd.valor}}" height="30"/>
                     </div>
                 </div>
