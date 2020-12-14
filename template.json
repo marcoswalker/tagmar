@@ -257,7 +257,7 @@
         "profissao": "",
         "valor": 0
       },
-      "hab_nata": "",
+      "hab_nata": false,
       "descricao": "",
       "tarefAperf": ""
     },
@@ -297,7 +297,16 @@
         "v3": 0,
         "v4": 0
       },
-      "descricao": ""
+      "descricao": "",
+      "hab_nata": "",
+      "grupo_pen": "",
+      "p_aquisicao": {
+        "p_hab": 0,
+        "p_tec": 0,
+        "p_gra": 0,
+        "p_mag": 0
+      },
+      "atrib_mag": ""
     },
     "Raca": {
       "descricao": "",

@@ -134,13 +134,13 @@
                         <table>
                             <tr style="text-align: left;">
                                 <th width="150px"></th>
-                                <th class="mediaeval">INT</th>
-                                <th class="mediaeval">AUR</th>
-                                <th class="mediaeval">CAR</th>
-                                <th class="mediaeval">FOR</th>
-                                <th class="mediaeval">FIS</th>
-                                <th class="mediaeval">AGI</th>
-                                <th class="mediaeval">PER</th>
+                                <th class="mediaeval"><a class="rolarAtt" data-item-id="INT" title="Clique para rolar Teste.">INT</a></th>
+                                <th class="mediaeval"><a class="rolarAtt" data-item-id="AUR" title="Clique para rolar Teste.">AUR</a></th>
+                                <th class="mediaeval"><a class="rolarAtt" data-item-id="CAR" title="Clique para rolar Teste.">CAR</a></th>
+                                <th class="mediaeval"><a class="rolarAtt" data-item-id="FOR" title="Já falei que isso vai dar merda.">FOR</a></th>
+                                <th class="mediaeval"><a class="rolarAtt" data-item-id="FIS" title="Clique para rolar Teste.">FIS</a></th>
+                                <th class="mediaeval"><a class="rolarAtt" data-item-id="AGI" title="Já entendeu né?">AGI</a></th>
+                                <th class="mediaeval"><a class="rolarAtt" data-item-id="PER" title="Clique para rolar Teste.">PER</a></th>
                             </tr>
                             <tr>
                                 <td class="mediaeval"><a class="rollAtributos" title="Rolar dados. Clica pra ver.">Característica Sorteada</a></td>
@@ -198,7 +198,7 @@
                 <div class="row dados">     <!--Quinta Linha-->
                     <div class="col-md-12">
                         <table>
-                            <caption class="mediaeval">Grupos</caption>
+                            <caption class="mediaeval">Pontos para Grupo de Armas: {{data.pontos_comb}}</caption>
                             <tr style="text-align: left;">
                                 <th class="mediaeval">CD</th>
                                 <th class="mediaeval">CI</th>
@@ -218,22 +218,58 @@
                                 <th class="mediaeval">PpB</th>
                             </tr>
                             <tr>
-                                <td><input title="Combate Desarmado" name="data.grupos.CD" type="number" value="{{data.grupos.CD}}" /></td>
-                                <td><input title="Combate de Imobilização" name="data.grupos.CI" type="number" value="{{data.grupos.CI}}" /></td>
-                                <td><input title="Corte Leve" name="data.grupos.CL" type="number" value="{{data.grupos.CL}}" /></td>
-                                <td><input title="Combate Leve à Distância" name="data.grupos.CLD" type="number" value="{{data.grupos.CLD}}" /></td>
-                                <td><input title="Esmagamento Leve" name="data.grupos.EL" type="number" value="{{data.grupos.EL}}" /></td>
-                                <td><input title="Corte Médio Com Espadas" name="data.grupos.CmE" type="number" value="{{data.grupos.CmE}}" /></td>
-                                <td><input title="Corte Médio Com Machados" name="data.grupos.CmM" type="number" value="{{data.grupos.CmM}}" /></td>
-                                <td><input title="Esmagamento Médio" name="data.grupos.EM" type="number" value="{{data.grupos.EM}}" /></td>
-                                <td><input title="Penetração Média Com Arcos" name="data.grupos.PmA" type="number" value="{{data.grupos.PmA}}" /></td>
-                                <td><input title="Penetração Média Com Lanças" name="data.grupos.PmL" type="number" value="{{data.grupos.PmL}}" /></td>
-                                <td><input title="Corte Pesado Com Espadas" name="data.grupos.CpE" type="number" value="{{data.grupos.CpE}}" /></td>
-                                <td><input title="Corte Pesado Com Machados" name="data.grupos.CpM" type="number" value="{{data.grupos.CpM}}" /></td>
-                                <td><input title="Esmagamento Pesado" name="data.grupos.EP" type="number" value="{{data.grupos.EP}}" /></td>
-                                <td><input title="Penetração Pesada" name="data.grupos.PP" type="number" value="{{data.grupos.PP}}" /></td>
-                                <td><input title="Pentração Pesado Com Arcos" name="data.grupos.PpA" type="number" value="{{data.grupos.PpA}}" /></td>
-                                <td><input title="Pentração Pesado Com Bestas" name="data.grupos.PpB" type="number" value="{{data.grupos.PpB}}" /></td>
+                                <td><a class="addGrupoArmas" data-item-id="CD"><i class="fas fa-plus-circle"></i></a></td>
+                                <td><a class="addGrupoArmas" data-item-id="CI"><i class="fas fa-plus-circle"></i></a></td>
+                                <td><a class="addGrupoArmas" data-item-id="CL"><i class="fas fa-plus-circle"></i></a></td>
+                                <td><a class="addGrupoArmas" data-item-id="CLD"><i class="fas fa-plus-circle"></i></a></td>
+                                <td><a class="addGrupoArmas" data-item-id="EL"><i class="fas fa-plus-circle"></i></a></td>
+                                <td><a class="addGrupoArmas" data-item-id="CmE"><i class="fas fa-plus-circle"></i></a></td>
+                                <td><a class="addGrupoArmas" data-item-id="CmM"><i class="fas fa-plus-circle"></i></a></td>
+                                <td><a class="addGrupoArmas" data-item-id="EM"><i class="fas fa-plus-circle"></i></a></td>
+                                <td><a class="addGrupoArmas" data-item-id="PmA"><i class="fas fa-plus-circle"></i></a></td>
+                                <td><a class="addGrupoArmas" data-item-id="PmL"><i class="fas fa-plus-circle"></i></a></td>
+                                <td><a class="addGrupoArmas" data-item-id="CpE"><i class="fas fa-plus-circle"></i></a></td>
+                                <td><a class="addGrupoArmas" data-item-id="CpM"><i class="fas fa-plus-circle"></i></a></td>
+                                <td><a class="addGrupoArmas" data-item-id="EP"><i class="fas fa-plus-circle"></i></a></td>
+                                <td><a class="addGrupoArmas" data-item-id="PP"><i class="fas fa-plus-circle"></i></a></td>
+                                <td><a class="addGrupoArmas" data-item-id="PpA"><i class="fas fa-plus-circle"></i></a></td>
+                                <td><a class="addGrupoArmas" data-item-id="PpB"><i class="fas fa-plus-circle"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td><input title="Combate Desarmado" name="data.grupos.CD" type="number" value="{{data.grupos.CD}}" readonly/></td>
+                                <td><input title="Combate de Imobilização" name="data.grupos.CI" type="number" value="{{data.grupos.CI}}" readonly/></td>
+                                <td><input title="Corte Leve" name="data.grupos.CL" type="number" value="{{data.grupos.CL}}" readonly/></td>
+                                <td><input title="Combate Leve à Distância" name="data.grupos.CLD" type="number" value="{{data.grupos.CLD}}" readonly/></td>
+                                <td><input title="Esmagamento Leve" name="data.grupos.EL" type="number" value="{{data.grupos.EL}}"readonly /></td>
+                                <td><input title="Corte Médio Com Espadas" name="data.grupos.CmE" type="number" value="{{data.grupos.CmE}}" readonly/></td>
+                                <td><input title="Corte Médio Com Machados" name="data.grupos.CmM" type="number" value="{{data.grupos.CmM}}" readonly/></td>
+                                <td><input title="Esmagamento Médio" name="data.grupos.EM" type="number" value="{{data.grupos.EM}}" readonly/></td>
+                                <td><input title="Penetração Média Com Arcos" name="data.grupos.PmA" type="number" value="{{data.grupos.PmA}}" readonly/></td>
+                                <td><input title="Penetração Média Com Lanças" name="data.grupos.PmL" type="number" value="{{data.grupos.PmL}}" readonly/></td>
+                                <td><input title="Corte Pesado Com Espadas" name="data.grupos.CpE" type="number" value="{{data.grupos.CpE}}" readonly/></td>
+                                <td><input title="Corte Pesado Com Machados" name="data.grupos.CpM" type="number" value="{{data.grupos.CpM}}" readonly/></td>
+                                <td><input title="Esmagamento Pesado" name="data.grupos.EP" type="number" value="{{data.grupos.EP}}" readonly/></td>
+                                <td><input title="Penetração Pesada" name="data.grupos.PP" type="number" value="{{data.grupos.PP}}" readonly/></td>
+                                <td><input title="Pentração Pesado Com Arcos" name="data.grupos.PpA" type="number" value="{{data.grupos.PpA}}" readonly/></td>
+                                <td><input title="Pentração Pesado Com Bestas" name="data.grupos.PpB" type="number" value="{{data.grupos.PpB}}" readonly/></td>
+                            </tr>
+                            <tr>
+                                <td><a class="subGrupoArmas" data-item-id="CD"><i class="fas fa-minus-circle"></i></a></td>
+                                <td><a class="subGrupoArmas" data-item-id="CI"><i class="fas fa-minus-circle"></i></a></td>
+                                <td><a class="subGrupoArmas" data-item-id="CL"><i class="fas fa-minus-circle"></i></a></td>
+                                <td><a class="subGrupoArmas" data-item-id="CLD"><i class="fas fa-minus-circle"></i></a></td>
+                                <td><a class="subGrupoArmas" data-item-id="EL"><i class="fas fa-minus-circle"></i></a></td>
+                                <td><a class="subGrupoArmas" data-item-id="CmE"><i class="fas fa-minus-circle"></i></a></td>
+                                <td><a class="subGrupoArmas" data-item-id="CmM"><i class="fas fa-minus-circle"></i></a></td>
+                                <td><a class="subGrupoArmas" data-item-id="EM"><i class="fas fa-minus-circle"></i></a></td>
+                                <td><a class="subGrupoArmas" data-item-id="PmA"><i class="fas fa-minus-circle"></i></a></td>
+                                <td><a class="subGrupoArmas" data-item-id="PmL"><i class="fas fa-minus-circle"></i></a></td>
+                                <td><a class="subGrupoArmas" data-item-id="CpE"><i class="fas fa-minus-circle"></i></a></td>
+                                <td><a class="subGrupoArmas" data-item-id="CpM"><i class="fas fa-minus-circle"></i></a></td>
+                                <td><a class="subGrupoArmas" data-item-id="EP"><i class="fas fa-minus-circle"></i></a></td>
+                                <td><a class="subGrupoArmas" data-item-id="PP"><i class="fas fa-minus-circle"></i></a></td>
+                                <td><a class="subGrupoArmas" data-item-id="PpA"><i class="fas fa-minus-circle"></i></a></td>
+                                <td><a class="subGrupoArmas" data-item-id="PpB"><i class="fas fa-minus-circle"></i></a></td>
                             </tr>
                         </table>
                     </div>
@@ -537,10 +573,10 @@
             <div class="tab combate container" data-group="primary" data-tab="combate">     <!--Tab Combate-->
                 <div class="row dados">
                     <div class="col-md-3" style="text-align: right;">
-                        <label><h4 class="mediaeval">Pontos Para Aquisição:</h4></label>
+                        <label><h4 class="mediaeval">Pontos para Técnicas de Combate:</h4></label>
                     </div>
                     <div class="col-md-2">
-                        <input name="data.pontos_comb" type="number" value="{{data.pontos_comb}}" height="30"/>
+                        <input name="data.pontos_tec" type="number" value="{{data.pontos_tec}}" height="30" readonly/>
                     </div>
                     <div class="col-md-2">Def. Oponente:</div>
                     <div class="col-md-1">
@@ -648,10 +684,10 @@
                 <div class="row dados">
                     <div class="col-md-3"></div>
                     <div class="col-md-3" style="text-align: right;">
-                        <label><h4 class="mediaeval">Pontos Para Aquisição:</h4></label>
+                        <label><h4 class="mediaeval">Pontos para Magías:</h4></label>
                     </div>
                     <div class="col-md-2">
-                        <input name="data.pontos_mag" type="number" value="{{data.pontos_mag}}" height="30"/>
+                        <input name="data.pontos_mag" type="number" value="{{data.pontos_mag}}" height="30" readonly/>
                     </div>
                     <div class="col-md-4"></div>
                 </div>

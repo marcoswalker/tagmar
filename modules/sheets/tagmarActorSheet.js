@@ -369,6 +369,7 @@ export default class tagmarActorSheet extends ActorSheet {
         html.find(".rolarMoral").click(this._rolarMoral.bind(this));
         html.find(".rolaR_Fis").click(this._rolaRFIS.bind(this));
         html.find(".rolaR_Mag").click(this._rolaRMAG.bind(this));
+        html.find(".rolarAtt").click(this._rolarAtt.bind(this));
         if (this.actor.owner) {
         let handler = ev => this._onDragStart(ev);
         html.find('.dragable').each((i, li) => {
@@ -385,9 +386,31 @@ export default class tagmarActorSheet extends ActorSheet {
         const valorDefI = this.actor.data.data.rm;
         let forcAtaque = forcAtaqueI;
         let valorDef = valorDefI;
+        let def_ataq = valorDef - forcAtaque;
         let stringSucesso = "";
         let valorSucess = 0;
-        if (forcAtaque > 20 || valorDef > 20) {
+        if (def_ataq == 0) valorSucess = 11;
+        else if (def_ataq == 1) valorSucess = 10;
+        else if (def_ataq == 2) valorSucess = 9;
+        else if (def_ataq == 3) valorSucess = 8;
+        else if (def_ataq == 4 || def_ataq == 5) valorSucess = 7;
+        else if (def_ataq == 6 || def_ataq == 7) valorSucess = 6;
+        else if (def_ataq == 8 || def_ataq == 9) valorSucess = 5;
+        else if (def_ataq == 10 || def_ataq == 11) valorSucess = 4;
+        else if (def_ataq == 12 || def_ataq == 13) valorSucess = 3;
+        else if (def_ataq == 14 || def_ataq == 15) valorSucess = 2;
+        else if (def_ataq >= 16) valorSucess = 1;
+        else if (def_ataq == -1) valorSucess = 11;
+        else if (def_ataq == -2) valorSucess = 12;
+        else if (def_ataq == -3) valorSucess = 13;
+        else if (def_ataq == -4 || def_ataq == -5) valorSucess = 14;
+        else if (def_ataq == -6 || def_ataq == -7) valorSucess = 15;
+        else if (def_ataq == -8 || def_ataq == -9) valorSucess = 16;
+        else if (def_ataq == -10 || def_ataq == -11) valorSucess = 17;
+        else if (def_ataq == -12 || def_ataq == -13) valorSucess = 18;
+        else if (def_ataq == -14 || def_ataq == -15) valorSucess = 19;
+        else if (def_ataq <= -16) valorSucess = 20;
+        /*if (forcAtaque > 20 || valorDef > 20) {
             let NforcAtaque = forcAtaque;
             let NvalorDef = valorDef;
             while (NforcAtaque > 20 || NvalorDef > 20) {
@@ -401,7 +424,7 @@ export default class tagmarActorSheet extends ActorSheet {
             if (linha[0] == valorDef) {
                 valorSucess = linha[forcAtaque];
             }
-        });
+        });*/
         const r = new Roll("1d20");
         r.evaluate();
         const Dresult = r.total;
@@ -424,9 +447,31 @@ export default class tagmarActorSheet extends ActorSheet {
         const valorDefI = this.actor.data.data.rm;
         let forcAtaque = forcAtaqueI;
         let valorDef = valorDefI;
+        let def_ataq = valorDef - forcAtaque;
         let stringSucesso = "";
         let valorSucess = 0;
-        if (forcAtaque > 20 || valorDef > 20) {
+        if (def_ataq == 0) valorSucess = 11;
+        else if (def_ataq == 1) valorSucess = 10;
+        else if (def_ataq == 2) valorSucess = 9;
+        else if (def_ataq == 3) valorSucess = 8;
+        else if (def_ataq == 4 || def_ataq == 5) valorSucess = 7;
+        else if (def_ataq == 6 || def_ataq == 7) valorSucess = 6;
+        else if (def_ataq == 8 || def_ataq == 9) valorSucess = 5;
+        else if (def_ataq == 10 || def_ataq == 11) valorSucess = 4;
+        else if (def_ataq == 12 || def_ataq == 13) valorSucess = 3;
+        else if (def_ataq == 14 || def_ataq == 15) valorSucess = 2;
+        else if (def_ataq >= 16) valorSucess = 1;
+        else if (def_ataq == -1) valorSucess = 11;
+        else if (def_ataq == -2) valorSucess = 12;
+        else if (def_ataq == -3) valorSucess = 13;
+        else if (def_ataq == -4 || def_ataq == -5) valorSucess = 14;
+        else if (def_ataq == -6 || def_ataq == -7) valorSucess = 15;
+        else if (def_ataq == -8 || def_ataq == -9) valorSucess = 16;
+        else if (def_ataq == -10 || def_ataq == -11) valorSucess = 17;
+        else if (def_ataq == -12 || def_ataq == -13) valorSucess = 18;
+        else if (def_ataq == -14 || def_ataq == -15) valorSucess = 19;
+        else if (def_ataq <= -16) valorSucess = 20;
+        /*if (forcAtaque > 20 || valorDef > 20) {
             let NforcAtaque = forcAtaque;
             let NvalorDef = valorDef;
             while (NforcAtaque > 20 || NvalorDef > 20) {
@@ -440,7 +485,7 @@ export default class tagmarActorSheet extends ActorSheet {
             if (linha[0] == valorDef) {
                 valorSucess = linha[forcAtaque];
             }
-        });
+        });*/
         const r = new Roll("1d20");
         r.evaluate();
         const Dresult = r.total;
@@ -528,6 +573,71 @@ export default class tagmarActorSheet extends ActorSheet {
         const actorData = sheetData.actor;
         if (actorData.profissao) {
             const profissaoData = actorData.profissao;
+            const atrib_magia = profissaoData.data.atrib_mag;
+            const grupo_pen = profissaoData.data.grupo_pen;
+            let pontos_mag = 0;
+            let pontos_gra = profissaoData.data.pontos_gra * actorData.data.estagio;
+            if (pontos_gra > 0) {
+                for (let i = 0; i < actorData.tecnicas.length; i++) {
+                    // Continuar
+                }
+            }
+            if (atrib_magia != "") {
+                if (atrib_magia == "INT") pontos_mag = ((2 * actorData.data.atributos.INT) + 7) * actorData.data.estagio;
+                else if (atrib_magia == "AUR") pontos_mag = ((2 * actorData.data.atributos.AUR) + 7) * actorData.data.estagio;
+                else if (atrib_magia == "CAR") pontos_mag = ((2 * actorData.data.atributos.CAR) + 7) * actorData.data.estagio;
+                else if (atrib_magia == "FOR") pontos_mag = ((2 * actorData.data.atributos.FOR) + 7) * actorData.data.estagio;
+                else if (atrib_magia == "FIS") pontos_mag = ((2 * actorData.data.atributos.FIS) + 7)  * actorData.data.estagio;
+                else if (atrib_magia == "AGI") pontos_mag = ((2 * actorData.data.atributos.AGI) + 7) * actorData.data.estagio;
+                else if (atrib_magia == "PER") pontos_mag = ((2 * actorData.data.atributos.PER) + 7) * actorData.data.estagio;
+            }
+            for (let i = 0; i < actorData.h_prof.length; i++){  // Falta Verificar Hab. Nata , atualizar Hab.nivel = estagio, Hab.custo = 0
+                if (grupo_pen == "profissional") {
+                    pontos_mag -= (actorData.h_prof[i].data.custo + 1);
+                } else {
+                    pontos_mag -= actorData.h_prof[i].data.custo;
+                }
+            }
+            for (let i = 0; i < actorData.h_man.length; i++){
+                if (grupo_pen == "manobra") {
+                    pontos_mag -= (actorData.h_man[i].data.custo + 1);
+                } else {
+                    pontos_mag -= actorData.h_man[i].data.custo;
+                }
+            }
+            for (let i = 0; i < actorData.h_con.length; i++){
+                if (grupo_pen == "conhecimento") {
+                    pontos_mag -= (actorData.h_con[i].data.custo + 1);
+                } else {
+                    pontos_mag -= actorData.h_con[i].data.custo;
+                }
+            }
+            for (let i = 0; i < actorData.h_sub.length; i++){
+                if (grupo_pen == "subterfugio") {
+                    pontos_mag -= (actorData.h_sub[i].data.custo + 1);
+                } else {
+                    pontos_mag -= actorData.h_sub[i].data.custo;
+                }
+            }
+            for (let i = 0; i < actorData.h_inf.length; i++){
+                if (grupo_pen == "influencia") {
+                    pontos_mag -= (actorData.h_inf[i].data.custo + 1);
+                } else {
+                    pontos_mag -= actorData.h_inf[i].data.custo;
+                }
+            }
+            for (let i = 0; i < actorData.h_geral.length; i++){
+                if (grupo_pen == "geral") {
+                    pontos_mag -= (actorData.h_geral[i].data.custo + 1);
+                } else {
+                    pontos_mag -= actorData.h_geral[i].data.custo;
+                }
+            }
+            if (pontos_mag != actorData.data.pontos_mag) {
+                this.actor.update({
+                    "data.pontos_mag": pontos_mag
+                });
+            }
             if  (profissaoData.name != actorData.data.profissao) {
                 this.actor.update({
                     "data.profissao": profissaoData.name
@@ -928,6 +1038,150 @@ export default class tagmarActorSheet extends ActorSheet {
                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                     flavor: `<h2 class='mediaeval rola'>Moral - ${moral}</h2>${coluna}${PrintResult}`
                   });
+            }
+        }
+    }
+
+    _rolarAtt(event) {      // Rolar Atributo
+        const actorData = this.actor.data.data;
+        const target = event.currentTarget;
+        let valor_teste = 0;
+        const cat = $(target).data("itemId");
+        const tabela_resol = this.tabela_resol;
+        let resultado = "";
+        let PrintResult = "";
+        let habil = 0;
+        var r;
+
+        if (cat == "INT") {
+            habil = actorData.atributos.INT;
+            valor_teste = actorData.valor_teste.INT;
+        }
+        else if (cat == "AUR") {
+            habil = actorData.atributos.AUR;
+            valor_teste = actorData.valor_teste.AUR;
+        }
+        else if (cat == "CAR") {
+            habil = actorData.atributos.CAR;
+            valor_teste = actorData.valor_teste.CAR;
+        }
+        else if (cat == "FOR") {
+            habil = actorData.atributos.FOR;
+            valor_teste = actorData.valor_teste.FOR;
+        }
+        else if (cat == "FIS") {
+            habil = actorData.atributos.FIS;
+            valor_teste = actorData.valor_teste.FIS;
+        }
+        else if (cat == "AGI") {
+            habil = actorData.atributos.AGI;
+            valor_teste = actorData.valor_teste.AGI;
+        }
+        else if (cat == "PER") {
+            habil = actorData.atributos.PER;
+            valor_teste = actorData.valor_teste.PER;
+        }
+        if (valor_teste < -7) valor_teste = -7;
+        if (valor_teste >= -7) {
+            r = new Roll("1d20");
+            r.evaluate();
+            var Dresult = r.total;
+            if (valor_teste <= 20) {
+                for (let i = 0; i < tabela_resol.length; i++) {
+                    if (tabela_resol[i][0] == valor_teste) {
+                        resultado = tabela_resol[i][Dresult];
+                        if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha</h1>";
+                        else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                        else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                        else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                        else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                        else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                        else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                        let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
+                        r.toMessage({
+                            user: game.user._id,
+                            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                            flavor: `<h2 class="mediaeval rola">Teste de Habilidade ${cat} - ${habil}</h2>${coluna}${PrintResult}`
+                        });
+                    }
+                }
+            } else {
+                let valor_hab = valor_teste % 20;
+                if (valor_hab == 0) {
+                    let vezes = valor_teste / 20;
+                    let dados = [];
+                    for (let x = 0; x < vezes; x++){
+                        dados[x] = new Roll("1d20");
+                        dados[x].evaluate();
+                        var Dresult = dados[x].total;
+                        for (let i = 0; i < tabela_resol.length; i++) {
+                            if (tabela_resol[i][0] == 20) {
+                                resultado = tabela_resol[i][Dresult];
+                                if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha</h1>";
+                                else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                                else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                                else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                                else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                                else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                                let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
+                                dados[x].toMessage({
+                                    user: game.user._id,
+                                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                                    flavor: `<h2 class="mediaeval rola">Teste de Habilidade ${cat} - ${habil}</h2>${coluna}${PrintResult}`
+                                });
+                            }
+                        }
+                    }
+                } else if (valor_hab > 0) {
+                    let vezes = parseInt(valor_teste / 20);
+                    let sobra = valor_teste % 20;
+                    let dados = [];
+                    for (let x = 0; x < vezes; x++){
+                        dados[x] = new Roll("1d20");
+                        dados[x].evaluate();
+                        var Dresult = dados[x].total;
+                        for (let i = 0; i < tabela_resol.length; i++) {
+                            if (tabela_resol[i][0] == 20) {
+                                resultado = tabela_resol[i][Dresult];
+                                if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha</h1>";
+                                else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                                else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                                else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                                else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                                else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                                let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
+                                dados[x].toMessage({
+                                    user: game.user._id,
+                                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                                    flavor: `<h2 class="mediaeval rola">Teste de Habilidade ${cat} - ${habil}</h2>${coluna}${PrintResult}`
+                                });
+                            }
+                        }
+                    }
+                    var dado = new Roll("1d20");
+                    dado.evaluate();
+                    Dresult = dado.total;
+                    for (let i = 0; i < tabela_resol.length; i++) {
+                        if (tabela_resol[i][0] == sobra) {
+                            resultado = tabela_resol[i][Dresult];
+                            if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha</h1>";
+                            else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
+                            else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
+                            else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - Médio</h1>";
+                            else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
+                            else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
+                            else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                            let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
+                            dado.toMessage({
+                                user: game.user._id,
+                                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                                flavor: `<h2 class="mediaeval rola">Teste de Habilidade ${cat} - ${habil}</h2>${coluna}${PrintResult}`
+                            });
+                        }
+                    }
+                }
             }
         }
     }
