@@ -17,6 +17,13 @@
     "css/sheet.css"
   ],
   "packs": [
+    {
+      "name": "teste",
+      "label": "teste",
+      "system": "tagmar",
+      "path": "./packs/teste.db",
+      "entity": "Actor"
+    }
   ],
   "languages": [
   ],

@@ -366,6 +366,8 @@ export default class tagmarActorSheet extends ActorSheet {
             });
             $(html.find(".valord10EH")).val(r.total);
         });
+        html.find(".displayRaca").click(this._displayRaca.bind(this));
+        html.find(".displayProf").click(this._displayProf.bind(this));
         html.find(".addGrupoArmas").click(this._addGrupoArmas.bind(this));
         html.find(".subGrupoArmas").click(this._subGrupoArmas.bind(this));
         html.find(".rolarMoral").click(this._rolarMoral.bind(this));
@@ -380,6 +382,32 @@ export default class tagmarActorSheet extends ActorSheet {
             li.addEventListener("dragstart", handler, false);
         });
         }
+    }
+
+    _displayRaca(event) {
+        const racaData = this.raca;
+        let chatData = {
+            user: game.user._id,
+            speaker: ChatMessage.getSpeaker({
+                actor: this.actor
+              })
+        };
+        chatData.content = "<img src='"+ racaData.img +"' style='display: block; margin-left: auto; margin-right: auto;' /><h1 class='mediaeval rola' style='text-align: center;'>" + racaData.name + "</h1>"  + "<h3 class='mediaeval rola'>" + racaData.data.descricao + "</h3>";
+        ChatMessage.create(chatData);
+       //console.log(this);
+    }
+
+    _displayProf(event) {
+        const profData = this.profissao;
+        let chatData = {
+            user: game.user._id,
+            speaker: ChatMessage.getSpeaker({
+                actor: this.actor
+              })
+        };
+        chatData.content = "<img src='"+ profData.img +"' style='display: block; margin-left: auto; margin-right: auto;' /><h1 class='mediaeval rola' style='text-align: center;'>" + profData.name + "</h1>"  + "<h3 class='mediaeval rola'>" + profData.data.descricao + "</h3>";
+        ChatMessage.create(chatData);
+       //console.log(this);
     }
 
     _rolaRMAG(event) {
@@ -412,21 +440,6 @@ export default class tagmarActorSheet extends ActorSheet {
         else if (def_ataq == -12 || def_ataq == -13) valorSucess = 18;
         else if (def_ataq == -14 || def_ataq == -15) valorSucess = 19;
         else if (def_ataq <= -16) valorSucess = 20;
-        /*if (forcAtaque > 20 || valorDef > 20) {
-            let NforcAtaque = forcAtaque;
-            let NvalorDef = valorDef;
-            while (NforcAtaque > 20 || NvalorDef > 20) {
-                NforcAtaque = Math.round(NforcAtaque / 2);
-                NvalorDef = Math.round(NvalorDef / 2);
-            }
-            forcAtaque = NforcAtaque;
-            valorDef = NvalorDef;
-        }
-        table_resFisMag.forEach(function(linha){
-            if (linha[0] == valorDef) {
-                valorSucess = linha[forcAtaque];
-            }
-        });*/
         const r = new Roll("1d20");
         r.evaluate();
         const Dresult = r.total;
@@ -473,21 +486,6 @@ export default class tagmarActorSheet extends ActorSheet {
         else if (def_ataq == -12 || def_ataq == -13) valorSucess = 18;
         else if (def_ataq == -14 || def_ataq == -15) valorSucess = 19;
         else if (def_ataq <= -16) valorSucess = 20;
-        /*if (forcAtaque > 20 || valorDef > 20) {
-            let NforcAtaque = forcAtaque;
-            let NvalorDef = valorDef;
-            while (NforcAtaque > 20 || NvalorDef > 20) {
-                NforcAtaque = Math.round(NforcAtaque / 2);
-                NvalorDef = Math.round(NvalorDef / 2);
-            }
-            forcAtaque = NforcAtaque;
-            valorDef = NvalorDef;
-        }
-        table_resFisMag.forEach(function(linha){
-            if (linha[0] == valorDef) {
-                valorSucess = linha[forcAtaque];
-            }
-        });*/
         const r = new Roll("1d20");
         r.evaluate();
         const Dresult = r.total;

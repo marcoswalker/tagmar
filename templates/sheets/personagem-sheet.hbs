@@ -41,13 +41,23 @@
             <div class="tab basico container" data-group="primary" data-tab="basico"> <!--Tab Básico-->
                 <div class="row dados">         <!--Primeira Linha-->
                     <div class="col-md-1">
+                        {{#ifeq actor.raca ""}}
                         <label><h4 class="mediaeval">Raça:</h4></label>
+                        {{/ifeq}}
+                        {{#ifdf actor.raca ""}}
+                        <a class="displayRaca"><h4 class="mediaeval">Raça:</h4></a>
+                        {{/ifdf}}
                     </div>
                     <div class="col-md-3">
                         <input name="data.raca" type="text" list="racas" value="{{data.raca}}" height="30" title="Escolha uma raça ou crie a sua." readonly/>
                     </div>
                     <div class="col-md-2">
+                        {{#ifeq actor.profissao ""}}
                         <label><h4 class="mediaeval">Profissão:</h4></label>
+                        {{/ifeq}}
+                        {{#ifdf actor.profissao ""}}
+                        <a class="displayProf"><h4 class="mediaeval">Profissão:</h4></a>
+                        {{/ifdf}}
                     </div>
                     <div class="col-md-3">
                         <input class="profissao" name="data.profissao" type="text" value="{{data.profissao}}" height="30" title="Uma profissão diz muito sobre o herói." readonly/>
