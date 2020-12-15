@@ -23,5 +23,6 @@
   "gridDistance": 1.0,
   "gridUnits": "m",
   "url": "https://github.com/marcoswalker/tagmar",
-  "manifest": "https://github.com/marcoswalker/tagmar/blob/master/system.json"
+  "manifest": "https://raw.githubusercontent.com/marcoswalker/tagmar/master/system.json",
+  "download": "https://codeload.github.com/marcoswalker/tagmar/zip/master"
 }
