@@ -150,7 +150,8 @@
           "valor_def": 0,
           "bonus": 0
         },
-        "bonus_habil": 0
+        "bonus_habil": 0,
+        "hab_nata": ""
       }
     },
     "Personagem": {

@@ -366,6 +366,8 @@ export default class tagmarActorSheet extends ActorSheet {
             });
             $(html.find(".valord10EH")).val(r.total);
         });
+        html.find(".addGrupoArmas").click(this._addGrupoArmas.bind(this));
+        html.find(".subGrupoArmas").click(this._subGrupoArmas.bind(this));
         html.find(".rolarMoral").click(this._rolarMoral.bind(this));
         html.find(".rolaR_Fis").click(this._rolaRFIS.bind(this));
         html.find(".rolaR_Mag").click(this._rolaRMAG.bind(this));
@@ -569,18 +571,212 @@ export default class tagmarActorSheet extends ActorSheet {
             "data.karma.max": karma
         });
     }
+    _addGrupoArmas(event) {
+        const grupo = $(event.currentTarget).data("itemId");
+        const actorData = this.actor.data;
+        if (actorData.data.pontos_comb > 0) {
+            if (grupo == "CD") {
+                let pontos = actorData.data.grupos.CD + 1;
+                this.actor.update({
+                    "data.grupos.CD": pontos
+                });
+            } else if (grupo == "CI") {
+                let pontos = actorData.data.grupos.CI + 1;
+                this.actor.update({
+                    "data.grupos.CI": pontos
+                });
+            } else if (grupo == "CL") {
+                let pontos = actorData.data.grupos.CL + 1;
+                this.actor.update({
+                    "data.grupos.CL": pontos
+                });
+            } else if (grupo == "CLD") {
+                let pontos = actorData.data.grupos.CLD + 1;
+                this.actor.update({
+                    "data.grupos.CLD": pontos
+                });
+            } else if (grupo == "EL") {
+                let pontos = actorData.data.grupos.EL + 1;
+                this.actor.update({
+                    "data.grupos.EL": pontos
+                });
+            } else if (grupo == "CmE") {
+                let pontos = actorData.data.grupos.CmE + 1;
+                this.actor.update({
+                    "data.grupos.CmE": pontos
+                });
+            } else if (grupo == "CmM") {
+                let pontos = actorData.data.grupos.CmM + 1;
+                this.actor.update({
+                    "data.grupos.CmM": pontos
+                });
+            } else if (grupo == "EM") {
+                let pontos = actorData.data.grupos.EM + 1;
+                this.actor.update({
+                    "data.grupos.EM": pontos
+                });
+            } else if (grupo == "PmA") {
+                let pontos = actorData.data.grupos.PmA + 1;
+                this.actor.update({
+                    "data.grupos.PmA": pontos
+                });
+            } else if (grupo == "PmL") {
+                let pontos = actorData.data.grupos.PmL + 1;
+                this.actor.update({
+                    "data.grupos.PmL": pontos
+                });
+            } else if (grupo == "CpE") {
+                let pontos = actorData.data.grupos.CpE + 1;
+                this.actor.update({
+                    "data.grupos.CpE": pontos
+                });
+            } else if (grupo == "CpM") {
+                let pontos = actorData.data.grupos.CpM + 1;
+                this.actor.update({
+                    "data.grupos.CpM": pontos
+                });
+            } else if (grupo == "EP") {
+                let pontos = actorData.data.grupos.EP + 1;
+                this.actor.update({
+                    "data.grupos.EP": pontos
+                });
+            } else if (grupo == "PP") {
+                let pontos = actorData.data.grupos.PP + 1;
+                this.actor.update({
+                    "data.grupos.PP": pontos
+                });
+            } else if (grupo == "PpA") {
+                let pontos = actorData.data.grupos.PpA + 1;
+                this.actor.update({
+                    "data.grupos.PpA": pontos
+                });
+            } else if (grupo == "PpB") {
+                let pontos = actorData.data.grupos.PpB + 1;
+                this.actor.update({
+                    "data.grupos.PpB": pontos
+                });
+            }
+        }
+    }
+    _subGrupoArmas(event){
+        const grupo = $(event.currentTarget).data("itemId");
+        const actorData = this.actor.data;
+        if (actorData.data.pontos_comb >= 0) {
+            if (grupo == "CD") {
+                let pontos = actorData.data.grupos.CD - 1;
+                this.actor.update({
+                    "data.grupos.CD": pontos
+                });
+            } else if (grupo == "CI") {
+                let pontos = actorData.data.grupos.CI - 1;
+                this.actor.update({
+                    "data.grupos.CI": pontos
+                });
+            } else if (grupo == "CL") {
+                let pontos = actorData.data.grupos.CL - 1;
+                this.actor.update({
+                    "data.grupos.CL": pontos
+                });
+            } else if (grupo == "CLD") {
+                let pontos = actorData.data.grupos.CLD - 1;
+                this.actor.update({
+                    "data.grupos.CLD": pontos
+                });
+            } else if (grupo == "EL") {
+                let pontos = actorData.data.grupos.EL - 1;
+                this.actor.update({
+                    "data.grupos.EL": pontos
+                });
+            } else if (grupo == "CmE") {
+                let pontos = actorData.data.grupos.CmE - 1;
+                this.actor.update({
+                    "data.grupos.CmE": pontos
+                });
+            } else if (grupo == "CmM") {
+                let pontos = actorData.data.grupos.CmM - 1;
+                this.actor.update({
+                    "data.grupos.CmM": pontos
+                });
+            } else if (grupo == "EM") {
+                let pontos = actorData.data.grupos.EM - 1;
+                this.actor.update({
+                    "data.grupos.EM": pontos
+                });
+            } else if (grupo == "PmA") {
+                let pontos = actorData.data.grupos.PmA - 1;
+                this.actor.update({
+                    "data.grupos.PmA": pontos
+                });
+            } else if (grupo == "PmL") {
+                let pontos = actorData.data.grupos.PmL - 1;
+                this.actor.update({
+                    "data.grupos.PmL": pontos
+                });
+            } else if (grupo == "CpE") {
+                let pontos = actorData.data.grupos.CpE - 1;
+                this.actor.update({
+                    "data.grupos.CpE": pontos
+                });
+            } else if (grupo == "CpM") {
+                let pontos = actorData.data.grupos.CpM - 1;
+                this.actor.update({
+                    "data.grupos.CpM": pontos
+                });
+            } else if (grupo == "EP") {
+                let pontos = actorData.data.grupos.EP - 1;
+                this.actor.update({
+                    "data.grupos.EP": pontos
+                });
+            } else if (grupo == "PP") {
+                let pontos = actorData.data.grupos.PP - 1;
+                this.actor.update({
+                    "data.grupos.PP": pontos
+                });
+            } else if (grupo == "PpA") {
+                let pontos = actorData.data.grupos.PpA - 1;
+                this.actor.update({
+                    "data.grupos.PpA": pontos
+                });
+            } else if (grupo == "PpB") {
+                let pontos = actorData.data.grupos.PpB - 1;
+                this.actor.update({
+                    "data.grupos.PpB": pontos
+                });
+            }
+        }
+    }
     _attProfissao(sheetData) {
         const actorData = sheetData.actor;
         if (actorData.profissao) {
             const profissaoData = actorData.profissao;
             const atrib_magia = profissaoData.data.atrib_mag;
+            let pontos_hab = profissaoData.data.p_aquisicao.p_hab;
             const grupo_pen = profissaoData.data.grupo_pen;
+            const hab_nata = actorData.data.hab_nata;
+            let pontos_tec = profissaoData.data.p_aquisicao.p_tec * actorData.data.estagio;
             let pontos_mag = 0;
-            let pontos_gra = profissaoData.data.pontos_gra * actorData.data.estagio;
+            let pontos_gra = profissaoData.data.p_aquisicao.p_gra * actorData.data.estagio;
             if (pontos_gra > 0) {
-                for (let i = 0; i < actorData.tecnicas.length; i++) {
-                    // Continuar
-                }
+                pontos_gra -= actorData.data.grupos.CD;
+                pontos_gra -= actorData.data.grupos.CI;
+                pontos_gra -= actorData.data.grupos.CL;
+                pontos_gra -= actorData.data.grupos.CLD;
+                pontos_gra -= actorData.data.grupos.EL;
+                pontos_gra -= actorData.data.grupos.CmE;
+                pontos_gra -= actorData.data.grupos.CmM;
+                pontos_gra -= actorData.data.grupos.EM;
+                pontos_gra -= actorData.data.grupos.PmA;
+                pontos_gra -= actorData.data.grupos.PmL;
+                pontos_gra -= actorData.data.grupos.CpE;
+                pontos_gra -= actorData.data.grupos.CpM;
+                pontos_gra -= actorData.data.grupos.EP;
+                pontos_gra -= actorData.data.grupos.PP;
+                pontos_gra -= actorData.data.grupos.PpA;
+                pontos_gra -= actorData.data.grupos.PpB;
+
+            }
+            for (let i = 0; i < actorData.tecnicas.length; i++) {
+                pontos_tec -= actorData.tecnicas[i].data.custo * actorData.tecnicas[i].data.nivel;
             }
             if (atrib_magia != "") {
                 if (atrib_magia == "INT") pontos_mag = ((2 * actorData.data.atributos.INT) + 7) * actorData.data.estagio;
@@ -590,48 +786,97 @@ export default class tagmarActorSheet extends ActorSheet {
                 else if (atrib_magia == "FIS") pontos_mag = ((2 * actorData.data.atributos.FIS) + 7)  * actorData.data.estagio;
                 else if (atrib_magia == "AGI") pontos_mag = ((2 * actorData.data.atributos.AGI) + 7) * actorData.data.estagio;
                 else if (atrib_magia == "PER") pontos_mag = ((2 * actorData.data.atributos.PER) + 7) * actorData.data.estagio;
+            } else pontos_mag = 0;
+            for (let i = 0; i < actorData.magias.length; i++) {
+                pontos_mag -= actorData.magias[i].data.custo * actorData.magias[i].data.nivel;
             }
-            for (let i = 0; i < actorData.h_prof.length; i++){  // Falta Verificar Hab. Nata , atualizar Hab.nivel = estagio, Hab.custo = 0
+            for (let i = 0; i < actorData.h_prof.length; i++) {
                 if (grupo_pen == "profissional") {
-                    pontos_mag -= (actorData.h_prof[i].data.custo + 1);
+                    pontos_hab -= (actorData.h_prof[i].data.custo + 1) * actorData.h_prof[i].data.nivel;
+                } else if (hab_nata == actorData.h_prof[i].name) {
+                    //pontos_hab -= 0;
+                    let habilidade = this.actor.getOwnedItem(actorData.h_prof[i]._id);
+                    habilidade.update({
+                        "data.nivel": actorData.data.estagio
+                    });
                 } else {
-                    pontos_mag -= actorData.h_prof[i].data.custo;
+                    pontos_hab -= actorData.h_prof[i].data.custo * actorData.h_prof[i].data.nivel;
                 }
             }
-            for (let i = 0; i < actorData.h_man.length; i++){
+            for (let i = 0; i < actorData.h_man.length; i++) {
                 if (grupo_pen == "manobra") {
-                    pontos_mag -= (actorData.h_man[i].data.custo + 1);
+                    pontos_hab -= (actorData.h_man[i].data.custo + 1) * actorData.h_man[i].data.nivel;
+                } else if (hab_nata == actorData.h_man[i].name) {
+                    const habilidade = this.actor.getOwnedItem(actorData.h_man[i]._id);
+                    habilidade.update({
+                        "data.nivel": actorData.data.estagio
+                    });
                 } else {
-                    pontos_mag -= actorData.h_man[i].data.custo;
+                    pontos_hab -= actorData.h_man[i].data.custo * actorData.h_man[i].data.nivel;
                 }
             }
-            for (let i = 0; i < actorData.h_con.length; i++){
+            for (let i = 0; i < actorData.h_con.length; i++) {
                 if (grupo_pen == "conhecimento") {
-                    pontos_mag -= (actorData.h_con[i].data.custo + 1);
+                    pontos_hab -= (actorData.h_con[i].data.custo + 1) * actorData.h_con[i].data.nivel;
+                } else if (hab_nata == actorData.h_con[i].name) {
+                    const habilidade = this.actor.getOwnedItem(actorData.h_con[i]._id);
+                    habilidade.update({
+                        "data.nivel": actorData.data.estagio
+                    });
                 } else {
-                    pontos_mag -= actorData.h_con[i].data.custo;
+                    pontos_hab -= actorData.h_con[i].data.custo * actorData.h_con[i].data.nivel;
                 }
             }
-            for (let i = 0; i < actorData.h_sub.length; i++){
+            for (let i = 0; i < actorData.h_sub.length; i++) {
                 if (grupo_pen == "subterfugio") {
-                    pontos_mag -= (actorData.h_sub[i].data.custo + 1);
+                    pontos_hab -= (actorData.h_sub[i].data.custo + 1) * actorData.h_sub[i].data.nivel;
+                } else if (hab_nata == actorData.h_sub[i].name) {
+                    const habilidade = this.actor.getOwnedItem(actorData.h_sub[i]._id);
+                    habilidade.update({
+                        "data.nivel": actorData.data.estagio
+                    });
                 } else {
-                    pontos_mag -= actorData.h_sub[i].data.custo;
+                    pontos_hab -= actorData.h_sub[i].data.custo * actorData.h_sub[i].data.nivel;
                 }
             }
-            for (let i = 0; i < actorData.h_inf.length; i++){
+            for (let i = 0; i < actorData.h_inf.length; i++) {
                 if (grupo_pen == "influencia") {
-                    pontos_mag -= (actorData.h_inf[i].data.custo + 1);
+                    pontos_hab -= (actorData.h_inf[i].data.custo + 1) * actorData.h_inf[i].data.nivel;
+                } else if (hab_nata == actorData.h_inf[i].name) {
+                    const habilidade = this.actor.getOwnedItem(actorData.h_inf[i]._id);
+                    habilidade.update({
+                        "data.nivel": actorData.data.estagio
+                    });
                 } else {
-                    pontos_mag -= actorData.h_inf[i].data.custo;
+                    pontos_hab -= actorData.h_inf[i].data.custo * actorData.h_inf[i].data.nivel;
                 }
             }
-            for (let i = 0; i < actorData.h_geral.length; i++){
+            for (let i = 0; i < actorData.h_geral.length; i++) {
                 if (grupo_pen == "geral") {
-                    pontos_mag -= (actorData.h_geral[i].data.custo + 1);
+                    pontos_hab -= (actorData.h_geral[i].data.custo + 1) * actorData.h_geral[i].data.nivel;
+                } else if (hab_nata == actorData.h_geral[i].name) {
+                    const habilidade = this.actor.getOwnedItem(actorData.h_geral[i]._id);
+                    habilidade.update({
+                        "data.nivel": actorData.data.estagio
+                    });
                 } else {
-                    pontos_mag -= actorData.h_geral[i].data.custo;
+                    pontos_hab -= actorData.h_geral[i].data.custo * actorData.h_geral[i].data.nivel;
                 }
+            }
+            if (pontos_hab != actorData.data.pontos_aqui) {
+                this.actor.update({
+                    "data.pontos_aqui": pontos_hab
+                });
+            }
+            if (pontos_tec != actorData.data.pontos_tec) {
+                this.actor.update({
+                    "data.pontos_tec": pontos_tec
+                });
+            }
+            if (pontos_gra != actorData.data.pontos_comb) {
+                this.actor.update({
+                    "data.pontos_comb": pontos_gra
+                });
             }
             if (pontos_mag != actorData.data.pontos_mag) {
                 this.actor.update({

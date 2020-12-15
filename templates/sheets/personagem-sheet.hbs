@@ -199,7 +199,7 @@
                     <div class="col-md-12">
                         <table>
                             <caption class="mediaeval">Pontos para Grupo de Armas: {{data.pontos_comb}}</caption>
-                            <tr style="text-align: left;">
+                            <tr style="text-align: center;">
                                 <th class="mediaeval">CD</th>
                                 <th class="mediaeval">CI</th>
                                 <th class="mediaeval">CL</th>
@@ -217,7 +217,7 @@
                                 <th class="mediaeval">PpA</th>
                                 <th class="mediaeval">PpB</th>
                             </tr>
-                            <tr>
+                            <tr style="text-align: center;">
                                 <td><a class="addGrupoArmas" data-item-id="CD"><i class="fas fa-plus-circle"></i></a></td>
                                 <td><a class="addGrupoArmas" data-item-id="CI"><i class="fas fa-plus-circle"></i></a></td>
                                 <td><a class="addGrupoArmas" data-item-id="CL"><i class="fas fa-plus-circle"></i></a></td>
@@ -235,7 +235,7 @@
                                 <td><a class="addGrupoArmas" data-item-id="PpA"><i class="fas fa-plus-circle"></i></a></td>
                                 <td><a class="addGrupoArmas" data-item-id="PpB"><i class="fas fa-plus-circle"></i></a></td>
                             </tr>
-                            <tr>
+                            <tr style="text-align: center;">
                                 <td><input title="Combate Desarmado" name="data.grupos.CD" type="number" value="{{data.grupos.CD}}" readonly/></td>
                                 <td><input title="Combate de Imobilização" name="data.grupos.CI" type="number" value="{{data.grupos.CI}}" readonly/></td>
                                 <td><input title="Corte Leve" name="data.grupos.CL" type="number" value="{{data.grupos.CL}}" readonly/></td>
@@ -253,7 +253,7 @@
                                 <td><input title="Pentração Pesado Com Arcos" name="data.grupos.PpA" type="number" value="{{data.grupos.PpA}}" readonly/></td>
                                 <td><input title="Pentração Pesado Com Bestas" name="data.grupos.PpB" type="number" value="{{data.grupos.PpB}}" readonly/></td>
                             </tr>
-                            <tr>
+                            <tr style="text-align: center;">
                                 <td><a class="subGrupoArmas" data-item-id="CD"><i class="fas fa-minus-circle"></i></a></td>
                                 <td><a class="subGrupoArmas" data-item-id="CI"><i class="fas fa-minus-circle"></i></a></td>
                                 <td><a class="subGrupoArmas" data-item-id="CL"><i class="fas fa-minus-circle"></i></a></td>
@@ -428,6 +428,37 @@
                     <div class="col-md-2">
                         <input name="data.bonus_habil" type="number" value="{{data.bonus_habil}}" height="30" title="Bônus/Penalidade será aplicado a todas as habilidades.(Nenhum valor, preencher zero)"/>
                     </div>
+                </div>
+                <div class="row dados">
+                    <div class="col-md-6">
+                        <label><h4 class="mediaeval">Habilidade Nata(<span style="color: gray;">{{actor.profissao.data.hab_nata}}):</span></h4></label>
+                    </div>
+                    <div class="col-md-4">
+                        <select name="data.hab_nata" type="text" data-dtype="String" value="{{data.hab_nata}}" height="30" title="Selecione sua Habilidade Nata."/>
+                            {{#select data.hab_nata}}
+                                <option value=""></option>
+                                {{#each actor.h_prof as |h_prof|}}
+                                    <option value="{{h_prof.name}}">{{h_prof.name}}</option>
+                                {{/each}}
+                                {{#each actor.h_man as |h_man|}}
+                                    <option value="{{h_man.name}}">{{h_man.name}}</option>
+                                {{/each}}
+                                {{#each actor.h_con as |h_con|}}
+                                    <option value="{{h_con.name}}">{{h_con.name}}</option>
+                                {{/each}}
+                                {{#each actor.h_sub as |h_sub|}}
+                                    <option value="{{h_sub.name}}">{{h_sub.name}}</option>
+                                {{/each}}
+                                {{#each actor.h_inf as |h_inf|}}
+                                    <option value="{{h_inf.name}}">{{h_inf.name}}</option>
+                                {{/each}}
+                                {{#each actor.h_geral as |h_geral|}}
+                                    <option value="{{h_geral.name}}">{{h_geral.name}}</option>
+                                {{/each}}
+                            {{/select}}
+                        </select>
+                    </div>
+                    <div class="col-md-2"></div>
                 </div>
                 <div class="row dados">
                     <div class="col-md-4" style="text-align: center;"><h2 class="fairyDust">Profissional</h2></div>
