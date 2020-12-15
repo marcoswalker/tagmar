@@ -17,6 +17,7 @@
     "css/sheet.css"
   ],
   "packs": [
+    "packs/asd.db"
   ],
   "languages": [
   ],
