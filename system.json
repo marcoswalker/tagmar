@@ -21,5 +21,6 @@
   "languages": [
   ],
   "gridDistance": 1.0,
-  "gridUnits": "m"
+  "gridUnits": "m",
+  "manifest": "https://github.com/marcoswalker/tagmar/blob/master/system.json"
 }
