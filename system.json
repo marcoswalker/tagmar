@@ -1,10 +1,10 @@
 {
   "name": "tagmar",
   "title": "Tagmar RPG",
-  "description": "Sistema simples para Tagmar 3.0.",
+  "description": "Sistema simples para Tagmar 3.0. Módulos Recomendados: Bar Brawl, Dice So Nice!, Dice Tray, Portuguese (BR) Core",
   "version": "1.0.0",
   "templateVersion": 2,
-  "author": "Xaura Walker, Pirata VFL",
+  "author": "Vinicius Fernandez, Marcos Walker",
   "minimumCoreVersion": "0.7.7",
   "compatibleCoreVersion": "0.7.8",
   "scripts": [
