@@ -38,7 +38,7 @@ export default class tagmarActorSheet extends ActorSheet {
             var valor_n = 0;
             if (data.actor.combate.length > 0){
                 data.actor.combate.forEach(function(item){
-                    actor_carga += item.data.peso;
+                    //actor_carga += item.data.peso;
                     if (item.data.tipo == "CD") {
                         valor_n = data.actor.data.grupos.CD;
                         isso.updateItemNivel(valor_n, item._id, isso.actor);
@@ -143,7 +143,7 @@ export default class tagmarActorSheet extends ActorSheet {
             }
             if (data.actor.defesas.length > 0){
                 data.actor.defesas.forEach(function(item){
-                    actor_carga += item.data.peso;
+                    //actor_carga += item.data.peso;
                     absorcao += item.data.absorcao;
                     def_pasVal += item.data.defesa_base.valor;
                     if (item.data.defesa_base.tipo != ""){
@@ -245,11 +245,6 @@ export default class tagmarActorSheet extends ActorSheet {
         super.activateListeners(html);
         if (!this.options.editable) return;
 
-        /*html.find(".profissao").change(ev => {
-            //const profissao = ev.currentTarget.value;
-            const especializacao = html.find(".especializacao");
-            $(especializacao).val("");
-        });*/
         // Update Inventory Item
         html.find('.item-edit').click(ev => {
             const li = $(ev.currentTarget).parents(".item");
@@ -572,7 +567,7 @@ export default class tagmarActorSheet extends ActorSheet {
     _addGrupoArmas(event) {
         const grupo = $(event.currentTarget).data("itemId");
         const actorData = this.actor.data;
-        if (actorData.data.pontos_comb > 0) {
+        if (actorData.data.pontos_comb >= 0) {
             if (grupo == "CD") {
                 let pontos = actorData.data.grupos.CD + 1;
                 this.actor.update({
@@ -659,89 +654,88 @@ export default class tagmarActorSheet extends ActorSheet {
     _subGrupoArmas(event){
         const grupo = $(event.currentTarget).data("itemId");
         const actorData = this.actor.data;
-        if (actorData.data.pontos_comb >= 0) {
-            if (grupo == "CD") {
-                let pontos = actorData.data.grupos.CD - 1;
-                this.actor.update({
-                    "data.grupos.CD": pontos
-                });
-            } else if (grupo == "CI") {
-                let pontos = actorData.data.grupos.CI - 1;
-                this.actor.update({
-                    "data.grupos.CI": pontos
-                });
-            } else if (grupo == "CL") {
-                let pontos = actorData.data.grupos.CL - 1;
-                this.actor.update({
-                    "data.grupos.CL": pontos
-                });
-            } else if (grupo == "CLD") {
-                let pontos = actorData.data.grupos.CLD - 1;
-                this.actor.update({
-                    "data.grupos.CLD": pontos
-                });
-            } else if (grupo == "EL") {
-                let pontos = actorData.data.grupos.EL - 1;
-                this.actor.update({
-                    "data.grupos.EL": pontos
-                });
-            } else if (grupo == "CmE") {
-                let pontos = actorData.data.grupos.CmE - 1;
-                this.actor.update({
-                    "data.grupos.CmE": pontos
-                });
-            } else if (grupo == "CmM") {
-                let pontos = actorData.data.grupos.CmM - 1;
-                this.actor.update({
-                    "data.grupos.CmM": pontos
-                });
-            } else if (grupo == "EM") {
-                let pontos = actorData.data.grupos.EM - 1;
-                this.actor.update({
-                    "data.grupos.EM": pontos
-                });
-            } else if (grupo == "PmA") {
-                let pontos = actorData.data.grupos.PmA - 1;
-                this.actor.update({
-                    "data.grupos.PmA": pontos
-                });
-            } else if (grupo == "PmL") {
-                let pontos = actorData.data.grupos.PmL - 1;
-                this.actor.update({
-                    "data.grupos.PmL": pontos
-                });
-            } else if (grupo == "CpE") {
-                let pontos = actorData.data.grupos.CpE - 1;
-                this.actor.update({
-                    "data.grupos.CpE": pontos
-                });
-            } else if (grupo == "CpM") {
-                let pontos = actorData.data.grupos.CpM - 1;
-                this.actor.update({
-                    "data.grupos.CpM": pontos
-                });
-            } else if (grupo == "EP") {
-                let pontos = actorData.data.grupos.EP - 1;
-                this.actor.update({
-                    "data.grupos.EP": pontos
-                });
-            } else if (grupo == "PP") {
-                let pontos = actorData.data.grupos.PP - 1;
-                this.actor.update({
-                    "data.grupos.PP": pontos
-                });
-            } else if (grupo == "PpA") {
-                let pontos = actorData.data.grupos.PpA - 1;
-                this.actor.update({
-                    "data.grupos.PpA": pontos
-                });
-            } else if (grupo == "PpB") {
-                let pontos = actorData.data.grupos.PpB - 1;
-                this.actor.update({
-                    "data.grupos.PpB": pontos
-                });
-            }
+        if (grupo == "CD" && actorData.data.grupos.CD > 0) {
+            let pontos = actorData.data.grupos.CD - 1;
+            this.actor.update({
+                "data.grupos.CD": pontos
+            });
+        } else if (grupo == "CI" && actorData.data.grupos.CI > 0) {
+            let pontos = actorData.data.grupos.CI - 1;
+            this.actor.update({
+                "data.grupos.CI": pontos
+            });
+        } else if (grupo == "CL" && actorData.data.grupos.CL > 0) {
+            let pontos = actorData.data.grupos.CL - 1;
+            this.actor.update({
+                "data.grupos.CL": pontos
+            });
+        } else if (grupo == "CLD" && actorData.data.grupos.CLD > 0) {
+            let pontos = actorData.data.grupos.CLD - 1;
+            this.actor.update({
+                "data.grupos.CLD": pontos
+            });
+        } else if (grupo == "EL" && actorData.data.grupos.EL > 0) {
+            let pontos = actorData.data.grupos.EL - 1;
+            this.actor.update({
+                "data.grupos.EL": pontos
+            });
+        } else if (grupo == "CmE" && actorData.data.grupos.CmE > 0) {
+            let pontos = actorData.data.grupos.CmE - 1;
+            this.actor.update({
+                "data.grupos.CmE": pontos
+            });
+        } else if (grupo == "CmM" && actorData.data.grupos.CmM > 0) {
+            let pontos = actorData.data.grupos.CmM - 1;
+            this.actor.update({
+                "data.grupos.CmM": pontos
+            });
+        } else if (grupo == "EM" && actorData.data.grupos.EM > 0) {
+            let pontos = actorData.data.grupos.EM - 1;
+            this.actor.update({
+                "data.grupos.EM": pontos
+            });
+        } else if (grupo == "PmA" && actorData.data.grupos.PmA > 0) {
+            let pontos = actorData.data.grupos.PmA - 1;
+            this.actor.update({
+                "data.grupos.PmA": pontos
+            });
+        } else if (grupo == "PmL" && actorData.data.grupos.PmL > 0) {
+            let pontos = actorData.data.grupos.PmL - 1;
+            this.actor.update({
+                "data.grupos.PmL": pontos
+            });
+        } else if (grupo == "CpE" && actorData.data.grupos.CpE > 0) {
+            let pontos = actorData.data.grupos.CpE - 1;
+            this.actor.update({
+                "data.grupos.CpE": pontos
+            });
+        } else if (grupo == "CpM" && actorData.data.grupos.CpM > 0) {
+            let pontos = actorData.data.grupos.CpM - 1;
+            this.actor.update({
+                "data.grupos.CpM": pontos
+            });
+        } else if (grupo == "EP" && actorData.data.grupos.EP > 0) {
+            let pontos = actorData.data.grupos.EP - 1;
+            this.actor.update({
+                "data.grupos.EP": pontos
+            });
+        } else if (grupo == "PP" && actorData.data.grupos.PP > 0) {
+            let pontos = actorData.data.grupos.PP - 1;
+            this.actor.update({
+                "data.grupos.PP": pontos
+            });
+        } else if (grupo == "PpA" && actorData.data.grupos.PpA > 0) {
+            let pontos = actorData.data.grupos.PpA - 1;
+            this.actor.update({
+                "data.grupos.PpA": pontos
+            });
+        } else if (grupo == "PpB" && actorData.data.grupos.PpB > 0) {
+            let pontos = actorData.data.grupos.PpB - 1;
+            this.actor.update({
+                "data.grupos.PpB": pontos
+            });
         }
+        
     }
     _attProfissao(sheetData) {
         const actorData = sheetData.actor;
@@ -760,17 +754,17 @@ export default class tagmarActorSheet extends ActorSheet {
                 pontos_gra -= actorData.data.grupos.CL;
                 pontos_gra -= actorData.data.grupos.CLD;
                 pontos_gra -= actorData.data.grupos.EL;
-                pontos_gra -= actorData.data.grupos.CmE;
-                pontos_gra -= actorData.data.grupos.CmM;
-                pontos_gra -= actorData.data.grupos.EM;
-                pontos_gra -= actorData.data.grupos.PmA;
-                pontos_gra -= actorData.data.grupos.PmL;
-                pontos_gra -= actorData.data.grupos.CpE;
-                pontos_gra -= actorData.data.grupos.CpM;
-                pontos_gra -= actorData.data.grupos.EP;
-                pontos_gra -= actorData.data.grupos.PP;
-                pontos_gra -= actorData.data.grupos.PpA;
-                pontos_gra -= actorData.data.grupos.PpB;
+                pontos_gra -= actorData.data.grupos.CmE * 2;
+                pontos_gra -= actorData.data.grupos.CmM * 2;
+                pontos_gra -= actorData.data.grupos.EM * 2;
+                pontos_gra -= actorData.data.grupos.PmA * 2;
+                pontos_gra -= actorData.data.grupos.PmL * 2;
+                pontos_gra -= actorData.data.grupos.CpE * 3;
+                pontos_gra -= actorData.data.grupos.CpM * 3;
+                pontos_gra -= actorData.data.grupos.EP * 3;
+                pontos_gra -= actorData.data.grupos.PP * 3;
+                pontos_gra -= actorData.data.grupos.PpA * 3;
+                pontos_gra -= actorData.data.grupos.PpB * 3;
 
             }
             for (let i = 0; i < actorData.tecnicas.length; i++) {
@@ -1444,7 +1438,13 @@ export default class tagmarActorSheet extends ActorSheet {
         
         if (item.data.type == "Habilidade") {
             let bonus_hab = this.actor.data.data.bonus_habil;
-            let h_total = item.data.data.total + bonus_hab;
+            let h_total = 0;
+            if (item.data.data.nivel > 0){
+                h_total = item.data.data.total + bonus_hab;
+            } else {
+                h_total = -7 + item.data.data.ajuste.valor + item.data.data.bonus + item.data.data.penalidade + bonus_hab;
+            }
+            if (h_total < -7) h_total = -7;
             formulaD = "1d20";
             conteudo = "<h3 class='mediaeval rola'>Tarefas Aperfeiçoadas: </h3>" + "<h4 class='mediaeval rola'>" + item.data.data.tarefAperf + "</h4>";
             r = new Roll(formulaD);
@@ -1692,9 +1692,13 @@ export default class tagmarActorSheet extends ActorSheet {
             var dano_text = "";
             const cat_def = this.actor.data.data.inf_ataque.cat_def;
             var valor_tabela = 0;
-            if (cat_def == "L") valor_tabela = total_l + this.actor.data.data.inf_ataque.bonus - this.actor.data.data.inf_ataque.valor_def;
-            else if (cat_def == "M") valor_tabela = total_m + this.actor.data.data.inf_ataque.bonus - this.actor.data.data.inf_ataque.valor_def;
-            else if (cat_def == "P") valor_tabela = total_p + this.actor.data.data.inf_ataque.bonus - this.actor.data.data.inf_ataque.valor_def;
+            if (item.data.data.nivel > 0) {
+                if (cat_def == "L") valor_tabela = total_l + this.actor.data.data.inf_ataque.bonus - this.actor.data.data.inf_ataque.valor_def;
+                else if (cat_def == "M") valor_tabela = total_m + this.actor.data.data.inf_ataque.bonus - this.actor.data.data.inf_ataque.valor_def;
+                else if (cat_def == "P") valor_tabela = total_p + this.actor.data.data.inf_ataque.bonus - this.actor.data.data.inf_ataque.valor_def;
+            } else {
+                valor_tabela = -7;
+            }
             formulaD = "1d20";
             conteudo = "<h4 class='mediaeval rola'>Descrição: " + item.data.data.descricao + "</h4>";
             r = new Roll(formulaD);
