@@ -88,7 +88,7 @@ export class tagmarItem extends Item {
             else if (cat_def == "M") valor_tabela = total_m + actorData.inf_ataque.bonus - actorData.inf_ataque.valor_def;
             else if (cat_def == "P") valor_tabela = total_p + actorData.inf_ataque.bonus - actorData.inf_ataque.valor_def;
             formulaD = "1d20";
-            conteudo = "<h4 class='mediaeval rola'>Descrição: " + itemData.descricao + "</h4>";
+            conteudo = "<h4 class='mediaeval rola rola_desc'>Descrição: " + itemData.descricao + "</h4>";
             r = new Roll(formulaD);
             r.evaluate();
             var Dresult = r.total;
@@ -197,7 +197,7 @@ export class tagmarItem extends Item {
                             r.toMessage({
                             user: game.user._id,
                             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola">${item.name} - ${itemData.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${punicaoText}${dano_text}`
+                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola" style="text-align:center;">${item.name} - ${itemData.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${punicaoText}${dano_text}`
                         });
                     }
                 }
@@ -362,14 +362,14 @@ export class tagmarItem extends Item {
                         r.toMessage({
                         user: game.user._id,
                         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                        flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola">${item.name} - ${itemData.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${ajuste_text}${punicaoText}${dano_text}`
+                        flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola" style="text-align:center;">${item.name} - ${itemData.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${ajuste_text}${punicaoText}${dano_text}`
                         });
                     }
                 }
             }
         } else if (item.type == "TecnicasCombate") {    // Rolagem TecnicasCombate Macro
             formulaD = "1d20";
-            conteudo = "<h3 class='mediaeval rola'>Descrição: </h3>" + "<h4 class='mediaeval rola'>" + itemData.descricao + "</h4>";
+            conteudo = "<h3 class='mediaeval rola'>Descrição: </h3>" + "<h4 class='mediaeval rola rola_desc'>" + itemData.descricao + "</h4>";
             r = new Roll(formulaD);
             r.evaluate();
             var Dresult = r.total;
@@ -388,7 +388,7 @@ export class tagmarItem extends Item {
                         r.toMessage({
                             user: game.user._id,
                             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola'>${item.name} - ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
+                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola' style="text-align:center;">${item.name} - ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
                         });
                     }
                 }
@@ -415,7 +415,7 @@ export class tagmarItem extends Item {
                                 dados[x].toMessage({
                                     user: game.user._id,
                                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola'>${item.name} - ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola' style="text-align:center;">${item.name} - ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
                                   });
                             }
                         }
@@ -442,7 +442,7 @@ export class tagmarItem extends Item {
                                 dados[x].toMessage({
                                     user: game.user._id,
                                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola'>${item.name} - ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola' style="text-align:center;">${item.name} - ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
                                   });
                             }
                         }
@@ -464,7 +464,7 @@ export class tagmarItem extends Item {
                             dado.toMessage({
                                 user: game.user._id,
                                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola'>${item.name} - ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola' style="text-align:center;">${item.name} - ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
                               });
                         }
                     }
