@@ -35,7 +35,7 @@
                     </div>
                 </div>
 
-                <div class="row dados">
+                <!--div class="row dados">
                     <div class="col-md-2">
                         <label><h4 class="mediaeval">Restrição:</h4></label>
                     </div>
@@ -53,20 +53,20 @@
                     <div class="col-md-2">
                         <label><h4 class="mediaeval">Ajuste:</h4></label>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <select class="mediaeval" style="font-size: 90%;" name="data.ajuste.atributo" type="text" value="{{data.ajuste.atributo}}" data-dtype="String" height="30">
                             {{#select data.ajuste.atributo}}
-                            <option value="INT">INTELECTO</option>
-                            <option value="CAR">CARISMA</option>
-                            <option value="AUR">AURA</option>
-                            <option value="FOR">FORÇA</option>
-                            <option value="FIS">FÍSICO</option>
-                            <option value="AGI">AGILIDADE</option>
-                            <option value="PER">PERCEPÇÃO</option>
+                            <option value="INT">INT</option>
+                            <option value="CAR">CAR</option>
+                            <option value="AUR">AUR</option>
+                            <option value="FOR">FOR</option>
+                            <option value="FIS">FIS</option>
+                            <option value="AGI">AGI</option>
+                            <option value="PER">PER</option>
                             {{/select}}
                         </select>         
                     </div>
-                </div>
+                </div-->
                 <div class="row dados">
                     <div class="col-md-2">
                         <label><h4 class="mediaeval">Categoria:</h4></label>
@@ -103,7 +103,23 @@
                             <i class="fas fa-chess-rook"></i>
                         {{/ifeq}}
                     </div>
-                    <div class="col-md-4"></div>
+                    <div class="col-md-2">
+                        <label><h4 class="mediaeval">Ajuste:</h4></label>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="mediaeval" style="font-size: 90%;" name="data.ajuste.atributo" type="text" value="{{data.ajuste.atributo}}" data-dtype="String" height="30">
+                            {{#select data.ajuste.atributo}}
+                            <option value=""></option>
+                            <option value="INT">INT</option>
+                            <option value="CAR">CAR</option>
+                            <option value="AUR">AUR</option>
+                            <option value="FOR">FOR</option>
+                            <option value="FIS">FIS</option>
+                            <option value="AGI">AGI</option>
+                            <option value="PER">PER</option>
+                            {{/select}}
+                        </select>         
+                    </div>
                 </div>
 
                 <div class="row dados">

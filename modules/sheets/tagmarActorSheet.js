@@ -742,7 +742,7 @@ export default class tagmarActorSheet extends ActorSheet {
         if (actorData.profissao) {
             const profissaoData = actorData.profissao;
             const atrib_magia = profissaoData.data.atrib_mag;
-            let pontos_hab = profissaoData.data.p_aquisicao.p_hab;
+            let pontos_hab = profissaoData.data.p_aquisicao.p_hab * actorData.data.estagio;
             const grupo_pen = profissaoData.data.grupo_pen;
             const hab_nata = actorData.data.hab_nata;
             let pontos_tec = profissaoData.data.p_aquisicao.p_tec * actorData.data.estagio;
@@ -1116,6 +1116,7 @@ export default class tagmarActorSheet extends ActorSheet {
         else if (ajusteTecnica.atributo == "FIS") total = actorData.atributos.FIS + nivel_tecnica;
         else if (ajusteTecnica.atributo == "AGI") total = actorData.atributos.AGI + nivel_tecnica;
         else if (ajusteTecnica.atributo == "PER") total = actorData.atributos.PER + nivel_tecnica;
+        else total = nivel_tecnica;
         tecnica.update({
             "data.total": total
         });
