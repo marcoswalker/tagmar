@@ -1447,7 +1447,7 @@ export default class tagmarActorSheet extends ActorSheet {
             }
             if (h_total < -7) h_total = -7;
             formulaD = "1d20";
-            conteudo = "<h3 class='mediaeval rola'>Tarefas Aperfeiçoadas: </h3>" + "<h4 class='mediaeval rola'>" + item.data.data.tarefAperf + "</h4>";
+            conteudo = "<h3 class='mediaeval rola'>Tarefas Aperfeiçoadas: </h3>" + "<h4 class='mediaeval rola rola_desc'>" + item.data.data.tarefAperf + "</h4>";
             r = new Roll(formulaD);
             r.evaluate();
             var Dresult = r.total;
