@@ -11,7 +11,7 @@
 }
 .mediaeval {
     font-family: "GoudyMediaeval";
-    font-size: 110%;
+    font-size: 105%;
 }
 .dados {
     padding: 2px 0;
@@ -35,9 +35,18 @@
 }
 .rollable:hover,
 .rollable:focus {
-  color: #000;
-  text-shadow: 0 0 10px red;
-  cursor: pointer;
+    color: #000;
+    text-shadow: 0 0 10px red;
+    cursor: pointer;
+}
+.creditos:hover,
+.creditos:focus {
+    color: rgb(94, 8, 8);
+    text-shadow: 0 0 10px black;
+}
+.creditos {
+    color: gray;
+    font-size: 90%;
 }
 .armaImg:hover,
 .armaImg:focus {

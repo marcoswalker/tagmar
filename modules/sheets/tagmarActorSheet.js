@@ -361,6 +361,7 @@ export default class tagmarActorSheet extends ActorSheet {
             });
             $(html.find(".valord10EH")).val(r.total);
         });
+        html.find(".showImg").click(this._combateImg.bind(this));
         html.find(".displayRaca").click(this._displayRaca.bind(this));
         html.find(".displayProf").click(this._displayProf.bind(this));
         html.find(".addGrupoArmas").click(this._addGrupoArmas.bind(this));
@@ -376,6 +377,20 @@ export default class tagmarActorSheet extends ActorSheet {
             li.setAttribute("draggable", true);
             li.addEventListener("dragstart", handler, false);
         });
+        }
+    }
+
+    _combateImg(event) {
+        const actorData = this.actor.data.data;
+        //console.log(actorData);
+        if (actorData.combos == "") {
+            this.actor.update({
+                "data.combos": "Apareca"
+            });
+        } else {
+            this.actor.update({
+                "data.combos": ""
+            });
         }
     }
 
@@ -970,6 +985,12 @@ export default class tagmarActorSheet extends ActorSheet {
         });
     }
 
+    SortByName(a, b){
+        var aName = a.name.toLowerCase();
+        var bName = b.name.toLowerCase(); 
+        return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
+    }
+
     _prepareCharacterItems(sheetData) {
         const actorData = sheetData.actor;
         const combate = [];
@@ -1077,6 +1098,12 @@ export default class tagmarActorSheet extends ActorSheet {
         if (profissoes[0]) {
             especializacoes = profissoes[0].data.especializacoes.split(",");
         }
+        if (magias.length > 1) magias.sort(this.SortByName);
+        if (combate.length > 1) combate.sort(this.SortByName);
+        if (tecnicas.length > 1) tecnicas.sort(this.SortByName);
+        if (defesas.length > 1) defesas.sort(this.SortByName);
+        if (pertences.length > 1) pertences.sort(this.SortByName);
+        if (transportes.length > 1) transportes.sort(this.SortByName);
         this.table_resFisMag = table_resFisMag;
         this.tabela_resol = tabela_resol;
         actorData.especializacoes = especializacoes;

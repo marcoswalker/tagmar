@@ -418,7 +418,13 @@
                         <label><h4 class="mediaeval">Caracterização:</h4></label>
                     </div>
                     <div class="col-md-10">
-                        <textarea class="mediaeval" name="data.descricao" value="{{data.descricao}}" style="height: 100px;font-size: 100%;" title="Escreve bastante ai.">{{data.descricao}}</textarea>
+                        <textarea class="mediaeval" name="data.descricao" value="{{data.descricao}}" style="height: 80px;font-size: 100%;" title="Escreve bastante ai.">{{data.descricao}}</textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7" style="height: 5px;"></div>
+                    <div class="col-md-5" style="text-align:right; heigth:5px;">
+                        <label class="mediaeval creditos">by Marcos Walker & Vinicius F. Lago (Pirata)</label>
                     </div>
                 </div>
 
@@ -642,33 +648,70 @@
                 <div class="row dados"> <!--Tabela Armas-->
                     <div class="col-md-12">
                         <table>
-                            <tr style="text-align: left;">
-                                <th class="mediaeval">Arma</th>
-                                <th class="mediaeval">Munição</th>
-                                <th class="mediaeval">Alcance</th>
-                                <th class="mediaeval">L</th>
-                                <th class="mediaeval">M</th>
-                                <th class="mediaeval">P</th>
-                                <th class="mediaeval">Dano 100%</th>
-                                <th class="mediaeval">Editar</th>
-                            </tr>
-                            {{#each actor.combate as |combate|}}
-                            <tr class="item" data-item-id="{{combate._id}}">
-                                <td class="mediaeval"><a class="rollable dragable" data-item-id="{{combate._id}}" title="Clique para atacar ou arraste para sua barra de macros.">{{combate.name}}</a></td>
-                                <td class="mediaeval">{{combate.data.municao}}</td>
-                                <td class="mediaeval">{{combate.data.alcance}}</td>
-                                <td class="mediaeval">{{combate.data.def_l}}</td>
-                                <td class="mediaeval">{{combate.data.def_m}}</td>
-                                <td class="mediaeval">{{combate.data.def_p}}</td>
-                                <td class="mediaeval">{{combate.data.dano.d100}}</td>
-                                <td>
-                                    <div class="item-controls">
-                                        <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
-                                        <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            {{/each}}
+                            {{#ifdf actor.data.combos ""}}
+                                <tr style="text-align: left;">
+                                    <th width="50px"></th>
+                                    <th class="mediaeval"><a class="showImg">Ataque</a></th>
+                                    <th class="mediaeval">Munição</th>
+                                    <th class="mediaeval">Alcance</th>
+                                    <th class="mediaeval">L</th>
+                                    <th class="mediaeval">M</th>
+                                    <th class="mediaeval">P</th>
+                                    <th class="mediaeval">Dano 100%</th>
+                                    <th class="mediaeval">Editar</th>
+                                </tr>
+                                {{#each actor.combate as |combate|}}
+                                <tr class="item" data-item-id="{{combate._id}}">
+                                    <td class="mediaeval">
+                                        <a class="rollable dragable" data-item-id="{{combate._id}}" title="Clique para atacar.">
+                                            <img class="imgItem" src="{{combate.img}}"/>
+                                        </a>
+                                    </td>
+                                    <td class="mediaeval"><a class="rollable dragable" data-item-id="{{combate._id}}" title="Clique para atacar ou arraste para sua barra de macros.">{{combate.name}}</a></td>
+                                    <td class="mediaeval">{{combate.data.municao}}</td>
+                                    <td class="mediaeval">{{combate.data.alcance}}</td>
+                                    <td class="mediaeval">{{combate.data.def_l}}</td>
+                                    <td class="mediaeval">{{combate.data.def_m}}</td>
+                                    <td class="mediaeval">{{combate.data.def_p}}</td>
+                                    <td class="mediaeval">{{combate.data.dano.d100}}</td>
+                                    <td>
+                                        <div class="item-controls">
+                                            <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                            <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            {{/ifdf}}
+                            {{#ifeq actor.data.combos ""}}
+                                <tr style="text-align: left;">
+                                    <th class="mediaeval"><a class="showImg">Ataque</a></th>
+                                    <th class="mediaeval">Munição</th>
+                                    <th class="mediaeval">Alcance</th>
+                                    <th class="mediaeval">L</th>
+                                    <th class="mediaeval">M</th>
+                                    <th class="mediaeval">P</th>
+                                    <th class="mediaeval">Dano 100%</th>
+                                    <th class="mediaeval">Editar</th>
+                                </tr>
+                                {{#each actor.combate as |combate|}}
+                                <tr class="item" data-item-id="{{combate._id}}">
+                                    <td class="mediaeval"><a class="rollable dragable" data-item-id="{{combate._id}}" title="Clique para atacar ou arraste para sua barra de macros.">{{combate.name}}</a></td>
+                                    <td class="mediaeval">{{combate.data.municao}}</td>
+                                    <td class="mediaeval">{{combate.data.alcance}}</td>
+                                    <td class="mediaeval">{{combate.data.def_l}}</td>
+                                    <td class="mediaeval">{{combate.data.def_m}}</td>
+                                    <td class="mediaeval">{{combate.data.def_p}}</td>
+                                    <td class="mediaeval">{{combate.data.dano.d100}}</td>
+                                    <td>
+                                        <div class="item-controls">
+                                            <a class="item-control item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+                                            <a class="item-control item-delete" title="Deletar"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            {{/ifeq}}
                         </table>
                     </div>
                 </div>
@@ -699,7 +742,7 @@
                     <div class="col-md-6"> <!--Tabela Tecnicas Combate-->
                         <table>
                             <tr style="text-align: left;">
-                                <th class="mediaeval">Técnicas de Combate</th>
+                                <th class="mediaeval">Técnica de Combate</th>
                                 <th class="mediaeval">Total</th>
                                 <th class="mediaeval">Categoria</th>
                                 <th class="mediaeval">Editar</th>
