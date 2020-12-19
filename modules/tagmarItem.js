@@ -96,10 +96,10 @@ export class tagmarItem extends Item {
                 for (let i = 0; i < tabela_resol.length; i++) {
                     if (tabela_resol[i][0] == valor_tabela) {
                         resultado = tabela_resol[i][Dresult];
-                        if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha Crítica</h1>";
-                        else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Errou</h1>";
+                        if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha Crítica</h1>";
+                        else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Errou</h1>";
                         else if (resultado == "amarelo") {
-                            PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - 25%</h1>";
+                            PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:yellow;'>Amarelo - 25%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
                                     dano_total = 0;
@@ -120,7 +120,7 @@ export class tagmarItem extends Item {
                             } else dano_total = itemData.dano.d25;
                         }
                         else if (resultado == "laranja") {
-                            PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - 50%</h1>";
+                            PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:orange;'>Laranja - 50%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
                                     punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
@@ -138,7 +138,7 @@ export class tagmarItem extends Item {
                             } else dano_total = itemData.dano.d50;
                         }
                         else if (resultado == "vermelho") {
-                            PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - 75%</h1>";
+                            PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:red;'>Vermelho - 75%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
                                     punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
@@ -156,7 +156,7 @@ export class tagmarItem extends Item {
                             } else dano_total = itemData.dano.d75;
                         }
                         else if (resultado == "azul") {
-                            PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - 100%</h1>";
+                            PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:blue;'>Azul - 100%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
                                     punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
@@ -174,7 +174,7 @@ export class tagmarItem extends Item {
                             } else dano_total = itemData.dano.d100;
                         }
                         else if (resultado == "roxo") {
-                            PrintResult = "<h1 class='mediaeval rola' style='color: rgb(2,9,37); text-align:center;'>Azul Escuro - 125%</h1>";
+                            PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:rgb(2,9,37);'>Azul Escuro - 125%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
                                     punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
@@ -191,7 +191,7 @@ export class tagmarItem extends Item {
                                 }
                             } else dano_total = itemData.dano.d125;
                         }
-                        else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico</h1>";
+                        else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico</h1>";
                         let coluna = "<h4 class='mediaeval rola'>Coluna: " + tabela_resol[i][0] + "</h4>";
                         dano_text = "<h2 class='mediaeval rola' style='text-align: center;'>Dano: " + dano_total + "</h2>";
                             r.toMessage({
@@ -207,9 +207,9 @@ export class tagmarItem extends Item {
                 for (let i = 0; i < tabela_resol.length; i++) {
                     if (tabela_resol[i][0] == coluna_t) {
                         resultado = tabela_resol[i][Dresult];
-                        if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha Crítica</h1>";
+                        if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha Crítica</h1>";
                         else if (resultado == "branco") {
-                            PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Errou</h1>";
+                            PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Errou</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
                                     punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
@@ -227,7 +227,7 @@ export class tagmarItem extends Item {
                             } else dano_total = 0 + ajusteDano;
                         }
                         else if (resultado == "amarelo") {
-                            PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - 25%</h1>";
+                            PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:yellow;'>Amarelo - 25%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
                                     punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
@@ -245,7 +245,7 @@ export class tagmarItem extends Item {
                             } else dano_total = 25 + ajusteDano;
                         }
                         else if (resultado == "laranja") {
-                            PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - 50%</h1>";
+                            PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:orange;'>Laranja - 50%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
                                     punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
@@ -263,7 +263,7 @@ export class tagmarItem extends Item {
                             } else dano_total = 50 + ajusteDano;
                         }
                         else if (resultado == "vermelho") {
-                            PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - 75%</h1>";
+                            PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:red;'>Vermelho - 75%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
                                     punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
@@ -281,7 +281,7 @@ export class tagmarItem extends Item {
                             } else dano_total = 75 + ajusteDano;
                         }
                         else if (resultado == "azul") {
-                            PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - 100%</h1>";
+                            PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:blue;'>Azul - 100%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
                                     punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
@@ -299,7 +299,7 @@ export class tagmarItem extends Item {
                             } else dano_total = 100 + ajusteDano;
                         }
                         else if (resultado == "roxo") {
-                            PrintResult = "<h1 class='mediaeval rola' style='color: rgb(2,9,37); text-align:center;'>Azul Escuro - 125%</h1>";
+                            PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:rgb(2,9,37);'>Azul Escuro - 125%</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
                                 if (puni_25) {
                                     punicaoText = "<h4 class='mediaeval rola' style='color: red; text-align: center;'>Penalidade 25%</h4>";
@@ -316,7 +316,7 @@ export class tagmarItem extends Item {
                                 }
                             } else dano_total = 125 + ajusteDano;
                         }
-                        else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico</h1>";
+                        else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico</h1>";
                         let dano_novo = 0;
                         switch (dano_total) {
                             case 25:
@@ -377,13 +377,13 @@ export class tagmarItem extends Item {
                 for (let i = 0; i < tabela_resol.length; i++) {
                     if (tabela_resol[i][0] == itemData.total) {
                         resultado = tabela_resol[i][Dresult];
-                        if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha</h1>";
-                        else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
-                        else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
-                        else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - Médio</h1>";
-                        else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
-                        else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
-                        else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                        if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha</h1>";
+                        else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Rotineiro</h1>";
+                        else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:yellow;'>Amarelo - Fácil</h1>";
+                        else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:orange;'>Laranja - Médio</h1>";
+                        else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:red;'>Vermelho - Difícil</h1>";
+                        else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: white; text-align:center;background-color:blue;'>Azul - Muito Difícil</h1>";
+                        else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico Absurdo</h1>";
                         let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
                         r.toMessage({
                             user: game.user._id,
@@ -404,13 +404,13 @@ export class tagmarItem extends Item {
                         for (let i = 0; i < tabela_resol.length; i++) {
                             if (tabela_resol[i][0] == 20) {
                                 resultado = tabela_resol[i][Dresult];
-                                if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha</h1>";
-                                else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
-                                else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
-                                else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - Médio</h1>";
-                                else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
-                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
-                                else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                                if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha</h1>";
+                                else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Rotineiro</h1>";
+                                else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:yellow;'>Amarelo - Fácil</h1>";
+                                else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:orange;'>Laranja - Médio</h1>";
+                                else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:red;'>Vermelho - Difícil</h1>";
+                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: white; text-align:center;background-color:blue;'>Azul - Muito Difícil</h1>";
+                                else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico Absurdo</h1>";
                                 let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
                                 dados[x].toMessage({
                                     user: game.user._id,
@@ -431,13 +431,13 @@ export class tagmarItem extends Item {
                         for (let i = 0; i < tabela_resol.length; i++) {
                             if (tabela_resol[i][0] == 20) {
                                 resultado = tabela_resol[i][Dresult];
-                                if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha</h1>";
-                                else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
-                                else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
-                                else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - Médio</h1>";
-                                else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
-                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
-                                else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                                if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha</h1>";
+                                else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Rotineiro</h1>";
+                                else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:yellow;'>Amarelo - Fácil</h1>";
+                                else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:orange;'>Laranja - Médio</h1>";
+                                else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:red;'>Vermelho - Difícil</h1>";
+                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: white; text-align:center;background-color:blue;'>Azul - Muito Difícil</h1>";
+                                else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico Absurdo</h1>";
                                 let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
                                 dados[x].toMessage({
                                     user: game.user._id,
@@ -453,13 +453,13 @@ export class tagmarItem extends Item {
                     for (let i = 0; i < tabela_resol.length; i++) {
                         if (tabela_resol[i][0] == sobra) {
                             resultado = tabela_resol[i][Dresult];
-                            if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha</h1>";
-                            else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
-                            else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
-                            else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - Médio</h1>";
-                            else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
-                            else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
-                            else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                            if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha</h1>";
+                            else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Rotineiro</h1>";
+                            else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:yellow;'>Amarelo - Fácil</h1>";
+                            else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:orange;'>Laranja - Médio</h1>";
+                            else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:red;'>Vermelho - Difícil</h1>";
+                            else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: white; text-align:center;background-color:blue;'>Azul - Muito Difícil</h1>";
+                            else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico Absurdo</h1>";
                             let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
                             dado.toMessage({
                                 user: game.user._id,
@@ -488,13 +488,13 @@ export class tagmarItem extends Item {
                 for (let i = 0; i < tabela_resol.length; i++) {
                     if (tabela_resol[i][0] == h_total) {
                         resultado = tabela_resol[i][Dresult];
-                        if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha</h1>";
-                        else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
-                        else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
-                        else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - Médio</h1>";
-                        else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
-                        else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
-                        else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                        if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha</h1>";
+                        else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Rotineiro</h1>";
+                        else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:yellow;'>Amarelo - Fácil</h1>";
+                        else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:orange;'>Laranja - Médio</h1>";
+                        else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:red;'>Vermelho - Difícil</h1>";
+                        else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:blue;'>Azul - Muito Difícil</h1>";
+                        else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico Absurdo</h1>";
                         let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
                         r.toMessage({
                             user: game.user._id,
@@ -515,13 +515,13 @@ export class tagmarItem extends Item {
                         for (let i = 0; i < tabela_resol.length; i++) {
                             if (tabela_resol[i][0] == 20) {
                                 resultado = tabela_resol[i][Dresult];
-                                if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha</h1>";
-                                else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
-                                else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
-                                else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - Médio</h1>";
-                                else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
-                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
-                                else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                                if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha</h1>";
+                                else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Rotineiro</h1>";
+                                else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:yellow;'>Amarelo - Fácil</h1>";
+                                else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:orange;'>Laranja - Médio</h1>";
+                                else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:red;'>Vermelho - Difícil</h1>";
+                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:blue;'>Azul - Muito Difícil</h1>";
+                                else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico Absurdo</h1>";
                                 let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
                                 dados[x].toMessage({
                                     user: game.user._id,
@@ -542,13 +542,13 @@ export class tagmarItem extends Item {
                         for (let i = 0; i < tabela_resol.length; i++) {
                             if (tabela_resol[i][0] == 20) {
                                 resultado = tabela_resol[i][Dresult];
-                                if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha</h1>";
-                                else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
-                                else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
-                                else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - Médio</h1>";
-                                else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
-                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
-                                else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                                if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha</h1>";
+                                else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Rotineiro</h1>";
+                                else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:yellow;'>Amarelo - Fácil</h1>";
+                                else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:orange;'>Laranja - Médio</h1>";
+                                else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:red;'>Vermelho - Difícil</h1>";
+                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:blue;'>Azul - Muito Difícil</h1>";
+                                else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico Absurdo</h1>";
                                 let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
                                 dados[x].toMessage({
                                     user: game.user._id,
@@ -564,13 +564,13 @@ export class tagmarItem extends Item {
                     for (let i = 0; i < tabela_resol.length; i++) {
                         if (tabela_resol[i][0] == sobra) {
                             resultado = tabela_resol[i][Dresult];
-                            if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: green; text-align:center;'>Verde - Falha</h1>";
-                            else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;'>Branco - Rotineiro</h1>";
-                            else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: yellow; text-align:center;'>Amarelo - Fácil</h1>";
-                            else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: orange; text-align:center;'>Laranja - Médio</h1>";
-                            else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: red; text-align:center;'>Vermelho - Difícil</h1>";
-                            else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: blue; text-align:center;'>Azul - Muito Difícil</h1>";
-                            else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: gray; text-align:center;'>Cinza - Crítico Absurdo</h1>";
+                            if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha</h1>";
+                            else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Rotineiro</h1>";
+                            else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:yellow;'>Amarelo - Fácil</h1>";
+                            else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:orange;'>Laranja - Médio</h1>";
+                            else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:red;'>Vermelho - Difícil</h1>";
+                            else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:blue;'>Azul - Muito Difícil</h1>";
+                            else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico Absurdo</h1>";
                             let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
                             dado.toMessage({
                                 user: game.user._id,
