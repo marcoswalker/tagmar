@@ -756,6 +756,7 @@ export default class tagmarActorSheet extends ActorSheet {
         const actorData = sheetData.actor;
         if (actorData.profissao) {
             const profissaoData = actorData.profissao;
+            const max_hab = profissaoData.data.p_aquisicao.p_hab + Math.floor(actorData.data.estagio / 2);
             const atrib_magia = profissaoData.data.atrib_mag;
             let pontos_hab = profissaoData.data.p_aquisicao.p_hab * actorData.data.estagio;
             const grupo_pen = profissaoData.data.grupo_pen;
@@ -763,6 +764,11 @@ export default class tagmarActorSheet extends ActorSheet {
             let pontos_tec = profissaoData.data.p_aquisicao.p_tec * actorData.data.estagio;
             let pontos_mag = 0;
             let pontos_gra = profissaoData.data.p_aquisicao.p_gra * actorData.data.estagio;
+            if (max_hab != actorData.data.max_hab) {
+                this.actor.update({
+                    "data.max_hab": max_hab
+                });
+            }
             if (pontos_gra > 0) {
                 pontos_gra -= actorData.data.grupos.CD;
                 pontos_gra -= actorData.data.grupos.CI;
