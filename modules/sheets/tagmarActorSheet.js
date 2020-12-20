@@ -1,4 +1,5 @@
 export default class tagmarActorSheet extends ActorSheet {
+    
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
         classes: ["tagmar", "sheet", "actor"],

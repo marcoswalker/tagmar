@@ -159,7 +159,22 @@
     },
     "NPC": {
       "templates": ["base"],
-      "moral": 0
+      "moral": 0,
+      "karma_npc": {
+        "value": 0,
+        "min": 0,
+        "max": 0
+      },
+      "eh_npc": {
+        "value": 0,
+        "min": 0,
+        "max": 0
+      },
+      "ef_npc": {
+        "value": 0,
+        "min": 0,
+        "max": 0
+      }
     }
   },
   "Item": {
