@@ -199,7 +199,7 @@
                 <div class="row dados">     <!--Quinta Linha-->
                     <div class="col-md-12">
                         <table>
-                            <caption class="mediaeval">Pontos para Grupo de Armas: {{data.pontos_comb}}</caption>
+                            <caption class="mediaeval">Grupo de Armas</caption>
                             <tr style="text-align: center;">
                                 <th class="mediaeval">CD</th>
                                 <th class="mediaeval">CI</th>
@@ -382,10 +382,10 @@
             <div class="tab habilidades container" data-group="primary" data-tab="habilidades"> <!--Tab Habilidades-->
                 <div class="row dados">
                     <div class="col-md-2"></div>
-                    <div class="col-md-3" style="text-align: right;">
+                    <div class="col-md-3 hidden" style="text-align: right;">
                         <label><h4 class="mediaeval">Pontos Para Habilidades:</h4></label>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 hidden">
                         <input name="data.pontos_aqui" type="number" value="{{data.pontos_aqui}}" height="30" readonly/>
                     </div>
                     <div class="col-md-3">
@@ -424,7 +424,7 @@
                             {{/select}}
                         </select>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 hidden">
                         <label class="mediaeval" style="text-align: right;">Máximo de Habilidades: {{data.max_hab}}</label>
                     </div>
                 </div>
@@ -571,10 +571,10 @@
             </div>
             <div class="tab combate container" data-group="primary" data-tab="combate">     <!--Tab Combate-->
                 <div class="row dados">
-                    <div class="col-md-3" style="text-align: right;">
+                    <div class="col-md-3 hidden" style="text-align: right;">
                         <label><h4 class="mediaeval">Pontos para Técnicas de Combate:</h4></label>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 hidden">
                         <input name="data.pontos_tec" type="number" value="{{data.pontos_tec}}" height="30" readonly/>
                     </div>
                     <div class="col-md-2">Def. Oponente:</div>
@@ -682,10 +682,10 @@
             <div class="tab magia container" data-group="primary" data-tab="magia">         <!--Tab Magia-->
                 <div class="row dados">
                     <div class="col-md-3"></div>
-                    <div class="col-md-3" style="text-align: right;">
+                    <div class="col-md-3 hidden" style="text-align: right;">
                         <label><h4 class="mediaeval">Pontos para Magías:</h4></label>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 hidden">
                         <input name="data.pontos_mag" type="number" value="{{data.pontos_mag}}" height="30" readonly/>
                     </div>
                     <div class="col-md-4"></div>
