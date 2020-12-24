@@ -66,6 +66,7 @@ export default class tagmarItemSheet extends ItemSheet {
             $(html.find(".dano275")).val(dano275);
             $(html.find(".dano300")).val(dano300);
         });
+        html.find(".sendMessage").click(this._sendMessage.bind(this));
 
         html.find(".ajuste").change(this._attTotalHab(this));
         html.find(".nivel").change(this._attTotalHab(this));
@@ -73,6 +74,21 @@ export default class tagmarItemSheet extends ItemSheet {
         html.find(".bonus").change(this._attTotalHab(this));
         html.find(".bAddEspec").click(this._addEspec.bind(this));
         html.find(".bApagaEspec").click(this._deleteEspec.bind(this));
+    }
+
+    _sendMessage(event) {
+        if (this.item.isOwned) {
+            let itemActor = this.item.actor.getOwnedItem(this.item._id);
+            Item.create(itemActor).then(function(value){
+                let chatData = {};
+                chatData.content = '@Item['+value._id+']';
+                ChatMessage.create(chatData);
+            });
+        } else {
+            let chatData = {};
+            chatData.content = '@Item['+this.item._id+']';
+            ChatMessage.create(chatData);
+        }
     }
 
     _deleteEspec(event) {
