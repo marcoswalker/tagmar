@@ -80,7 +80,9 @@
     font-size: 105%;
 }
 .rola_dano {
-    animation: blinking 1s infinite;  /* IE 10+, Fx 29+ */
+    animation: blinking 1s 3;  /* IE 10+, Fx 29+ */
+    background-color: rgb(0, 0, 0);
+    color: white;
 }
 @keyframes blinking {
 0%, 49% {
