@@ -197,16 +197,34 @@ export default class tagmarActorSheet extends ActorSheet {
                     "data.carga_transp.hasTransp": false
                 });
             }
-            if (data.actor.data.carga.value > 20 && data.actor.data.carga.value > data.actor.data.atributos.FOR * 20) {
-                this.actor.update({
-                    "data.carga.sobrecarga": true,
-                    "data.carga.valor_s": data.actor.data.carga.value - data.actor.data.atributos.FOR * 20
-                });
-            } else {
-                this.actor.update({
-                    "data.carga.sobrecarga": false,
-                    "data.carga.valor_s": 0
-                });
+            let carga_max = 0;
+            if (data.actor.data.atributos.FOR >= 1) {
+                carga_max = data.actor.data.atributos.FOR * 20;
+                if (data.actor.data.carga.value > carga_max) {
+                    this.actor.update({
+                        "data.carga.sobrecarga": true,
+                        "data.carga.valor_s": data.actor.data.carga.value - carga_max
+                    });
+                } else {
+                    this.actor.update({
+                        "data.carga.sobrecarga": false,
+                        "data.carga.valor_s": 0
+                    });
+                }
+            } else 
+            {
+                carga_max = 20;
+                if (data.actor.data.carga.value > carga_max) {
+                    this.actor.update({
+                        "data.carga.sobrecarga": true,
+                        "data.carga.valor_s": data.actor.data.carga.value - carga_max
+                    });
+                } else {
+                    this.actor.update({
+                        "data.carga.sobrecarga": false,
+                        "data.carga.valor_s": 0
+                    });
+                }
             }
             if (data.actor.raca && data.actor.profissao) {
                 let ef_base = 0;
