@@ -488,7 +488,7 @@ export default class tagmarActorSheet extends ActorSheet {
     _rolaRFIS(event) {
         const table_resFisMag = this.table_resFisMag;
         const forcAtaqueI = parseInt($(".F_Ataque").val());
-        const valorDefI = this.actor.data.data.rm;
+        const valorDefI = this.actor.data.data.rf;
         let forcAtaque = forcAtaqueI;
         let valorDef = valorDefI;
         let def_ataq = valorDef - forcAtaque;
@@ -531,7 +531,7 @@ export default class tagmarActorSheet extends ActorSheet {
         $(".F_Ataque").val("");
     }
     _passandoEH(event) {
-        let estagio_atual = parseInt($(".ipEstagio").val());
+        let estagio_atual = this.actor.data.data.estagio;
         let valord10 = parseInt($(".valord10EH").val())
         let raca_list = [];
         let nova_eh = 0;
@@ -578,21 +578,21 @@ export default class tagmarActorSheet extends ActorSheet {
     }
 
     _attRM(event) {
-        let rm = parseInt($(".ipEstagio").val()) + this.actor.data.data.atributos.AUR;
+        let rm = this.actor.data.data.estagio + this.actor.data.data.atributos.AUR;
         this.actor.update({
             "data.rm": rm
         });
     }
 
     _attRF(event) {
-        let rf = parseInt($(".ipEstagio").val()) + this.actor.data.data.atributos.FIS;
+        let rf = this.actor.data.data.estagio + this.actor.data.data.atributos.FIS;
         this.actor.update({
             "data.rf": rf
         });
     }
 
     _attKarmaMax(event) {
-        let karma = (parseInt($(".ipAtrAUR").val()) + 1 ) * (parseInt($(".ipEstagio").val()) + 1);
+        let karma = ((this.actor.data.data.atributos.AUR) + 1 ) * ((this.actor.data.data.estagio) + 1);
         if (karma < 0) karma = 0;
         this.actor.update({
             "data.karma.max": karma
