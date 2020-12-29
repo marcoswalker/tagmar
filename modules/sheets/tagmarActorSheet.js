@@ -1305,31 +1305,112 @@ export default class tagmarActorSheet extends ActorSheet {
     }
     _rolarMoral(event) {
         const tabela_resol = this.tabela_resol;
-        const moral = this.actor.data.data.moral;
+        let moral = this.actor.data.data.moral;
+        if (moral < -7) moral = -7;
         let formulaD = "1d20";
         let r = new Roll(formulaD);
         let resultado = "";
         let PrintResult = "";
         r.evaluate();
         var Dresult = r.total;
-        for (let i = 0; i < tabela_resol.length; i++) {
-            if (tabela_resol[i][0] == moral) {
-                resultado = tabela_resol[i][Dresult];
-                if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha</h1>";
-                else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Rotineiro</h1>";
-                else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:yellow;'>Amarelo - Fácil</h1>";
-                else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:orange;'>Laranja - Médio</h1>";
-                else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:red;'>Vermelho - Difícil</h1>";
-                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:blue;'>Azul - Muito Difícil</h1>";
-                else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico Absurdo</h1>";
-                let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
-                r.toMessage({
-                    user: game.user._id,
-                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                    flavor: `<h2 class='mediaeval rola'>Moral - ${moral}</h2>${coluna}${PrintResult}`
-                  });
+        if (moral <= 20) {
+            for (let i = 0; i < tabela_resol.length; i++) {
+                if (tabela_resol[i][0] == moral) {
+                    resultado = tabela_resol[i][Dresult];
+                    if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha</h1>";
+                    else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Rotineiro</h1>";
+                    else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:yellow;'>Amarelo - Fácil</h1>";
+                    else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:orange;'>Laranja - Médio</h1>";
+                    else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:red;'>Vermelho - Difícil</h1>";
+                    else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:blue;'>Azul - Muito Difícil</h1>";
+                    else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico Absurdo</h1>";
+                    let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
+                    r.toMessage({
+                        user: game.user._id,
+                        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                        flavor: `<h2 class='mediaeval rola'>Moral - ${moral}</h2>${coluna}${PrintResult}`
+                      });
+                }
             }
+        } else {
+            let valor_hab = moral % 20;
+                if (valor_hab == 0) {
+                    let vezes = moral / 20;
+                    let dados = [];
+                    for (let x = 0; x < vezes; x++){
+                        dados[x] = new Roll(formulaD);
+                        dados[x].evaluate();
+                        var Dresult = dados[x].total;
+                        for (let i = 0; i < tabela_resol.length; i++) {
+                            if (tabela_resol[i][0] == 20) {
+                                resultado = tabela_resol[i][Dresult];
+                                if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha</h1>";
+                                else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Rotineiro</h1>";
+                                else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:yellow;'>Amarelo - Fácil</h1>";
+                                else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:orange;'>Laranja - Médio</h1>";
+                                else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:red;'>Vermelho - Difícil</h1>";
+                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:blue;'>Azul - Muito Difícil</h1>";
+                                else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico Absurdo</h1>";
+                                let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
+                                r.toMessage({
+                                    user: game.user._id,
+                                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                                    flavor: `<h2 class='mediaeval rola'>Moral - ${moral}</h2>${coluna}${PrintResult}`
+                                  });
+                            }
+                        }
+                    }
+                } else if (valor_hab > 0) {
+                    let vezes = parseInt(moral / 20);
+                    let sobra = moral % 20;
+                    let dados = [];
+                    for (let x = 0; x < vezes; x++){
+                        dados[x] = new Roll(formulaD);
+                        dados[x].evaluate();
+                        var Dresult = dados[x].total;
+                        for (let i = 0; i < tabela_resol.length; i++) {
+                            if (tabela_resol[i][0] == 20) {
+                                resultado = tabela_resol[i][Dresult];
+                                if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha</h1>";
+                                else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Rotineiro</h1>";
+                                else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:yellow;'>Amarelo - Fácil</h1>";
+                                else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:orange;'>Laranja - Médio</h1>";
+                                else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:red;'>Vermelho - Difícil</h1>";
+                                else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:blue;'>Azul - Muito Difícil</h1>";
+                                else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico Absurdo</h1>";
+                                let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
+                                r.toMessage({
+                                    user: game.user._id,
+                                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                                    flavor: `<h2 class='mediaeval rola'>Moral - ${moral}</h2>${coluna}${PrintResult}`
+                                  });
+                            }
+                        }
+                    }
+                    var dado = new Roll(formulaD);
+                    dado.evaluate();
+                    Dresult = dado.total;
+                    for (let i = 0; i < tabela_resol.length; i++) {
+                        if (tabela_resol[i][0] == sobra) {
+                            resultado = tabela_resol[i][Dresult];
+                            if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha</h1>";
+                            else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Rotineiro</h1>";
+                            else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:yellow;'>Amarelo - Fácil</h1>";
+                            else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:orange;'>Laranja - Médio</h1>";
+                            else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:red;'>Vermelho - Difícil</h1>";
+                            else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:blue;'>Azul - Muito Difícil</h1>";
+                            else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico Absurdo</h1>";
+                            let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
+                            r.toMessage({
+                                user: game.user._id,
+                                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                                flavor: `<h2 class='mediaeval rola'>Moral - ${moral}</h2>${coluna}${PrintResult}`
+                              });
+                        }
+                    }
+                }
         }
+        
     }
 
     _rolarAtt(event) {      // Rolar Atributo
