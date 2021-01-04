@@ -2,7 +2,7 @@
   "name": "tagmar",
   "title": "Tagmar RPG",
   "description": "Sistema simples para Tagmar 3.0. Módulo Obrigatório: Compendium Folders, Módulos Recomendados: Bar Brawl, Dice So Nice!, Dice Tray, Portuguese (BR) Core",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "templateVersion": 2,
   "author": "Vinicius Fernandez, Marcos Walker",
   "minimumCoreVersion": "0.7.7",
@@ -18,11 +18,81 @@
   ],
   "packs": [
     {
-      "name": "material-de-criacao-geral",
-      "label": "Materia de criação geral",
+      "name": "armaduras-elmos-escudos",
+      "label": "Armaduras, Elmos e Escudos",
       "system": "tagmar",
-      "path": "./packs/material-de-criacao-geral.db",
+      "path": "./packs/armaduras-elmos-escudos.db",
       "entity": "Item"
+    },
+    {
+      "name": "criando-criaturas",
+      "label": "Criando Criaturas",
+      "system": "tagmar",
+      "path": "./packs/criando-criaturas.db",
+      "entity": "Item"
+    },
+    {
+      "name": "grupo-de-armas",
+      "label": "Grupos de Armas",
+      "system": "tagmar",
+      "path": "./packs/grupo-de-armas.db",
+      "entity": "Item"
+    },
+    {
+      "name": "habilidades",
+      "label": "Habilidades",
+      "system": "tagmar",
+      "path": "./packs/habilidades.db",
+      "entity": "Item"
+    },
+    {
+      "name": "magias",
+      "label": "Magias",
+      "system": "tagmar",
+      "path": "./packs/magias.db",
+      "entity": "Item"
+    },
+    {
+      "name": "pertences-e-afins",
+      "label": "Pertences e Afins",
+      "system": "tagmar",
+      "path": "./packs/pertences-e-afins.db",
+      "entity": "Item"
+    },
+    {
+      "name": "pocoes-oleos-elixires-unguentos",
+      "label": "Poções, Óleos, Elixires e Unguento",
+      "system": "tagmar",
+      "path": "./packs/pocoes-oleos-elixires-unguentos.db",
+      "entity": "Item"
+    },
+    {
+      "name": "racas-e-profissoes",
+      "label": "Raças e Profissões",
+      "system": "tagmar",
+      "path": "./packs/racas-e-profissoes.db",
+      "entity": "Item"
+    },
+    {
+      "name": "tecnicas-de-combate",
+      "label": "Técnicas de Combate",
+      "system": "tagmar",
+      "path": "./packs/tecnicas-de-combate.db",
+      "entity": "Item"
+    },
+    {
+      "name": "venenos-e-drogas",
+      "label": "Venenos e Drogas",
+      "system": "tagmar",
+      "path": "./packs/venenos-e-drogas.db",
+      "entity": "Item"
+    },
+    {
+      "name": "lista-de-arquetipos",
+      "label": "Lista de Arquétipos",
+      "system": "tagmar",
+      "path": "./packs/lista-de-arquetipos.db",
+      "entity": "Actor"
     },
     {
       "name": "livro-de-criaturas",
