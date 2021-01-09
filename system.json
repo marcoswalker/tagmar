@@ -2,7 +2,7 @@
   "name": "tagmar",
   "title": "Tagmar RPG",
   "description": "Sistema simples para Tagmar 3.0. Módulo Obrigatório: Compendium Folders, Módulos Recomendados: Bar Brawl, Dice So Nice!, Dice Tray, Portuguese (BR) Core",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "templateVersion": 2,
   "author": "Vinicius Fernandez, Marcos Walker",
   "minimumCoreVersion": "0.7.7",
@@ -100,6 +100,27 @@
       "system": "tagmar",
       "path": "./packs/livro-de-criaturas.db",
       "entity": "Actor"
+    },
+    {
+      "name": "itens-magicos-exemplos",
+      "label": "Itens Mágicos de Exemplo",
+      "system": "tagmar",
+      "path": "./packs/itens-magicos-exemplos.db",
+      "entity": "Item"
+    },
+    {
+      "name": "magias-ancestrais",
+      "label": "Magias Ancestrais",
+      "system": "tagmar",
+      "path": "./packs/magias-ancestrais.db",
+      "entity": "Item"
+    },
+    {
+      "name": "magias-perdidas",
+      "label": "Magias Perdidas",
+      "system": "tagmar",
+      "path": "./packs/magias-perdidas.db",
+      "entity": "Item"
     }
   ],
   "languages": [
