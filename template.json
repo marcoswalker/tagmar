@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["Personagem", "NPC"],
+    "types": ["Personagem", "NPC", "Inventario"],
     "templates": {
       "base": {
         "descricao": "",
@@ -175,6 +175,9 @@
         "min": 0,
         "max": 0
       }
+    },
+    "Inventario": {
+      
     }
   },
   "Item": {

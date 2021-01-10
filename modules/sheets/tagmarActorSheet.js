@@ -19,7 +19,10 @@ export default class tagmarActorSheet extends ActorSheet {
         const data = super.getData();
         data.dtypes = ["String", "Number", "Boolean"];
          // Prepare items.
-        if (this.actor.data.type == 'Personagem' || this.actor.data.type == "NPC") {
+        if (this.actor.data.type == "Inventario") {
+            this._prepareInventarioItems(data);
+            console.log(data);
+        } else if (this.actor.data.type == 'Personagem' || this.actor.data.type == "NPC") {
             this._prepareCharacterItems(data);
             this._prepareValorTeste(data);
             this._calculaAjuste(data);
@@ -262,8 +265,10 @@ export default class tagmarActorSheet extends ActorSheet {
 
     activateListeners(html) {
         super.activateListeners(html);
-        if (!this.options.editable) return;
-
+        if (this.actor.data.type != "Inventario") {
+            if (!this.options.editable) return;
+        }
+        
         // Update Inventory Item
         html.find('.item-edit').click(ev => {
             const li = $(ev.currentTarget).parents(".item");
@@ -277,7 +282,27 @@ export default class tagmarActorSheet extends ActorSheet {
             this.actor.deleteOwnedItem(li.data("itemId"));
             li.slideUp(200, () => this.render(false));
         });
-
+        html.find('.item-cesto').click(ev => {
+            const actors = game.actors;
+            let personagem;
+            let inventario;
+            let bau;
+            actors.forEach(function (actor){
+                if (actor.owner && actor.data.type == "Personagem") personagem = actor;
+                if (actor.owner && actor.data.type == "Inventario") {
+                    bau = actor;
+                    inventario = actor;
+                }
+                else if (actor.data.type == "Inventario") inventario = actor;
+            });
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.getOwnedItem(li.data("itemId"));
+            personagem.createOwnedItem(item);
+            if (bau) {
+                bau.deleteOwnedItem(item._id);
+            }
+        });
+        if (this.actor.data.type != "Inventario") {
 
         html.find('.rollable').click(this._onItemRoll.bind(this));
 
@@ -397,11 +422,11 @@ export default class tagmarActorSheet extends ActorSheet {
             li.addEventListener("dragstart", handler, false);
         });
         }
+        }
     }
 
     _combateImg(event) {
         const actorData = this.actor.data.data;
-        //console.log(actorData);
         if (actorData.combos == "") {
             this.actor.update({
                 "data.combos": "Apareca"
@@ -423,7 +448,6 @@ export default class tagmarActorSheet extends ActorSheet {
         };
         chatData.content = "<img src='"+ racaData.img +"' style='display: block; margin-left: auto; margin-right: auto;' /><h1 class='mediaeval rola' style='text-align: center;'>" + racaData.name + "</h1>"  + "<h3 class='mediaeval rola rola_desc'>" + racaData.data.descricao + "</h3>";
         ChatMessage.create(chatData);
-       //console.log(this);
     }
 
     _displayProf(event) {
@@ -436,7 +460,6 @@ export default class tagmarActorSheet extends ActorSheet {
         };
         chatData.content = "<img src='"+ profData.img +"' style='display: block; margin-left: auto; margin-right: auto;' /><h1 class='mediaeval rola' style='text-align: center;'>" + profData.name + "</h1>"  + "<h3 class='mediaeval rola rola_desc'>" + profData.data.descricao + "</h3>";
         ChatMessage.create(chatData);
-       //console.log(this);
     }
 
     _rolaRMAG(event) {
@@ -1014,6 +1037,25 @@ export default class tagmarActorSheet extends ActorSheet {
         var aName = a.name.toLowerCase();
         var bName = b.name.toLowerCase(); 
         return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
+    }
+    //Exclusivo para Inventário
+    _prepareInventarioItems(sheetData) { 
+        const actorData = sheetData.actor;
+        const pertences = [];
+        const transportes = [];
+        const cesto = [];
+        const itens = sheetData.items;
+        itens.forEach(function(item, indice, array) {
+            if (item.type == "Pertence") {
+                pertences.push(item);
+            } else if (item.type == "Transporte") {
+                transportes.push(item);
+            }
+        });
+        actorData.pertences = pertences;
+        actorData.transportes = transportes;
+        actorData.cesto = cesto;
+        this.cesto = cesto;
     }
 
     _prepareCharacterItems(sheetData) {
