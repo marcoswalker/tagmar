@@ -16,6 +16,7 @@ Sob as seguintes condições:
     4. Continua vetado a impressão para revenda em lojas físicas ou online. Quem imprime deverá prestar o serviço direto a quem irá utilizar os livros. Quem adquire os livros não poderá revendê-los; 
     5. Continua vetada a cobrança oriunda de qualquer natureza para as versões digitais; 
     6. Todos os demais termos da licença creative commons “Atribuição-NãoComercial-CompartilhaIgual 3.0 Brasil” deverão ser cumpridos.
+    
 Qualquer uma destas condições acima podem ser renunciadas, desde que Você obtenha permissão do autor.
 Este licenciamento segue um padrão obra aberta e está registrado pela seguinte licença da Creative Commons: [Creative Commons](http://creativecommons.org/licenses/by-nc-sa/3.0/br/) com validade legal no Brasil e por muitos outros países. 
 
