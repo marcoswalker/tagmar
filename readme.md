@@ -25,13 +25,13 @@ Este licenciamento segue um padrão obra aberta e está registrado pela seguinte
 
 # Crédito aos artistas:
 
-(Marlon Souza)
-(Claudio Souza)
-(Sergio Artigas)
-(Antomio Jironimo Bizerril Neto)
-(Luiz Berbert)
-(Jorge Paiva)
-(Licinio Souza)
+* Marlon Souza
+* Claudio Souza
+* Sergio Artigas
+* Antomio Jironimo Bizerril Neto
+* Luiz Berbert
+* Jorge Paiva
+* Licinio Souza
 
 Todas as Imagens estão licenciadas de acordo as seguintes condições: Atribuição-NãoComercial-CompartilhaIgual 3.0 Brasil.
 [Creative Commons](http://creativecommons.org/licenses/by-nc-sa/3.0/br/)
