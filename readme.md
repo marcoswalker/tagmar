@@ -1,3 +1,4 @@
+![](assets/fichas_gif.gif)
 [![](assets/tutorial/001_Easy-Resize.com.jpg)](assets/tutorial/TutorialFoundryTagmarRPG.pdf)
 
 # Licença
