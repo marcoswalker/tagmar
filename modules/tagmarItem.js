@@ -3,10 +3,14 @@ export class tagmarItem extends Item {
     prepareData() {
         if (!this.owner) return;
         super.prepareData();
-    
+        if (this.actor !== null) {
+            if (this.actor.compendium !== null) {
+                return;
+            }
+        }
         // Get the Item's data
         const itemData = this.data;
-        const actorData = this.actor ? this.actor.data : {}; 
+        const actorData = this.actor ? this.actor.data : {};
         const data = itemData.data;
         const tabela_resol = [
             [-7, "verde", "verde", "verde", "verde", "verde", "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "laranja", "vermelho", "azul", "cinza"],
