@@ -1,8 +1,11 @@
 export class tagmarItem extends Item {
+
     prepareData() {
         if (!this.owner) return;
         super.prepareData();
         // Get the Item's data
+        // Arrumar erro que da no compendium
+         // Arrumar erro que da no compendium
         const itemData = this.data;
         const actorData = this.actor ? this.actor.data : {};
         const data = itemData.data;
@@ -350,7 +353,7 @@ export class tagmarItem extends Item {
                             r.toMessage({
                             user: game.user._id,
                             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola" style="text-align:center;">${item.name} - ${valor_tabela} - ${itemData.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${punicaoText}${dano_text}`
+                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola" style="text-align:center;">${item.name}: ${valor_tabela} - ${itemData.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${punicaoText}${dano_text}`
                         });
                     }
                 }
@@ -515,7 +518,7 @@ export class tagmarItem extends Item {
                         r.toMessage({
                         user: game.user._id,
                         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                        flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola" style="text-align:center;">${item.name} - ${valor_tabela} - ${itemData.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${ajuste_text}${punicaoText}${dano_text}`
+                        flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola" style="text-align:center;">${item.name}: ${valor_tabela} - ${itemData.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${ajuste_text}${punicaoText}${dano_text}`
                         });
                     }
                 }
@@ -541,7 +544,7 @@ export class tagmarItem extends Item {
                         r.toMessage({
                             user: game.user._id,
                             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola' style="text-align:center;">${item.name} - ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
+                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola' style="text-align:center;">${item.name}: ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
                         });
                     }
                 }
@@ -568,7 +571,7 @@ export class tagmarItem extends Item {
                                 dados[x].toMessage({
                                     user: game.user._id,
                                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola' style="text-align:center;">${item.name} - ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola' style="text-align:center;">${item.name}: ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
                                   });
                             }
                         }
@@ -595,7 +598,7 @@ export class tagmarItem extends Item {
                                 dados[x].toMessage({
                                     user: game.user._id,
                                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola' style="text-align:center;">${item.name} - ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola' style="text-align:center;">${item.name}: ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
                                   });
                             }
                         }
@@ -617,7 +620,7 @@ export class tagmarItem extends Item {
                             dado.toMessage({
                                 user: game.user._id,
                                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola' style="text-align:center;">${item.name} - ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
+                                flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola' style="text-align:center;">${item.name}: ${itemData.total}</h2>${conteudo}${coluna}${PrintResult}`
                               });
                         }
                     }
@@ -652,7 +655,7 @@ export class tagmarItem extends Item {
                         r.toMessage({
                             user: game.user._id,
                             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola" style="text-align:center;">${item.name} - ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
+                            flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola" style="text-align:center;">${item.name}: ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
                           });
                     }
                 }
@@ -679,7 +682,7 @@ export class tagmarItem extends Item {
                                 dados[x].toMessage({
                                     user: game.user._id,
                                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola" style="text-align:center;">${item.name} - ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
+                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola" style="text-align:center;">${item.name}: ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
                                   });
                             }
                         }
@@ -706,7 +709,7 @@ export class tagmarItem extends Item {
                                 dados[x].toMessage({
                                     user: game.user._id,
                                     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola'>${item.name} - ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
+                                    flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class='mediaeval rola'>${item.name}: ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
                                   });
                             }
                         }
@@ -728,7 +731,7 @@ export class tagmarItem extends Item {
                             dado.toMessage({
                                 user: game.user._id,
                                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                                flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola" style="text-align:center;">${item.name} - ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
+                                flavor: `<img src="${item.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola" style="text-align:center;">${item.name}: ${h_total}</h2>${conteudo}${coluna}${PrintResult}`
                               });
                         }
                     }
