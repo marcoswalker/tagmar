@@ -75,7 +75,7 @@ Hooks.once("ready", async function () {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => createTagmarMacro(data, slot));
 });
-// Como Player da um erro, user laks permission to update token
+
 Hooks.on("createToken", async function(scene, token) {
   if (!game.user.isGM) return;
   if (!token.actorLink) {
@@ -264,6 +264,69 @@ Hooks.on("preCreateToken", function(_scene, data) {
     }
   }
 });
+
+Hooks.once("dragRuler.ready", (SpeedProvider) => {
+  class TagmarSpeedProvider extends SpeedProvider {
+      get colors() {
+          return [
+              {id: "walk", default: 0xFFFF00, name: "tagmar.speeds.walk"},
+              {id: "dash", default: 0x00FF00, name: "tagmar.speeds.dash"},
+              {id: "run", default: 0xFF8000, name: "tagmar.speeds.run"}
+          ];
+      }
+
+      getRanges(token) {
+          const baseSpeed = token.actor.data.data.vb;
+
+    // A character can always walk it's base speed and dash twice it's base speed
+    const ranges = [
+      {range: baseSpeed, color: "walk"},
+      {range: baseSpeed / 2, color: "dash"}
+    ];
+          return ranges;
+      }
+  }
+
+  dragRuler.registerSystem("tagmar", TagmarSpeedProvider);
+});
+
+document.addEventListener('keydown', function (event) {
+  const atalhoTarget = game.settings.get("tagmar", "atalhoTarget");
+  if (event.key == atalhoTarget.toLowerCase() || event.key == atalhoTarget.toUpperCase() && game.user.isGM) {
+    const hoveredToken = canvas.tokens._hover;
+    if (hoveredToken !== null) {
+      if (!hoveredToken.isTargeted) hoveredToken.setTarget(true, game.user, true, false);
+      else hoveredToken.setTarget(false);
+    }
+  }
+});
+
+Hooks.on('targetToken', function (user, token, targeted) {
+  const setting_target = game.settings.get("tagmar", "autoTarget");
+  if (targeted && setting_target == "yes") setInf_ataque(token, user);
+});
+
+function setInf_ataque(target_token, user) {
+  if (user == game.user) {
+    const speaker = ChatMessage.getSpeaker();
+    let actor = game.actors.get(speaker.actor);
+    if (!actor) return ui.notifications.warn("Selecione um Token para setar Def. Oponente!");
+    if (actor.data.type == "Inventario") return ui.notifications.error("Não é possível atacar com um Inventário.");
+    actor.update({
+      'data.inf_ataque.cat_def': target_token.actor.data.data.d_ativa.categoria,
+      'data.inf_ataque.valor_def': target_token.actor.data.data.d_ativa.valor
+    });
+    let chatData = {
+      user: game.user._id,
+      speaker: ChatMessage.getSpeaker({
+          actor: actor
+        })
+    };
+    let target_def = target_token.actor.data.data.d_ativa;
+    chatData.content = "<p><img src='"+ actor.img +"' style='float: left; margin-left: auto; margin-right: auto; width: 40%;border: 0px;' /><img src='systems/tagmar/assets/TAGMAR FOUNDRY.png' style='float: left;margin-top:25px; margin-left: auto; margin-right: auto; width: 20%;border: 0px;'/><img src='"+ target_token.actor.img +"' style='float: left; width: 40%; margin-left: auto; margin-right: auto;border: 0px;' /></p><p class='rola_desc' style='display: block;margin-left:auto;margin-right:auto;margin-top:50%;'>"+ "<b>Agressor: </b>" + actor.data.name + "<br><b>Bônus de Ataque: </b>"+ String(actor.data.data.inf_ataque.bonus) +"<br><b>Oponente: </b>" + target_token.actor.data.name  +"<br><b>Def. Oponente: </b>"+ target_def.categoria + String(target_def.valor) +"</p>";
+    ChatMessage.create(chatData);
+  }
+}
 
 async function createTagmarMacro(data, slot) {
   if (data.type !== "Item") return;
