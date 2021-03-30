@@ -1,5 +1,6 @@
 ![](assets/fichas_gif.gif)
 [![](assets/tutorial/001_Easy-Resize.com.jpg)](assets/tutorial/TutorialFoundryTagmarRPG.pdf)
+# [Atualizações](changelog.md)
 
 # Licença
 Todo material produzido e distribuido pelo projeto Tagmar é derivado do livro “Tagmar – RPG de Aventura Medieval” © 1991 de autoria de Marcelo Rodrigues,  Ygor Moraes Esteves da Silva, Julio Augusto Cezar Junior e Leonardo Nahoum Pache de Faria; e está licenciado de acordo as seguintes condições: Atribuição-NãoComercial-CompartilhaIgual 3.0 Brasil.
