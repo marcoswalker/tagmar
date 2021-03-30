@@ -1,8 +1,6 @@
 # Atualizações
 
-* **1.0.1 :** O valor total mostrado na aba Habilidade, não estava sendo calculado com o -7 para habilidades, igual a 0, agora ela mostra o valor final a ser lançado menos o valor de penalidade e bônus geral no topo da ficha da aba habilidade (lembre-se, sempre que ao criar um personagem novo ou passar de nível deve ser aberto cada item de habilidade para que seja atualizada, colocando valor ou não no nível! Clique fora da caixa e feche em seguida assim os dados serão atualizados). 
-
-OBS.: Os valores de rolagens estavam corretos, são mudanças visuais somente, nada no compêndio de criaturas mudou basta usar a habilidade que os cálculos estarão corretos mesmo mostrando um número diferente, caso queira mudar isso basta abrir e fechar o item habilidade.
+* **1.0.1 :** O valor total mostrado na aba Habilidade, não estava sendo calculado com o -7 para habilidades, igual a 0, agora ela mostra o valor final a ser lançado menos o valor de penalidade e bônus geral no topo da ficha da aba habilidade (lembre-se, sempre que ao criar um personagem novo ou passar de nível deve ser aberto cada item de habilidade para que seja atualizada, colocando valor ou não no nível! Clique fora da caixa e feche em seguida assim os dados serão atualizados). OBS.: Os valores de rolagens estavam corretos, são mudanças visuais somente, nada no compêndio de criaturas mudou basta usar a habilidade que os cálculos estarão corretos mesmo mostrando um número diferente, caso queira mudar isso basta abrir e fechar o item habilidade.
 
  
 * **1.0.2 :** Colocamos 22 Imagens para personalizar as fichas, basta entrar nas Configurações de jogo, alterar configurações, Configurações de Sistema e na "lista" selecionar o tema e Salvar mudanças.
