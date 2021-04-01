@@ -44,3 +44,6 @@
 
 
 * **1.1.4 :** Adicionado opção para pegar as informações da defesa ao marcar o target em um token, sendo desnecessário o uso de macros (essa opção pode ser desativada na página de configurações do sistema). Para o mestre de jogo, existe também uma nova opção para usar um atalho de teclado para marcar o target (o padrão é a tecla "t", mas pode ser mudado na página de configurações do sistema). Ao usar o módulo [Drag Ruler](https://foundryvtt.com/packages/drag-ruler), a configuração de cores utilizando a Velocidade Base da ficha já está programada no sistema. O item de efeito agora támbem pode modificar os valores dos pontos de aquisição de: Magias, Técnicas de Combate, Grupos de Armas e Habilidades.
+
+
+* **1.1.5** Arrumado rolagens de Combate abaixo da coluna -7. Adicionado total de peso(Kg) para cada pertence na lista da ficha de personagem, e arrumado numeros com casa decimal em alguns campos referente a carga total dos pertences.
