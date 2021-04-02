@@ -47,3 +47,6 @@
 
 
 * **1.1.5 :** Arrumado rolagens de Combate abaixo da coluna -7. Adicionado total de peso(Kg) para cada pertence na lista da ficha de personagem, e arrumado numeros com casa decimal em alguns campos referente a carga total dos pertences.
+
+
+* **1.1.6 :** Ajustada a integração do módulo [Drag Ruler](https://foundryvtt.com/packages/drag-ruler), agora todos os jogadores podem ver as cores de velocidade de todos Personagens e NPC's. Na aba de Combate na ficha de NPC agora é mostrado a imagem dos itens.
