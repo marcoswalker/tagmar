@@ -324,6 +324,12 @@ Hooks.once("dragRuler.ready", (SpeedProvider) => {
   dragRuler.registerSystem("tagmar", TagmarSpeedProvider);
 });
 
+Hooks.on('renderChatMessage', function (message, jq, messageData) {
+  const fonte_size = game.settings.get('tagmar', 'fonteMsg');
+  const rola_desc = jq.find('.rola_desc');
+  $(rola_desc).css('font-size', fonte_size.toString()+'%');
+});
+
 document.addEventListener('keydown', function (event) {
   const atalhoTarget = game.settings.get("tagmar", "atalhoTarget");
   if (event.key == atalhoTarget.toLowerCase() || event.key == atalhoTarget.toUpperCase() && game.user.isGM) {
@@ -336,6 +342,7 @@ document.addEventListener('keydown', function (event) {
 });
 
 Hooks.on('targetToken', function (user, token, targeted) {
+  if (!(token.actor.data.type === "Personagem" || token.actor.data.type === "NPC")) return;
   const setting_target = game.settings.get("tagmar", "autoTarget");
   if (targeted && setting_target == "yes") setInf_ataque(token, user);
 });
@@ -357,7 +364,7 @@ function setInf_ataque(target_token, user) {
         })
     };
     let target_def = target_token.actor.data.data.d_ativa;
-    chatData.content = "<p><img src='"+ actor.img +"' style='float: left; margin-left: auto; margin-right: auto; width: 40%;border: 0px;' /><img src='systems/tagmar/assets/TAGMAR FOUNDRY.png' style='float: left;margin-top:25px; margin-left: auto; margin-right: auto; width: 20%;border: 0px;'/><img src='"+ target_token.actor.img +"' style='float: left; width: 40%; margin-left: auto; margin-right: auto;border: 0px;' /></p><p class='rola_desc' style='display: block;margin-left:auto;margin-right:auto;margin-top:50%;'>"+ "<b>Agressor: </b>" + actor.data.name + "<br><b>Bônus de Ataque: </b>"+ String(actor.data.data.inf_ataque.bonus) +"<br><b>Oponente: </b>" + target_token.actor.data.name  +"<br><b>Def. Oponente: </b>"+ target_def.categoria + String(target_def.valor) +"</p>";
+    chatData.content = "<p><img src='"+ actor.img +"' style='float: left; margin-left: auto; margin-right: auto; width: 40%;border: 0px;' /><img src='systems/tagmar/assets/TAGMAR FOUNDRY.png' style='float: left;margin-top:25px; margin-left: auto; margin-right: auto; width: 20%;border: 0px;'/><img src='"+ target_token.actor.img +"' style='float: left; width: 40%; margin-left: auto; margin-right: auto;border: 0px;' /></p><p class='rola_desc' style='display: block;margin-left:auto;margin-right:auto;margin-top:60%;'>"+ "<b>Agressor: </b>" + actor.data.name + "<br><b>Bônus de Ataque: </b>"+ String(actor.data.data.inf_ataque.bonus) +"<br><b>Oponente: </b>" + target_token.actor.data.name  +"<br><b>Def. Oponente: </b>"+ target_def.categoria + String(target_def.valor) +"</p>";
     ChatMessage.create(chatData);
   }
 }
