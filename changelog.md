@@ -56,3 +56,6 @@
 
 
 * **1.1.8 :** Com a última atualização do [Bar Brawl](https://foundryvtt.com/packages/barbrawl) agora é possível ignorar valores limites, quando ativada opção de criar barras automaticamente, a barra de **EH** tem o limite máximo ignorado, já a barra de **EF** tem seus limites máximo e mínimo ignorados, podendo somar além do valor máximo ou subtrair abaixo de zero. Otimização dos cálculos de características finais na ficha de Personagem, alguns campos que são calculados automaticamente foram setados como readonly, impossibilitando a tentativa de modificá-los. Nas tabelas de Magia, Pertences e Efeitos da ficha de Personagem, as imagens podem ser ocultadas como nas tabelas da aba Combate.
+
+
+* **1.1.9 :** Nova opção nas configurações do sistema, **Modificar ajuste manualmente**, quando ativado permite que se altere manualmente os valores de ajuste(INT, AUR, CAR, FOR, FIS, AGI, PER) na ficha de Personagem, deixando de calcular automaticamente através das Características Sorteadas. Efeitos não calcularão atributos de ajuste quando esta opção está ativada. Recomendável o uso apenas quando não lhe agradar a definição dos atributos por sorteio.

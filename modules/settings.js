@@ -76,4 +76,12 @@ export const SystemSettings = function() {
       default: 100,
       type: Number
     });
+    game.settings.register('tagmar', 'ajusteManual', {
+      name: 'Modificar ajuste manualmente',
+      hint: 'Quando ativado, deixa de calcular os valores de ajuste da ficha de Personagem',
+      scope: 'world',
+      config: true,
+      default: false,
+      type: Boolean
+    });
 }
