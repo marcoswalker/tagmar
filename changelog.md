@@ -87,4 +87,4 @@ Com a última atualização do [Bar Brawl](https://foundryvtt.com/packages/barbr
 
 ## **1.1.9 :** 
 Nova opção nas configurações do sistema, **Modificar ajuste manualmente**, quando ativado permite que se altere manualmente os valores de ajuste(INT, AUR, CAR, FOR, FIS, AGI, PER) na ficha de Personagem, deixando de calcular automaticamente através das Características Sorteadas. Efeitos não calcularão atributos de ajuste quando esta opção está ativada. Recomendável o uso apenas quando não lhe agradar a definição dos atributos por sorteio.
-![](https://doc-10-58-docs.googleusercontent.com/docs/securesc/gnm3m1r5tr331vb2be6kh3shkiop1ucs/360pjjrchorq4dtht1sah8bp0u7lfd7c/1617903150000/14988945064775569302/14988945064775569302/12xkdpn_a-uklZVcocNK1CRWA8YzxAp6b?authuser=0)
+![](https://docs.google.com/uc?id=12xkdpn_a-uklZVcocNK1CRWA8YzxAp6b)
