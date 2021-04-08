@@ -6,6 +6,7 @@ O valor total mostrado na aba Habilidade, não estava sendo calculado com o -7 p
  
 ## **1.0.2 :** 
 Colocamos 22 Imagens para personalizar as fichas, basta entrar nas Configurações de jogo, alterar configurações, Configurações de Sistema e na "lista" selecionar o tema e Salvar mudanças.
+![](https://doc-04-58-docs.googleusercontent.com/docs/securesc/gnm3m1r5tr331vb2be6kh3shkiop1ucs/v6ng98s0dtgi8vlmpj8l896q4ujmug60/1617901950000/14988945064775569302/14988945064775569302/1CR8itNmCO9tQAud6d8b5SD4w7EnbhuLN?authuser=0)
 
 
 ## **1.0.3 :** 
@@ -26,6 +27,7 @@ Achamos um bug para macros de ataques e técnicas de combate que já foi resolvi
  
 ## **1.0.7 :** 
 Adicionamos Itens de Efeito, com isso você pode alterar valores de forma rápida para efeitos mágicos e outros, que antes não estavam liberados para alteração de forma manual, somente na ficha do personagem. Para usar basta criar um item de efeito e escolher INT, CAR, AUR, FOR, FÍS, AGI, PER, ENERGIA FÍSICA, ABSORÇÃO, DEFESA, KARMA, VELOCIDADE BASE, RESISTÊNCIA FÍSICA e RESISTÊNCIA MAGIA Podendo ser Somado, Subtraído, Dividido e Multiplicado pelo valor que desejar, você ainda pode ativar ou desativar a qualquer momento, nos atributos físicos e ajuste leva um pequeno tempo de atualização maior de 15 segundo aproximadamente, aguarde atualização com paciência!
+![](https://doc-0o-58-docs.googleusercontent.com/docs/securesc/gnm3m1r5tr331vb2be6kh3shkiop1ucs/gmsnvvkpasmrj2esnscojeujdnthnh4h/1617902400000/14988945064775569302/14988945064775569302/1Qu8lhCImZPSLS8T6RBjlwHQNI5332L-J?authuser=0&nonce=ojsksm16bj3ue&user=14988945064775569302&hash=cd8n747kd14kd8les8ujjhd8e3g15egm)
 
  
 ## **1.0.8 :** 
@@ -38,6 +40,7 @@ Para Melhorar o sistema Marcão melhorou alguns cálculos Agrupando-os diminuind
  
 ## **1.1.0 :** 
 Agora o Mestre de jogo pode escolher nas Configurações de Sistema, se quer que ao colocar um npc ou personagem na Cena, que ele venha com todas as barras necessária para Tagmar, usando o Modulo [Bar Brawl](https://foundryvtt.com/packages/barbrawl). Obs: Pode-se escolher entre as seguintes opções, Não Criar Barras automaticamente, Criar Barras para tokens de Personagem, Criar Barras para tokens de NPCs, Criar Barras para tokens de Personagem e NPCs
+![](https://doc-0o-58-docs.googleusercontent.com/docs/securesc/gnm3m1r5tr331vb2be6kh3shkiop1ucs/qeh5sbe95da9ff5ojnr9i4poaenktnmt/1617902550000/14988945064775569302/14988945064775569302/1Z9R0tayDs8aUy46cmyrHVA-0x1keCQzZ?authuser=0)
 
  
 ## **1.1.1 :** 
@@ -58,6 +61,7 @@ Agora nas fichas de personagem e NPCs os valores de L M P das armas estão com v
 
 ## **1.1.4 :** 
 Adicionado opção para pegar as informações da defesa ao marcar o target em um token, sendo desnecessário o uso de macros (essa opção pode ser desativada na página de configurações do sistema). Para o mestre de jogo, existe também uma nova opção para usar um atalho de teclado para marcar o target (o padrão é a tecla "t", mas pode ser mudado na página de configurações do sistema). Ao usar o módulo [Drag Ruler](https://foundryvtt.com/packages/drag-ruler), a configuração de cores utilizando a Velocidade Base da ficha já está programada no sistema. O item de efeito agora támbem pode modificar os valores dos pontos de aquisição de: Magias, Técnicas de Combate, Grupos de Armas e Habilidades.
+![](https://doc-0c-58-docs.googleusercontent.com/docs/securesc/gnm3m1r5tr331vb2be6kh3shkiop1ucs/a0pifv7r448c4r5gc2p8gnmnosbo36t1/1617902700000/14988945064775569302/14988945064775569302/1ue4l6EAnnXHIe5DNp1g-pt4WCd8h4GOk?authuser=0&nonce=6mulb27a2i84c&user=14988945064775569302&hash=614q9llk7f03uijlk4hrhmdsg107h4ju)
 
 
 ## **1.1.5 :** 
@@ -66,6 +70,7 @@ Arrumado rolagens de Combate abaixo da coluna -7. Adicionado total de peso(Kg) p
 
 ## **1.1.6 :** 
 Ajustada a integração do módulo [Drag Ruler](https://foundryvtt.com/packages/drag-ruler), agora todos os jogadores podem ver as cores de velocidade de todos Personagens e NPC's. Na aba de Combate na ficha de NPC agora é mostrado a imagem dos itens.
+![](https://doc-0g-58-docs.googleusercontent.com/docs/securesc/gnm3m1r5tr331vb2be6kh3shkiop1ucs/41kuce4cqf8nb0j1t1l17gbabvsmht01/1617902925000/14988945064775569302/14988945064775569302/1Q_Vn41KcylfzmTMNoUx2bxUtmpD6FvNL?authuser=0)
 
 
 ## **1.1.7 :** 
@@ -73,6 +78,7 @@ Adicionado opção nas configurações do sistema para mudar o tamanho da fonte 
 ~~~javascript 
 Hooks.on('tagmar_itemRoll', function (itemRolado, usuario) {});
 ~~~
+![](https://doc-0o-58-docs.googleusercontent.com/docs/securesc/gnm3m1r5tr331vb2be6kh3shkiop1ucs/mufeorpfqp7a0g4rvsf45bs7jo8mkv7d/1617903000000/14988945064775569302/14988945064775569302/1Id3CIlof_Jh6jWVlxJRjhKYU_8nIiR8w?authuser=0&nonce=kmas5ibn2hl64&user=14988945064775569302&hash=a53rdtslccquiidl4pl8bu1pokomd9ga)
 
 
 ## **1.1.8 :** 
@@ -81,3 +87,4 @@ Com a última atualização do [Bar Brawl](https://foundryvtt.com/packages/barbr
 
 ## **1.1.9 :** 
 Nova opção nas configurações do sistema, **Modificar ajuste manualmente**, quando ativado permite que se altere manualmente os valores de ajuste(INT, AUR, CAR, FOR, FIS, AGI, PER) na ficha de Personagem, deixando de calcular automaticamente através das Características Sorteadas. Efeitos não calcularão atributos de ajuste quando esta opção está ativada. Recomendável o uso apenas quando não lhe agradar a definição dos atributos por sorteio.
+![](https://doc-10-58-docs.googleusercontent.com/docs/securesc/gnm3m1r5tr331vb2be6kh3shkiop1ucs/360pjjrchorq4dtht1sah8bp0u7lfd7c/1617903150000/14988945064775569302/14988945064775569302/12xkdpn_a-uklZVcocNK1CRWA8YzxAp6b?authuser=0)
