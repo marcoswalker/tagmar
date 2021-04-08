@@ -69,7 +69,8 @@ Ajustada a integração do módulo [Drag Ruler](https://foundryvtt.com/packages/
 
 
 ## **1.1.7 :** 
-Adicionado opção nas configurações do sistema para mudar o tamanho da fonte nos textos do chat, essa configuração é pessoal pra cada usuário e funciona por porcentagem, onde 100% é o tamanho original. Adicionado verificação no sistema de target para não apresentar erro ao tentar pegar as informações de defesa de uma ficha de Inventário. Adicionado Hooks nas rolagens retornando o item rolado e o usuário que fez a rolagem. **Hooks.on('tagmar_itemRoll', function (itemRolado, usuario) {});**
+Adicionado opção nas configurações do sistema para mudar o tamanho da fonte nos textos do chat, essa configuração é pessoal pra cada usuário e funciona por porcentagem, onde 100% é o tamanho original. Adicionado verificação no sistema de target para não apresentar erro ao tentar pegar as informações de defesa de uma ficha de Inventário. Adicionado Hooks nas rolagens retornando o item rolado e o usuário que fez a rolagem. 
+~~~javascript Hooks.on('tagmar_itemRoll', function (itemRolado, usuario) {});~~~
 
 
 ## **1.1.8 :** 
