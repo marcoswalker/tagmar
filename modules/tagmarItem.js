@@ -44,6 +44,7 @@ export class tagmarItem extends Item {
             if (this.data.type == "Combate") {
                 let nivel_comb = 0;
                 const bonus_magico = this.data.data.bonus_magico;
+                const bonus_danomais = this.data.data.peso;
                 const bonus_dano = this.data.data.bonus_dano;
                 const bonus = this.data.data.bonus;
                 let bonus_normal = 0;
@@ -119,21 +120,21 @@ export class tagmarItem extends Item {
                 else if (this.data.data.tipo == "") {
                     nivel_comb = this.data.data.nivel;
                 }
-                if (this.data.data.nivel != nivel_comb || this.data.data.dano.d25 != p_25 + bonus_valor + bonus_magico || this.data.data.custo != bonus_normal) {
+                if (this.data.data.nivel != nivel_comb || this.data.data.dano.d25 != p_25 + bonus_valor + bonus_danomais || this.data.data.custo != bonus_normal) {
                     this.update({
                         'data.nivel': nivel_comb,
-                        "data.dano.d25": p_25 + bonus_valor + bonus_magico,
-                        "data.dano.d50": p_50 + bonus_valor + bonus_magico,
-                        "data.dano.d75": p_75 + bonus_valor + bonus_magico,
-                        "data.dano.d100": p_100 + bonus_valor + bonus_magico,
-                        "data.dano.d125": p_125 + bonus_valor + bonus_magico,
-                        "data.dano.d150": p_150 + bonus_valor + bonus_magico,
-                        "data.dano.d175": p_175 + bonus_valor + bonus_magico,
-                        "data.dano.d200": p_200 + bonus_valor + bonus_magico,
-                        "data.dano.d225": p_225 + bonus_valor + bonus_magico,
-                        "data.dano.d250": p_250 + bonus_valor + bonus_magico,
-                        "data.dano.d275": p_275 + bonus_valor + bonus_magico,
-                        "data.dano.d300": p_300 + bonus_valor + bonus_magico,
+                        "data.dano.d25": p_25 + bonus_valor + bonus_danomais,
+                        "data.dano.d50": p_50 + bonus_valor + bonus_danomais,
+                        "data.dano.d75": p_75 + bonus_valor + bonus_danomais,
+                        "data.dano.d100": p_100 + bonus_valor + bonus_danomais,
+                        "data.dano.d125": p_125 + bonus_valor + bonus_danomais,
+                        "data.dano.d150": p_150 + bonus_valor + bonus_danomais,
+                        "data.dano.d175": p_175 + bonus_valor + bonus_danomais,
+                        "data.dano.d200": p_200 + bonus_valor + bonus_danomais,
+                        "data.dano.d225": p_225 + bonus_valor + bonus_danomais,
+                        "data.dano.d250": p_250 + bonus_valor + bonus_danomais,
+                        "data.dano.d275": p_275 + bonus_valor + bonus_danomais,
+                        "data.dano.d300": p_300 + bonus_valor + bonus_danomais,
                         'data.custo': bonus_normal
                     });
                 }
@@ -258,7 +259,10 @@ export class tagmarItem extends Item {
                 for (let i = 0; i < tabela_resol.length; i++) {
                     if (tabela_resol[i][0] == valor_tabela) {
                         resultado = tabela_resol[i][Dresult];
-                        if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha Crítica</h1>";
+                        if (resultado == "verde") {
+                            PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha Crítica</h1>";
+                            Hooks.callAll('tagmar_Critico', tabela_resol[i][0], tabela_resol, game.user, this.actor);
+                        }
                         else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Errou</h1>";
                         else if (resultado == "amarelo") {
                             PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:yellow;'>Amarelo - 25%</h1>";
@@ -353,7 +357,10 @@ export class tagmarItem extends Item {
                                 }
                             } else dano_total = itemData.dano.d125;
                         }
-                        else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico</h1>";
+                        else if (resultado == "cinza") {
+                            PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico</h1>";
+                            Hooks.callAll('tagmar_Critico', tabela_resol[i][0], tabela_resol, game.user, this.actor);
+                        }
                         let coluna = "<h4 class='mediaeval rola'>Coluna: " + tabela_resol[i][0] + "</h4>";
                         dano_text = "<h2 class='mediaeval rola rola_dano' style='text-align: center;'>Dano: " + dano_total + "</h2>";
                             r.toMessage({
@@ -369,7 +376,10 @@ export class tagmarItem extends Item {
                 for (let i = 0; i < tabela_resol.length; i++) {
                     if (tabela_resol[i][0] == coluna_t) {
                         resultado = tabela_resol[i][Dresult];
-                        if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha Crítica</h1>";
+                        if (resultado == "verde") {
+                            PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:green;'>Verde - Falha Crítica</h1>";
+                            Hooks.callAll('tagmar_Critico', tabela_resol[i][0], tabela_resol, game.user, this.actor);
+                        }
                         else if (resultado == "branco") {
                             PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Errou</h1>";
                             if (puni_25 || puni_50 || puni_75 || puni_100) {
@@ -478,7 +488,10 @@ export class tagmarItem extends Item {
                                 }
                             } else dano_total = 125 + ajusteDano;
                         }
-                        else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico</h1>";
+                        else if (resultado == "cinza") {
+                            PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:gray;'>Cinza - Crítico</h1>";
+                            Hooks.callAll('tagmar_Critico', tabela_resol[i][0], tabela_resol, game.user, this.actor);
+                        }
                         let dano_novo = 0;
                         switch (dano_total) {
                             case 25:
