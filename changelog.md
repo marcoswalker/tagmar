@@ -94,3 +94,7 @@ Nova opção nas configurações do sistema, **Modificar ajuste manualme
 1. Removido a opção de marcar o target por atalho de teclado, agora o Mestre de Jogo deve usar o botão do meio do mouse. 
 2. Quando uma rolagem de ataque resulta em **verde** ou **cinza** uma segunda rolagem é executada mostrando o resultado do crítico no chat. 
 3. Na ficha do item de **Combate**, o antigo **B.Magico** se tornou **Coluna+** que agora soma apenas na coluna da arma, uma nova caixa chamada **Dano+** soma apenas no dano da arma.
+
+
+## **1.2.1 :**
+Na tela do Mestre de Jogo, em **Basic Controls** na esquerda, agora tem um novo ícone de dado em baixo da ferramenta de medição de distância. Ao clicar, uma janela se abrirá, nela o Mestre pode fazer dois tipos de rolagens avulsas, __Teste de Resistência__ ou __Rolagem direto na tabela__, basta preencher os campos e clicar no ícone de dado ao lado dos campos referentes.   
