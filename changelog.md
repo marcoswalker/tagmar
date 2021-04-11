@@ -98,3 +98,10 @@ Nova opção nas configurações do sistema, **Modificar ajuste manualme
 
 ## **1.2.1 :**
 Na tela do Mestre de Jogo, em **Basic Controls** na esquerda, agora tem um novo ícone de dado em baixo da ferramenta de medição de distância. Ao clicar, uma janela se abrirá, nela o Mestre pode fazer dois tipos de rolagens avulsas, __Teste de Resistência__ ou __Rolagem direto na tabela__, basta preencher os campos e clicar no ícone de dado ao lado dos campos referentes.   
+
+
+## **1.2.2 :**
+Reescrito toda programação de rolagem de itens(Combate, Habilidade, Magia, Técnicas de Combate), agora essas são controladas apenas pela classe tagmarItem, com o resultado agora a rolagem de crítico aparece no chat após a rolagem do ataque. Novo Hooks adicionado:
+~~~javascript
+Hooks.on('tagmar_Critico', function (coluna_rolada, tabela_resol, user, actor) {});
+~~~
