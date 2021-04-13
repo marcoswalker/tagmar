@@ -105,3 +105,9 @@ Reescrito toda programação de rolagem de itens(Combate, Habilidade, Magia, Té
 ~~~javascript
 Hooks.on('tagmar_Critico', function (coluna_rolada, tabela_resol, user, actor) {});
 ~~~
+
+## **1.2.3 :**
+1. As armas agora podem ser duplicadas na ficha de Personagem.
+2. Quando clicar para deletar algum item das fichas, uma janela aparecerá para confirmar a ação. Evitando deletar "sem querer" o item.
+3. Mudança nas fontes usadas.
+4. Novo compêndio de Journals chamado **Registros** com Datas Sagradas e Datas Profanadas do mundo Tagmar. 
