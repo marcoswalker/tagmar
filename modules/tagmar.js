@@ -1,5 +1,6 @@
 import tagmarItemSheet from "./sheets/tagmarItemSheet.js";
 import tagmarActorSheet from "./sheets/tagmarActorSheet.js";
+import tagmarAltSheet from "./sheets/tagmarAltSheet.js";
 import { tagmarItem } from "./tagmarItem.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import { SystemSettings } from "./settings.js";
@@ -23,6 +24,7 @@ Hooks.once("init", function(){
 
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("tagmar", tagmarActorSheet, {makeDefault: true});
+  Actors.registerSheet("tagmar", tagmarAltSheet, {makeDefault: false});
 
   Handlebars.registerHelper('ifeq', function (a, b, options) {
     if (a == b) { return options.fn(this); }
@@ -88,6 +90,21 @@ Hooks.once("init", function(){
       return options.fn(this);
     }
     return options.inverse(this);
+  });
+
+  Handlebars.registerHelper('pontos_carac', function(estagio) {
+    let pontos = 3;
+    if (estagio > 0) {
+      if (estagio == 1) return pontos;
+      else {
+        for (let x = 2; x <= estagio; x++) {
+          if ((x % 2) != 0) {
+            pontos += 1;
+          }
+        }
+        return pontos;
+      }
+    } else return 0;
   });
 
   preloadHandlebarsTemplates();

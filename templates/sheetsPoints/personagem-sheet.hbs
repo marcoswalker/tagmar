@@ -144,7 +144,7 @@
                     <div class="col-md-12">
                         <table>
                             <tr style="text-align: left;">
-                                <th width="150px"></th>
+                                <th width="150px" class="mediaeval">Pontos: {{toFixed data.carac_final.INT 1}}</th>
                                 <th class="mediaeval"><a class="rolarAtt" data-item-id="INT" title="Clique para rolar Teste.">INT</a></th>
                                 <th class="mediaeval"><a class="rolarAtt" data-item-id="AUR" title="Clique para rolar Teste.">AUR</a></th>
                                 <th class="mediaeval"><a class="rolarAtt" data-item-id="CAR" title="Clique para rolar Teste.">CAR</a></th>
@@ -153,18 +153,6 @@
                                 <th class="mediaeval"><a class="rolarAtt" data-item-id="AGI" title="Já entendeu né?">AGI</a></th>
                                 <th class="mediaeval"><a class="rolarAtt" data-item-id="PER" title="Clique para rolar Teste.">PER</a></th>
                             </tr>
-                            {{#settingFalse 'ajusteManual'}}
-                            <tr>
-                                <td class="mediaeval"><a class="rollAtributos" title="Rolar dados.{3d10dl,3d10dl,3d10dl,3d10dl,3d10dl,3d10dl,3d10dl}">Característica Sorteada</a></td>
-                                <td><input title="Valor sorteado." class="carac_sortINT" name="data.carac_sort.INT" type="number" value="{{data.carac_sort.INT}}"/></td>
-                                <td><input title="Valor sorteado." class="carac_sortAUR" name="data.carac_sort.AUR" type="number" value="{{data.carac_sort.AUR}}"/></td>
-                                <td><input title="Valor sorteado." class="carac_sortCAR" name="data.carac_sort.CAR" type="number" value="{{data.carac_sort.CAR}}"/></td>
-                                <td><input title="Valor sorteado." class="carac_sortFOR" name="data.carac_sort.FOR" type="number" value="{{data.carac_sort.FOR}}"/></td>
-                                <td><input title="Valor sorteado." class="carac_sortFIS" name="data.carac_sort.FIS" type="number" value="{{data.carac_sort.FIS}}"/></td>
-                                <td><input title="Valor sorteado." class="carac_sortAGI" name="data.carac_sort.AGI" type="number" value="{{data.carac_sort.AGI}}"/></td>
-                                <td><input title="Valor sorteado." class="carac_sortPER" name="data.carac_sort.PER" type="number" value="{{data.carac_sort.PER}}"/></td>
-                            </tr>
-                            {{/settingFalse}}
                             <tr>
                                 <td class="mediaeval">Modificador Racial</td>
                                 <td><input title="Ajuste de INT da raça." class="mod_racialINT" name="data.mod_racial.INT" type="number" value="{{data.mod_racial.INT}}" readonly/></td>
@@ -175,19 +163,16 @@
                                 <td><input title="Ajuste de AGI da raça." class="mod_racialAGI" name="data.mod_racial.AGI" type="number" value="{{data.mod_racial.AGI}}" readonly/></td>
                                 <td><input title="Ajuste de PER da raça." class="mod_racialPER" name="data.mod_racial.PER" type="number" value="{{data.mod_racial.PER}}" readonly/></td>
                             </tr>
-                            {{#settingFalse 'ajusteManual'}}
                             <tr>
-                                <td class="mediaeval">Características Finais</td>
-                                <td><input title="Aqui não precisa mexer." class="car_finINT" name="data.carac_final.INT" type="number" value="{{data.carac_final.INT}}" readonly/></td>
-                                <td><input title="Não faça isso." class="car_finAUR" name="data.carac_final.AUR" type="number" value="{{data.carac_final.AUR}}" readonly/></td>
-                                <td><input title="Eu sei que você está com vontade." class="car_finCAR" name="data.carac_final.CAR" type="number" value="{{data.carac_final.CAR}}" readonly/></td>
-                                <td><input title="Mas eu já avisei." class="car_finFOR" name="data.carac_final.FOR" type="number" value="{{data.carac_final.FOR}}" readonly/></td>
-                                <td><input title="Tá, vai, pode mexer. Não vou lhe julgar." class="car_finFIS" name="data.carac_final.FIS" type="number" value="{{data.carac_final.FIS}}" readonly/></td>
-                                <td><input title="Quê? Está com medo agora?" class="car_finAGI" name="data.carac_final.AGI" type="number" value="{{data.carac_final.AGI}}" readonly/></td>
-                                <td><input title="Caramba, eu falei pra você não mexer, arruma isso logo!" class="car_finPER" name="data.carac_final.PER" type="number" value="{{data.carac_final.PER}}" readonly/></td>
+                                <td class="mediaeval">Pontos Gastos</td>
+                                <td><input title="Valor sorteado." class="carac_sortINT" name="data.carac_sort.INT" type="number" value="{{data.carac_sort.INT}}" readonly/></td>
+                                <td><input title="Valor sorteado." class="carac_sortAUR" name="data.carac_sort.AUR" type="number" value="{{data.carac_sort.AUR}}" readonly/></td>
+                                <td><input title="Valor sorteado." class="carac_sortCAR" name="data.carac_sort.CAR" type="number" value="{{data.carac_sort.CAR}}" readonly/></td>
+                                <td><input title="Valor sorteado." class="carac_sortFOR" name="data.carac_sort.FOR" type="number" value="{{data.carac_sort.FOR}}" readonly/></td>
+                                <td><input title="Valor sorteado." class="carac_sortFIS" name="data.carac_sort.FIS" type="number" value="{{data.carac_sort.FIS}}" readonly/></td>
+                                <td><input title="Valor sorteado." class="carac_sortAGI" name="data.carac_sort.AGI" type="number" value="{{data.carac_sort.AGI}}" readonly/></td>
+                                <td><input title="Valor sorteado." class="carac_sortPER" name="data.carac_sort.PER" type="number" value="{{data.carac_sort.PER}}" readonly/></td>
                             </tr>
-                            {{/settingFalse}}
-                            {{#settingTrue 'ajusteManual'}}
                             <tr>
                                 <td class="mediaeval">Ajuste</td>
                                 <td><input title="Atributo final do personagem." name="data.atributos.INT" type="number" value="{{data.atributos.INT}}" /></td>
@@ -198,19 +183,6 @@
                                 <td><input title="Atributo final do personagem." name="data.atributos.AGI" type="number" value="{{data.atributos.AGI}}" /></td>
                                 <td><input title="Atributo final do personagem." name="data.atributos.PER" type="number" value="{{data.atributos.PER}}" /></td>
                             </tr>
-                            {{/settingTrue}}
-                            {{#settingFalse 'ajusteManual'}}
-                            <tr>
-                                <td class="mediaeval">Ajuste</td>
-                                <td><input title="Atributo final do personagem." name="data.atributos.INT" type="number" value="{{data.atributos.INT}}" readonly/></td>
-                                <td><input title="Atributo final do personagem." class="ipAtrAUR" name="data.atributos.AUR" type="number" value="{{data.atributos.AUR}}" readonly/></td>
-                                <td><input title="Atributo final do personagem." name="data.atributos.CAR" type="number" value="{{data.atributos.CAR}}" readonly/></td>
-                                <td><input title="Atributo final do personagem." name="data.atributos.FOR" type="number" value="{{data.atributos.FOR}}" readonly/></td>
-                                <td><input title="Atributo final do personagem." class="ipAtrFIS" name="data.atributos.FIS" type="number" value="{{data.atributos.FIS}}" readonly/></td>
-                                <td><input title="Atributo final do personagem." name="data.atributos.AGI" type="number" value="{{data.atributos.AGI}}" readonly/></td>
-                                <td><input title="Atributo final do personagem." name="data.atributos.PER" type="number" value="{{data.atributos.PER}}" readonly/></td>
-                            </tr>
-                            {{/settingFalse}}
                             <tr>
                                 <td class="mediaeval">Valor Para Teste</td>
                                 <td><input title="Simplesmente 4 vezes o valor do atributo." name="data.valor_teste.INT" type="number" value="{{data.valor_teste.INT}}" readonly/></td>

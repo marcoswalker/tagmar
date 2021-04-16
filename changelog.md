@@ -111,3 +111,7 @@ Hooks.on('tagmar_Critico', function (coluna_rolada, tabela_resol, user, actor) {
 2. Quando clicar para deletar algum item das fichas, uma janela aparecerá para confirmar a ação. Evitando deletar "sem querer" o item.
 3. Mudança nas fontes usadas.
 4. Novo compêndio de Journals chamado **Registros** com Datas Sagradas e Datas Profanadas do mundo Tagmar. 
+
+
+## **1.2.4 :** 
+Nova ficha alternativa, é exatamente igual a outra, porém utiliza o sistema de compra de atributos por pontos. Para quem gosta de fazer a ficha no excel vai gostar ainda mais dessa atualização. Ao abrir a ficha de um Personagem, clique em "Sheet" uma pequena engrenagem no topo da ficha, ao lado de "Prototype Token", escolha tagmar.tagmarAltSheet, recomendável utilizar individualmente por ficha, mas se quiser deixar como default não tem problema.
