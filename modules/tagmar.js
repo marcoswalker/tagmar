@@ -438,10 +438,11 @@ async function rolarCritico(coluna, tabela_resol, user, actor) {
   }
 }
 
-document.addEventListener('auxclick', function (event) {
-  if (event.button == 1 && game.user.isGM) {
+document.addEventListener('mousedown', function (event) {
+  if ((event.button == 1 || event.button == 4) && game.user.isGM) {
     const hoveredToken = canvas.tokens._hover;
     if (hoveredToken !== null) {
+      event.preventDefault();
       if (!hoveredToken.isTargeted) hoveredToken.setTarget(true, game.user, true, false);
       else hoveredToken.setTarget(false);
     }
@@ -623,7 +624,7 @@ async function rollResistencia(resist, f_ataque) {
 
 async function createTagmarMacro(data, slot) {
   if (data.type !== "Item") return;
-  if (!("data" in data)) return ui.notifications.warn("Você só pode criar Macros para Ataques, Técnicas de Combate e Habilidades.");
+  if (!("data" in data)) return ui.notifications.warn("Você só pode criar Macros para Ataques, Técnicas de Combate, Habilidades e Magias.");
   const item = data.data;
   // const actor = getItemOwner(item);
   // Create the macro command
