@@ -127,3 +127,6 @@ Magias agora podem ser arrastadas para a hotkey.
 
 ## **1.2.7 :**
 Resolvido problema nas rolagens de Moral acima da coluna 20.
+
+## **1.2.8 :**
+Resolvida incompatibilidade com o módulo Forien's Quest Log.

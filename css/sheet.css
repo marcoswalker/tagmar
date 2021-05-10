@@ -20,7 +20,7 @@
 }
 .container_dados {
     border: 6px solid transparent;
-    border-image-source: url(/systems/tagmar/templates/sheets/img/panel1.png);
+    border-image-source: url(/systems/tagmar_rpg/templates/sheets/img/panel1.png);
     border-image-slice: 20;
 }
 .cont-dir {
@@ -55,7 +55,7 @@
 .armaImg:focus {
     cursor: pointer;
 }
-.hidden {
+.hiddenT {
     visibility: hidden;
 }
 .hide {
@@ -111,120 +111,120 @@
     margin-right: 2px;
 }
 .borda-m .container_dados {
-    border-image-source: url(/systems/tagmar/templates/sheets/img/panel2.png);
+    border-image-source: url(/systems/tagmar_rpg/templates/sheets/img/panel2.png);
 }
 .bg-img {
-    background-image: url('/systems/tagmar/templates/sheets/img/Borda Dos Livros Tagmar 3.0.png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Borda Dos Livros Tagmar 3.0.png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-anao {
-    background-image: url('/systems/tagmar/templates/sheets/img/Guerreiro - Anão  (Sergio Artigas).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Guerreiro - Anão  (Sergio Artigas).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-barda {
-    background-image: url('/systems/tagmar/templates/sheets/img/Barda - Meio-Elfa (Antomio Jironimo Bizerril Neto).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Barda - Meio-Elfa (Antomio Jironimo Bizerril Neto).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-bardo {
-    background-image: url('/systems/tagmar/templates/sheets/img/Bardo - Meio-Elfo (Claudio Souza).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Bardo - Meio-Elfo (Claudio Souza).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-gana {
-    background-image: url('/systems/tagmar/templates/sheets/img/Guerreira - Anã (Berbert).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Guerreira - Anã (Berbert).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-ghuma {
-    background-image: url('/systems/tagmar/templates/sheets/img/Guerreira - Humana  (Jorge Paiva).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Guerreira - Humana  (Jorge Paiva).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-ghumk {
-    background-image: url('/systems/tagmar/templates/sheets/img/Guerreira - Humana (Jorge Kenko).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Guerreira - Humana (Jorge Kenko).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-lhuma {
-    background-image: url('/systems/tagmar/templates/sheets/img/Ladina Humana (Licinio Souza).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Ladina Humana (Licinio Souza).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-lpeqa {
-    background-image: url('/systems/tagmar/templates/sheets/img/Ladina Pequenina (Licinio Souza).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Ladina Pequenina (Licinio Souza).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-lpeq {
-    background-image: url('/systems/tagmar/templates/sheets/img/Ladinio - Pequenino (Antomio Jironimo Bizerril Neto).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Ladinio - Pequenino (Antomio Jironimo Bizerril Neto).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-lhum {
-    background-image: url('/systems/tagmar/templates/sheets/img/Ladino - Humano (Luiz Berbert).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Ladino - Humano (Luiz Berbert).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-melfa {
-    background-image: url('/systems/tagmar/templates/sheets/img/Maga - Elfa (Luis Berbert).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Maga - Elfa (Luis Berbert).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-mhuma {
-    background-image: url('/systems/tagmar/templates/sheets/img/Maga - Humana (Antomio Jironimo Bizerril Neto).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Maga - Humana (Antomio Jironimo Bizerril Neto).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-melfo {
-    background-image: url('/systems/tagmar/templates/sheets/img/Mago - Elfo (Antomio Jironimo Bizerril Neto).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Mago - Elfo (Antomio Jironimo Bizerril Neto).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-pap {
-    background-image: url('/systems/tagmar/templates/sheets/img/Papiros (Licinio Souza).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Papiros (Licinio Souza).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-relf {
-    background-image: url('/systems/tagmar/templates/sheets/img/Rastreador Elfo (Sergio Artigas).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Rastreador Elfo (Sergio Artigas).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-rhuma {
-    background-image: url('/systems/tagmar/templates/sheets/img/Rastreadora Humana (Sergio Artigas).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Rastreadora Humana (Sergio Artigas).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-shum {
-    background-image: url('/systems/tagmar/templates/sheets/img/Sacerdote Humano (Luis Berbert).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Sacerdote Humano (Luis Berbert).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-shumv {
-    background-image: url('/systems/tagmar/templates/sheets/img/Sacerdote Humano Velho (Luis Berbert).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Sacerdote Humano Velho (Luis Berbert).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-selfa {
-    background-image: url('/systems/tagmar/templates/sheets/img/Sacerdotisa Elfa Dourada (Licinio Souza).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Sacerdotisa Elfa Dourada (Licinio Souza).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-shum1 {
-    background-image: url('/systems/tagmar/templates/sheets/img/Sacerdotiza - Humana (marlon souza).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Sacerdotiza - Humana (marlon souza).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-shum2 {
-    background-image: url('/systems/tagmar/templates/sheets/img/Sacerdotiza Humana (Sergio Artigas).png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/Sacerdotiza Humana (Sergio Artigas).png');
     background-repeat: no-repeat;
     background-size:cover;
 }
 .bg-img-items {
-    background-image: url('/systems/tagmar/templates/sheets/img/fundo_items.png');
+    background-image: url('/systems/tagmar_rpg/templates/sheets/img/fundo_items.png');
     background-repeat: no-repeat;
     background-size:cover;
 }
