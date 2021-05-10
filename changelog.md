@@ -124,3 +124,6 @@ Magias agora podem ser arrastadas para a hotkey.
 ## **1.2.6 :**
 1. Adicionado novo tipo "Magia" nos itens de **Combate**, quando atacar com um item **Combate** do tipo "Magia" ou nenhum tipo, o ataque vai rolar na L0. No tipo "Magia", será removido do karma o valor igual ao nível do ataque. Ao não escolher nenhum tipo, o consumo da munição será igual ao nível, pode ser usado para ataques mágicos provenientes de items com karma próprio.
 2. Técnicas de Combate são ordenadas por Categoria.
+
+## **1.2.7 :**
+Resolvido problema nas rolagens de Moral acima da coluna 20.
