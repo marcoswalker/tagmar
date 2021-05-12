@@ -130,3 +130,6 @@ Resolvido problema nas rolagens de Moral acima da coluna 20.
 
 ## **1.2.8 :**
 Resolvida incompatibilidade com o módulo Forien's Quest Log.
+
+## **1.2.9 :**
+Preparação para Foundry Vtt versão 0.8.x, trocadas funções em depreciação: getOwnedItem, createOwnedItem e deleteOwnedItem.
