@@ -136,3 +136,6 @@ Preparação para Foundry Vtt versão 0.8.x, trocadas funções em depreciação
 
 ## **1.3.0 :**
 Rolagem de Habilidades agora tem as dificuldades: Falha, Rotineiro, Fácil, Médio, Difícil, Muito Difícil, Absurdo e Impossível.
+
+## **1.3.1 :**
+Rolagem de Crítico mais completa.
