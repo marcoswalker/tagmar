@@ -139,3 +139,9 @@ Rolagem de Habilidades agora tem as dificuldades: Falha, Rotineiro, Fácil, Méd
 
 ## **1.3.1 :**
 Rolagem de Crítico mais completa.
+
+## **1.3.2 :**
+Arrumado bug nos cálculos de pontos de aquisição na ficha de Personagem padrão.
+
+## **1.3.3 :**
+Nas rolagens de crítico nos Combates, é inserido uma tabela com os danos da arma (25%,50%,75%,100%) no lugar que apareceria o Dano.

@@ -2,7 +2,7 @@
   "name": "tagmar",
   "title": "Tagmar RPG",
   "description": "Sistema simples para Tagmar 3.0. Módulo Obrigatório: Compendium Folders, Módulos Recomendados: Bar Brawl, Dice So Nice!, Dice Tray, Portuguese (BR) Core",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "templateVersion": 2,
   "author": "Vinicius Fernandez, Marcos Walker",
   "minimumCoreVersion": "0.7.7",
