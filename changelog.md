@@ -145,3 +145,6 @@ Arrumado bug nos cálculos de pontos de aquisição na ficha de Personagem padr�
 
 ## **1.3.3 :**
 Nas rolagens de crítico nos Combates, é inserido uma tabela com os danos da arma (25%,50%,75%,100%) no lugar que apareceria o Dano.
+
+## **1.3.4 :** 
+Ajustado resultado nas rolagens de Testes de Resistência.
