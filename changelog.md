@@ -148,3 +148,6 @@ Nas rolagens de crítico nos Combates, é inserido uma tabela com os danos da ar
 
 ## **1.3.4 :** 
 Ajustado resultado nas rolagens de Testes de Resistência.
+
+## **1.3.5 :**
+Arrumado código que bugava o DragRuler.
