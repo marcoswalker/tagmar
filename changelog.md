@@ -151,3 +151,6 @@ Ajustado resultado nas rolagens de Testes de Resistência.
 
 ## **1.3.5 :**
 Arrumado código que bugava o DragRuler.
+
+## **1.3.6 :**
+Atualização para versão 0.8.6 do Foundry Vtt, essa versão do sistema deixa de funcionar nas versões mais antigas que 0.8.6 do Foundry Vtt.
