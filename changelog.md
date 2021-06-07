@@ -154,3 +154,6 @@ Arrumado código que bugava o DragRuler.
 
 ## **1.3.6 :**
 Atualização para versão 0.8.6 do Foundry Vtt, essa versão do sistema deixa de funcionar nas versões mais antigas que 0.8.6 do Foundry Vtt.
+
+## **1.3.7 :**
+Correção de erros referente atualização 0.8.6 do Foundry Vtt.
