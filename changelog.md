@@ -160,3 +160,6 @@ Correção de erros referente atualização 0.8.6 do Foundry Vtt.
 
 ## **1.3.8 :**
 Ajuste na fonte nas fichas de cadastro.
+
+## **1.3.9 :**
+Revisão e melhorias nos códigos das fichas.
