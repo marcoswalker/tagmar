@@ -151,22 +151,24 @@ Hooks.on('createToken',async function (document) {
       ui.notifications.error("Ocorreu um erro, delete esse token e crie novamente. " + e);
     }
   } 
+});
+
+Hooks.on('preCreateToken', async function (document) {
+  if (!game.user.isGM) return;
   const settingBars = game.settings.get("tagmar", "autoBars");
   if (settingBars != "no") {
-      if (game.modules.get('barbrawl') && game.modules.get('barbrawl').active) {
-        let resources = createBrawrs(document, settingBars);
-        const scene = game.scenes.find(sena => sena.active && sena.visible);
-        if (document.getFlag('barbrawl', 'resourceBars')) {
-          document.unsetFlag('barbrawl', 'resourceBars');
-        }
-        //await document.setFlag('barbrawl', 'resourceBars', resources);
-        foundry.utils.setProperty(document.data, 'flags.barbrawl.resourceBars', resources);
-        await scene.updateEmbeddedDocuments("Token", [{
-          "_id": document.id,
-          "flags.barbrawl.resourceBars": document.data.flags.barbrawl.resourceBars
-        }]);
+    if (game.modules.get('barbrawl') && game.modules.get('barbrawl').active) {
+      let resources = createBrawrs(document, settingBars);
+      if (Object.keys(resources).length > 0) {
+        await document.data.update({
+          'flags.barbrawl.resourceBars': 0,
+          'bar1.attribute': "",
+          'bar2.attribute': ""
+        });
+        document.data.update({'flags.barbrawl.resourceBars': resources});
       }
-      else ui.notifications.warn("Instale e ative o módulo Bar Brawl!");
+    }
+    else ui.notifications.warn("Instale e ative o módulo Bar Brawl!");
   }
 });
 
