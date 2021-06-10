@@ -11,12 +11,12 @@ Hooks.once("init", function(){
     tagmarItem,
     rollItemMacro
   };
-
   CONFIG.Combat.initiative = {
     formula: "1d10 + @iniciativa",
     decimals: 2
   };
   CONFIG.Item.documentClass = tagmarItem;
+  CONFIG.time.roundTime = 15;
   // Register System Settings
   SystemSettings();
   Items.unregisterSheet("core", ItemSheet);
@@ -140,13 +140,10 @@ Hooks.on('createToken',async function (document) {
   const token = document.data;
   if (!token.actorLink) {
     try {
-      let tokenA = await canvas.tokens.get(token._id);
-      let tokenactor = tokenA.actor;
-      await tokenactor.update({
-        'name': tokenA.actor.name + " Cópia"
-      });
-      let actor = await Actor.create(tokenactor.data);
-      await tokenA.document.update({
+      let tokenactor = duplicate(document.actor);
+      tokenactor.name = tokenactor.name + " Cópia";
+      let actor = await Actor.create(tokenactor);
+      await token.document.update({
         'actorId': actor.data._id,
         'actorLink': true
       });
@@ -155,12 +152,25 @@ Hooks.on('createToken',async function (document) {
     }
   } 
   const settingBars = game.settings.get("tagmar", "autoBars");
-  if (settingBars != "no") createBars(document);
-  
+  if (settingBars != "no") {
+      if (game.modules.get('barbrawl') && game.modules.get('barbrawl').active) {
+        let resources = createBrawrs(document, settingBars);
+        const scene = game.scenes.find(sena => sena.active && sena.visible);
+        if (document.getFlag('barbrawl', 'resourceBars')) {
+          document.unsetFlag('barbrawl', 'resourceBars');
+        }
+        //await document.setFlag('barbrawl', 'resourceBars', resources);
+        foundry.utils.setProperty(document.data, 'flags.barbrawl.resourceBars', resources);
+        await scene.updateEmbeddedDocuments("Token", [{
+          "_id": document.id,
+          "flags.barbrawl.resourceBars": document.data.flags.barbrawl.resourceBars
+        }]);
+      }
+      else ui.notifications.warn("Instale e ative o módulo Bar Brawl!");
+  }
 });
 
-function createBars(token) {
-  const setting = game.settings.get("tagmar", "autoBars");
+function createBrawrs(token, setting) {
   const actor = token.actor;
   let resources = {};
   if (setting == "barra_pers") {
@@ -254,8 +264,8 @@ function createBars(token) {
   } else if (setting == "barra_both") {
     if (actor.data.type == "Personagem") {
       resources = {
-        "bar1": {
-            id: "bar1",
+        "bareh": {
+            id: "bareh",
             mincolor: "#fbff00",
             maxcolor: "#00ff08",
             position: "top-outer",
@@ -263,16 +273,16 @@ function createBars(token) {
             visibility: CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
             ignoreMax: true
         },
-        "bar2": {
-          id: "bar2",
+        "barab": {
+          id: "barab",
           mincolor: "#fbff00",
           maxcolor: "#6b6b6b",
           position: "top-outer",
           attribute: "absorcao",
           visibility: CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER
         },
-        "bar3": {
-          id: "bar3",
+        "baref": {
+          id: "baref",
           mincolor: "#fbff00",
           maxcolor: "#ff0000",
           position: "top-outer",
@@ -281,16 +291,16 @@ function createBars(token) {
           ignoreMax: true,
           ignoreMin: true
         },
-        "bar4": {
-          id: "bar4",
+        "barkm": {
+          id: "barkm",
           mincolor: "#fbff00",
           maxcolor: "#a600ff",
           position: "bottom-outer",
           attribute: "karma",
           visibility: CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER
         },
-        "bar5": {
-          id: "bar5",
+        "barfo": {
+          id: "barfo",
           mincolor: "#fbff00",
           maxcolor: "#003399",
           position: "bottom-outer",
@@ -338,7 +348,7 @@ function createBars(token) {
       };
     }
   }
-  foundry.utils.setProperty(token.data, "flags.barbrawl.resourceBars",resources);
+  return resources;
 }
 
 Hooks.once("dragRuler.ready", (SpeedProvider) => {
@@ -364,6 +374,72 @@ Hooks.once("dragRuler.ready", (SpeedProvider) => {
   }
 
   dragRuler.registerSystem("tagmar", TagmarSpeedProvider);
+});
+
+Hooks.once('diceSoNiceReady', function (dice) {
+  dice.addSystem({ id: game.system.id, name: "Tagmar RPG"}, true);
+  dice.addDicePreset({
+    type: 'd2',
+    labels: [
+      '1',
+      'systems/'+game.system.id+'/assets/logodice.png'
+    ],
+    system: game.system.id
+  });
+  dice.addDicePreset({
+    type: 'd10',
+    labels: [
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      'systems/'+game.system.id+'/assets/logodice.png'
+    ],
+    system: game.system.id
+  });
+  dice.addDicePreset({
+    type: 'd20',
+    labels: [
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      '10',
+      '11',
+      '12',
+      '13',
+      '14',
+      '15',
+      '16',
+      '17',
+      '18',
+      '19',
+      'systems/'+game.system.id+'/assets/logodice.png',
+    ],
+    system: game.system.id
+  });
+  dice.addColorset({
+    name: game.system.id,
+    description: ' * Tagmar RPG * ',
+    category: 'Colors',
+    foreground: '#55420a',
+    background: '#6b6b6b',
+    outline: '#000000',
+    texture: 'metal',
+    material: 'metal',
+    font: 'Verdana',
+    default: true,
+  })
 });
 
 Hooks.on('renderChatMessage', function (message, jq, messageData) {

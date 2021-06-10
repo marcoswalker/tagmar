@@ -163,3 +163,6 @@ Ajuste na fonte nas fichas de cadastro.
 
 ## **1.3.9 :**
 Revisão e melhorias nos códigos das fichas.
+
+## **1.4.0 :**
+Problemas com o BarBrawl, apresenta erro no console mas cria as barras normalmente.
