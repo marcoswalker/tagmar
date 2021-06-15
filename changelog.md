@@ -166,3 +166,6 @@ Revisão e melhorias nos códigos das fichas.
 
 ## **1.4.0 :**
 Problemas com o BarBrawl, apresenta erro no console mas cria as barras normalmente.
+
+## **1.4.1 :**
+Melhorias visuais e extermínio de alguns bugs malditos.
