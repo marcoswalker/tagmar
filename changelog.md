@@ -169,3 +169,6 @@ Problemas com o BarBrawl, apresenta erro no console mas cria as barras normalmen
 
 ## **1.4.1 :**
 Melhorias visuais e extermínio de alguns bugs malditos.
+
+## **1.4.2 :**
+Testes de resistência com valores dentro do range da tabela usam a tabela de resolução.
