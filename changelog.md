@@ -172,3 +172,6 @@ Melhorias visuais e extermínio de alguns bugs malditos.
 
 ## **1.4.2 :**
 Testes de resistência com valores dentro do range da tabela usam a tabela de resolução.
+
+## **1.4.3 :**
+Arrumado problemas de cálculo da ficha quando ativa efeitos.
