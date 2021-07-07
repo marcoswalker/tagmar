@@ -175,3 +175,6 @@ Testes de resistência com valores dentro do range da tabela usam a tabela de re
 
 ## **1.4.3 :**
 Arrumado problemas de cálculo da ficha quando ativa efeitos.
+
+## **1.4.4 :**
+Jogadores podem criar itens de efeito na própria ficha, botão adicionado ao lado da caixa de busca na aba Efeitos.
