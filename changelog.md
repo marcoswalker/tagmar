@@ -178,3 +178,6 @@ Arrumado problemas de cálculo da ficha quando ativa efeitos.
 
 ## **1.4.4 :**
 Jogadores podem criar itens de efeito na própria ficha, botão adicionado ao lado da caixa de busca na aba Efeitos.
+
+## **1.4.5 :**
+Ao clicar com o botão **direito** do mouse sobre items roláveis (Combate, Habilidade, Técnica de Combate, Magia) é possível ler a descrição do item sem efetuar a rolagem para o chat.
