@@ -181,3 +181,6 @@ Jogadores podem criar itens de efeito na própria ficha, botão adicionado ao la
 
 ## **1.4.5 :**
 Ao clicar com o botão **direito** do mouse sobre items roláveis (Combate, Habilidade, Técnica de Combate, Magia) é possível ler a descrição do item sem efetuar a rolagem para o chat.
+
+## **1.4.6 :**
+Na ficha de edição das Técnicas de Combate foi adicionado o campo **Bônus/Penalidade** onde o valor é somado ao total da técnica.
