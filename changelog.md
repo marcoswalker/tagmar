@@ -184,3 +184,6 @@ Ao clicar com o botão **direito** do mouse sobre items roláveis (Combate, Habi
 
 ## **1.4.6 :**
 Na ficha de edição das Técnicas de Combate foi adicionado o campo **Bônus/Penalidade** onde o valor é somado ao total da técnica.
+
+## **1.4.7 :**
+Todos os items incluindo Raça e Profissão podem ser criados direto na ficha de Personagem.
