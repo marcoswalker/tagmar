@@ -187,3 +187,6 @@ Na ficha de edição das Técnicas de Combate foi adicionado o campo **Bônus/Pe
 
 ## **1.4.7 :**
 Todos os items incluindo Raça e Profissão podem ser criados direto na ficha de Personagem.
+
+## **1.4.8 :**
+Adicionado botão na turn order para somar iniciativa em vários combatentes ao mesmo tempo.
