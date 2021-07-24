@@ -190,3 +190,6 @@ Todos os items incluindo Raça e Profissão podem ser criados direto na ficha de
 
 ## **1.4.8 :**
 Adicionado botão na turn order para somar iniciativa em vários combatentes ao mesmo tempo.
+
+## **1.4.9 :**
+Na tela de configuração do Jogador, apenas Personagens estarão disponível para selecionar. Na aba de atores, os atores do tipo "Inventario" estão escondidos dos Jogadores mesmo tendo permissão de observador ou dono.
