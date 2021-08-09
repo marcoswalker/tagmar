@@ -180,9 +180,9 @@ Hooks.once("init", function(){
 });
 
 Hooks.once("ready", async function () {
-  // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => createTagmarMacro(data, slot));
   boasVindas();
+  $('#logo').attr('src', '/systems/tagmar/templates/sheets/img/logo.png');
 });
 
 function boasVindas () {
@@ -821,8 +821,8 @@ async function rollTabela(colunaR) {
         let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
         r.toMessage({
             user: game.user.id,
-            speaker: ChatMessage.getSpeaker({ user: game.user }),
-            flavor: `<h2 class='mediaeval rola'>Rolagem : ${colunaR}</h2>${coluna}${PrintResult}`
+            speaker: ChatMessage.getSpeaker({ alias: game.user.name }),
+            flavor: `<h2 class='mediaeval rola' style='text-align:center;'>Rolagem Resolução de Ações</h2>${coluna}${PrintResult}`
           });
     }
   }
@@ -870,8 +870,8 @@ async function rollResistencia(resist, f_ataque) {
   }  
   r.toMessage({
       user: game.user.id,
-      speaker: ChatMessage.getSpeaker({ user: game.user }),
-      flavor: `<h2 class="mediaeval rola">Teste de Resistência </h2><h3 class="mediaeval rola"> Força Ataque: ${forcAtaque}</h3><h3 class="mediaeval rola">Resistência: ${valorDef}</h3>${stringSucesso}`
+      speaker: ChatMessage.getSpeaker({ alias: game.user.name }),
+      flavor: `<h2 class="mediaeval rola" style="text-align:center;">Teste de Resistência</h2><h3 class="mediaeval rola"> Força Ataque: ${forcAtaque}</h3><h3 class="mediaeval rola">Resistência: ${valorDef}</h3>${stringSucesso}`
   });
 }
 

@@ -193,3 +193,6 @@ Adicionado botão na turn order para somar iniciativa em vários combatentes ao 
 
 ## **1.4.9 :**
 Na tela de configuração do Jogador, apenas Personagens estarão disponível para selecionar. Na aba de atores, os atores do tipo "Inventario" estão escondidos dos Jogadores mesmo tendo permissão de observador ou dono.
+
+## **1.5.0 :**
+Melhorias na disposição das informações nas fichas.

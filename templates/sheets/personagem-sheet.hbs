@@ -3,7 +3,7 @@
         <div class='container'>
             <div class="row container_dados">
                 <div class="col-md-4 col-4">
-                    <a href="https://www.tagmar.com.br/wiki/search.aspx" title="Clique para acessar o site."><img class="tagmarLogo" src="systems/tagmar/templates/sheets/img/logo.png"/></a> 
+                    <a href="https://www.tagmar.com.br/wiki/search.aspx" class="tagmarlink"><img class="tagmarLogo" src="systems/tagmar/templates/sheets/img/logo.png"/> </a> 
                 </div>
                 <div class="col-md-8 col-8">
                     <h1 class="fairyDust" style="text-align: center; padding-top:20px;">{{actor.type}}</h1>
@@ -323,7 +323,7 @@
                                 {{#ifgr data.data.estagio 1}}
                                 <table class='table_novaEH'>
                                     <caption class="mediaeval">Nova EH</caption>
-                                    <tr style="text-align: center;">
+                                    <tr style="text-align: center;height:35px;">
                                         <th class="mediaeval"><a title="Clique para rolar 1d10." class="roll1d10" style="margin-right: 10px;"><i class="fas fa-dice-d20"></i></a><a class="calculaNovaEH" title="Calcular EH"><i class="fas fa-calculator"></i></a></th>
                                     </tr>
                                     <tr style="text-align: center;">
@@ -343,48 +343,62 @@
                                 </table>
                                 {{/ifle}}
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <table>
+                                    <caption class="mediaeval">Resistência</caption>
+                                    <tr>
+                                        <th class="mediaeval" style="text-align: center;width:50px;"><a class="rolaR_Fis" title="Preencha F.Ataque para rolar Tesde de Resistência."/>Física</th>
+                                        <th class="mediaeval" style="text-align: center;width:50px;"><a class="rolaR_Mag" title="Preencha F.Ataque para rolar Tesde de Resistência."/>Magia</th>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"><input name="data.rf" type="number" value="{{data.data.rf}}" title="Resistência Física." readonly/></td>
+                                        <td style="text-align: center;"><input name="data.rm" type="number" value="{{data.data.rm}}" title="Resistência Magía." readonly/></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="mediaeval">F.Ataque:</th>
+                                       <td><input class="F_Ataque" style="text-align: center;" type="number" name="data.forca_ataque" value="{{data.data.forca_ataque}}" title="Força de Ataque para Teste de Resistência Física ou Magía."/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-3">
+                                <table>
+                                    <caption class="mediaeval">Defesa</caption>
                                     <tr style="text-align: left;">
-                                        <th class="mediaeval">V.Base</th>
-                                        <th class="mediaeval">V.B.E</th>
-                                        <th class="mediaeval"><a class="rolaR_Fis" title="Preencha F.Ataque para rolar Tesde de Resistência."/>R.Física</th>
-                                        <th class="mediaeval"><a class="rolaR_Mag" title="Preencha F.Ataque para rolar Tesde de Resistência."/>R.Magia</th>
-                                        <th class="mediaeval">Iniciativa</th>
+                                        <th width="60px"></th>
+                                        <th class="mediaeval">Cat.</th>
+                                        <th class="mediaeval">Valor</th>
                                     </tr>
-                                    <tr>
-                                        <td><input title="Velocidade Base." name="data.vb" type="number" value="{{data.data.vb}}" readonly/></td> 
-                                        <td><input name="data.vbe" type="number" value="{{data.data.vbe}}" title="Você voa? Você nada? Coloca ai e não enche o saco!" /></td>
-                                        <td><input name="data.rf" type="number" value="{{data.data.rf}}" title="Resistência Física." readonly/></td>
-                                        <td><input name="data.rm" type="number" value="{{data.data.rm}}" title="Resistência Magía." readonly/></td>
-                                        <td><input name="data.iniciativa" type="number" value="{{data.data.iniciativa}}" title="Valor para testar Iniciativa."/></td>
+                                    <tr style="text-align: left;">
+                                        <th class="mediaeval" width="60px">Ativa</th>
+                                        <td><input name="data.d_ativa.categoria" type="text" value="{{data.data.d_ativa.categoria}}" title="Tipo da defesa." readonly/></td>
+                                        <td><input name="data.d_ativa.valor" type="number" value="{{data.data.d_ativa.valor}}" title="Valor da defesa ativa." readonly/></td>
                                     </tr>
-                                    <tr>
-                                       <td></td>
-                                       <th class="mediaeval">F.Ataque:</th>
-                                       <td><input class="F_Ataque" type="number" name="data.forca_ataque" value="{{data.data.forca_ataque}}" title="Força de Ataque para Teste de Resistência Física ou Magía."/></td> 
+                                    <tr style="text-align: left;">
+                                        <th class="mediaeval">Passiva</th>
+                                        <td><input name="data.d_passiva.categoria" type="text" value="{{data.data.d_passiva.categoria}}" title="Tipo da defesa." readonly/></td>
+                                        <td><input name="data.d_passiva.valor" type="number" value="{{data.data.d_passiva.valor}}" title="Valor da defesa passiva." readonly/></td>
                                     </tr>
                                 </table>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-7">
+                            <div class="col-md-8">
                                 <table>
                                     <tr style="text-align: left;">
                                         <th width="100px"></th>
-                                        <th class="mediaeval"><a class="dano_rell" data-tipo="EF">EF</a></th>
-                                        <th class="mediaeval"><a class="dano_rell" data-tipo="EH">EH</a></th>
-                                        <th class="mediaeval"><a class="dano_rell" data-tipo="KARMA">Karma</a></th>
-                                        <th class="mediaeval"><a class="dano_rell" data-tipo="FOCUS">Focus</a></th>
-                                        <th class="mediaeval"><a class="dano_rell" data-tipo="ABS">Absorção</a></th>
+                                        <th width="50px" class="mediaeval"><a class="dano_rell" data-tipo="EF">EF</a></th>
+                                        <th width="50px" class="mediaeval"><a class="dano_rell" data-tipo="EH">EH</a></th>
+                                        <th width="50px" class="mediaeval"><a class="dano_rell" data-tipo="KARMA">Karma</a></th>
+                                        <th width="50px" class="mediaeval"><a class="dano_rell" data-tipo="FOCUS">Focus</a></th>
+                                        <th width="50px" class="mediaeval"><a class="dano_rell" data-tipo="ABS">Absorção</a></th>
                                     </tr>
                                     <tr>
                                         <th class="mediaeval">Valor Máximo</th>
-                                        <td> <input name="data.ef.max" type="number" value="{{data.data.ef.max}}" title="Que EF mixuruca."/> </td>
+                                        <td> <input name="data.ef.max" type="number" value="{{data.data.ef.max}}" title="Que EF mixuruca." readonly/> </td>
                                         <td> <input name="data.eh.max" type="number" value="{{data.data.eh.max}}" title="Energia Heróica"/> </td>
-                                        <td> <input class="ipKarmaMax" name="data.karma.max" type="number" value="{{data.data.karma.max}}" title="Karma"/> </td>
+                                        <td> <input class="ipKarmaMax" name="data.karma.max" type="number" value="{{data.data.karma.max}}" title="Karma" readonly/> </td>
                                         <td> <input name="data.focus.max" type="number" value="{{data.data.focus.max}}" title="Você tem Focus?"/> </td>
-                                        <td> <input name="data.absorcao.max" type="number" value="{{data.data.absorcao.max}}" title="Está naqueles dias? Para máxima absorção use absorvente Intimus."/> </td>
+                                        <td> <input name="data.absorcao.max" type="number" value="{{data.data.absorcao.max}}" title="Está naqueles dias? Para máxima absorção use absorvente Intimus." readonly/> </td>
                                     </tr>
                                     <tr>
                                         <th class="mediaeval">Valor Atual</th>
@@ -396,23 +410,18 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-md-1"></div>
-                            <div class="col-md-4">
+                            <div class="col-md-4" style="margin-top:16px;">
                                 <table>
+                                    <caption class="mediaeval">Velocidade / Iniciativa</caption>
                                     <tr style="text-align: left;">
-                                        <th width="80px"></th>
-                                        <th class="mediaeval">Cat.</th>
-                                        <th class="mediaeval">Valor</th>
+                                        <th class="mediaeval" style="width: 50px;">V.Base</th>
+                                        <th class="mediaeval" style="width: 50px;">V.B.E</th>
+                                        <th class="mediaeval" style="width: 50px;"><a class="rolarIniciativa" title="Rolar Iniciativa">Iniciativa</a></th>
                                     </tr>
-                                    <tr style="text-align: left;">
-                                        <th class="mediaeval" width="80px">D.Ativa</th>
-                                        <td><input name="data.d_ativa.categoria" type="text" value="{{data.data.d_ativa.categoria}}" title="Tipo da defesa." readonly/></td>
-                                        <td><input name="data.d_ativa.valor" type="number" value="{{data.data.d_ativa.valor}}" title="Valor da defesa ativa." readonly/></td>
-                                    </tr>
-                                    <tr style="text-align: left;">
-                                        <th class="mediaeval">D.Passiva</th>
-                                        <td><input name="data.d_passiva.categoria" type="text" value="{{data.data.d_passiva.categoria}}" title="Tipo da defesa." readonly/></td>
-                                        <td><input name="data.d_passiva.valor" type="number" value="{{data.data.d_passiva.valor}}" title="Valor da defesa passiva." readonly/></td>
+                                    <tr>
+                                        <td><input title="Velocidade Base." name="data.vb" type="number" value="{{data.data.vb}}" readonly/></td> 
+                                        <td><input name="data.vbe" type="number" value="{{data.data.vbe}}" title="Você voa? Você nada? Coloca ai e não enche o saco!" /></td>
+                                        <td><input name="data.iniciativa" type="number" value="{{data.data.iniciativa}}" title="Valor para testar Iniciativa."/></td>
                                     </tr>
                                 </table>
                             </div>
@@ -422,19 +431,20 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <table>
-                                    <tr style="text-align: center;">
+                                    <caption class="mediaeval">Moedas</caption>
+                                    <tr style="text-align: center;height: 28px;">
                                         <th class="mediaeval">M.O</th>
                                     </tr>
                                     <tr style="text-align: center;">
                                         <td><input name="data.dinheiro.mo" type="number" value="{{data.data.dinheiro.mo}}" title="Moedas de Ouro"/></td>
                                     </tr>
-                                    <tr style="text-align: center;">
+                                    <tr style="text-align: center;height: 28px;">
                                         <th class="mediaeval">M.P</th>
                                     </tr>
                                     <tr style="text-align: center;">
                                         <td><input name="data.dinheiro.mp" type="number" value="{{data.data.dinheiro.mp}}" title="Moedas de Prata"/></td>
                                     </tr>
-                                    <tr style="text-align: center;">
+                                    <tr style="text-align: center;height: 28px;">
                                         <th class="mediaeval">M.C</th>
                                     </tr>
                                     <tr style="text-align: center;">
