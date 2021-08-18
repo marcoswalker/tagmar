@@ -196,3 +196,6 @@ Na tela de configuração do Jogador, apenas Personagens estarão disponível pa
 
 ## **1.5.0 :**
 Melhorias na disposição das informações nas fichas.
+
+## **1.5.1 :**
+Atributos básicos não vão mais aparecer em efeitos usando a ficha de compra de atributos por pontos.
