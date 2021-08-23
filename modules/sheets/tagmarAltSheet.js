@@ -203,6 +203,8 @@ export default class tagmarAltSheet extends ActorSheet {
 
         html.find('.item-copy').click(this._duplicateItem.bind(this));
 
+        html.find('.toJournal').click(this._toJournal.bind(this));
+
         html.find('.rollable').click(this._onItemRoll.bind(this));
         html.find('.rollable').contextmenu(this._onItemRightButton.bind(this));
         html.find('.dano_rell').click(this._danoRell.bind(this));
@@ -324,7 +326,95 @@ export default class tagmarAltSheet extends ActorSheet {
             html.find('.searchCombate').keyup(this._realcaCombate.bind(this));
             html.find('.searchHabilidade').keyup(this._realcaHablidade.bind(this));
             html.find('.searchEfeito').keyup(this._realcaEfeito.bind(this));
+            html.find('.descansar').click(this._descanso.bind(this));
         } 
+    }
+
+    _descanso(event) {
+        let dialog = new Dialog({
+            title: "Descanso",
+            content: `<div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <select class="mediaeval tipoDescanso">
+                                    <option value="full">Descanso Completo</option>
+                                    <option value="meio">Descanso Curto</option>
+                                </select>
+                            </div>
+                        </div>
+                     </div>`,
+            buttons: {
+                "descansar": {
+                    icon: '<i class="fas fa-check"></i>',
+                    label: 'Descansar',
+                    callback: (html) => {
+                        let descanso = $('.tipoDescanso').val();
+                        let changes = {};
+                        if (descanso === "full") {
+                            changes = {
+                                'data.ef.value': this.actor.data.data.ef.max,
+                                'data.eh.value': this.actor.data.data.eh.max,
+                                'data.karma.value': this.actor.data.data.karma.max
+                            };
+                        } else if (descanso === "meio") {
+                            let efAtual = this.actor.data.data.ef.value;
+                            let ehAtual = this.actor.data.data.eh.value;
+                            let karmaAtual = this.actor.data.data.karma.value;
+                            let efMax = this.actor.data.data.ef.max;
+                            let ehMax = this.actor.data.data.eh.max;
+                            let karmaMax = this.actor.data.data.karma.max;
+                            if (efAtual < efMax) {
+                                efAtual += efMax/2;
+                                if (efAtual > efMax) efAtual = efMax;
+                                changes['data.ef.value'] = parseInt(efAtual)
+                            }
+                            if (ehAtual < ehMax) {
+                                ehAtual += ehMax/2;
+                                if (ehAtual > ehMax) ehAtual = ehMax;
+                                changes['data.eh.value'] = parseInt(ehAtual)
+                            }
+                            if (karmaAtual < karmaMax) {
+                                karmaAtual += karmaMax/2;
+                                if (karmaAtual > karmaMax) karmaAtual = karmaMax;
+                                changes['data.karma.value'] = parseInt(karmaAtual)
+                            }
+                        }
+                        this.actor.update(changes);
+                    }
+                },
+                "cancelar": {
+                    icon: '<i class="fas fa-times"></i>',
+                    label: 'Cancelar'
+                }
+            },
+            default: "cancelar"
+        });
+        dialog.render(true);
+    }
+
+    async _toJournal(event) {
+        let journal = await JournalEntry.create({
+            name: this.actor.data.name,
+            img: this.actor.data.img,
+            content: `<div class="bg-img"><div class="container" style="height:100%;">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="fairyDust" style="text-align:center;">${this.actor.data.name}</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <img src="${this.actor.data.img}" style="border-width:0;display:block;margin-left:auto;margin-right:auto;"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p class="mediaeval">${this.actor.data.data.descricao}</p>
+                    </div>
+                </div>
+            </div></div>`
+        });
+        journal.sheet.render(true);
     }
 
     _rolarIniciativa(event) {
