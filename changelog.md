@@ -203,3 +203,6 @@ Atributos básicos não vão mais aparecer em efeitos usando a ficha de compra d
 ## **1.5.2 :**
 1. Adicionado botão nas fichas de NPC para gerar um Journal com imagem e descrição do mesmo.
 2. Adicionado sistema de descanso nas fichas de Personagem, "Descanso Completo" restaura EF,EH e Karma ao valor maxímo, "Descanso Curto" restaura apenas a metade.
+
+## **1.5.3 :**
+Mudança na forma de chamar testes de atributos, resistência e moral.
