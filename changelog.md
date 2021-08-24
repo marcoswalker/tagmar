@@ -206,3 +206,6 @@ Atributos básicos não vão mais aparecer em efeitos usando a ficha de compra d
 
 ## **1.5.3 :**
 Mudança na forma de chamar testes de atributos, resistência e moral.
+
+## **1.5.4 :**
+Bugs do programador.
