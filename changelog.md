@@ -209,3 +209,7 @@ Mudança na forma de chamar testes de atributos, resistência e moral.
 
 ## **1.5.4 :**
 Bugs do programador.
+
+## **1.5.5 :**
+1. Espaço para descrição nas fichas de personagens e npc's movidos para aba Biografia, edição agora é igual ao Journal. Mudança também nos campos de descrição dos itens.
+2. Adicionado suporte para módulo [Polyglot](https://foundryvtt.com/packages/polyglot), idiomas podem ser selecionados na área de Habilidades da ficha.

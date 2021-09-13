@@ -2,6 +2,19 @@
 [![](assets/tutorial/001_Easy-Resize.com.jpg)](assets/tutorial/TutorialFoundryTagmarRPG.pdf)
 # [Atualizações](changelog.md)
 
+# Módulos Suportados
+* [Bar Brawl](https://foundryvtt.com/packages/barbrawl)
+* [Drag Ruler](https://foundryvtt.com/packages/drag-ruler)
+* [Token Action HUD](https://foundryvtt.com/packages/token-action-hud)
+* [Polyglot](https://foundryvtt.com/packages/polyglot)
+* [Combat Messages](https://foundryvtt.com/packages/combat-messages)
+
+## Módulos Exclusivos para sistema Tagmar
+* [Tagmar Ficha Padrão](https://foundryvtt.com/packages/fichatagmar)
+* [Tagmar Efeitos Mágicos](https://foundryvtt.com/packages/tagmar-token-fx)
+* [Tagmar Transações](https://foundryvtt.com/packages/tagmartrade)
+* [Tagmar Gestão de Munições](https://foundryvtt.com/packages/tagmar-ammu-nation)
+
 # Licença
 Todo material produzido e distribuido pelo projeto Tagmar é derivado do livro “Tagmar – RPG de Aventura Medieval” © 1991 de autoria de Marcelo Rodrigues,  Ygor Moraes Esteves da Silva, Julio Augusto Cezar Junior e Leonardo Nahoum Pache de Faria; e está licenciado de acordo as seguintes condições: Atribuição-NãoComercial-CompartilhaIgual 3.0 Brasil.
 
