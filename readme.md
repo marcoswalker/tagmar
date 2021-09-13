@@ -6,6 +6,7 @@
 * [Bar Brawl](https://foundryvtt.com/packages/barbrawl)
 * [Drag Ruler](https://foundryvtt.com/packages/drag-ruler)
 * [Token Action HUD](https://foundryvtt.com/packages/token-action-hud)
+* [Dice So Nice!](https://foundryvtt.com/packages/dice-so-nice)
 * [Polyglot](https://foundryvtt.com/packages/polyglot)
 * [Combat Messages](https://foundryvtt.com/packages/combat-messages)
 
