@@ -6,6 +6,8 @@ import {tagmarActor} from "./tagmarActor.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import { SystemSettings } from "./settings.js";
 
+let ocultos = false;
+
 const tabela_resol = [
   [-7, "verde", "verde", "verde", "verde", "verde", "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "laranja", "vermelho", "azul", "cinza"],
   [-6, "verde", "verde", "verde", "verde", "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "laranja", "vermelho", "azul", "cinza"],
@@ -283,6 +285,45 @@ Hooks.once("ready", async function () {
   Hooks.on("hotbarDrop", (bar, data, slot) => createTagmarMacro(data, slot));
   boasVindas();
   $('#logo').attr('src', '/systems/tagmar/templates/sheets/img/logo.png');
+  $('#logo').click(function () {
+    if (!ocultos) {
+      $('#controls').addClass('esconde');
+      $('#navigation').addClass('esconde');
+      $('#hotbar').addClass('esconde');
+      $('#players').addClass('esconde');
+      ocultos = true;
+    } else {
+      $('#controls').removeClass('esconde');
+      $('#navigation').removeClass('esconde');
+      $('#players').removeClass('esconde');
+      $('#hotbar').removeClass('esconde');
+      ocultos = false;
+    }
+  }); 
+});
+
+Hooks.on('renderPlayerList', function () {
+  if (ocultos) {
+    $('#players').addClass('esconde');
+  } else {
+    $('#players').removeClass('esconde');
+  }
+});
+
+Hooks.on('renderSceneNavigation', function () {
+  if (ocultos) {
+    $('#navigation').addClass('esconde');
+  } else {
+    $('#navigation').removeClass('esconde');
+  }
+});
+
+Hooks.on('renderSceneControls', function () {
+  if (ocultos) {
+    $('#controls').addClass('esconde');
+  } else {
+    $('#controls').removeClass('esconde');
+  }
 });
 
 function boasVindas () {
@@ -338,7 +379,38 @@ Hooks.on('preCreateToken', async function (document) {
   }
 });
 
-Hooks.once('renderChatLog', function (chatLog,html,css) {
+Hooks.on('tagmar_combate_roll', function (rollData) {
+  if (game.user != rollData.user) return;
+  let input_dano = $('#sidebar #chat #danos #soma_dano');
+  let valor = 0;
+  if (parseInt(input_dano.val())) valor = parseInt(input_dano.val());
+  valor += rollData.dano;
+  input_dano.val(valor);  
+});
+
+Hooks.once('renderChatLog', function (chatLog, html, css) {
+  let apaga_dano = $(`<a id="apaga_dano" title="Apagar." style="flex:0;margin-right:10px;"><i class="far fa-trash-alt"></i></a>`);
+  let chat_dano = $(`<a id="chat_dano" title="Mandar pro Chat."><i class="far fa-envelope"></i></a>`);
+  let input_dano = $(`<input type="number" style="background-color: white;" id="soma_dano"/>`);
+  chat_dano.click(function (event) {
+    let valor = 0;
+    if (parseInt(input_dano.val())) valor = parseInt(input_dano.val());
+    if (valor != 0) ChatMessage.create({
+      user: game.user,
+      content: `<p class="mediaeval rola_desc">Dano somado: ${valor}</p>`,
+      speaker: ChatMessage.getSpeaker({ alias: game.user.name })
+    });
+    $(input_dano).val(0);
+  });
+  apaga_dano.click(function (event) {
+    $(input_dano).val(0);
+  });
+  let div_danos = $(`<div id="danos" class="flexrow" style="flex: 0 0 28px;margin: 0 6px;align-content: center;"></div>`);
+  div_danos.append(apaga_dano);
+  div_danos.append(chat_dano);
+  div_danos.append($(`<label for="soma_dano">Somar Dano:</label>`));
+  div_danos.append(input_dano);
+  div_danos.insertBefore($(html.find('#chat-controls')));
   if (!game.user.isGM) return;
   let button = $('<a class="button export-to-journal" title="Salvar log do chat em um Journal."><i class="fas fa-archive"></i></a>');
   button.click(function () {
@@ -629,6 +701,7 @@ Hooks.once('diceSoNiceReady', function (dice) {
     font: 'Verdana',
     default: true,
   });
+  game.user.setFlag('dice-so-nice', 'appearance', { "global": {"system": "tagmar"}});
 });
 
 Hooks.on('renderChatMessage', function (message, jq, messageData) {
@@ -644,6 +717,16 @@ Hooks.on('renderChatMessage', function (message, jq, messageData) {
     else {
       jq.find('.rola_desc').css('display','none');
       jq.find('.showDesc').html('Descrição: <i class="far fa-eye-slash"></i>');
+    }
+  });
+  jq.find('.aplicarDano').click(function (event) {
+    let tokens = canvas.tokens.controlled;
+    if (tokens.length == 0) return ui.notifications.warn('Nenhum token selecionado.');
+    for (let token of tokens) {
+      let dano = $(event.currentTarget).data('dano');
+      let cura = $(event.currentTarget).data('cura');
+      let critico = $(event.currentTarget).data('critico');
+      token.actor._aplicarDano({"valor": dano, "isCura": cura, "isCritico": critico});
     }
   });
 });
@@ -684,6 +767,36 @@ async function rolarCritico(coluna, tabela_resol, user, actor) {
   } else if (resultado == "verde") {
     conteudo = "<h1 class='mediaeval rola' style='text-align:center;'>Rolagem do Crítico</h1><br><h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#91cf50;'>Verde</h1>";
     conteudo = conteudo + "<br><p class='mediaeval rola_desc'><b>Corte: </b>25%. Corte leve no músculo do braço dá um ajuste de – 4 na próxima rodada.<br><b>Esmagamento: </b>25%. Golpe no ombro desequilibra o adversário na próxima rodada, dando um ajuste de – 4.<br><b>Penetração: </b>25% Estocada na perna reduz o movimento à metade e causa um ajuste de – 2 por 1 hora.<br><b>Garras/Mordida: </b>25%. Ataque desequilibra o inimigo, levando-o a cair e perder uma rodada.<br><b>Magia: </b>25%. A magia foi evocada com maestria. Economizando 1 de karma OU causando +2 na FA.<br><b>Falha: </b>Faça um ataque no seu companheiro mais próximo.<br><b>10 a 50 vezes o peso do atacante: </b>25%. Golpe impõe ao adversário um ajuste de - 3 por 5 rodadas.<br><b>Peso acima de 50 vezes: </b>25%. ataque preciso causa um ajuste de –5 no próximo ataque.<br><b>Combate Desarmado: </b>25%. Golpe no ouvido causa desorientação. Ajuste de -3 por 3 rodadas.</p>";
+  }
+  if (game.settings.get('tagmar', 'dadosColoridos')) {
+    switch (resultado) {
+        case "verde":
+            roll.dice[0].options.appearance = {background: "#52cc00", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+            break;
+        case "branco":
+            roll.dice[0].options.appearance = {background: "#ffffff", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+            break;
+        case "amarelo":
+            roll.dice[0].options.appearance = {background: "#fff700", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+            break;
+        case "laranja":
+            roll.dice[0].options.appearance = {background: "#8f4500", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+            break;
+        case "vermelho":
+            roll.dice[0].options.appearance = {background: "#ff0000", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+            break;
+        case "azul":
+            roll.dice[0].options.appearance = {background: "#00a1e8", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+            break;
+        case "roxo":
+            roll.dice[0].options.appearance = {background: "#0000ff", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+            break;
+        case "cinza":
+            roll.dice[0].options.appearance = {background: "#525252", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+            break;
+        default:
+            break;
+    }
   }
   roll.toMessage({
     user: user,
@@ -919,6 +1032,36 @@ async function rollTabela(colunaR) {
         else if (resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#0000ff;'>Azul Escuro - Absurdo</h1>";
         else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:#bfbfbf;'>Cinza - Impossível</h1>";
         let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
+        if (game.settings.get('tagmar', 'dadosColoridos')) {
+          switch (resultado) {
+              case "verde":
+                  r.dice[0].options.appearance = {background: "#52cc00", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                  break;
+              case "branco":
+                  r.dice[0].options.appearance = {background: "#ffffff", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                  break;
+              case "amarelo":
+                  r.dice[0].options.appearance = {background: "#fff700", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                  break;
+              case "laranja":
+                  r.dice[0].options.appearance = {background: "#8f4500", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                  break;
+              case "vermelho":
+                  r.dice[0].options.appearance = {background: "#ff0000", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                  break;
+              case "azul":
+                  r.dice[0].options.appearance = {background: "#00a1e8", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                  break;
+              case "roxo":
+                  r.dice[0].options.appearance = {background: "#0000ff", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                  break;
+              case "cinza":
+                  r.dice[0].options.appearance = {background: "#525252", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                  break;
+              default:
+                  break;
+          }
+        }
         r.toMessage({
             user: game.user.id,
             speaker: ChatMessage.getSpeaker({ alias: game.user.name }),
@@ -965,8 +1108,14 @@ async function rollResistencia(resist, f_ataque) {
   const Dresult = r.total;
   if ((Dresult >= valorSucess || Dresult == 20) && Dresult > 1) { // Sucesso
       stringSucesso = "<h1 class='mediaeval rola' style='text-align:center; color: white;background-color:#00a1e8;'>SUCESSO</h1>";
+      if (game.settings.get('tagmar', 'dadosColoridos')) {
+        r.dice[0].options.appearance = {background: "#00a1e8", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+      }
   } else {    // Insucesso
       stringSucesso = "<h1 class='mediaeval rola' style='text-align:center; color: white;background-color:#ff0000;'>FRACASSO</h1>";
+      if (game.settings.get('tagmar', 'dadosColoridos')) {
+        r.dice[0].options.appearance = {background: "#ff0000", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+      }
   }  
   r.toMessage({
       user: game.user.id,
@@ -986,6 +1135,9 @@ Hooks.on("renderSidebarTab", async (object, html) => {
 });
 
 Hooks.on("renderCombatTracker",function (combatTracker, html) {
+  if (game.settings.get('tagmar', 'popOutCombat')) {
+    if (!combatTracker.options.popOut && combatTracker.combats.length > 0) combatTracker.renderPopout();
+  }
   if (!game.user.isGM) return;
   const combats = combatTracker.combats;
   if (combats.length > 0) {

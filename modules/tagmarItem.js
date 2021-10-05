@@ -48,6 +48,36 @@ export class tagmarItem extends Item {
         else if (resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#0000ff;'>Azul Escuro - Absurdo</h1>";
         else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:#bfbfbf;'>Cinza - Impossível</h1>";
         let coluna = "<h4 class='mediaeval rola'>Coluna:" + colunarolada + "</h4>";
+        if (game.settings.get('tagmar', 'dadosColoridos')) {
+            switch (resultado) {
+                case "verde":
+                    r.dice[0].options.appearance = {background: "#52cc00", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "branco":
+                    r.dice[0].options.appearance = {background: "#ffffff", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "amarelo":
+                    r.dice[0].options.appearance = {background: "#fff700", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "laranja":
+                    r.dice[0].options.appearance = {background: "#8f4500", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "vermelho":
+                    r.dice[0].options.appearance = {background: "#ff0000", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "azul":
+                    r.dice[0].options.appearance = {background: "#00a1e8", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "roxo":
+                    r.dice[0].options.appearance = {background: "#0000ff", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "cinza":
+                    r.dice[0].options.appearance = {background: "#525252", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                default:
+                    break;
+            }
+        }
         r.toMessage({
             user: game.user.id,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -120,15 +150,45 @@ export class tagmarItem extends Item {
 
     async tecnicaToChat(resultado, r, coluna_rolada) {
         let PrintResult = "";
-        let conteudo = "<h3 class='mediaeval rola'><a class='showDesc'>Descrição: <i class='far fa-eye-slash'></i></a> </h3>" + "<h4 class='mediaeval rola rola_desc' style='display: none;'>" + this.data.data.descricao + "</h4>";
+        let conteudo = "<h3 class='mediaeval rola'><a class='showDesc'>Descrição: <i class='far fa-eye-slash'></i></a> </h3>" + "<p class='mediaeval rola rola_desc' style='display: none;'>" + this.data.data.descricao + "</p>";
         if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#91cf50;'>Verde - Falha</h1>";
         else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Rotineiro</h1>";
         else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:#ffff00;'>Amarelo - Fácil</h1>";
         else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#ff9900;'>Laranja - Médio</h1>";
         else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#ff0000;'>Vermelho - Difícil</h1>";
-        else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 style='color: white; text-align:center;background-color:#00a1e8;'>Azul - Muito Difícil</h1>";
+        else if (resultado == "azul" || resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#00a1e8;'>Azul - Muito Difícil</h1>";
         else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:#bfbfbf;'>Cinza - Crítico Absurdo</h1>";
         let coluna = "<h4 class='mediaeval rola'>Coluna:" + coluna_rolada + "</h4>";
+        if (game.settings.get('tagmar', 'dadosColoridos')) {
+            switch (resultado) {
+                case "verde":
+                    r.dice[0].options.appearance = {background: "#52cc00", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "branco":
+                    r.dice[0].options.appearance = {background: "#ffffff", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "amarelo":
+                    r.dice[0].options.appearance = {background: "#fff700", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "laranja":
+                    r.dice[0].options.appearance = {background: "#8f4500", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "vermelho":
+                    r.dice[0].options.appearance = {background: "#ff0000", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "azul":
+                    r.dice[0].options.appearance = {background: "#00a1e8", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "roxo":
+                    r.dice[0].options.appearance = {background: "#00a1e8", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "cinza":
+                    r.dice[0].options.appearance = {background: "#525252", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                default:
+                    break;
+            }
+        }
         r.toMessage({
             user: game.user.id,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -293,12 +353,55 @@ export class tagmarItem extends Item {
         let dano_text = "<h2 class='mediaeval rola rola_dano' style='text-align: center;'>Dano: " + dano_total + "</h2>";
         let table_dano = `<table style="margin-left: auto;margin-right: auto;text-align:center;" class="mediaeval"><tr><th>25%</th><th>50%</th><th>75%</th><th>100%</th></tr><tr><td>${this.data.data.dano.d25}</td><td>${this.data.data.dano.d50}</td><td>${this.data.data.dano.d75}</td><td>${this.data.data.dano.d100}</td></tr></table>`;
         if (critico) dano_text = table_dano;
+        if (game.settings.get('tagmar', 'dadosColoridos')) {
+            switch (resultado) {
+                case "verde":
+                    r.dice[0].options.appearance = {background: "#52cc00", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "branco":
+                    r.dice[0].options.appearance = {background: "#ffffff", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "amarelo":
+                    r.dice[0].options.appearance = {background: "#fff700", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "laranja":
+                    r.dice[0].options.appearance = {background: "#8f4500", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "vermelho":
+                    r.dice[0].options.appearance = {background: "#ff0000", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "azul":
+                    r.dice[0].options.appearance = {background: "#00a1e8", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "roxo":
+                    r.dice[0].options.appearance = {background: "#0000ff", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "cinza":
+                    r.dice[0].options.appearance = {background: "#525252", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                default:
+                    break;
+            }
+        }
+        let button = "";
+        let buttonC = "";
+        if (!critico && dano_total != 0) button = `<button class="aplicarDano mediaeval" data-critico="false" data-cura="false" data-dano="${dano_total}">Aplicar Dano</button>`;
+        if (!critico && dano_total != 0) buttonC = `<button class="aplicarDano mediaeval" data-critico="false" data-cura="true" data-dano="${dano_total}">Aplicar Cura EH</button>`;
+        if (critico) {
+            button = `<p>
+                <button class="aplicarDano mediaeval" data-critico="true" data-cura="false" data-dano="${this.data.data.dano.d25}">Aplicar 25% Dano</button>
+                <br><button class="aplicarDano mediaeval" data-critico="true" data-cura="false" data-dano="${this.data.data.dano.d50}">Aplicar 50% Dano</button>
+                <br><button class="aplicarDano mediaeval" data-critico="true" data-cura="false" data-dano="${this.data.data.dano.d75}">Aplicar 75% Dano</button>
+                <br><button class="aplicarDano mediaeval" data-critico="true" data-cura="false" data-dano="${this.data.data.dano.d100}">Aplicar 100% Dano</button>
+            </p>`;
+        }
         await r.toMessage({
             user: game.user.id,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            flavor: `<img src="${this.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola" style="text-align:center;">${this.name}: ${valor_tabela} - ${this.data.data.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${punicaoText}${dano_text}`
+            flavor: `<img src="${this.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola" style="text-align:center;">${this.name}: ${valor_tabela} - ${this.data.data.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${punicaoText}${dano_text}${button}${buttonC}`
         });
         if (critico) Hooks.callAll('tagmar_Critico', coluna_rolada, tabela_resol, game.user, this.actor);
+        else Hooks.callAll('tagmar_combate_roll', {coluna: coluna_rolada, user: game.user, dano: dano_total, actor: this.actor});
     }
 
     async combateToChatPlus(coluna_rolada, resultado, puni_25, puni_50, puni_75, puni_100, r, municao_text, valor_tabela, ajusteDano) {
@@ -426,6 +529,9 @@ export class tagmarItem extends Item {
         }
         let dano_novo = 0;
         switch (dano_total) {
+            case 0:
+                dano_novo = 0;
+                break;
             case 25:
                 dano_novo = this.data.data.dano.d25;
                 break;
@@ -462,18 +568,66 @@ export class tagmarItem extends Item {
             case 300:
                 dano_novo = this.data.data.dano.d300;
                 break;
+            default:
+                let vez = dano_total / 25;
+                let dif = this.data.data.dano.d50 - this.data.data.dano.d25;
+                dano_novo = this.data.data.dano.d25 + ( (vez-1) * dif );
+                break;
         }
         let coluna = "<h4 class='mediaeval rola'>Coluna: " + coluna_rolada + "</h4>";
         let ajuste_text = "<h1 class='mediaeval rola' style='text-align: center;'>AAC20: " + ajusteDano + "%</h1>";
         let dano_text = "<h1 class='mediaeval rola rola_dano' style='text-align: center;'>Dano: " + dano_novo + "</h1>";
         let table_dano = `<table style="margin-left: auto;margin-right: auto;text-align:center;" class="mediaeval"><tr><th>25%</th><th>50%</th><th>75%</th><th>100%</th></tr><tr><td>${this.data.data.dano.d25}</td><td>${this.data.data.dano.d50}</td><td>${this.data.data.dano.d75}</td><td>${this.data.data.dano.d100}</td></tr></table>`;
         if (critico) dano_text = table_dano;
+        if (game.settings.get('tagmar', 'dadosColoridos')) {
+            switch (resultado) {
+                case "verde":
+                    r.dice[0].options.appearance = {background: "#52cc00", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "branco":
+                    r.dice[0].options.appearance = {background: "#ffffff", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "amarelo":
+                    r.dice[0].options.appearance = {background: "#fff700", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "laranja":
+                    r.dice[0].options.appearance = {background: "#8f4500", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "vermelho":
+                    r.dice[0].options.appearance = {background: "#ff0000", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "azul":
+                    r.dice[0].options.appearance = {background: "#00a1e8", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "roxo":
+                    r.dice[0].options.appearance = {background: "#0000ff", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                case "cinza":
+                    r.dice[0].options.appearance = {background: "#525252", texture: "none", material: "plastic", edge: "#000000", foreground: "#000000"};
+                    break;
+                default:
+                    break;
+            }
+        }
+        let button = "";
+        let buttonC = "";
+        if (!critico && dano_novo != 0) button = `<button class="aplicarDano mediaeval" data-critico="false" data-cura="false" data-dano="${dano_novo}">Aplicar Dano</button>`;
+        if (!critico && dano_novo != 0) buttonC = `<button class="aplicarDano mediaeval" data-critico="false" data-cura="true" data-dano="${dano_novo}">Aplicar Cura EH</button>`;
+        if (critico) {
+            button = `<p>
+                <button class="aplicarDano mediaeval" data-critico="true" data-cura="false" data-dano="${this.data.data.dano.d25}">Aplicar 25% Dano</button>
+                <br><button class="aplicarDano mediaeval" data-critico="true" data-cura="false" data-dano="${this.data.data.dano.d50}">Aplicar 50% Dano</button>
+                <br><button class="aplicarDano mediaeval" data-critico="true" data-cura="false" data-dano="${this.data.data.dano.d75}">Aplicar 75% Dano</button>
+                <br><button class="aplicarDano mediaeval" data-critico="true" data-cura="false" data-dano="${this.data.data.dano.d100}">Aplicar 100% Dano</button>
+            </p>`;
+        }
         await r.toMessage({
-        user: game.user.id,
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: `<img src="${this.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola" style="text-align:center;">${this.name}: ${valor_tabela} - ${this.data.data.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${ajuste_text}${punicaoText}${dano_text}`
+            user: game.user.id,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            flavor: `<img src="${this.img}" style="display: block; margin-left: auto; margin-right: auto;" /><h2 class="mediaeval rola" style="text-align:center;">${this.name}: ${valor_tabela} - ${this.data.data.tipo}</h2>${conteudo}${municao_text}${coluna}${PrintResult}${ajuste_text}${punicaoText}${dano_text}${button}${buttonC}`
         });
         if (critico) Hooks.callAll('tagmar_Critico', coluna_rolada, tabela_resol, game.user, this.actor);
+        else Hooks.callAll('tagmar_combate_roll', {coluna: coluna_rolada, user: game.user, dano: dano_novo, actor: this.actor});
     }
 
     async rollCombate() {

@@ -76,4 +76,20 @@ export const SystemSettings = function() {
       default: false,
       type: Boolean
     });
+    game.settings.register('tagmar', 'popOutCombat', {
+      name: 'PopOut TurnOrder automático',
+      hint: 'Quando um combate começa, Turn Order abre em popOut.',
+      scope: 'client',
+      config: true,
+      default: true,
+      type: Boolean
+    });
+    game.settings.register('tagmar', 'dadosColoridos', {
+      name: 'Dados coloridos (Dice so nice)',
+      hint: 'Dados 3d na cor do resultado.',
+      scope: 'client',
+      config: true,
+      default: true,
+      type: Boolean
+    });
 }

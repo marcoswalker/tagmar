@@ -213,3 +213,8 @@ Bugs do programador.
 ## **1.5.5 :**
 1. Espaço para descrição nas fichas de personagens e npc's movidos para aba Biografia, edição agora é igual ao Journal. Mudança também nos campos de descrição dos itens.
 2. Adicionado suporte para módulo [Polyglot](https://foundryvtt.com/packages/polyglot), idiomas podem ser selecionados na área de Habilidades da ficha.
+
+## **1.5.6 :**
+1. Utilizando módulo Dice-so-nice, foi adicionado uma opção para que a cor do dado rolado represente o resultado das tabelas de resolução. Pode ser desativado nas opções do sistema.
+2. Adicionado botões para aplicar dano (ou cura) diretamente no chat das rolagens de Combate. Para rolagens críticas deve se escolher entre as opções a mais adequada (opções apenas para aplicar dano), na ausência de equipamento de Defesa com absorção mágica, o dano é aplicado diretamente na **EF**. Indicação de absorção mágica deve ser selecionado na edição do equipamento de Defesa.
+3. Adicionado um campo onde é somado o valor dos danos (não críticos), esse valor pode ser enviado ao chat.
