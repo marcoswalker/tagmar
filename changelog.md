@@ -221,3 +221,6 @@ Bugs do programador.
 
 ## **1.5.7 :**
 Corrigido bug para aplicar danos automaticos nos NPC's.
+
+## **1.5.8 :**
+Atualização do Foundry Vtt V9.
