@@ -224,3 +224,6 @@ Corrigido bug para aplicar danos automaticos nos NPC's.
 
 ## **1.5.8 :**
 Atualização do Foundry Vtt V9.
+
+## **1.5.9 :**
+Dialog com mensagens do chat apenas do usuário.
