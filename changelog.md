@@ -227,3 +227,8 @@ Atualização do Foundry Vtt V9.
 
 ## **1.5.9 :**
 Dialog com mensagens do chat apenas do usuário.
+
+## **1.6.0 :**
+1. Nova aba **"Favoritos"** na ficha de Personagem, para adicionar Ataques, Técnicas e Magias basta editar o item e selecionar Favorito.
+2. Arrumado bug na rolagem AAC20 que impedia de rolar ataques na coluna 20.
+3. Dados coloridos do DiceSoNice só muda a cor dos números do dado 3d.
