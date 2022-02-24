@@ -235,3 +235,6 @@ Dialog com mensagens do chat apenas do usuário.
 
 ## **1.6.1 :**
 Quando aplicar dano direto do chat em um token, o texto aparece momentaneamente no token.
+
+## **1.6.2 :**
+Correção de erros na ficha de personagem, melhoria na descrição da rolagem do dano crítico.

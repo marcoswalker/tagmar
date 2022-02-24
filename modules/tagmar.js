@@ -9,6 +9,7 @@ import { dadosColoridos } from "./dadosColoridos.js";
 
 let ocultos = false;
 
+
 const tabela_resol = [
   [-7, "verde", "verde", "verde", "verde", "verde", "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "laranja", "vermelho", "azul", "cinza"],
   [-6, "verde", "verde", "verde", "verde", "verde", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "branco", "amarelo", "amarelo", "amarelo", "laranja", "vermelho", "azul", "cinza"],
@@ -279,7 +280,6 @@ Hooks.once("init", function(){
       polyglot.registerSystem(game.system.id, TagmarLanguageProvider);
     });
   }
-  
 });
 
 Hooks.once("ready", async function () {
@@ -387,49 +387,6 @@ Hooks.on('tagmar_combate_roll', function (rollData) {
   if (parseInt(input_dano.val())) valor = parseInt(input_dano.val());
   valor += rollData.dano;
   input_dano.val(valor);  
-});
-
-Hooks.once('renderChatLog', function (chatLog, html, css) {
-  let apaga_dano = $(`<a id="apaga_dano" title="Apagar." style="flex:0;margin-right:10px;"><i class="far fa-trash-alt"></i></a>`);
-  let chat_dano = $(`<a id="chat_dano" title="Mandar pro Chat."><i class="far fa-envelope"></i></a>`);
-  let input_dano = $(`<input type="number" style="background-color: white;" id="soma_dano"/>`);
-  chat_dano.click(function (event) {
-    let valor = 0;
-    if (parseInt(input_dano.val())) valor = parseInt(input_dano.val());
-    if (valor != 0) ChatMessage.create({
-      user: game.user,
-      content: `<p class="mediaeval rola_desc">Dano somado: ${valor}</p>`,
-      speaker: ChatMessage.getSpeaker({ alias: game.user.name })
-    });
-    $(input_dano).val(0);
-  });
-  apaga_dano.click(function (event) {
-    $(input_dano).val(0);
-  });
-  let div_danos = $(`<div id="danos" class="flexrow" style="flex: 0 0 28px;margin: 0 6px;align-content: center;"></div>`);
-  div_danos.append(apaga_dano);
-  div_danos.append(chat_dano);
-  div_danos.append($(`<label for="soma_dano">Somar Dano:</label>`));
-  div_danos.append(input_dano);
-  div_danos.insertBefore($(html.find('#chat-controls')));
-  if (!game.user.isGM) return;
-  let button = $('<a class="button export-to-journal" title="Salvar log do chat em um Journal."><i class="fas fa-archive"></i></a>');
-  button.click(function () {
-    let content = html.find('[id="chat-log"]').html();
-    let date = new Date();
-    const dia = date.getDate();
-    const mes = date.getMonth();
-    const ano = date.getFullYear();
-    const hora = date.getHours();
-    const min = date.getMinutes();
-    JournalEntry.create({
-      name: `ChatLog ${dia}/${mes+1}/${ano} - ${hora}:${min}`,
-      content: content
-    });
-    ui.notifications.info("Registro do chat armazenado em um Journal!");
-  });
-  $(html.find('.export-log')).remove();
-  $(html.find('.control-buttons')).append(button);
 });
 
 function createBrawrs(token, setting) {
@@ -716,43 +673,189 @@ Hooks.on('renderChatMessage', function (message, jq, messageData) {
   });
 });
 
-Hooks.on('tagmar_Critico', async function (coluna, tabela_resol, user, actor) {
+Hooks.on('tagmar_Critico', async function (coluna, tabela_resol, user, actor, tipo, falha) {
   if (game.user !== user) return;
-  await rolarCritico(coluna, tabela_resol, user, actor);
+  await rolarCritico(coluna, tabela_resol, user, actor, tipo, falha);
 });
 
-async function rolarCritico(coluna, tabela_resol, user, actor) {
+async function rolarCritico(coluna, tabela_resol, user, actor, tipo, falha) {
   let roll = new Roll('1d20');
   roll.evaluate({async: false});
   let result = roll.total;
-  let conteudo = "";
+  let conteudo = "<h1 class='mediaeval rola' style='text-align:center;'>Rolagem do Crítico</h1><br><p class='mediaeval rola_desc'>";
+  let table = "";
   let col_tab = tabela_resol.filter(h => h[0] == coluna);
   let resultado = col_tab[0][result];
   if (resultado == "cinza") {
-    conteudo = "<h1 class='mediaeval rola' style='text-align:center;'>Rolagem do Crítico</h1><br><h1 class='mediaeval rola' style='color: black; text-align:center;background-color:#bfbfbf;'>Cinza</h1>";
-    conteudo = conteudo + "<br><p class='mediaeval rola_desc'><b>Corte: </b>O Oponente é decapitado.<br><b>Esmagamento: </b>Afundamento torácico destrói os pulmões.<br><b>Penetração: </b>Golpe perfura o coração.<br><b>Garras/Mordida: </b>Força do golpe rasga a carótida.<br><b>Magia: </b>Impacto total da magia mata o adversário.<br><b>Falha: </b>Um golpe ruim. Erra o adversário.<br><b>10 a 50 vezes o peso do atacante: </b>100%. Golpe paralisa por uma rodada causando um ferimento fatal e impondo um ajuste de – 10, depois de 7 rodadas o oponente morre.<br><b>Peso acima de 50 vezes: </b>100%. Ferimento no oponente reduz o número de ataques pela metade (se for só 1, passa a ser um a cada duas rodadas).<br><b>Combate Desarmado: </b>100%. Nocaute, oponente fica desmaiado por 1 hora e incapacitado por 2 dias.</p>";
+    conteudo = conteudo + `<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:#bfbfbf;'>Cinza</h1>`;
+    if (falha) {
+      table = table + `<ul style="list-style-type: disc;" class="rola_desc">
+        <li class="mediaeval"><b>Falha:</b> Um golpe ruim. Erra o adversário.</li>
+      </ul>`;
+    } else {
+      table = table + `<ul style="list-style-type: disc;" class="rola_desc">`;
+      if (tipo != "") {
+        table = table + `<li class="mediaeval"><b>Combate Desarmado:</b> 100%. Nocaute, oponente fica desmaiado por 1 hora e incapacitado por 2 dias.</li>
+                        <li class="mediaeval"><b>Garras/Mordida:</b> Força do golpe rasga a carótida.</li>
+                        <li class="mediaeval"><b>Corte:</b> O Oponente é decapitado.</li>
+                        <li class="mediaeval"><b>Esmagamento:</b> Afundamento torácico destrói os pulmões.</li>
+                        <li class="mediaeval"><b>Penetração:</b> Golpe perfura o coração.</li>`;
+      } else {
+        table = table + `<li class="mediaeval"><b>Magia:</b> Impacto total da magia mata o adversário.</li>`;
+      }
+      table = table + `<li class="mediaeval"><b>10 a 50 vezes o peso do atacante:</b> 100%. Golpe paralisa por uma rodada causando um ferimento fatal e impondo um ajuste de – 10, depois de 7 rodadas o oponente morre.</li>
+        <li class="mediaeval"><b>Peso acima de 50 vezes:</b> 100%. Ferimento no oponente reduz o número de ataques pela metade (se for só 1, passa a ser um a cada duas rodadas).</li>
+        </ul>`;
+    }
   } else if (resultado == "roxo") {
-    conteudo = "<h1 class='mediaeval rola' style='text-align:center;'>Rolagem do Crítico</h1><br><h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#0000ff;'>Azul Escuro</h1>";
-    conteudo = conteudo + "<br><p class='mediaeval rola_desc'><b>Corte: </b>100%. Corte vaza o olho. A dor paralisa o adversário por duas rodadas.<br><b>Esmagamento: </b>100%. Golpe no pulso destrói a articulação, obrigando a amputação em 2 dias. O inimigo é paralisado por duas rodadas.<br><b>Penetração: </b>100%. Estocada na mão, inutiliza permanentemente. A dor paralisa o inimigo por duas rodadas.<br><b>Garras/Mordida: </b>100%. Ataque no olho arranca o globo ocular e paralisa o adversário por duas rodadas.<br><b>Magia: </b>100% Impacto no pé do adversário o destrói, e ele fica paralisado por duas rodadas.<br><b>Falha: </b>Descontrole dá um ajuste de – 3 nas próximas duas rodadas.<br><b>10 a 50 vezes o peso do atacante: </b>100%. Ferimento no oponente reduz o número de ataques pela metade (se for só 1, passa a ser um a cada duas rodadas).<br><b>Peso acima de 50 vezes: </b>100%. Golpe paralisa o oponente por uma rodada e impõe um ajuste de – 5 por 10 rodadas.<br><b>Combate Desarmado: </b>100%. Nocaute, oponente fica desmaiado por meia hora.</p>";
+    conteudo = conteudo + "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#0000ff;'>Azul Escuro</h1>";
+    if (falha) {
+      table = table + `<ul style="list-style-type: disc;" class="rola_desc">
+        <li class="mediaeval"><b>Falha:</b> Descontrole dá um ajuste de – 3 nas próximas duas rodadas.</li>
+      </ul>`;
+    } else {
+      table = table + `<ul style="list-style-type: disc;" class="rola_desc">`;
+      if (tipo != "") {
+        table = table + `<li class="mediaeval"><b>Combate Desarmado:</b> 100%. Nocaute, oponente fica desmaiado por meia hora.</li>
+                        <li class="mediaeval"><b>Garras/Mordida:</b> 100%. Ataque no olho arranca o globo ocular e paralisa o adversário por duas rodadas.</li>
+                        <li class="mediaeval"><b>Corte:</b> 100%. Corte vaza o olho. A dor paralisa o adversário por duas rodadas.</li>
+                        <li class="mediaeval"><b>Esmagamento:</b> 100%. Golpe no pulso destrói a articulação, obrigando a amputação em 2 dias. O inimigo é paralisado por duas rodadas.</li>
+                        <li class="mediaeval"><b>Penetração:</b> 100%. Estocada na mão, inutiliza permanentemente. A dor paralisa o inimigo por duas rodadas.</li>`;
+      } else {
+        table = table + `<li class="mediaeval"><b>Magia:</b> 100% Impacto no pé do adversário o destrói, e ele fica paralisado por duas rodadas.</li>`;
+      }
+      table = table + `<li class="mediaeval"><b>10 a 50 vezes o peso do atacante:</b> 100%. Ferimento no oponente reduz o número de ataques pela metade (se for só 1, passa a ser um a cada duas rodadas).</li>
+        <li class="mediaeval"><b>Peso acima de 50 vezes:</b> 100%. Golpe paralisa o oponente por uma rodada e impõe um ajuste de – 5 por 10 rodadas.</li>
+        </ul>`;
+    }
   } else if (resultado == "azul") {
-    conteudo = "<h1 class='mediaeval rola' style='text-align:center;'>Rolagem do Crítico</h1><br><h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#00a1e8;'>Azul</h1>";
-    conteudo = conteudo + "<br><p class='mediaeval rola_desc'><b>Corte: </b>100%. Corte grande no músculo inutiliza um braço por uma semana.<br><b>Esmagamento: </b>100%. Pancada na cabeça. Elmo se parte (caso não seja mágico). Se não tiver Elmo entra em coma por 2 dias.<br><b>Penetração: </b>100%. Perfura o músculo do braço e o inutiliza por uma semana.<br><b>Garras/Mordida: </b>100%. Ataque arranca uma orelha e paralisa o adversário por uma rodada.<br><b>Magia: </b>100%. O poder da magia leva o inimigo a inconsciência por um dia.<br><b>Falha: </b>Descontrole dá um ajuste de – 4 nas próximas 3 rodadas.<br><b>10 a 50 vezes o peso do atacante: </b>100%. Golpe paralisa o oponente por duas rodadas e impõe um ajuste de – 5 por 10 rodadas.<br><b>Peso acima de 50 vezes: </b>100%. Ferimento desnorteia o oponente impedindo-o de atacar por uma rodada.<br><b>Combate Desarmado: </b>100%. Oponente tonto não ataca por duas rodadas.</p>";
+    conteudo = conteudo + "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#00a1e8;'>Azul</h1>";
+    if (falha) {
+      table = table + `<ul style="list-style-type: disc;" class="rola_desc">
+        <li class="mediaeval"><b>Falha:</b> Descontrole dá um ajuste de – 4 nas próximas 3 rodadas.</li>
+      </ul>`;
+    } else {
+      table = table + `<ul style="list-style-type: disc;" class="rola_desc">`;
+      if (tipo != "") {
+        table = table + `<li class="mediaeval"><b>Combate Desarmado:</b> 100%. Oponente tonto não ataca por duas rodadas.</li>
+                        <li class="mediaeval"><b>Garras/Mordida:</b> 100%. Ataque arranca uma orelha e paralisa o adversário por uma rodada.</li>
+                        <li class="mediaeval"><b>Corte:</b> 100%. Corte grande no músculo inutiliza um braço por uma semana.</li>
+                        <li class="mediaeval"><b>Esmagamento:</b> 100%. Pancada na cabeça. Elmo se parte (caso não seja mágico). Se não tiver Elmo entra em coma por 2 dias.</li>
+                        <li class="mediaeval"><b>Penetração:</b> 100%. Perfura o músculo do braço e o inutiliza por uma semana.</li>`;
+      } else {
+        table = table + `<li class="mediaeval"><b>Magia:</b> 100%. O poder da magia leva o inimigo a inconsciência por um dia.</li>`;
+      }
+      table = table + `<li class="mediaeval"><b>10 a 50 vezes o peso do atacante:</b> 100%. Golpe paralisa o oponente por duas rodadas e impõe um ajuste de – 5 por 10 rodadas.</li>
+        <li class="mediaeval"><b>Peso acima de 50 vezes:</b> 100%. Ferimento desnorteia o oponente impedindo-o de atacar por uma rodada.</li>
+        </ul>`;
+    }
   } else if (resultado == "vermelho") {
-    conteudo = "<h1 class='mediaeval rola' style='text-align:center;'>Rolagem do Crítico</h1><br><h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#ff0000;'>Vermelho</h1>";
-    conteudo = conteudo + "<br><p class='mediaeval rola_desc'><b>Corte: </b>75%. Corte mediano no músculo inutiliza um braço por 2 dias.<br><b>Esmagamento: </b>75%. Pancada na cabeça. Elmo se parte (caso não seja mágico). Se não tiver Elmo fica desacordado por 2 horas e incapacito por 2 dias.<br><b>Penetração: </b>75%. Perfura o músculo do braço e o inutiliza por 2 dias.<br><b>Garras/Mordida: </b>75%. Ataque rasga o braço causando um ajuste de - 8 por 2 dias.<br><b>Magia: </b>75%. O poder da magia leva o inimigo a inconsciência por meia hora.<br><b>Falha: </b>Ataque precipitado causa 25 % de dano em si mesmo.<br><b>10 a 50 vezes o peso do atacante: </b>75%. Golpe paralisa o oponente por uma rodada e impõe um ajuste de – 5 por 10 rodadas.<br><b>Peso acima de 50 vezes: </b>75%. Golpe reduz a velocidade base à metade e o impede de realizar sua próxima ação.<br><b>Combate Desarmado: </b>75%. Golpe desarma o oponente e o derruba, a arma cai a 3m dele.</p>";
+    conteudo = conteudo + "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#ff0000;'>Vermelho</h1>";
+    if (falha) {
+      table = table + `<ul style="list-style-type: disc;" class="rola_desc">
+        <li class="mediaeval"><b>Falha:</b> Ataque precipitado causa 25 % de dano em si mesmo.</li>
+      </ul>`;
+    } else {
+      table = table + `<ul style="list-style-type: disc;" class="rola_desc">`;
+      if (tipo != "") {
+        table = table + `<li class="mediaeval"><b>Combate Desarmado:</b> 75%. Golpe desarma o oponente e o derruba, a arma cai a 3m dele.</li>
+                        <li class="mediaeval"><b>Garras/Mordida:</b> 75%. Ataque rasga o braço causando um ajuste de - 8 por 2 dias.</li>
+                        <li class="mediaeval"><b>Corte:</b> 75%. Corte mediano no músculo inutiliza um braço por 2 dias.</li>
+                        <li class="mediaeval"><b>Esmagamento:</b> 75%. Pancada na cabeça. Elmo se parte (caso não seja mágico). Se não tiver Elmo fica desacordado por 2 horas e incapacito por 2 dias.</li>
+                        <li class="mediaeval"><b>Penetração:</b> 75%. Perfura o músculo do braço e o inutiliza por 2 dias.</li>`;
+      } else {
+        table = table + `<li class="mediaeval"><b>Magia:</b> 75%. O poder da magia leva o inimigo a inconsciência por meia hora.</li>`;
+      }
+      table = table + `<li class="mediaeval"><b>10 a 50 vezes o peso do atacante:</b> 75%. Golpe paralisa o oponente por uma rodada e impõe um ajuste de – 5 por 10 rodadas.</li>
+        <li class="mediaeval"><b>Peso acima de 50 vezes:</b> 75%. Golpe reduz a velocidade base à metade e o impede de realizar sua próxima ação.</li>
+        </ul>`;
+    }
   } else if (resultado == "laranja") {
-    conteudo = "<h1 class='mediaeval rola' style='text-align:center;'>Rolagem do Crítico</h1><br><h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#ff9900;'>Laranja</h1>";
-    conteudo = conteudo + "<br><p class='mediaeval rola_desc'><b>Corte: </b>75%. Corte na cabeça põe adversário em coma por 1 dia se ele não tiver usando elmo.<br><b>Esmagamento: </b>75%. Escudo do inimigo se quebra (caso não seja mágico). Na ausência deste o braço quebra (cura em um mês).<br><b>Penetração: </b>75%. Golpe no tronco derruba o adversário se estiver usando escudo. Caso contrário incapacita-o por 2 dias.<br><b>Garras/Mordida: </b>75%. A ferocidade do golpe derruba o adversário impedindo de atacar nas próximas 3 rodadas.<br><b>Magia: </b>75%. O potente impacto paralisa o adversário, impedindo de atacar nas próximas 3 rodadas.<br><b>Falha: </b>Ataque desastroso causa 50 % de dano em si mesmo.<br><b>10 a 50 vezes o peso do atacante: </b>75%. Ferimento desnorteia o oponente impedindo-o de atacar por duas rodadas.<br><b>Peso acima de 50 vezes: </b>75%. Golpe reduz a velocidade base à metade e impõe ao adversário um ajuste de – 3 por 5 rodadas.<br><b>Combate Desarmado: </b>75%. A dor ou falta de ar deixam o oponente grogue. Ajuste de - 5 por 4 rodadas.</p>";
+    conteudo = conteudo + "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#ff9900;'>Laranja</h1>";
+    if (falha) {
+      table = table + `<ul style="list-style-type: disc;" class="rola_desc">
+        <li class="mediaeval"><b>Falha:</b> Ataque desastroso causa 50 % de dano em si mesmo.</li>
+      </ul>`;
+    } else {
+      table = table + `<ul style="list-style-type: disc;" class="rola_desc">`;
+      if (tipo != "") {
+        table = table + `<li class="mediaeval"><b>Combate Desarmado:</b> 75%. A dor ou falta de ar deixam o oponente grogue. Ajuste de - 5 por 4 rodadas.</li>
+                        <li class="mediaeval"><b>Garras/Mordida:</b> 75%. A ferocidade do golpe derruba o adversário impedindo de atacar nas próximas 3 rodadas.</li>
+                        <li class="mediaeval"><b>Corte:</b> 75%. Corte na cabeça põe adversário em coma por 1 dia se ele não tiver usando elmo.</li>
+                        <li class="mediaeval"><b>Esmagamento:</b> 75%. Escudo do inimigo se quebra (caso não seja mágico). Na ausência deste o braço quebra (cura em um mês).</li>
+                        <li class="mediaeval"><b>Penetração:</b> 75%. Golpe no tronco derruba o adversário se estiver usando escudo. Caso contrário incapacita-o por 2 dias.</li>`;
+      } else {
+        table = table + `<li class="mediaeval"><b>Magia:</b> 75%. O potente impacto paralisa o adversário, impedindo de atacar nas próximas 3 rodadas.</li>`;
+      }
+      table = table + `<li class="mediaeval"><b>10 a 50 vezes o peso do atacante:</b> 75%. Ferimento desnorteia o oponente impedindo-o de atacar por duas rodadas.</li>
+        <li class="mediaeval"><b>Peso acima de 50 vezes:</b> 75%. Golpe reduz a velocidade base à metade e impõe ao adversário um ajuste de – 3 por 5 rodadas.</li>
+        </ul>`;
+    }
   } else if (resultado == "amarelo") {
-    conteudo = "<h1 class='mediaeval rola' style='text-align:center;'>Rolagem do Crítico</h1><br><h1 class='mediaeval rola' style='color: black; text-align:center;background-color:#ffff00;'>Amarelo</h1>";
-    conteudo = conteudo + "<br><p class='mediaeval rola_desc'><b>Corte: </b>50%. Com um belo golpe, não só atinge como desarma o inimigo.<br><b>Esmagamento: </b>50%. Golpe no tórax derruba o adversário, que deixa cair o que tiver segurando.<br><b>Penetração: </b>50% Estocada no peito paralisa o adversário nas próximas 2 rodadas.<br><b>Garras/Mordida: </b>50%. Feroz ataque na mão desarma o inimigo.<br><b>Magia: </b>50%. A força da magia arremessa o adversário a 2 metros de distância, e ele deixa cair sua arma.<br><b>Falha: </b>Sua arma escapa da sua mão, caindo a 3 metros de distância.<br><b>10 a 50 vezes o peso do atacante: </b>50%. Golpe faz com que o adversário se atrapalhe, impedindo-o de realizar sua próxima ação.<br><b>Peso acima de 50 vezes: </b>50%. Golpe impõe ao adversário um ajuste de – 3 por 5 rodadas.<br><b>Combate Desarmado: </b>50%. Inchaço e sangramento facial atrapalham a visão. Ajuste de - 3 por 6 rodadas.</p>";
+    conteudo = conteudo + "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:#ffff00;'>Amarelo</h1>";
+    if (falha) {
+      table = table + `<ul style="list-style-type: disc;" class="rola_desc">
+        <li class="mediaeval"><b>Falha:</b> Sua arma escapa da sua mão, caindo a 3 metros de distância.</li>
+      </ul>`;
+    } else {
+      table = table + `<ul style="list-style-type: disc;" class="rola_desc">`;
+      if (tipo != "") {
+        table = table + `<li class="mediaeval"><b>Combate Desarmado:</b> 50%. Inchaço e sangramento facial atrapalham a visão. Ajuste de - 3 por 6 rodadas.</li>
+                        <li class="mediaeval"><b>Garras/Mordida:</b> 50%. Feroz ataque na mão desarma o inimigo.</li>
+                        <li class="mediaeval"><b>Corte:</b> 50%. Com um belo golpe, não só atinge como desarma o inimigo.</li>
+                        <li class="mediaeval"><b>Esmagamento:</b> 50%. Golpe no tórax derruba o adversário, que deixa cair o que tiver segurando.</li>
+                        <li class="mediaeval"><b>Penetração:</b> 50% Estocada no peito paralisa o adversário nas próximas 2 rodadas.</li>`;
+      } else {
+        table = table + `<li class="mediaeval"><b>Magia:</b> 50%. A força da magia arremessa o adversário a 2 metros de distância, e ele deixa cair sua arma.</li>`;
+      }
+      table = table + `<li class="mediaeval"><b>10 a 50 vezes o peso do atacante:</b> 50%. Golpe faz com que o adversário se atrapalhe, impedindo-o de realizar sua próxima ação.</li>
+        <li class="mediaeval"><b>Peso acima de 50 vezes:</b> 50%. Golpe impõe ao adversário um ajuste de – 3 por 5 rodadas.</li>
+        </ul>`;
+    }
   } else if (resultado == "branco") {
-    conteudo = "<h1 class='mediaeval rola' style='text-align:center;'>Rolagem do Crítico</h1><br><h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco</h1>";
-    conteudo = conteudo + "<br><p class='mediaeval rola_desc'><b>Corte: </b>50%. Corte no ombro, impõe um ajuste de – 4 por 1 dia.<br><b>Esmagamento: </b>50%. Golpe duro no ombro, paralisa o oponente na próxima rodada.<br><b>Penetração: </b>50%. Penetração causa ajuste de – 4 por 2 dias. Se for flecha o ajuste é de - 6 até que a mesma seja retirada.<br><b>Garras/Mordida: </b>50%. Rasgo na mão impede o adversário de realizar seu próximo ataque.<br><b>Magia: </b>50%. O poder da magia atordoa o inimigo, impedindo de realizar seu próximo ataque.<br><b>Falha: </b>Tropeção o impede de realizar seu próximo ataque.<br><b>10 a 50 vezes o peso do atacante: </b>50%. Golpe reduz a velocidade base à metade e impõe ao adversário um ajuste de – 3 por 5 rodadas.<br><b>Peso acima de 50 vezes: </b>50%. Golpe impõe ao adversário um ajuste de – 3 por 3 rodadas.<br><b>Combate Desarmado: </b>50%. Golpe desarma o oponente, e a arma cai a 2 m dele.</p>";
+    conteudo = conteudo + "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco</h1>";
+    if (falha) {
+      table = table + `<ul style="list-style-type: disc;" class="rola_desc">
+        <li class="mediaeval"><b>Falha:</b> Tropeção o impede de realizar seu próximo ataque.</li>
+      </ul>`;
+    } else {
+      table = table + `<ul style="list-style-type: disc;" class="rola_desc">`;
+      if (tipo != "") {
+        table = table + `<li class="mediaeval"><b>Combate Desarmado:</b> 50%. Golpe desarma o oponente, e a arma cai a 2 m dele.</li>
+                        <li class="mediaeval"><b>Garras/Mordida:</b> 50%. Rasgo na mão impede o adversário de realizar seu próximo ataque.</li>
+                        <li class="mediaeval"><b>Corte:</b> 50%. Corte no ombro, impõe um ajuste de – 4 por 1 dia.</li>
+                        <li class="mediaeval"><b>Esmagamento:</b> 50%. Golpe duro no ombro, paralisa o oponente na próxima rodada.</li>
+                        <li class="mediaeval"><b>Penetração:</b> 50%. Penetração causa ajuste de – 4 por 2 dias. Se for flecha o ajuste é de - 6 até que a mesma seja retirada.</li>`;
+      } else {
+        table = table + `<li class="mediaeval"><b>Magia:</b> 50%. O poder da magia atordoa o inimigo, impedindo de realizar seu próximo ataque.</li>`;
+      }
+      table = table + `<li class="mediaeval"><b>10 a 50 vezes o peso do atacante:</b> 50%. Golpe reduz a velocidade base à metade e impõe ao adversário um ajuste de – 3 por 5 rodadas.</li>
+        <li class="mediaeval"><b>Peso acima de 50 vezes:</b> 50%. Golpe impõe ao adversário um ajuste de – 3 por 3 rodadas.</li>
+        </ul>`;
+    }
   } else if (resultado == "verde") {
-    conteudo = "<h1 class='mediaeval rola' style='text-align:center;'>Rolagem do Crítico</h1><br><h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#91cf50;'>Verde</h1>";
-    conteudo = conteudo + "<br><p class='mediaeval rola_desc'><b>Corte: </b>25%. Corte leve no músculo do braço dá um ajuste de – 4 na próxima rodada.<br><b>Esmagamento: </b>25%. Golpe no ombro desequilibra o adversário na próxima rodada, dando um ajuste de – 4.<br><b>Penetração: </b>25% Estocada na perna reduz o movimento à metade e causa um ajuste de – 2 por 1 hora.<br><b>Garras/Mordida: </b>25%. Ataque desequilibra o inimigo, levando-o a cair e perder uma rodada.<br><b>Magia: </b>25%. A magia foi evocada com maestria. Economizando 1 de karma OU causando +2 na FA.<br><b>Falha: </b>Faça um ataque no seu companheiro mais próximo.<br><b>10 a 50 vezes o peso do atacante: </b>25%. Golpe impõe ao adversário um ajuste de - 3 por 5 rodadas.<br><b>Peso acima de 50 vezes: </b>25%. ataque preciso causa um ajuste de –5 no próximo ataque.<br><b>Combate Desarmado: </b>25%. Golpe no ouvido causa desorientação. Ajuste de -3 por 3 rodadas.</p>";
+    conteudo = conteudo + "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#91cf50;'>Verde</h1>";
+    if (falha) {
+      table = table + `<ul style="list-style-type: disc;" class="rola_desc">
+        <li class="mediaeval"><b>Falha:</b> Faça um ataque no seu companheiro mais próximo.</li>
+      </ul>`;
+    } else {
+      table = table + `<ul style="list-style-type: disc;" class="rola_desc">`;
+      if (tipo != "") {
+        table = table + `<li class="mediaeval"><b>Combate Desarmado:</b> 25%. Golpe no ouvido causa desorientação. Ajuste de -3 por 3 rodadas.</li>
+                        <li class="mediaeval"><b>Garras/Mordida:</b> 25%. Ataque desequilibra o inimigo, levando-o a cair e perder uma rodada.</li>
+                        <li class="mediaeval"><b>Corte:</b> 25%. Corte leve no músculo do braço dá um ajuste de – 4 na próxima rodada.</li>
+                        <li class="mediaeval"><b>Esmagamento:</b> 25%. Golpe no ombro desequilibra o adversário na próxima rodada, dando um ajuste de – 4.</li>
+                        <li class="mediaeval"><b>Penetração:</b> 25% Estocada na perna reduz o movimento à metade e causa um ajuste de – 2 por 1 hora.</li>`;
+      } else {
+        table = table + `<li class="mediaeval"><b>Magia:</b> 25%. A magia foi evocada com maestria. Economizando 1 de karma OU causando +2 na FA.</li>`;
+      }
+      table = table + `<li class="mediaeval"><b>10 a 50 vezes o peso do atacante:</b> 25%. Golpe impõe ao adversário um ajuste de - 3 por 5 rodadas.</li>
+        <li class="mediaeval"><b>Peso acima de 50 vezes:</b> 25%. Ataque preciso causa um ajuste de –5 no próximo ataque.</li>
+        </ul>`;
+    }
   }
+  conteudo = conteudo + table + "</p>";
   if (game.settings.get('tagmar', 'dadosColoridos')) {
     dadosColoridos(resultado, roll);
   }
@@ -853,30 +956,7 @@ Hooks.on("getSceneControlButtons", (controls) => {
     onClick: () => tabelaResistencia(),
     button: true
   });
-  bar.tools.push({
-    name: "Mensagens do Usuário",
-    icon: "fas fa-comments",
-    title: "Mensagens do chat apenas do usuário.",
-    onClick: async () => user_messages(),
-    button: true
-  });
 });
-
-async function user_messages() {
-  const messages = game.messages.filter(b => b.user.id == game.user.id);
-  let dialog = new Dialog({
-    title: `Mensagens do ${game.user.name}`,
-    content: "<ol id='user_messages' style='width: 100%; padding-left: 5px; padding-right: 5px; background-color: none;'></ol>",
-    buttons: {},
-    render: async (html) => {
-      for (let mess of messages) {
-        let mess_html = await mess.getHTML();
-        $(html.find("#user_messages")).append($(mess_html));
-      }
-    }
-  },{height: 800, width: 400, popOut: true});
-  dialog.render(true);
-}
 
 function tabelaResistencia () {
   let dialogContent = `<table class="mediaeval" style="text-align:center;">
@@ -992,6 +1072,8 @@ async function rollDialog() {
       }
     });
     dialog.render(true);
+  }).fail(function (error) {
+    return ui.notifications.error(`Ocorreu um erro! Verifique sua conexão com o servidor.  ${error.status} - ${error.statusText}`);
   });
 }
 
@@ -1001,28 +1083,25 @@ async function rollTabela(colunaR) {
   let PrintResult = "";
   r.evaluate({async: false});
   var Dresult = r.total;
-  for (let i = 0; i < tabela_resol.length; i++) {
-    if (tabela_resol[i][0] == colunaR) {
-        resultado = tabela_resol[i][Dresult];
-        if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#91cf50;'>Verde - Falha</h1>";
-        else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Rotineiro</h1>";
-        else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:#ffff00;'>Amarelo - Fácil</h1>";
-        else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#ff9900;'>Laranja - Médio</h1>";
-        else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#ff0000;'>Vermelho - Difícil</h1>";
-        else if (resultado == "azul" ) PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#00a1e8;'>Azul - Muito Difícil</h1>";
-        else if (resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#0000ff;'>Azul Escuro - Absurdo</h1>";
-        else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:#bfbfbf;'>Cinza - Impossível</h1>";
-        let coluna = "<h4 class='mediaeval rola'>Coluna:" + tabela_resol[i][0] + "</h4>";
-        if (game.settings.get('tagmar', 'dadosColoridos')) {
-          dadosColoridos(resultado, r);
-        }
-        r.toMessage({
-            user: game.user.id,
-            speaker: ChatMessage.getSpeaker({ alias: game.user.name }),
-            flavor: `<h2 class='mediaeval rola' style='text-align:center;'>Rolagem Resolução de Ações</h2>${coluna}${PrintResult}`
-          });
-    }
+  let coluna_table = tabela_resol.find(h => h[0] == colunaR);
+  resultado = coluna_table[Dresult];
+  if (resultado == "verde") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#91cf50;'>Verde - Falha</h1>";
+  else if (resultado == "branco") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:white;'>Branco - Rotineiro</h1>";
+  else if (resultado == "amarelo") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:#ffff00;'>Amarelo - Fácil</h1>";
+  else if (resultado == "laranja") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#ff9900;'>Laranja - Médio</h1>";
+  else if (resultado == "vermelho") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#ff0000;'>Vermelho - Difícil</h1>";
+  else if (resultado == "azul" ) PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#00a1e8;'>Azul - Muito Difícil</h1>";
+  else if (resultado == "roxo") PrintResult = "<h1 class='mediaeval rola' style='color: white; text-align:center;background-color:#0000ff;'>Azul Escuro - Absurdo</h1>";
+  else if (resultado == "cinza") PrintResult = "<h1 class='mediaeval rola' style='color: black; text-align:center;background-color:#bfbfbf;'>Cinza - Impossível</h1>";
+  let coluna = "<h4 class='mediaeval rola'>Coluna:" + coluna_table[0] + "</h4>";
+  if (game.settings.get('tagmar', 'dadosColoridos')) {
+    dadosColoridos(resultado, r);
   }
+  r.toMessage({
+      user: game.user.id,
+      speaker: ChatMessage.getSpeaker({ alias: game.user.name }),
+      flavor: `<h2 class='mediaeval rola' style='text-align:center;'>Rolagem Resolução de Ações</h2>${coluna}${PrintResult}`
+  });
 }
 
 async function rollResistencia(resist, f_ataque) {
