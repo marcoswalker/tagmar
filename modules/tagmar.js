@@ -1227,11 +1227,9 @@ async function createTagmarMacro(data, slot) {
   if (data.type !== "Item") return;
   if (!("data" in data)) return ui.notifications.warn("Você só pode criar Macros para Ataques, Técnicas de Combate, Habilidades e Magias.");
   const item = data.data;
-  // const actor = getItemOwner(item);
-  // Create the macro command
   const command = `game.tagmar.rollItemMacro("${item.name}");`;
 
-  let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
+  let macro = game.macros.find(m => (m.name === item.name) && (m.command === command));
   if (!macro) {
     macro = await Macro.create({
       name: item.name,
@@ -1247,12 +1245,6 @@ async function createTagmarMacro(data, slot) {
   return false;
 }
 
-/**
- * Create a Macro from an Item drop.
- * Get an existing item macro if one exists, otherwise create a new one.
- * @param {string} itemName
- * @return {Promise}
- */
 function rollItemMacro(itemName, extra) {
   const speaker = ChatMessage.getSpeaker();
   let actor;
