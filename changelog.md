@@ -242,3 +242,6 @@ Correção de erros na ficha de personagem, melhoria na descrição da rolagem d
 ## **1.6.3 :**
 1. Correção de bug que impedia criação de macros a partir de itens da ficha.
 2. Feito caixa de dialogo para rolar teste de Resistência Magia/Física se nenhum valor for preenchido em F.Ataque.
+
+## **1.6.4 :**
+Update para versão 10 do Foundry Vtt. Recomendável desativar módulos não atualizados.

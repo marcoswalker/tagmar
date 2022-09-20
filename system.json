@@ -2,11 +2,29 @@
   "name": "tagmar",
   "title": "Tagmar RPG",
   "description": "Sistema simples para Tagmar 3.0. Módulo Obrigatório: Compendium Folders, Módulos Recomendados: Bar Brawl, Dice So Nice!, Dice Tray, Portuguese (BR) Core",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "templateVersion": 2,
-  "author": "Vinicius Fernandez, Marcos Walker",
-  "minimumCoreVersion": "0.8.6",
-  "compatibleCoreVersion": "9",
+  "authors": [
+    {
+      "name": "Marcos Walker",
+      "url": "https://github.com/marcoswalker"
+    },
+    {
+      "name": "Vinicius Fernandez",
+      "url": "https://www.youtube.com/channel/UCDyR_0eg3TjV5r5cOUqQaSQ"
+    }
+  ],
+  "media": [
+    {
+      "type": "video",
+      "link": "https://youtu.be/N2yr3L2m2ac?list=PLrRhUsW5zVjALqHoqfyaDXoRv2ku6Wxei"
+    }
+  ],
+  "compatibility": {
+    "minimum": "10",
+    "verified": "10",
+    "maximum": "10"
+  },
   "scripts": [
   ],
   "esmodules": [
@@ -22,145 +40,139 @@
       "label": "Armaduras, Elmos e Escudos",
       "system": "tagmar",
       "path": "./packs/armaduras-elmos-escudos.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "criando-criaturas",
       "label": "Criando Criaturas",
       "system": "tagmar",
       "path": "./packs/criando-criaturas.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "grupo-de-armas",
       "label": "Grupos de Armas",
       "system": "tagmar",
       "path": "./packs/grupo-de-armas.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "habilidade",
       "label": "Habilidades",
       "system": "tagmar",
       "path": "./packs/habilidade.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "magias",
       "label": "Magias",
       "system": "tagmar",
       "path": "./packs/magias.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "pertences-e-afins",
       "label": "Pertences e Afins",
       "system": "tagmar",
       "path": "./packs/pertences-e-afins.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "pocoes-oleos-elixires-unguentos",
       "label": "Poções, Óleos, Elixires e Unguento",
       "system": "tagmar",
       "path": "./packs/pocoes-oleos-elixires-unguentos.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "racas-e-profissoes",
       "label": "Raças e Profissões",
       "system": "tagmar",
       "path": "./packs/racas-e-profissoes.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "tecnicas-de-combate",
       "label": "Técnicas de Combate",
       "system": "tagmar",
       "path": "./packs/tecnicas-de-combate.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "venenos-e-drogas",
       "label": "Venenos e Drogas",
       "system": "tagmar",
       "path": "./packs/venenos-e-drogas.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "lista-de-arquetipos",
       "label": "Lista de Arquétipos",
       "system": "tagmar",
       "path": "./packs/lista-de-arquetipos.db",
-      "entity": "Actor"
+      "type": "Actor"
     },
     {
       "name": "livro-de-criaturas",
       "label": "Livro de Criaturas",
       "system": "tagmar",
       "path": "./packs/livro-de-criaturas.db",
-      "entity": "Actor"
+      "type": "Actor"
     },
     {
       "name": "itens-magicos-exemplos",
       "label": "Itens Mágicos de Exemplo",
       "system": "tagmar",
       "path": "./packs/itens-magicos-exemplos.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "magias-ancestrais",
       "label": "Magias Ancestrais",
       "system": "tagmar",
       "path": "./packs/magias-ancestrais.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "magias-perdidas",
       "label": "Magias Perdidas",
       "system": "tagmar",
       "path": "./packs/magias-perdidas.db",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "label": "Registros",
-      "entity": "JournalEntry",
+      "type": "JournalEntry",
       "name": "registros",
       "path": "./packs/registros.db",
       "system": "tagmar"
     },
     {
-      "label": "Tutoriais Video",
-      "entity": "JournalEntry",
-      "name": "tutoriais-video",
-      "path": "./packs/tutoriais-video.db",
+      "label": "Livro de Arquétipos",
+      "type": "Actor",
+      "name": "livro-de-arquetipos",
+      "path": "./packs/livro-de-arquetipos.db",
       "system": "tagmar"
     }
   ],
   "languages": [
   ],
-  "dependencies": [
-    {
-      "name": "compendium-folders",
-      "manifest": "https://raw.githubusercontent.com/earlSt1/vtt-compendium-folders/09x-update/module.json"
-    },
-    {
-      "name": "barbrawl",
-      "manifest": "https://gitlab.com/woodentavern/foundryvtt-bar-brawl/-/raw/master/src/module.json"
-    },
-    {
-      "name": "drag-ruler",
-      "manifest": "https://raw.githubusercontent.com/manuelVo/foundryvtt-drag-ruler/master/module.json"
-    },
-    {
-      "name": "socketlib",
-      "manifest": "https://raw.githubusercontent.com/manuelVo/foundryvtt-socketlib/master/module.json"
-    },
-    {
-      "name": "lib-wrapper",
-      "manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json"
-    }
-  ],
+  "relationships": {
+    "requires": [
+      {
+        "id": "compendium-folders",
+        "manifest": "https://raw.githubusercontent.com/earlSt1/vtt-compendium-folders/10x-update/module.json"
+      },
+      {
+        "id": "barbrawl",
+        "manifest": "https://gitlab.com/woodentavern/foundryvtt-bar-brawl/-/raw/master/src/module.json"
+      },
+      {
+        "id": "lib-wrapper",
+        "manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json"
+      }
+    ]
+  },
   "gridDistance": 1.0,
   "gridUnits": "m",
   "url": "https://github.com/marcoswalker/tagmar",
