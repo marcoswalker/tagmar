@@ -245,3 +245,6 @@ Correção de erros na ficha de personagem, melhoria na descrição da rolagem d
 
 ## **1.6.4 :**
 Update para versão 10 do Foundry Vtt. Recomendável desativar módulos não atualizados.
+
+## **1.6.5 :**
+Melhoria na rolagem avulsa.

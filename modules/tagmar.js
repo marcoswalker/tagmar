@@ -915,7 +915,7 @@ Hooks.on("getSceneControlButtons", (controls) => {
   bar.tools.push({
     name: "Rolar direto na tabela ou Teste de Resistência",
     icon: "fas fa-dice-d20",
-    title: "Rolagem do Mestre",
+    title: "Rolagem na Tabela",
     onClick: async () => rollDialog(),
     button: true
   });
@@ -1030,20 +1030,27 @@ async function centralizaToken () {
 async function rollDialog() {
   $.get("systems/tagmar/templates/roll_dialog.hbs", function (data) {
     let dialog = new Dialog({
-      title: "Rolagem do Mestre",
+      title: "Rolagem na Tabela",
       content: data,
       buttons: {},
       render: (html) => {
         html.find(".rollResist").click(async function (event) {
           let resist = html.find('.ip_resist').val();
           let f_ataque = html.find(".ip_fAtaque").val();
-          if (resist > 0 && f_ataque > 0) await rollResistencia(resist, f_ataque);
+          if (resist >= -2 && f_ataque > 0) await rollResistencia(resist, f_ataque);
           html.find('.ip_resist').val("");
           html.find(".ip_fAtaque").val("");
         });
         html.find(".rollTabela").click(async function (event) {
           let coluna = html.find(".ip_coluna").val();
           if (coluna >= -7 && coluna <= 20) await rollTabela(coluna);
+          else if (coluna > 20) {
+            while (coluna > 20) {
+              await rollTabela(20);
+              coluna -= 20;
+            }
+            if (coluna > 0) await rollTabela(coluna);
+          }
           html.find(".ip_coluna").val("");
         });
       }
@@ -1141,6 +1148,7 @@ Hooks.on("renderSidebarTab", async (object, html) => {
     tgDetails.classList.add("donation-sistema");
     tgDetails.innerHTML = "Tagmar RPG no Foundry Vtt <span><a title='Acesse nosso Youtube.' href='https://www.youtube.com/channel/UCDyR_0eg3TjV5r5cOUqQaSQ'><i class='fab fa-youtube-square'></i></a></span>";
     details.append(tgDetails);
+    $(html.find("#chat-controls .chat-control-icon")).click(async () => rollDialog());
   }
 });
 
