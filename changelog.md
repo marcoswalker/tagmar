@@ -248,3 +248,6 @@ Update para versão 10 do Foundry Vtt. Recomendável desativar módulos não atu
 
 ## **1.6.5 :**
 Melhoria na rolagem avulsa.
+
+## **1.6.6 :**
+Compatibilidade Drag Ruler.
