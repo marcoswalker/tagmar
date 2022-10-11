@@ -251,3 +251,7 @@ Melhoria na rolagem avulsa.
 
 ## **1.6.6 :**
 Compatibilidade Drag Ruler.
+
+## **1.6.7 :**
+1. Quantidade de Habilidades com nível apresentado junto com o número máximo de Habilidades na ficha de personagem.
+2. Melhoria nas tabelas de resolução de ações e resistência.
