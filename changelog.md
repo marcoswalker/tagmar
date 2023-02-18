@@ -258,3 +258,6 @@ Compatibilidade Drag Ruler.
 
 ## **1.6.8 :**
 Melhoria nas rolagens de Habilidades e Atributos.
+
+## **1.6.9 :**
+Melhoria nas rolagens de Técnicas de Combate.
