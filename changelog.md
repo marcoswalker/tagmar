@@ -261,3 +261,6 @@ Melhoria nas rolagens de Habilidades e Atributos.
 
 ## **1.6.9 :**
 Melhoria nas rolagens de Técnicas de Combate.
+
+## **1.7.0 :**
+Update para versão 11 do Foundry Vtt.

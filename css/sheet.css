@@ -32,10 +32,10 @@
     cursor: url(/systems/tagmar/assets/cursor/xp-middle-finger.cur), auto;
 }
 #chat-controls label:hover {
-    cursor: url(/systems/tagmar_rpg/assets/cursor/xp-middle-finger.cur), auto;
+    cursor: url(/systems/tagmar/assets/cursor/xp-middle-finger.cur), auto;
 }
 .mid-cursor:hover {
-    cursor: url(/systems/tagmar_rpg/assets/cursor/xp-middle-finger.cur), auto;
+    cursor: url(/systems/tagmar/assets/cursor/xp-middle-finger.cur), auto;
 }
 .form_tagmar input:read-only {
     border-width: 0;

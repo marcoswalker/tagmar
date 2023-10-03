@@ -283,7 +283,7 @@ Hooks.once("init", function(){
       }
       game.polyglot.registerSystem(game.system.id, TagmarLanguageProvider);
     });
-  }
+  };
 });
 
 Hooks.once("ready", async function () {
@@ -308,6 +308,7 @@ Hooks.once("ready", async function () {
       ocultos = false;
     }
   }); 
+  $("#chat-controls > label").click(async () => rollDialog()); // Rolagem avulsa no dadinho do chat
 });
 
 Hooks.on('renderPlayerList', function () {
@@ -906,7 +907,7 @@ Hooks.on('renderActorDirectory', function (actordirectory, html, user) {
 });
 
 Hooks.on("getSceneControlButtons", (controls) => {
-  const bar = controls.find(c => c.name === "token");
+const bar = controls.find(c => c.name === "token");
   if (!game.user.isGM && typeof(game.user.character) != 'undefined') {
     bar.tools.push({
       name: "Centralizar Canvas no Token",
@@ -1179,7 +1180,6 @@ Hooks.on("renderSidebarTab", async (object, html) => {
     tgDetails.classList.add("donation-sistema");
     tgDetails.innerHTML = "Tagmar RPG no Foundry Vtt <span><a title='Acesse nosso Youtube.' href='https://www.youtube.com/channel/UCDyR_0eg3TjV5r5cOUqQaSQ'><i class='fab fa-youtube-square'></i></a></span>";
     details.append(tgDetails);
-    $(html.find("#chat-controls .chat-control-icon")).click(async () => rollDialog());
   }
 });
 
@@ -1239,15 +1239,12 @@ Hooks.on("renderCombatTracker",function (combatTracker, html) {
 
 async function createTagmarMacro(data, slot) {
   if (data.type !== "Item") return;
-  //if (!("data" in data)) return ui.notifications.warn("Você só pode criar Macros para Ataques, Técnicas de Combate, Habilidades e Magias.");
-  //const item = data.data;
   let data_a = data.uuid.split('.');
-  const item = game.actors.get(data_a[1]).items.get(data_a[3]);
+  const item = game.actors.get(data_a[5]).items.get(data_a[7]);
   if (typeof item == "undefined") {
     return ui.notifications.error("Não foi possível encontrar o item.");
   }
   const command = 'game.tagmar.rollItemMacro("'+item.name+'");';
-
   let macro = game.macros.find(m => (m.name == item.name) && (m.command == command));
   if (!macro) {
     macro = await Macro.create({
