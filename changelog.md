@@ -264,3 +264,6 @@ Melhoria nas rolagens de Técnicas de Combate.
 
 ## **1.7.0 :**
 Update para versão 11 do Foundry Vtt.
+
+## **1.7.1 :**
+Arrumando Vendedores e Baús.
