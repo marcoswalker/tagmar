@@ -267,3 +267,6 @@ Update para versão 11 do Foundry Vtt.
 
 ## **1.7.1 :**
 Arrumando Vendedores e Baús.
+
+## **1.7.2 :**
+Arrumando a integração com o módulo Polyglot.
