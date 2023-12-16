@@ -270,3 +270,7 @@ Arrumando Vendedores e Baús.
 
 ## **1.7.2 :**
 Arrumando a integração com o módulo Polyglot.
+
+## **1.7.3 :**
+1. Correção de erros relacionado a "Inventario" e Polyglot.
+2. Adicionado imagem do personagem na rolagem do chat.
