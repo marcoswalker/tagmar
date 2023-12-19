@@ -274,3 +274,6 @@ Arrumando a integração com o módulo Polyglot.
 ## **1.7.3 :**
 1. Correção de erros relacionado a "Inventario" e Polyglot.
 2. Adicionado imagem do personagem na rolagem do chat.
+
+## **1.7.4 :**
+Corrigido erro na criação de atalhos da Hotbar.
