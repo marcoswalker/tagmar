@@ -100,6 +100,11 @@ Hooks.once("init", function(){
     return options.inverse(this);
   });
 
+  Handlebars.registerHelper('ifge', function (a, b, options) {
+    if (a >= b) { return options.fn(this); }
+    return options.inverse(this);
+  });
+
   Handlebars.registerHelper('ifle', function (a, b, options) {
     if (a <= b) { return options.fn(this); }
     return options.inverse(this);

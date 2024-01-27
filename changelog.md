@@ -277,3 +277,7 @@ Arrumando a integração com o módulo Polyglot.
 
 ## **1.7.4 :**
 Corrigido erro na criação de atalhos da Hotbar.
+
+## **1.7.5 :**
+1. Novo sistema para subir de estágio, quando atingir exp suficiente basta clicar na seta para subir de estágio.
+2. É possível equipar/desequipar equipamentos de **Defesa**, na aba **Combate** basta clicar na bolinha perto da edição do item.
