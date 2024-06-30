@@ -281,3 +281,6 @@ Corrigido erro na criação de atalhos da Hotbar.
 ## **1.7.5 :**
 1. Novo sistema para subir de estágio, quando atingir exp suficiente basta clicar na seta para subir de estágio.
 2. É possível equipar/desequipar equipamentos de **Defesa**, na aba **Combate** basta clicar na bolinha perto da edição do item.
+
+## **1.7.6 :**
+Se o token tiver elevação diferente de 0 (zero) o Drag Ruler vai utilizar **V.B.E** no lugar da **V.B**. 
