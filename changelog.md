@@ -284,3 +284,8 @@ Corrigido erro na criação de atalhos da Hotbar.
 
 ## **1.7.6 :**
 Se o token tiver elevação diferente de 0 (zero) o Drag Ruler vai utilizar **V.B.E** no lugar da **V.B**. 
+
+## **1.7.7 :**
+1. Atualização para V12 do Foundry.
+2. Novo sistema de técnicas de combate e atualizações da nova versão de Tagmar 3.01.
+3. Atualização do compêndio de Técnicas de Combate e Habilidades.

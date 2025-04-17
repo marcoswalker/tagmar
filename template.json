@@ -155,7 +155,8 @@
       }
     },
     "Personagem": {
-      "templates": ["base"]
+      "templates": ["base"],
+      "grupo_aprim": ""
     },
     "NPC": {
       "templates": ["base"],
@@ -181,7 +182,7 @@
     }
   },
   "Item": {
-    "types": ["Combate", "Magia", "TecnicasCombate","Habilidade","Defesa","Transporte","Pertence", "Profissao", "Raca", "Efeito"],
+    "types": ["Combate", "Magia","Habilidade","Defesa","Transporte","Pertence", "Profissao", "Raca", "Efeito", "Tecnica_Combate"],
     "templates": {
       "base": {
         "alcance": "",
@@ -240,18 +241,30 @@
       },
       "tipo": "",
       "municao": 0
+    },"TecnicasCombate": {
+      "templates": ["custoNivel"]
     },
-    "TecnicasCombate": {
+    "Tecnica_Combate": {
       "templates": ["custoNivel"],
       "descricao": "",
       "ajuste": {
         "atributo": "",
         "valor": 0
       },
-      "total": 0,
-      "categoria": "",
-      "restricaoP": ""
-
+      "fa": 0,
+      "mecanica": 0,
+      "duracao": {
+        "valor": 0,
+        "tipo": "Ataque(s)"
+      },
+      "teste": "Não",
+      "restricao": "",
+      "pre_requisito": {
+        "valor": "Não",
+        "tecnica": ""
+      },
+      "complemento": "Não",
+      "bonus": 0
     },
     "Magia": {
       "templates": ["base", "custoNivel"],
@@ -279,7 +292,8 @@
       },
       "hab_nata": false,
       "descricao": "",
-      "tarefAperf": ""
+      "tarefAperf": "",
+      "nao_rolar_sem_nivel": false
     },
     "Defesa": {
       "defesa_base": {
@@ -327,7 +341,8 @@
         "p_gra": 0,
         "p_mag": 0
       },
-      "atrib_mag": ""
+      "atrib_mag": "",
+      "grupo_aprim": false
     },
     "Raca": {
       "descricao": "",

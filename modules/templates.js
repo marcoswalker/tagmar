@@ -19,6 +19,7 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/tagmar/templates/sheets/profissao-sheet.hbs",
         "systems/tagmar/templates/sheets/raca-sheet.hbs",
         "systems/tagmar/templates/sheets/tecnicascombate-sheet.hbs",
+        "systems/tagmar/templates/sheets/tecnica_combate-sheet.hbs",
         "systems/tagmar/templates/sheets/transporte-sheet.hbs",
         "systems/tagmar/templates/sheets/efeito-sheet.hbs"
 	]);

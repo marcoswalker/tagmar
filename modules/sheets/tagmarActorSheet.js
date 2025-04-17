@@ -3,10 +3,10 @@ export default class tagmarActorSheet extends ActorSheet {
     static get defaultOptions() {
         this.lastUpdate = {};
         this.lastItemsUpdate = [];
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
         classes: ["tagmar", "sheet", "actor"],
         //width: 900,
-        height: 890,
+        height: 925,
         tabs: [{
             navSelector: ".prim-tabs",
             contentSelector: ".sheet-primary",
@@ -256,15 +256,17 @@ export default class tagmarActorSheet extends ActorSheet {
         }, function (event) {
             $(event.currentTarget).html("Iniciativa");
         });
-        html.find(".rollAtributos").click(ev => {
+        html.find(".rollAtributos").click(rollCaracters);
+        async function rollCaracters(event) {
             let formula = "{3d10dl,3d10dl,3d10dl,3d10dl,3d10dl,3d10dl,3d10dl}";
             let r = new Roll(formula);
-            r.evaluate({async: false}).toMessage({
+            await r.evaluate();
+            r.toMessage({
                 user: game.user.id,
                 speaker: ChatMessage.getSpeaker({ actor: this.document }),
                 flavor: ``
             });
-        });
+        }
         html.find(".clickHab").mousedown( function (event) {
             $('.clickHab').html("Nível");
             $('.habNivel').removeClass('esconde');
@@ -334,7 +336,22 @@ export default class tagmarActorSheet extends ActorSheet {
             html.find('.searchHabilidade').keyup(this._realcaHablidade.bind(this));
             html.find('.searchEfeito').keyup(this._realcaEfeito.bind(this));
             html.find('.descansar').click(this._descanso.bind(this));
+            html.find('input[name="grupo_aprim"]').click(this._radio_grupo_aprim.bind(this));
         } 
+    }
+
+    _radio_grupo_aprim(event) {
+        event.preventDefault();
+        let old_grup = this.document.system.grupo_aprim;
+        if (old_grup == $(event.currentTarget).val()) {
+            this.document.update({
+                'system.grupo_aprim': ""
+            });
+        } else {
+            this.document.update({
+                'system.grupo_aprim': $(event.currentTarget).val()
+            });
+        }
     }
     
     _linguasDialog(event) {
@@ -608,7 +625,7 @@ export default class tagmarActorSheet extends ActorSheet {
                     let tipoItem = "";
                     if (tipo == "Ataque") tipoItem = "Combate";
                     else if (tipo == "Defesa") tipoItem = "Defesa";
-                    else if (tipo == "Tecnica") tipoItem = "TecnicasCombate";
+                    else if (tipo == "Tecnica") tipoItem = "Tecnica_Combate";
                     if (tipoItem.length > 0) {
                         actor.createEmbeddedDocuments("Item", [{name: "Novo Item Criado", type: tipoItem}]).then(function (item) {
                             item[0].sheet.render(true);
@@ -977,7 +994,7 @@ export default class tagmarActorSheet extends ActorSheet {
         });
         dialog.render(true);
     }
-    
+
     async _subirEstagio(event) {
         let estagio_atual = this.document.system.estagio;
         let r = new Roll('1d10');
@@ -1224,7 +1241,7 @@ export default class tagmarActorSheet extends ActorSheet {
         const h_sub = actorData.items.filter(item => item.type == "Habilidade" && item.system.tipo == "subterfugio");
         const h_inf = actorData.items.filter(item => item.type == "Habilidade" && item.system.tipo == "influencia");
         const h_geral = actorData.items.filter(item => item.type == "Habilidade" && item.system.tipo == "geral");
-        const tecnicas = actorData.items.filter(item => item.type == "TecnicasCombate");
+        const tecnicas = actorData.items.filter(item => item.type == "Tecnica_Combate");
         const defesas = actorData.items.filter(item => item.type == "Defesa");
         const transportes = actorData.items.filter(item => item.type == "Transporte");
         const pertences = actorData.items.filter(item => item.type == "Pertence" && !item.system.inTransport);
@@ -1233,6 +1250,14 @@ export default class tagmarActorSheet extends ActorSheet {
         const profissoes = actorData.items.filter(item => item.type == "Profissao");
         //if (racas.length >= 1) this.document.deleteEmbeddedDocuments("Item", [racas]);
         //if (profissoes.length >= 1) this.document.deleteEmbeddedDocuments("Item", [item._id]);
+        const old_tecnicas = actorData.items.filter(item => item.type == "TecnicasCombate");
+        if (old_tecnicas.length > 0) {
+            let old_ids = [];
+            old_tecnicas.forEach(function (old) {
+                old_ids.push(old.id);
+            });
+            this.document.deleteEmbeddedDocuments("Item", old_ids);
+        }
         var especializacoes = [];
         const efeitos = actorData.items.filter(item => item.type == "Efeito");
         const tabela_resol = [
@@ -1291,7 +1316,10 @@ export default class tagmarActorSheet extends ActorSheet {
             [20,  2,  2,  2,  2,  2,  2,  3,  3,  4,  4,  5,  5,  6,  6,  7,  7,  8,  9, 10, 11]
         ];
         if (profissoes[0]) {
-            especializacoes = profissoes[0].system.especializacoes.split(",");
+            //especializacoes = profissoes[0].system.especializacoes.split(",");
+            profissoes[0].system.especializacoes.split(",").forEach(function (espec) {
+                especializacoes.push({key : espec});
+            });
         } // Alow
         
         if (h_prof.length > 1) h_prof.sort(function (a, b) {
@@ -1320,9 +1348,6 @@ export default class tagmarActorSheet extends ActorSheet {
         });
         if (tecnicas.length > 1) tecnicas.sort(function (a, b) {
             return a.name.localeCompare(b.name);
-        });
-        if (tecnicas.length > 1) tecnicas.sort(function (a, b) {
-            return a.system.categoria.localeCompare(b.system.categoria);
         });
         if (defesas.length > 1) defesas.sort(function (a, b) {
             return a.name.localeCompare(b.name);
@@ -1362,12 +1387,98 @@ export default class tagmarActorSheet extends ActorSheet {
         actorData.h_sub = h_sub;
         actorData.h_inf = h_inf;
         actorData.h_geral = h_geral;
+        actorData.habilidades = h_prof.concat(h_man, h_con, h_sub, h_inf, h_geral);
+        actorData.cat_def = [{key : "L"}, {key : "M"}, {key : "P"}];
         actorData.combate = combate;
         actorData.combate_fav = combate_fav;
         actorData.tecnica_fav = tecnica_fav;
         actorData.magia_fav = magia_fav;
         actorData.magias = magias;
         actorData.ficha = "Sorteio";
+        actorData.cd_aprim = false;
+        actorData.ci_aprim = false;
+        actorData.cl_aprim = false;
+        actorData.cld_aprim = false;
+        actorData.el_aprim = false;
+        actorData.cme_aprim = false;
+        actorData.cmm_aprim = false;
+        actorData.em_aprim = false;
+        actorData.pma_aprim = false;
+        actorData.pml_aprim = false;
+        actorData.cpe_aprim = false;
+        actorData.cpm_aprim = false;
+        actorData.ep_aprim = false;
+        actorData.pp_aprim = false;
+        actorData.ppa_aprim = false;
+        actorData.ppb_aprim = false;
+        switch (actorData.system.grupo_aprim) {
+            case "CD":
+                actorData.cd_aprim = true;
+                break;
+            case "CI":
+                actorData.ci_aprim = true;
+                break;
+            case "CL":
+                actorData.cl_aprim = true;
+                break;
+            case "CLD":
+                actorData.cld_aprim = true;
+                break;
+            case "EL":
+                actorData.el_aprim = true;
+                break;
+            case "CmE":
+                actorData.cme_aprim = true;
+                break;
+            case "CmM":
+                actorData.cmm_aprim = true;
+                break;
+            case "EM":
+                actorData.em_aprim = true;
+                break;
+            case "PmA":
+                actorData.pma_aprim = true;
+                break;
+            case "PmL":
+                actorData.pml_aprim = true;
+                break;
+            case "CpE":
+                actorData.cpe_aprim = true;
+                break;
+            case "CpM":
+                actorData.cpm_aprim = true;
+                break;
+            case "EP":
+                actorData.ep_aprim = true;
+                break;
+            case "PP":
+                actorData.pp_aprim = true;
+                break;
+            case "PpA":
+                actorData.ppa_aprim = true;
+                break;
+            case "PpB":
+                actorData.ppb_aprim = true;
+                break;
+            default:
+                actorData.cd_aprim = false;
+                actorData.ci_aprim = false;
+                actorData.cl_aprim = false;
+                actorData.cld_aprim = false;
+                actorData.el_aprim = false;
+                actorData.cme_aprim = false;
+                actorData.cmm_aprim = false;
+                actorData.em_aprim = false;
+                actorData.pma_aprim = false;
+                actorData.pml_aprim = false;
+                actorData.cpe_aprim = false;
+                actorData.cpm_aprim = false;
+                actorData.ep_aprim = false;
+                actorData.pp_aprim = false;
+                actorData.ppa_aprim = false;
+                actorData.ppb_aprim = false;
+                break;
+        }
     }
 
     async _rolarMoral(event) {

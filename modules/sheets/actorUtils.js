@@ -318,9 +318,11 @@ export function _attProfissao(sheetData, updatePers, items_toUpdate) {
             pontos_gra -= actorSheetData.grupos.PP * 3;
             pontos_gra -= actorSheetData.grupos.PpA * 3;
             pontos_gra -= actorSheetData.grupos.PpB * 3;
-
+            if (actorSheetData.grupo_aprim != "") {
+                pontos_gra -= actorSheetData.grupos[actorSheetData.grupo_aprim] * 2;
+            }
         }
-        let tecnicasP = actorData.items.filter(item => item.type == "TecnicasCombate");
+        let tecnicasP = actorData.items.filter(item => item.type == "Tecnica_Combate");
         tecnicasP.forEach(function (tecnica) {
             pontos_tec -= tecnica.system.custo * tecnica.system.nivel;
         });
@@ -597,6 +599,13 @@ export function _attKarmaMax(data, updatePers) {
     if (updatePers.hasOwnProperty('system.atributos.AUR')) aura = updatePers['system.atributos.AUR'];
     let karma = ((aura) + 1 ) * ((data.document.system.estagio) + 1);
     if (karma < 0) karma = 0;
+    const profissoes = data.items.filter(item => item.type == "Profissao");
+    const profissaoP = profissoes[0];
+    if (profissaoP) {
+        const profissaoData = profissaoP.system;
+        const atrib_magia = profissaoData.atrib_mag;
+        if (atrib_magia == "") karma = 0;
+    }
     const efeitos = data.document.items.filter(e => e.type == "Efeito" && (e.system.atributo == "KMA" && e.system.ativo));
     efeitos.forEach(function(efeit) {
         let efeito = efeit.system;
@@ -701,7 +710,7 @@ export function _updateHabilItems(sheetData, updateItemsNpc) {
 export function _updateTencnicasItems(sheetData, items_toUpdate) {
     if (!sheetData.options.editable) return;
     const actorData = sheetData.document.system;
-    const tecnicas = sheetData.document.items.filter(item => item.type == "TecnicasCombate");
+    const tecnicas = sheetData.document.items.filter(item => item.type == "Tecnica_Combate");
     //let update_tecnicas = [];
     tecnicas.forEach(function(tecnica) {
         let tec = tecnica.system;
@@ -717,10 +726,11 @@ export function _updateTencnicasItems(sheetData, items_toUpdate) {
         else if (ajusteTecnica.atributo == "PER") total = actorData.atributos.PER + nivel_tecnica;
         else total = nivel_tecnica;
         total += ajusteTecnica.valor;
+        total += tec.bonus;
         if (tec.total != total) {
             items_toUpdate.push({
                 "_id": tecnica.id,
-                "system.total": total
+                "system.fa": total
             });
         }
     });
