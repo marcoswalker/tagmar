@@ -1,3 +1,8 @@
+# Ultima atualização, técnicas novas, com tokens para Foundry V12
+* [GitHub](https://github.com/marcoswalker/tagmar_rpg)
+* [Modulos V12](https://github.com/marcoswalker/modulos_foundry/)
+* Manifest: https://raw.githubusercontent.com/marcoswalker/tagmar_rpg/master/system.json
+
 ![](assets/fichas_gif.gif)
 [![](assets/tutorial/001_Easy-Resize.com.jpg)](assets/tutorial/TutorialFoundryTagmarRPG.pdf)
 # [Atualizações](changelog.md)
